@@ -1,5 +1,5 @@
-# Stage 1: Build dashboard (Alpine is fine - no native deps)
-FROM node:22-alpine AS dashboard-build
+# Stage 1: Build dashboard (Debian - rollup needs glibc native bindings)
+FROM node:22 AS dashboard-build
 WORKDIR /app/dashboard
 COPY dashboard/package.json dashboard/package-lock.json ./
 RUN npm ci
