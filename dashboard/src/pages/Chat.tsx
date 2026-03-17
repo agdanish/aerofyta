@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SendHorizontal, Bot, User, Sparkles, Cpu } from "lucide-react";
+import { toast } from "sonner";
 
 interface Message {
   id: number;
@@ -31,7 +33,16 @@ const demoMessages: Message[] = [
 
 const suggestions = ["Who should I tip?", "Check my balance", "Analyze gas fees", "Show portfolio health"];
 
+const actionRoutes: Record<string, string> = {
+  "View wallets": "/wallets",
+  "View dashboard": "/dashboard",
+  "View creator profiles": "/creators",
+  "View yield options": "/defi",
+  "Transfer funds": "/wallets",
+};
+
 export default function Chat() {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>(demoMessages);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -41,6 +52,38 @@ export default function Chat() {
     "analyze gas fees": { text: "Current gas: ETH 12 gwei (low), Polygon 0.003 gwei (very low), Solana 0.00025 SOL. Recommendation: use Polygon for tips under $5, Ethereum for amounts over $10. Optimal window: next 2 hours.", intent: "check_gas", confidence: 94, actions: ["Set gas alert", "Switch to Polygon"] },
     "show portfolio health": { text: "Health Score: 87/100. Diversification: 85% (good). Risk: 23/100 (low). Yield: 4.2% avg APY. Suggestion: consider rebalancing 5% from stables to ETH staking for better yield.", intent: "portfolio_report", confidence: 89, actions: ["Rebalance now", "View yield options"] },
   };
+
+  const handleAction = useCallback((action: string) => {
+    // Navigation actions
+    const route = actionRoutes[action];
+    if (route) { navigate(route); return; }
+
+    // Tip actions — navigate to tips page
+    if (action.toLowerCase().startsWith("tip ")) {
+      toast.success(`Executing: ${action}`);
+      navigate("/tips");
+      return;
+    }
+
+    // Analysis / query actions — feed back into chat as a new user message
+    setInput(action);
+    setTimeout(() => {
+      setInput("");
+      const userMsg: Message = { id: Date.now(), role: "user", text: action };
+      setMessages((m) => [...m, userMsg]);
+      setLoading(true);
+      setTimeout(() => {
+        const agentMsg: Message = {
+          id: Date.now() + 1, role: "agent",
+          text: `Analysis complete for "${action}". All systems nominal. Portfolio health: 87/100, liquidity ratio: 78%, diversification: 85%. No immediate action required.`,
+          intent: "explain_reasoning", confidence: 88,
+          actions: ["View dashboard", "View wallets"],
+        };
+        setMessages((m) => [...m, agentMsg]);
+        setLoading(false);
+      }, 1000 + Math.random() * 500);
+    }, 100);
+  }, [navigate]);
 
   const send = async () => {
     if (!input.trim()) return;
@@ -91,7 +134,7 @@ export default function Chat() {
                     {m.actions && (
                       <div className="flex flex-wrap gap-1.5 mt-2">
                         {m.actions.map((a) => (
-                          <button key={a} className="text-[10px] px-2 py-1 rounded-md border border-border/50 bg-card/50 hover:bg-accent/50 transition-colors">{a}</button>
+                          <button key={a} onClick={() => handleAction(a)} className="text-[10px] px-2 py-1 rounded-md border border-border/50 bg-card/50 hover:bg-accent/50 transition-colors cursor-pointer">{a}</button>
                         ))}
                       </div>
                     )}

@@ -43,9 +43,10 @@ export default function Demo() {
         setFullRunning(false);
         return;
       }
-      setFullResults((prev) => [...prev, demoSteps[i]]);
-      setFullProgress(((i + 1) / demoSteps.length) * 100);
+      const idx = i; // capture by value — closure over mutable `i` would race with `i++`
       i++;
+      setFullResults((prev) => [...prev, demoSteps[idx]]);
+      setFullProgress((idx + 1) / demoSteps.length * 100);
     }, 800);
   };
 
@@ -100,7 +101,7 @@ export default function Demo() {
                   <Progress value={fullProgress} className="h-2 bg-secondary" />
                 </div>
                 <div className="space-y-2">
-                  {fullResults.map((step) => (
+                  {fullResults.filter(Boolean).map((step) => (
                     <div key={step.id} className="flex items-start gap-3 p-3 rounded-lg bg-accent/20 animate-fade-in">
                       <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" strokeWidth={1.5} style={{ color: "#50AF95" }} />
                       <div className="flex-1 min-w-0">

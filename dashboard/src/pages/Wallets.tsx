@@ -20,7 +20,7 @@ export default function Wallets() {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {(wallets as typeof demoWallets).map((w) => (
+        {(Array.isArray(wallets) ? wallets : demoWallets).map((w) => (
           <div
             key={w.chain}
             className="rounded-xl border border-border/50 bg-card/50 overflow-hidden hover:border-border transition-all group"

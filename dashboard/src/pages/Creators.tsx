@@ -21,7 +21,8 @@ export default function Creators() {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState<number | null>(null);
 
-  const filtered = (creators as typeof demoCreators).filter((c) =>
+  const safeCreators = Array.isArray(creators) ? creators : demoCreators;
+  const filtered = safeCreators.filter((c) =>
     c.name.toLowerCase().includes(search.toLowerCase()) ||
     c.platform.toLowerCase().includes(search.toLowerCase())
   );

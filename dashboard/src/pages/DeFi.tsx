@@ -11,7 +11,8 @@ import { ExternalLink, ArrowRightLeft, Landmark, FileCheck } from "lucide-react"
 import { toast } from "sonner";
 
 export default function DeFi() {
-  const { data: lending } = useFetch("/api/lending/positions", demoLendingPosition);
+  const { data: rawLending } = useFetch("/api/lending/positions", demoLendingPosition);
+  const lending = (rawLending && typeof rawLending === "object" && "supplied" in rawLending) ? rawLending : demoLendingPosition;
   const [swapFrom, setSwapFrom] = useState("USDT");
   const [swapTo, setSwapTo] = useState("ETH");
   const [swapAmount, setSwapAmount] = useState("100");
@@ -33,21 +34,21 @@ export default function DeFi() {
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">Supplied</p>
-              <p className="text-lg font-bold">{(lending as typeof demoLendingPosition).supplied}</p>
+              <p className="text-lg font-bold">{lending.supplied}</p>
             </div>
             <div>
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">APY</p>
-              <p className="text-lg font-bold text-success">{(lending as typeof demoLendingPosition).apy}</p>
+              <p className="text-lg font-bold text-success">{lending.apy}</p>
             </div>
             <div>
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">Earned</p>
-              <p className="text-sm font-medium text-success">{(lending as typeof demoLendingPosition).earned}</p>
+              <p className="text-sm font-medium text-success">{lending.earned}</p>
             </div>
           </div>
           <div className="border-t border-border/30 pt-3">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Yield Projections</p>
             <div className="grid grid-cols-4 gap-2">
-              {Object.entries((lending as typeof demoLendingPosition).projections).map(([period, value]) => (
+              {Object.entries(lending.projections ?? {}).map(([period, value]) => (
                 <div key={period} className="text-center bg-secondary/30 rounded-md py-2">
                   <p className="text-xs font-medium">{value}</p>
                   <p className="text-[10px] text-muted-foreground">{period}</p>

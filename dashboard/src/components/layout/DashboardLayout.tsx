@@ -6,6 +6,7 @@ import CommandPalette from "../shared/CommandPalette";
 import KeyboardShortcuts from "../shared/KeyboardShortcuts";
 // import OnboardingTour from "../shared/OnboardingTour"; // disabled — overlay blocks clicks
 import AnnouncementBanner from "../shared/AnnouncementBanner";
+import ErrorBoundary from "../shared/ErrorBoundary";
 import { Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { Sun, Moon } from "lucide-react";
@@ -46,9 +47,11 @@ export default function DashboardLayout() {
               </div>
             </header>
             <main className="flex-1 p-4 md:p-6 overflow-auto">
-              <div className="animate-fade-in">
-                <Outlet />
-              </div>
+              <ErrorBoundary>
+                <div className="animate-fade-in">
+                  <Outlet />
+                </div>
+              </ErrorBoundary>
             </main>
             <Footer />
           </div>

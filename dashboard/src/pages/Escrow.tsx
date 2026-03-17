@@ -89,7 +89,7 @@ export default function Escrow() {
 
       {/* Escrow Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {(escrows as typeof demoEscrows).map((esc) => (
+        {(Array.isArray(escrows) ? escrows : demoEscrows).map((esc) => (
           <div key={esc.id} className="rounded-xl border border-border/50 bg-card/50 p-5 hover:border-border transition-colors">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">

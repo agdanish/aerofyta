@@ -25,15 +25,22 @@ const chainColors: Record<string, string> = {
   Tron: "bg-[#FF0013]/15 text-[#FF0013] border-[#FF0013]/30",
 };
 
+function randomHex(len: number) {
+  return Array.from({ length: len }, () => Math.floor(Math.random() * 16).toString(16)).join("");
+}
+
 export default function Tips() {
   const { data: tips } = useFetch("/api/wallet/history", demoTipHistory);
+  const [localTips, setLocalTips] = useState<typeof demoTipHistory>([]);
   const [search, setSearch] = useState("");
   const [chainFilter, setChainFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [open, setOpen] = useState(false);
   const [tipForm, setTipForm] = useState({ address: "", amount: "", chain: "Ethereum" });
 
-  const filtered = (tips as typeof demoTipHistory).filter((t) => {
+  const safeTips = Array.isArray(tips) ? tips : demoTipHistory;
+  const allTips = [...localTips, ...safeTips];
+  const filtered = allTips.filter((t) => {
     if (chainFilter !== "all" && t.chain !== chainFilter) return false;
     if (statusFilter !== "all" && t.status !== statusFilter) return false;
     if (search && !t.recipient.toLowerCase().includes(search.toLowerCase())) return false;
@@ -41,9 +48,29 @@ export default function Tips() {
   });
 
   const sendTip = () => {
-    toast.success(`Tip of ${tipForm.amount} USDT sent to ${tipForm.address} on ${tipForm.chain}`);
+    const now = new Date();
+    const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    const newTip = {
+      id: Date.now(),
+      date,
+      recipient: tipForm.address.startsWith("@") || tipForm.address.startsWith("0x") ? tipForm.address : `@${tipForm.address}`,
+      amount: tipForm.amount,
+      chain: tipForm.chain,
+      status: "pending" as const,
+      txHash: `0x${randomHex(64)}`,
+    };
+    setLocalTips((prev) => [newTip, ...prev]);
+    toast.success(`Tip of ${tipForm.amount} USDT sent to ${newTip.recipient} on ${tipForm.chain}`);
     setOpen(false);
     setTipForm({ address: "", amount: "", chain: "Ethereum" });
+
+    // Simulate confirmation after 3 seconds
+    setTimeout(() => {
+      setLocalTips((prev) =>
+        prev.map((t) => (t.id === newTip.id ? { ...t, status: "confirmed" } : t))
+      );
+      toast.success(`Tip to ${newTip.recipient} confirmed on ${tipForm.chain}`);
+    }, 3000);
   };
 
   return (
