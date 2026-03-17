@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="dashboard/public/logo-orange.png" alt="Zynvaro" width="120"/>
+<img src="dashboard/public/logo-orange.png" alt="AeroFyta" width="120"/>
 
-# Zynvaro
+# AeroFyta
 
 ### Your Wallet Thinks. Your Agent Pays. Across Every Chain.
 
@@ -54,7 +54,7 @@ Until now.
 
 ---
 
-## 💡 How Zynvaro Solves It
+## 💡 How AeroFyta Solves It
 
 ```
   ┌─────────────────────────────────────────────────────────────────────┐
@@ -106,7 +106,7 @@ Programmable money flows that make micro-tipping economically viable, turning pa
 
 ## 🏗️ The Innovation: Wallet-as-Brain™
 
-> *Traditional crypto agents treat wallets as dumb transaction signers. Zynvaro makes the wallet state **drive** agent behavior.*
+> *Traditional crypto agents treat wallets as dumb transaction signers. AeroFyta makes the wallet state **drive** agent behavior.*
 
 ```mermaid
 graph LR
@@ -217,7 +217,7 @@ npx @xzashr/aerofyta reason      # LLM reasoning demo
 ```mermaid
 graph TD
     A["🖥️ Dashboard\nReact 19 + Vite\n42 pages · PWA"] -->|"REST + SSE"| B["🔌 API Router\nExpress 5 · 603 endpoints"]
-    B --> C["🤖 Zynvaro Agent Core"]
+    B --> C["🤖 AeroFyta Agent Core"]
 
     C --> D["🧠 Intelligence Layer"]
     D --> D1["OpenClaw ReAct Engine\n5-iteration reasoning loop"]
@@ -286,7 +286,7 @@ sequenceDiagram
 
 ---
 
-## 🎯 What Makes Zynvaro Different
+## 🎯 What Makes AeroFyta Different
 
 <table>
 <tr>
@@ -378,9 +378,9 @@ sequenceDiagram
 
 ---
 
-## 📊 Zynvaro vs. Traditional Tipping Bots
+## 📊 AeroFyta vs. Traditional Tipping Bots
 
-| Capability | **Zynvaro** | Typical Tipping Bot |
+| Capability | **AeroFyta** | Typical Tipping Bot |
 |:-----------|:----------:|:-------------------:|
 | Chains supported | **9** | 1–2 |
 | Autonomous reasoning | ✅ Multi-agent consensus | ❌ Manual triggers |
@@ -401,7 +401,7 @@ sequenceDiagram
 
 | Timestamp | What You'll See |
 |:---------:|-----------------|
-| `0:00` | Landing page — first impression of Zynvaro |
+| `0:00` | Landing page — first impression of AeroFyta |
 | `0:20` | **Dashboard** — Wallet-as-Brain radar, live decision stream, agent orb |
 | `0:45` | **9-chain wallets** — copy address, see balances across all chains |
 | `1:05` | **Smart escrow** — create HTLC with SHA-256 hash-lock live |
@@ -419,7 +419,7 @@ sequenceDiagram
 
 ## 🏁 Hackathon Tracks
 
-| Track | How Zynvaro Competes |
+| Track | How AeroFyta Competes |
 |:-----:|---------------------|
 | **🎯 Tipping Bot** | Autonomous financial agent that tips Rumble creators based on real engagement data, with multi-chain fee optimization |
 | **🔗 Agent Wallets** | OpenClaw ReAct framework + 9-chain WDK wallets with gasless support |
@@ -469,8 +469,8 @@ curl http://localhost:3001/api/proof
 
 | Contract | Purpose | Source |
 |----------|---------|--------|
-| **ZynvaroEscrow** | HTLC escrow — hash-lock + timelock for trustless tipping | `agent/contracts/AeroFytaEscrow.sol` |
-| **ZynvaroTipSplitter** | On-chain tip splitting with configurable revenue shares | `agent/contracts/AeroFytaTipSplitter.sol` |
+| **AeroFytaEscrow** | HTLC escrow — hash-lock + timelock for trustless tipping | `agent/contracts/AeroFytaEscrow.sol` |
+| **AeroFytaTipSplitter** | On-chain tip splitting with configurable revenue shares | `agent/contracts/AeroFytaTipSplitter.sol` |
 
 ```bash
 cd agent && npm run deploy    # Deploy to Sepolia
@@ -563,6 +563,6 @@ This project was built entirely during the Tether Hackathon Galactica: WDK Editi
 
 **Built with [Tether WDK](https://wdk.tether.io) · Published on [npm](https://www.npmjs.com/package/@xzashr/aerofyta) · Deployed at [aerofyta.xzashr.com](https://aerofyta.xzashr.com)**
 
-*Zynvaro — where wallets think and agents pay.*
+*AeroFyta — where wallets think and agents pay.*
 
 </div>
