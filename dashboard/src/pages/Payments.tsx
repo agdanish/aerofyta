@@ -1,12 +1,10 @@
 import { demoDCA, demoSubscriptions, demoStreaming, demoSplits, demoX402 } from "@/lib/demo-data";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Pause, Play, X } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ---- real API shapes ---- */
 interface RealDCA {
@@ -134,7 +132,7 @@ export default function Payments() {
                   <Button variant="ghost" size="icon" className="h-7 w-7" onClick={async () => {
                     const action = d.status === 'active' ? 'pause' : 'resume';
                     try {
-                      await fetch(`${API}/api/dca/${d.id}/${action}`, { method: 'POST' });
+                      await fetch(`${API_BASE}/api/dca/${d.id}/${action}`, { method: 'POST' });
                       toast.success(`DCA ${action}d`);
                     } catch (err) {
                       toast.error(`DCA ${action} failed: ${err instanceof Error ? err.message : "Unknown error"}`);
@@ -161,7 +159,7 @@ export default function Payments() {
                   {s.status === "active" && (
                     <Button variant="ghost" size="icon" className="h-7 w-7" onClick={async () => {
                       try {
-                        await fetch(`${API}/api/subscriptions/${s.id}/cancel`, { method: 'POST' });
+                        await fetch(`${API_BASE}/api/subscriptions/${s.id}/cancel`, { method: 'POST' });
                         toast.success('Subscription cancelled');
                       } catch (err) {
                         toast.error(`Cancel failed: ${err instanceof Error ? err.message : "Unknown error"}`);
@@ -188,7 +186,7 @@ export default function Payments() {
                   <Badge variant="outline" className={`text-[10px] ${statusBadge(s.status)}`}>{s.status}</Badge>
                   <Button variant="ghost" size="icon" className="h-7 w-7" onClick={async () => {
                     try {
-                      await fetch(`${API}/api/streaming/${s.id}/stop`, { method: 'POST' });
+                      await fetch(`${API_BASE}/api/streaming/${s.id}/stop`, { method: 'POST' });
                       toast.success('Stream stopped');
                     } catch (err) {
                       toast.error(`Stream stop failed: ${err instanceof Error ? err.message : "Unknown error"}`);

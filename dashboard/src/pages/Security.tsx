@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { demoAdversarialTests, demoPolicies } from "@/lib/demo-data";
+import { API_BASE } from "@/hooks/useFetch";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -8,8 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Shield, ShieldCheck, Play, Trash2, Plus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 interface Scenario {
   id: string;
@@ -60,12 +59,16 @@ export default function Security() {
   const [creditScore, setCreditScore] = useState<number | null>(null);
   const [creditLoading, setCreditLoading] = useState(false);
   const [creditFactors, setCreditFactors] = useState<{ name: string; value: number; impact: string }[]>([]);
+  const [scenariosLoading, setScenariosLoading] = useState(true);
 
   // Load scenarios on mount
   useEffect(() => {
-    fetch(`${API}/api/demo/adversarial`, { signal: AbortSignal.timeout(5000) })
+    let cancelled = false;
+    setScenariosLoading(true);
+    fetch(`${API_BASE}/api/demo/adversarial`, { signal: AbortSignal.timeout(5000) })
       .then((r) => r.json())
       .then((data: { scenarios: Scenario[] }) => {
+        if (cancelled) return;
         setScenarios(data.scenarios);
         // Pre-populate test cards from scenarios (not yet run)
         setTestResults(
@@ -79,9 +82,14 @@ export default function Security() {
         );
       })
       .catch(() => {
+        if (cancelled) return;
         // Fallback to demo data
         setTestResults(demoAdversarialTests.map((t) => ({ ...t, description: t.reason })));
+      })
+      .finally(() => {
+        if (!cancelled) setScenariosLoading(false);
       });
+    return () => { cancelled = true; };
   }, []);
 
   const runTests = async () => {
@@ -92,7 +100,7 @@ export default function Security() {
     setSummary(null);
 
     try {
-      const res = await fetch(`${API}/api/demo/adversarial/run-all`, {
+      const res = await fetch(`${API_BASE}/api/demo/adversarial/run-all`, {
         method: "POST",
         signal: AbortSignal.timeout(15000),
       });
@@ -136,7 +144,7 @@ export default function Security() {
     setCreditScore(null);
     setCreditFactors([]);
     try {
-      const res = await fetch(`${API}/api/credit/${creditAddr}`, { signal: AbortSignal.timeout(5000) });
+      const res = await fetch(`${API_BASE}/api/credit/${creditAddr}`, { signal: AbortSignal.timeout(5000) });
       if (!res.ok) throw new Error("not found");
       const data = await res.json();
       setCreditScore(data.score ?? 500);
@@ -205,6 +213,17 @@ export default function Security() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {scenariosLoading && testResults.length === 0 && (
+            <>
+              {[1, 2, 3, 4, 5, 6].map((n) => (
+                <div key={n} className="rounded-xl border border-border/50 bg-card/50 p-4 animate-pulse">
+                  <div className="h-4 w-3/4 bg-muted rounded mb-3" />
+                  <div className="h-3 w-full bg-muted/60 rounded mb-1" />
+                  <div className="h-3 w-2/3 bg-muted/40 rounded" />
+                </div>
+              ))}
+            </>
+          )}
           {testResults.map((test, i) => (
             <div
               key={test.name}
@@ -298,7 +317,7 @@ export default function Security() {
               <Button variant="outline" size="sm" onClick={() => setAddPolicyOpen(false)}>Cancel</Button>
               <Button size="sm" onClick={async () => {
                 try {
-                  const res = await fetch(`${API}/api/policies/rules`, {
+                  const res = await fetch(`${API_BASE}/api/policies/rules`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ type: newPolicyType, value: newPolicyValue, enabled: true }),

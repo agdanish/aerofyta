@@ -3,12 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import CountUp from "@/components/shared/CountUp";
 import { Award, Search, Download, Upload, Trophy, Star, Zap, Globe, Heart, Shield } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ---------- Real API types ---------- */
 interface ApiReputation {
@@ -83,7 +81,7 @@ export default function Reputation() {
     if (!addr) return;
     setLookupError(null);
     try {
-      const res = await fetch(`${API}/api/reputation/${encodeURIComponent(addr)}`, {
+      const res = await fetch(`${API_BASE}/api/reputation/${encodeURIComponent(addr)}`, {
         signal: AbortSignal.timeout(5000),
       });
       const json = await res.json();
@@ -105,7 +103,7 @@ export default function Reputation() {
   /* ---- Export Passport ---- */
   const handleExportPassport = async () => {
     try {
-      const res = await fetch(`${API}/api/reputation/export`);
+      const res = await fetch(`${API_BASE}/api/reputation/export`);
       const data = await res.json();
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
@@ -128,7 +126,7 @@ export default function Reputation() {
     reader.onload = async (ev) => {
       try {
         const parsed = JSON.parse(ev.target?.result as string);
-        const res = await fetch(`${API}/api/reputation/import`, {
+        const res = await fetch(`${API_BASE}/api/reputation/import`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(parsed),

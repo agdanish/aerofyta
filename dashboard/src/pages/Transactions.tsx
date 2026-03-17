@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ArrowLeftRight, Search, ExternalLink, Clock, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 
 /* ── chain helpers ── */
 const chainLabel: Record<string, string> = {
@@ -105,7 +105,6 @@ function timeAgo(iso: string): string {
 export default function Transactions() {
   const { data: raw, isDemo } = useFetch<HistoryResponse | null>("/api/agent/history", null);
 
-  const API = import.meta.env.PROD ? "" : "http://localhost:3001";
   const [lookupHash, setLookupHash] = useState("");
   const [looked, setLooked] = useState(false);
   const [lookupData, setLookupData] = useState<Record<string, string> | null>(null);
@@ -156,7 +155,7 @@ export default function Transactions() {
   const lookup = async () => {
     if (!lookupHash.trim()) return;
     try {
-      const res = await fetch(`${API}/api/tx/${encodeURIComponent(lookupHash.trim())}/status`, { signal: AbortSignal.timeout(5000) });
+      const res = await fetch(`${API_BASE}/api/tx/${encodeURIComponent(lookupHash.trim())}/status`, { signal: AbortSignal.timeout(5000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setLookupData({

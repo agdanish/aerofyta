@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { demoEscrows, demoEscrowStats } from "@/lib/demo-data";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import CountUp from "@/components/shared/CountUp";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,8 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Lock, Plus, Key, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 function Countdown({ seconds }: { seconds: number }) {
   const [remaining, setRemaining] = useState(seconds);
@@ -78,7 +76,7 @@ interface EscrowRow {
 }
 
 export default function Escrow() {
-  const { data: raw, isDemo } = useFetch<ApiEscrow[] | typeof demoEscrows>(
+  const { data: raw, loading, isDemo } = useFetch<ApiEscrow[] | typeof demoEscrows>(
     "/api/escrow",
     demoEscrows,
   );
@@ -229,17 +227,43 @@ export default function Escrow() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        {statCards.map((s) => (
-          <div key={s.label} className="rounded-xl border border-border/50 bg-card/50 p-4 text-center">
-            <CountUp target={s.value} className="text-2xl font-bold tabular-nums" />
-            <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
-          </div>
-        ))}
+        {loading ? (
+          [1, 2, 3, 4].map((n) => (
+            <div key={n} className="rounded-xl border border-border/50 bg-card/50 p-4 text-center animate-pulse">
+              <div className="h-7 w-12 bg-muted rounded mx-auto mb-1" />
+              <div className="h-3 w-16 bg-muted/60 rounded mx-auto" />
+            </div>
+          ))
+        ) : (
+          statCards.map((s) => (
+            <div key={s.label} className="rounded-xl border border-border/50 bg-card/50 p-4 text-center">
+              <CountUp target={s.value} className="text-2xl font-bold tabular-nums" />
+              <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Escrow Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {escrows.map((esc) => (
+        {loading && (
+          <>
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="rounded-xl border border-border/50 bg-card/50 p-5 animate-pulse">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="h-4 w-20 bg-muted rounded" />
+                  <div className="h-5 w-14 bg-muted/60 rounded" />
+                </div>
+                <div className="space-y-2 mb-4">
+                  <div className="h-3 w-full bg-muted/40 rounded" />
+                  <div className="h-3 w-2/3 bg-muted/40 rounded" />
+                  <div className="h-3 w-1/2 bg-muted/40 rounded" />
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+        {!loading && escrows.map((esc) => (
           <div key={esc.id} className="rounded-xl border border-border/50 bg-card/50 p-5 hover:border-border transition-colors">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
@@ -287,7 +311,7 @@ export default function Escrow() {
             )}
           </div>
         ))}
-        {escrows.length === 0 && (
+        {!loading && escrows.length === 0 && (
           <div className="col-span-full text-center py-12 text-sm text-muted-foreground">No escrows found.</div>
         )}
       </div>

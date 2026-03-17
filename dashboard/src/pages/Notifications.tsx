@@ -5,8 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bell, SendHorizontal, Lock, ShieldCheck, Monitor, CheckCheck, X, Loader2 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 /* ---------- types ---------- */
 interface Notification {
@@ -89,6 +88,7 @@ export default function Notifications() {
   const [tab, setTab] = useState("all");
   const [loading, setLoading] = useState(true);
   const [isDemo, setIsDemo] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -118,12 +118,23 @@ export default function Notifications() {
       } catch {
         if (!cancelled) setIsDemo(true);
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) { setLoading(false); setInitialLoading(false); }
       }
     }
     load();
     return () => { cancelled = true; };
   }, []);
+
+  if (initialLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="animate-pulse bg-white/5 rounded-lg h-8 w-64" />
+        <div className="animate-pulse bg-white/5 rounded-lg h-10 w-80" />
+        <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+        <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+      </div>
+    );
+  }
 
   const filtered = tab === "all" ? notifications : notifications.filter((n) => n.type === tab);
   const unreadCount = notifications.filter((n) => !n.read).length;

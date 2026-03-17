@@ -7,8 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Play, Square, Brain, Zap, Eye, MessageCircle, CheckCircle, Wifi, WifiOff } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 interface ReasoningCard {
   type: string;
@@ -36,11 +35,11 @@ const prefilledTrace: ReasoningCard[] = [
 
 export default function Reasoning() {
   const [prompt, setPrompt] = useState("Analyze portfolio and recommend next action");
-  const [cards, setCards] = useState<ReasoningCard[]>(prefilledTrace);
+  const [cards, setCards] = useState<ReasoningCard[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [confidence, setConfidence] = useState(87);
+  const [confidence, setConfidence] = useState(0);
   const [hasRun, setHasRun] = useState(false);
-  const [totalSteps, setTotalSteps] = useState(prefilledTrace.length);
+  const [totalSteps, setTotalSteps] = useState(0);
   const [isLive, setIsLive] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const eventSourceRef = useRef<EventSource | null>(null);

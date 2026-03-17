@@ -3,9 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ShimmerSkeleton from "@/components/shared/ShimmerSkeleton";
 import { SendHorizontal, Bot, User, Sparkles, Cpu } from "lucide-react";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 interface Message {
   id: number;
@@ -78,14 +78,16 @@ export default function Chat() {
   const [messages, setMessages] = useState<Message[]>(demoMessages);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [capabilities, setCapabilities] = useState<CapabilitiesResponse>(demoCapabilities);
+  const [capabilities, setCapabilities] = useState<CapabilitiesResponse | null>(null);
   const [capsDemo, setCapsDemo] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   /* load capabilities from real API */
   useEffect(() => {
     let cancelled = false;
     async function load() {
+      setPageLoading(true);
       try {
         const res = await fetch(`${API_BASE}/api/ai/capabilities`, { signal: AbortSignal.timeout(5000) });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -95,7 +97,12 @@ export default function Chat() {
           setCapsDemo(false);
         }
       } catch {
-        if (!cancelled) setCapsDemo(true);
+        if (!cancelled) {
+          setCapabilities(demoCapabilities);
+          setCapsDemo(true);
+        }
+      } finally {
+        if (!cancelled) setPageLoading(false);
       }
     }
     load();
@@ -143,9 +150,26 @@ export default function Chat() {
     }
   };
 
-  const providerLabel = capabilities.llmAvailable
-    ? capabilities.currentProvider
-    : `${capabilities.currentProvider} (no LLM key)`;
+  const caps = capabilities ?? demoCapabilities;
+  const providerLabel = caps.llmAvailable
+    ? caps.currentProvider
+    : `${caps.currentProvider} (no LLM key)`;
+
+  if (pageLoading) {
+    return (
+      <div className="p-6 space-y-6">
+        <ShimmerSkeleton className="h-8 w-48" />
+        <ShimmerSkeleton className="h-4 w-72" />
+        <div className="grid lg:grid-cols-[1fr_280px] gap-4">
+          <ShimmerSkeleton className="h-[560px]" />
+          <div className="space-y-4">
+            <ShimmerSkeleton className="h-32" />
+            <ShimmerSkeleton className="h-48" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -217,20 +241,20 @@ export default function Chat() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <div className={`h-2 w-2 rounded-full ${capabilities.llmAvailable ? "bg-emerald-500" : "bg-amber-500"}`} />
+                <div className={`h-2 w-2 rounded-full ${caps.llmAvailable ? "bg-emerald-500" : "bg-amber-500"}`} />
                 <span className="text-xs">{providerLabel}</span>
               </div>
-              <p className="text-[10px] text-muted-foreground">v{capabilities.version}</p>
+              <p className="text-[10px] text-muted-foreground">v{caps.version}</p>
             </div>
           </div>
 
           <div className="rounded-xl border border-border/50 bg-card/50 p-4">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-4 w-4" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />
-              <h3 className="text-sm font-semibold">Supported Intents ({capabilities.intents.length})</h3>
+              <h3 className="text-sm font-semibold">Supported Intents ({caps.intents.length})</h3>
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {capabilities.intents.map((c) => (
+              {caps.intents.map((c) => (
                 <Badge key={c.name} variant="outline" className="text-[9px]" title={c.description}>{c.name}</Badge>
               ))}
             </div>

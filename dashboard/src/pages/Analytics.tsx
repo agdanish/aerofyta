@@ -1,13 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
 import { demoAgentStatus, demoTipsPerDay, demoChainDistribution, demoCreators, demoDecisionLog } from "@/lib/demo-data";
 import CountUp from "@/components/shared/CountUp";
+import ShimmerSkeleton from "@/components/shared/ShimmerSkeleton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RTooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, ScatterChart, Scatter, ZAxis } from "recharts";
 import { Download, Medal, AlertTriangle, Wifi, WifiOff } from "lucide-react";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 const decisionColors: Record<string, string> = {
   approved: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
@@ -89,10 +89,12 @@ export default function Analytics() {
   const [agentStatus, setAgentStatus] = useState<AgentStatus | null>(null);
   const [anomalyData, setAnomalyData] = useState<AnomalyChart | null>(null);
   const [isDemo, setIsDemo] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
     async function fetchAll() {
+      setPageLoading(true);
       try {
         const [statusRes, anomalyRes] = await Promise.all([
           fetch(`${API_BASE}/api/agent/status`, { signal: AbortSignal.timeout(5000) }),
@@ -107,6 +109,8 @@ export default function Analytics() {
         }
       } catch {
         if (!cancelled) setIsDemo(true);
+      } finally {
+        if (!cancelled) setPageLoading(false);
       }
     }
     fetchAll();
@@ -175,6 +179,29 @@ export default function Analytics() {
   }, [anomalyData]);
 
   const maxTips = Math.max(...demoCreators.slice(0, 5).map((c) => c.tips));
+
+  if (pageLoading) {
+    return (
+      <div className="p-6 space-y-6">
+        <ShimmerSkeleton className="h-8 w-48" />
+        <ShimmerSkeleton className="h-4 w-72" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <ShimmerSkeleton className="h-24" />
+          <ShimmerSkeleton className="h-24" />
+          <ShimmerSkeleton className="h-24" />
+          <ShimmerSkeleton className="h-24" />
+        </div>
+        <div className="grid lg:grid-cols-2 gap-4">
+          <ShimmerSkeleton className="h-56" />
+          <ShimmerSkeleton className="h-56" />
+        </div>
+        <div className="grid lg:grid-cols-2 gap-4">
+          <ShimmerSkeleton className="h-48" />
+          <ShimmerSkeleton className="h-48" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

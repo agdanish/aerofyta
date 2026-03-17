@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ShimmerSkeleton from "@/components/shared/ShimmerSkeleton";
 import { FileCheck, Download, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 // --- Demo fallbacks ---
 const demoTaxEvents = [
@@ -57,7 +57,7 @@ export default function Compliance() {
   const fetchAudit = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API}/api/audit?limit=50`, { signal: AbortSignal.timeout(5000) });
+      const res = await fetch(`${API_BASE}/api/audit?limit=50`, { signal: AbortSignal.timeout(5000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       if (data.entries && Array.isArray(data.entries)) {
@@ -86,6 +86,20 @@ export default function Compliance() {
 
   // Group by eventType for the "tax events" table
   const tipEvents = auditEntries.filter((e) => e.eventType === "tip_sent" || e.eventType === "tip_failed");
+
+  if (loading && auditEntries.length === 0 && !isDemo) {
+    return (
+      <div className="p-6 space-y-6">
+        <ShimmerSkeleton className="h-8 w-56" />
+        <ShimmerSkeleton className="h-4 w-72" />
+        <div className="grid lg:grid-cols-3 gap-4">
+          <ShimmerSkeleton className="h-48" />
+          <ShimmerSkeleton className="h-48 lg:col-span-2" />
+        </div>
+        <ShimmerSkeleton className="h-64" />
+      </div>
+    );
+  }
 
   return (
     <div>

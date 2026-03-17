@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { demoCreators } from "@/lib/demo-data";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Search, Sparkles } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 const tierColors: Record<string, string> = {
   Diamond: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
@@ -68,7 +66,7 @@ function normalise(raw: ApiCreator): CreatorRow {
 }
 
 export default function Creators() {
-  const { data: rawData, isDemo, refetch } = useFetch<{ creators: ApiCreator[] } | typeof demoCreators>(
+  const { data: rawData, loading, isDemo, refetch } = useFetch<{ creators: ApiCreator[] } | typeof demoCreators>(
     "/api/rumble/creators",
     demoCreators,
   );
@@ -101,7 +99,7 @@ export default function Creators() {
   const handleDiscover = async () => {
     setDiscovering(true);
     try {
-      const res = await fetch(`${API}/api/creators/discover`);
+      const res = await fetch(`${API_BASE}/api/creators/discover`);
       const data = await res.json();
       toast.success(`Discovered ${data.creators?.length || 0} new creators`);
       refetch();
@@ -155,7 +153,23 @@ export default function Creators() {
               <span className="text-right">Tier</span>
             </div>
             <div className="divide-y divide-border/30">
-              {filtered.map((c) => (
+              {loading && (
+                <>
+                  {[1, 2, 3, 4].map((n) => (
+                    <div key={n} className="grid grid-cols-[1fr_100px_140px_80px_90px] gap-4 px-5 py-3 animate-pulse items-center">
+                      <div className="flex items-center gap-3">
+                        <div className="h-8 w-8 rounded-full bg-muted" />
+                        <div className="h-3 w-24 bg-muted rounded" />
+                      </div>
+                      <div className="h-3 w-12 bg-muted/60 rounded" />
+                      <div className="h-1.5 w-full bg-muted/40 rounded" />
+                      <div className="h-3 w-8 bg-muted/60 rounded ml-auto" />
+                      <div className="h-5 w-16 bg-muted/40 rounded ml-auto" />
+                    </div>
+                  ))}
+                </>
+              )}
+              {!loading && filtered.map((c) => (
                 <div key={c.id}>
                   <button
                     className="w-full grid grid-cols-[1fr_100px_140px_80px_90px] gap-4 px-5 py-3 text-sm hover:bg-accent/30 transition-colors items-center text-left"
@@ -201,7 +215,7 @@ export default function Creators() {
                   )}
                 </div>
               ))}
-              {filtered.length === 0 && (
+              {!loading && filtered.length === 0 && (
                 <div className="px-5 py-8 text-center text-sm text-muted-foreground">No creators found.</div>
               )}
             </div>

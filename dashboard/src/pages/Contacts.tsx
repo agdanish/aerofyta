@@ -15,9 +15,7 @@ import {
 import { Plus, Download, Upload, Search } from "lucide-react";
 import { toast } from "sonner";
 import CopyButton from "@/components/shared/CopyButton";
-import { useFetch } from "@/hooks/useFetch";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 
 /* ---------- Real API types ---------- */
 interface ApiContact {
@@ -67,7 +65,7 @@ const guessChain = (address: string): string => {
 };
 
 export default function Contacts() {
-  const { data: rawData, isDemo, refetch } = useFetch<ContactsResponse>(
+  const { data: rawData, loading, isDemo, refetch } = useFetch<ContactsResponse>(
     "/api/contacts",
     demoContacts,
   );
@@ -109,7 +107,7 @@ export default function Contacts() {
     }
     setAddLoading(true);
     try {
-      const res = await fetch(`${API}/api/contacts`, {
+      const res = await fetch(`${API_BASE}/api/contacts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: newName.trim(), address: newAddress.trim(), chain: newChain.trim() || undefined }),
@@ -148,7 +146,7 @@ export default function Contacts() {
     reader.onload = async (ev) => {
       try {
         const parsed = JSON.parse(ev.target?.result as string);
-        const res = await fetch(`${API}/api/contacts/import`, {
+        const res = await fetch(`${API_BASE}/api/contacts/import`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(parsed),
@@ -171,7 +169,7 @@ export default function Contacts() {
     if (!ensInput.trim()) return;
     setEnsLoading(true);
     try {
-      const res = await fetch(`${API}/api/ens/${encodeURIComponent(ensInput.trim())}`);
+      const res = await fetch(`${API_BASE}/api/ens/${encodeURIComponent(ensInput.trim())}`);
       const data = await res.json();
       if (data.address) {
         toast.success(`Resolved: ${data.address}`);
@@ -244,7 +242,20 @@ export default function Contacts() {
             </div>
           </div>
           <ScrollArea className="h-[480px]">
-            {groups.map((group) => {
+            {loading && (
+              <div className="divide-y divide-border/20">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <div key={n} className="px-5 py-3 flex items-center gap-3 animate-pulse">
+                    <div className="h-8 w-8 rounded-full bg-muted" />
+                    <div className="flex-1 space-y-2">
+                      <div className="h-3 w-1/3 bg-muted rounded" />
+                      <div className="h-2.5 w-1/2 bg-muted/60 rounded" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {!loading && groups.map((group) => {
               const groupContacts = filtered.filter((c) => c.group === group);
               if (groupContacts.length === 0) return null;
               return (
@@ -271,7 +282,7 @@ export default function Contacts() {
                 </div>
               );
             })}
-            {filtered.length === 0 && (
+            {!loading && filtered.length === 0 && (
               <div className="px-5 py-8 text-center text-sm text-muted-foreground">No contacts found.</div>
             )}
           </ScrollArea>

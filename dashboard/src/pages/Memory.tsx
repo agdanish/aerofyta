@@ -3,8 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { BrainCircuit, CheckCircle, XCircle, Loader2 } from "lucide-react";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 /* ---------- types matching real /api/agent/memory ---------- */
 interface CreatorPref {
@@ -141,6 +140,7 @@ export default function Memory() {
   const [contextPreview, setContextPreview] = useState(demoContext);
   const [loading, setLoading] = useState(true);
   const [isDemo, setIsDemo] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -157,12 +157,25 @@ export default function Memory() {
       } catch {
         if (!cancelled) setIsDemo(true);
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) { setLoading(false); setInitialLoading(false); }
       }
     }
     load();
     return () => { cancelled = true; };
   }, []);
+
+  if (initialLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="animate-pulse bg-white/5 rounded-lg h-8 w-64" />
+        <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+        <div className="grid lg:grid-cols-2 gap-4">
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

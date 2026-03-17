@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { demoLendingPosition, demoContracts } from "@/lib/demo-data";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,8 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import CopyButton from "@/components/shared/CopyButton";
 import { ExternalLink, ArrowRightLeft, Landmark, FileCheck, CheckCircle, XCircle } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ---- Real API shapes ---- */
 interface RealPosition {
@@ -63,11 +61,12 @@ const demoYield: RealYieldSummary = {
 const demoProof: RealProofBundle | null = null;
 
 export default function DeFi() {
-  const { data: lendingData, isDemo: isLendingDemo } = useFetch<RealLendingData>("/api/strategies/lending/positions", {
+  const { data: lendingData, loading: lendingLoading, isDemo: isLendingDemo } = useFetch<RealLendingData>("/api/strategies/lending/positions", {
     positions: [], lendingAvailable: false,
   });
-  const { data: yieldData, isDemo: isYieldDemo } = useFetch<RealYieldSummary>("/api/lending/yield-summary", demoYield);
-  const { data: proofData, isDemo: isProofDemo, refetch: refetchProof } = useFetch<RealProofBundle | null>("/api/proof/bundle", demoProof);
+  const { data: yieldData, loading: yieldLoading, isDemo: isYieldDemo } = useFetch<RealYieldSummary>("/api/lending/yield-summary", demoYield);
+  const { data: proofData, loading: proofLoading, isDemo: isProofDemo, refetch: refetchProof } = useFetch<RealProofBundle | null>("/api/proof/bundle", demoProof);
+  const pageLoading = lendingLoading || yieldLoading;
 
   const [swapFrom, setSwapFrom] = useState("USDT");
   const [swapTo, setSwapTo] = useState("ETH");
@@ -91,7 +90,21 @@ export default function DeFi() {
         <p className="text-sm text-muted-foreground mt-1">Aave lending, cross-chain swaps, and verified proofs.</p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-4 mb-6">
+      {pageLoading && (
+        <div className="grid lg:grid-cols-2 gap-4 mb-6">
+          {[1, 2].map((n) => (
+            <div key={n} className="rounded-xl border border-border/50 bg-card/50 p-5 animate-pulse">
+              <div className="h-4 w-1/3 bg-muted rounded mb-4" />
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div><div className="h-2.5 w-16 bg-muted/60 rounded mb-2" /><div className="h-6 w-24 bg-muted rounded" /></div>
+                <div><div className="h-2.5 w-12 bg-muted/60 rounded mb-2" /><div className="h-6 w-16 bg-muted rounded" /></div>
+              </div>
+              <div className="h-3 w-full bg-muted/40 rounded mt-4" />
+            </div>
+          ))}
+        </div>
+      )}
+      {!pageLoading && <div className="grid lg:grid-cols-2 gap-4 mb-6">
         {/* Aave Card */}
         <div className="rounded-xl border border-border/50 bg-card/50 p-5">
           <div className="flex items-center gap-2 mb-4">
@@ -182,7 +195,7 @@ export default function DeFi() {
             </div>
             <Button className="w-full bg-primary hover:bg-primary/90" onClick={async () => {
               try {
-                const res = await fetch(`${API}/api/swap/quote`, {
+                const res = await fetch(`${API_BASE}/api/swap/quote`, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ from: swapFrom, to: swapTo, amount: swapAmount })
@@ -197,7 +210,7 @@ export default function DeFi() {
             </Button>
           </div>
         </div>
-      </div>
+      </div>}
 
       <div className="grid lg:grid-cols-2 gap-4">
         {/* Contracts */}
@@ -269,7 +282,7 @@ export default function DeFi() {
               <p className="text-xs text-muted-foreground mb-4">Verify DeFi transactions on-chain</p>
               <Button variant="outline" size="sm" onClick={async () => {
                 try {
-                  const res = await fetch(`${API}/api/proof/generate-all`, { method: 'POST' });
+                  const res = await fetch(`${API_BASE}/api/proof/generate-all`, { method: 'POST' });
                   const data = await res.json();
                   toast.success(`Proof generated: ${data.steps?.length || 0} steps`);
                   refetchProof();

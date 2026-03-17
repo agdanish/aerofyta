@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 interface ServiceStatus {
   name: string;
@@ -111,13 +110,40 @@ export default function Status() {
   const allHealthy = statuses.length > 0 && statuses.every((s) => s.healthy);
   const healthyCount = statuses.filter((s) => s.healthy).length;
 
+  if (loading) {
+    return (
+      <div>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">System Health</h1>
+            <p className="text-sm text-muted-foreground mt-0.5">Checking services...</p>
+          </div>
+          <Badge variant="outline" className="border-yellow-500/40 text-yellow-500">Checking...</Badge>
+        </div>
+        <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden">
+          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-4 px-5 py-3 border-b border-border/40 text-xs text-muted-foreground font-medium">
+            <span>Service</span><span>Status</span><span>Response</span><span>Checked</span>
+          </div>
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="grid grid-cols-[1fr_auto_auto_auto] gap-4 items-center px-5 py-3 border-b border-border/20 last:border-0 animate-pulse">
+              <div className="h-4 w-28 bg-muted/40 rounded" />
+              <div className="h-4 w-16 bg-muted/40 rounded" />
+              <div className="h-4 w-12 bg-muted/40 rounded" />
+              <div className="h-4 w-14 bg-muted/40 rounded" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">System Health</h1>
           <p className="text-sm text-muted-foreground mt-0.5">
-            {loading ? "Checking services..." : `${healthyCount}/${statuses.length} services checked against localhost:3001`}
+            {`${healthyCount}/${statuses.length} services checked against localhost:3001`}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -134,7 +160,7 @@ export default function Status() {
                 : "border-yellow-500/40 text-yellow-500"
             }
           >
-            {loading ? "Checking..." : allHealthy ? "All Systems Operational" : "Partial Outage"}
+            {allHealthy ? "All Systems Operational" : "Partial Outage"}
           </Badge>
         </div>
       </div>

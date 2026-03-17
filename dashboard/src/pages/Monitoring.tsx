@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Play, Pause, Square, MonitorCheck, AlertTriangle, Info, AlertCircle, RefreshCw } from "lucide-react";
 import CountUp from "@/components/shared/CountUp";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 interface LoopData {
   running: boolean;
@@ -77,16 +76,19 @@ export default function Monitoring() {
   const [agentStatus, setAgentStatus] = useState<AgentStatus | null>(null);
   const [isDemo, setIsDemo] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const fetchStatus = useCallback(async () => {
     try {
-      const res = await fetch(`${API}/api/agent/status`, { signal: AbortSignal.timeout(5000) });
+      const res = await fetch(`${API_BASE}/api/agent/status`, { signal: AbortSignal.timeout(5000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data: AgentStatus = await res.json();
       setAgentStatus(data);
       setIsDemo(false);
     } catch {
       setIsDemo(true);
+    } finally {
+      setInitialLoading(false);
     }
   }, []);
 
@@ -109,7 +111,7 @@ export default function Monitoring() {
 
   const handleLoopAction = async (action: "start" | "stop" | "pause" | "resume") => {
     try {
-      await fetch(`${API}/api/agent/loop/${action}`, { method: "POST", signal: AbortSignal.timeout(5000) });
+      await fetch(`${API_BASE}/api/agent/loop/${action}`, { method: "POST", signal: AbortSignal.timeout(5000) });
       // Refresh status after action
       setTimeout(fetchStatus, 500);
     } catch {
@@ -155,6 +157,24 @@ export default function Monitoring() {
         detail: `Data source: ${loop.dataSource}`,
       });
     }
+  }
+
+  if (initialLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="animate-pulse bg-white/5 rounded-lg h-8 w-64" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+        </div>
+        <div className="grid lg:grid-cols-2 gap-4">
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+        </div>
+      </div>
+    );
   }
 
   return (

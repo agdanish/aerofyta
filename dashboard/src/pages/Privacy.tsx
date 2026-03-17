@@ -6,8 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ShieldCheck, Check, Loader2, Lock, Eye, Hash } from "lucide-react";
 import CountUp from "@/components/shared/CountUp";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 interface ZkCapabilities {
   hashBased: boolean;
@@ -34,6 +33,7 @@ const defaultCaps: ZkCapabilities = {
 export default function Privacy() {
   const [caps, setCaps] = useState<ZkCapabilities>(defaultCaps);
   const [capsLoaded, setCapsLoaded] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const [commitInput, setCommitInput] = useState("87");
   const [commitHash, setCommitHash] = useState("");
@@ -49,7 +49,7 @@ export default function Privacy() {
 
   // Load ZK capabilities on mount
   useEffect(() => {
-    fetch(`${API}/api/zk/capabilities`, { signal: AbortSignal.timeout(5000) })
+    fetch(`${API_BASE}/api/zk/capabilities`, { signal: AbortSignal.timeout(5000) })
       .then((r) => r.json())
       .then((data: ZkCapabilities) => {
         setCaps(data);
@@ -58,7 +58,8 @@ export default function Privacy() {
       .catch(() => {
         setCaps(defaultCaps);
         setCapsLoaded(true);
-      });
+      })
+      .finally(() => setInitialLoading(false));
   }, []);
 
   const handleCommit = async () => {
@@ -68,7 +69,7 @@ export default function Privacy() {
     setProof("");
     setVerifyResult(null);
     try {
-      const res = await fetch(`${API}/api/zk/commit`, {
+      const res = await fetch(`${API_BASE}/api/zk/commit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ score: Number(commitInput) }),
@@ -96,7 +97,7 @@ export default function Privacy() {
     setProof("");
     setVerifyResult(null);
     try {
-      const res = await fetch(`${API}/api/zk/prove`, {
+      const res = await fetch(`${API_BASE}/api/zk/prove`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -125,7 +126,7 @@ export default function Privacy() {
     setVerifyLoading(true);
     setVerifyResult(null);
     try {
-      const res = await fetch(`${API}/api/zk/verify`, {
+      const res = await fetch(`${API_BASE}/api/zk/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -149,6 +150,21 @@ export default function Privacy() {
       setVerifyLoading(false);
     }
   };
+
+  if (initialLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="animate-pulse bg-white/5 rounded-lg h-8 w-64" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="animate-pulse bg-white/5 rounded-lg h-24" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-24" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-24" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-24" />
+        </div>
+        <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+      </div>
+    );
+  }
 
   return (
     <div>

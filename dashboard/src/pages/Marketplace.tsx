@@ -6,7 +6,7 @@ import CountUp from "@/components/shared/CountUp";
 import { Store, Download, Package, Wrench, Puzzle, Code, Cpu, Globe, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { type LucideIcon } from "lucide-react";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 
 /* ---------- Types matching real API ---------- */
 interface ApiAgent {
@@ -105,12 +105,10 @@ export default function Marketplace() {
     setSkills((s) => s.map((sk) => sk.id === id ? { ...sk, enabled: !sk.enabled } : sk));
   };
 
-  const API = import.meta.env.PROD ? "" : "http://localhost:3001";
-
   const install = async (id: string) => {
     setSkills((s) => s.map((sk) => sk.id === id ? { ...sk, installed: true, enabled: true } : sk));
     try {
-      await fetch(`${API}/api/advanced/marketplace/agents/${id}/install`, { method: 'POST' });
+      await fetch(`${API_BASE}/api/advanced/marketplace/agents/${id}/install`, { method: 'POST' });
       toast.success("Skill installed and enabled");
     } catch {
       toast.success("Skill installed locally");

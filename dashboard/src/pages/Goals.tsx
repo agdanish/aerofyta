@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import CountUp from "@/components/shared/CountUp";
+import ShimmerSkeleton from "@/components/shared/ShimmerSkeleton";
 import { Target, CheckCircle2, Flame, Trophy, Zap, Star, Heart, Globe, Shield, Award, Loader2 } from "lucide-react";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 /* ---------- API types ---------- */
 interface GoalApi {
@@ -143,9 +143,9 @@ const demoAchievements: AchievementDisplay[] = [
 ];
 
 export default function Goals() {
-  const [activeGoals, setActiveGoals] = useState<ActiveGoal[]>(demoActive);
-  const [completedGoals, setCompletedGoals] = useState<CompletedGoal[]>(demoCompleted);
-  const [achievements, setAchievements] = useState<AchievementDisplay[]>(demoAchievements);
+  const [activeGoals, setActiveGoals] = useState<ActiveGoal[]>([]);
+  const [completedGoals, setCompletedGoals] = useState<CompletedGoal[]>([]);
+  const [achievements, setAchievements] = useState<AchievementDisplay[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDemo, setIsDemo] = useState(false);
 
@@ -179,9 +179,21 @@ export default function Goals() {
           }
         }
 
-        if (!cancelled) setIsDemo(!gotReal);
+        if (!cancelled) {
+          if (!gotReal) {
+            setActiveGoals(demoActive);
+            setCompletedGoals(demoCompleted);
+            setAchievements(demoAchievements);
+          }
+          setIsDemo(!gotReal);
+        }
       } catch {
-        if (!cancelled) setIsDemo(true);
+        if (!cancelled) {
+          setActiveGoals(demoActive);
+          setCompletedGoals(demoCompleted);
+          setAchievements(demoAchievements);
+          setIsDemo(true);
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -191,6 +203,20 @@ export default function Goals() {
   }, []);
 
   const unlockedCount = achievements.filter((a) => a.unlocked).length;
+
+  if (loading) {
+    return (
+      <div className="p-6 space-y-6">
+        <ShimmerSkeleton className="h-8 w-48" />
+        <ShimmerSkeleton className="h-4 w-72" />
+        <div className="grid lg:grid-cols-2 gap-4">
+          <ShimmerSkeleton className="h-48" />
+          <ShimmerSkeleton className="h-48" />
+        </div>
+        <ShimmerSkeleton className="h-40" />
+      </div>
+    );
+  }
 
   return (
     <div>

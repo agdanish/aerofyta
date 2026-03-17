@@ -8,11 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import CountUp from "@/components/shared/CountUp";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import { Vote, Plus, Check, X, Users, ThumbsUp, ThumbsDown } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ── Demo fallback ── */
 const demoProposals = {
@@ -67,15 +65,16 @@ export default function Governance() {
   const [newOpen, setNewOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newDesc, setNewDesc] = useState("");
-  const { data: proposalsData, isDemo } = useFetch("/api/advanced/governance/proposals", demoProposals);
-  const { data: stats } = useFetch("/api/advanced/governance/stats", demoStats);
+  const { data: proposalsData, loading: proposalsLoading, isDemo } = useFetch("/api/advanced/governance/proposals", demoProposals);
+  const { data: stats, loading: statsLoading } = useFetch("/api/advanced/governance/stats", demoStats);
+  const loading = proposalsLoading || statsLoading;
 
   const rawProposals = proposalsData.proposals ?? [];
   const proposals: DisplayProposal[] = rawProposals.map((p: Record<string, unknown>) => mapProposal(p as Record<string, unknown>));
 
   const vote = async (id: string, direction: string) => {
     try {
-      await fetch(`${API}/api/advanced/governance/proposals/${id}/veto`, {
+      await fetch(`${API_BASE}/api/advanced/governance/proposals/${id}/veto`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ vote: direction }),
@@ -90,7 +89,7 @@ export default function Governance() {
   const createProposal = async () => {
     if (!newTitle.trim()) { toast.error("Title is required"); return; }
     try {
-      await fetch(`${API}/api/advanced/governance/proposals`, {
+      await fetch(`${API_BASE}/api/advanced/governance/proposals`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: newTitle, description: newDesc }),
@@ -118,22 +117,31 @@ export default function Governance() {
 
       {/* Stats */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        {[
-          { label: "Total Proposals", value: stats.totalProposals ?? proposals.length, icon: Vote },
-          { label: "Approval Rate", value: Math.round(stats.avgApprovalRate ?? 0), suffix: "%", icon: ThumbsUp },
-          { label: "Governing Agents", value: stats.governingAgents ?? 5, icon: Users },
-          { label: "Active Votes", value: stats.activeProposals ?? activeVoting, icon: ThumbsDown },
-        ].map((s) => (
-          <div key={s.label} className="rounded-xl border border-border/50 bg-card/50 p-5">
-            <div className="flex items-center gap-2 mb-1">
-              <s.icon className="h-4 w-4" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />
-              <p className="text-xs text-muted-foreground font-medium">{s.label}</p>
+        {loading ? (
+          [1, 2, 3, 4].map((n) => (
+            <div key={n} className="rounded-xl border border-border/50 bg-card/50 p-5 animate-pulse">
+              <div className="h-3 w-20 bg-muted/60 rounded mb-2" />
+              <div className="h-7 w-12 bg-muted rounded" />
             </div>
-            <div className="text-2xl font-bold tabular-nums tracking-tight">
-              <CountUp target={s.value} />{s.suffix}
+          ))
+        ) : (
+          [
+            { label: "Total Proposals", value: stats.totalProposals ?? proposals.length, icon: Vote },
+            { label: "Approval Rate", value: Math.round(stats.avgApprovalRate ?? 0), suffix: "%", icon: ThumbsUp },
+            { label: "Governing Agents", value: stats.governingAgents ?? 5, icon: Users },
+            { label: "Active Votes", value: stats.activeProposals ?? activeVoting, icon: ThumbsDown },
+          ].map((s) => (
+            <div key={s.label} className="rounded-xl border border-border/50 bg-card/50 p-5">
+              <div className="flex items-center gap-2 mb-1">
+                <s.icon className="h-4 w-4" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />
+                <p className="text-xs text-muted-foreground font-medium">{s.label}</p>
+              </div>
+              <div className="text-2xl font-bold tabular-nums tracking-tight">
+                <CountUp target={s.value} />{s.suffix}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       <div className="grid lg:grid-cols-2 gap-4 mb-6">
@@ -167,7 +175,19 @@ export default function Governance() {
           </div>
           <ScrollArea className="h-[380px]">
             <div className="divide-y divide-border/20">
-              {proposals.map((p) => {
+              {loading && (
+                <>
+                  {[1, 2, 3].map((n) => (
+                    <div key={n} className="px-5 py-3 animate-pulse">
+                      <div className="h-3 w-16 bg-muted/60 rounded mb-2" />
+                      <div className="h-4 w-3/4 bg-muted rounded mb-2" />
+                      <div className="h-2.5 w-full bg-muted/40 rounded mb-2" />
+                      <div className="h-1.5 w-full bg-muted/30 rounded" />
+                    </div>
+                  ))}
+                </>
+              )}
+              {!loading && proposals.map((p) => {
                 const totalVotes = p.votesFor + p.votesAgainst;
                 return (
                   <div key={p.id} className="px-5 py-3 hover:bg-accent/30 transition-colors">
@@ -198,7 +218,7 @@ export default function Governance() {
                   </div>
                 );
               })}
-              {proposals.length === 0 && <div className="px-5 py-8 text-center text-xs text-muted-foreground">No proposals yet</div>}
+              {!loading && proposals.length === 0 && <div className="px-5 py-8 text-center text-xs text-muted-foreground">No proposals yet</div>}
             </div>
           </ScrollArea>
         </div>

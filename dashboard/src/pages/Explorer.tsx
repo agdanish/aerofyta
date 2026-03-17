@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { demoApiSpec } from "@/lib/demo-data";
 import JsonViewer from "@/components/shared/JsonViewer";
+import ShimmerSkeleton from "@/components/shared/ShimmerSkeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,8 +11,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Search, Send, ChevronDown, Loader2, Menu, Wifi, WifiOff } from "lucide-react";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 interface Endpoint {
   method: string;
@@ -181,13 +181,15 @@ export default function Explorer() {
   const [responseTime, setResponseTime] = useState(0);
   const [loading, setLoading] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [allEndpoints, setAllEndpoints] = useState<Endpoint[]>(demoApiSpec.endpoints as Endpoint[]);
+  const [allEndpoints, setAllEndpoints] = useState<Endpoint[]>([]);
   const [isLive, setIsLive] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
 
   // Fetch real OpenAPI spec from backend
   useEffect(() => {
     let cancelled = false;
     async function fetchSpec() {
+      setPageLoading(true);
       try {
         const res = await fetch(`${API_BASE}/api/docs`, { signal: AbortSignal.timeout(5000) });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -197,11 +199,18 @@ export default function Explorer() {
           if (parsed.length > 0) {
             setAllEndpoints(parsed);
             setIsLive(true);
+          } else {
+            setAllEndpoints(demoApiSpec.endpoints as Endpoint[]);
           }
         }
       } catch {
         // Keep demo data as fallback
-        if (!cancelled) setIsLive(false);
+        if (!cancelled) {
+          setAllEndpoints(demoApiSpec.endpoints as Endpoint[]);
+          setIsLive(false);
+        }
+      } finally {
+        if (!cancelled) setPageLoading(false);
       }
     }
     fetchSpec();
@@ -364,6 +373,19 @@ export default function Explorer() {
       </div>
     </div>
   );
+
+  if (pageLoading) {
+    return (
+      <div className="p-6 space-y-6">
+        <ShimmerSkeleton className="h-8 w-48" />
+        <ShimmerSkeleton className="h-4 w-72" />
+        <div className="flex gap-4 min-h-[600px]">
+          <ShimmerSkeleton className="w-72 shrink-0 hidden lg:block" />
+          <ShimmerSkeleton className="flex-1" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

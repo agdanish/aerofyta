@@ -2,11 +2,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import CountUp from "@/components/shared/CountUp";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import { CandlestickChart, TrendingUp, TrendingDown, Play, Pause, Check, X, BarChart3 } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ── Demo fallback data ── */
 const demoStats = {
@@ -141,7 +139,7 @@ export default function Trading() {
                       <Button size="icon" variant="ghost" className="h-7 w-7" onClick={async () => {
                         try {
                           const action = t.status === 'active' ? 'pause' : 'resume';
-                          await fetch(`${API}/api/advanced/trading/traders/${t.id}/${action}`, { method: 'POST' });
+                          await fetch(`${API_BASE}/api/advanced/trading/traders/${t.id}/${action}`, { method: 'POST' });
                           toast.success(`Trader ${action}d`);
                         } catch { toast.error("Failed to update trader"); }
                       }}>

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { QrCode, Copy, Download, Link, Plus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 
 /* ---------- API types ---------- */
 interface ApiQrStats {
@@ -54,8 +54,6 @@ const demoPayments: { payments: ApiPayment[] } = {
     { id: "qr-5", merchantId: "demo", amount: "0.5", currency: "USDT", chain: "Arbitrum", status: "completed", createdAt: new Date(Date.now() - 18000000).toISOString() },
   ],
 };
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 function timeAgo(iso: string): string {
   const diff = Date.now() - new Date(iso).getTime();
@@ -120,8 +118,13 @@ export default function QRCodes() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+      <div className="space-y-4">
+        <div className="animate-pulse bg-white/5 rounded-lg h-8 w-64" />
+        <div className="grid lg:grid-cols-[1fr_320px] gap-4">
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
+        </div>
+        <div className="animate-pulse bg-white/5 rounded-lg h-32" />
       </div>
     );
   }

@@ -7,11 +7,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import CountUp from "@/components/shared/CountUp";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import { KeyRound, Plus, Check, X, Clock } from "lucide-react";
 import { toast } from "sonner";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ── Demo fallback ── */
 const demoWallets = {
@@ -108,7 +106,7 @@ export default function Multisig() {
     if (signers.length < 2) { toast.error("At least 2 signers required"); return; }
     if (threshold < 1 || threshold > signers.length) { toast.error("Invalid threshold"); return; }
     try {
-      await fetch(`${API}/api/advanced/multisig/wallets`, {
+      await fetch(`${API_BASE}/api/advanced/multisig/wallets`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ signers, threshold }),

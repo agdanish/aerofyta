@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { API_BASE } from "@/hooks/useFetch";
 
 interface DemoStepResult {
   id: number;

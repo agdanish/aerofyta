@@ -1,13 +1,11 @@
 import { useMemo, useCallback } from "react";
 import { demoWallets } from "@/lib/demo-data";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import CopyButton from "@/components/shared/CopyButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 const faucetUrls: Record<string, string> = {
   "Ethereum Sepolia": "https://cloud.google.com/application/web3/faucet/ethereum/sepolia",

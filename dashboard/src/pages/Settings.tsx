@@ -7,9 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Settings as SettingsIcon, User, Shield, Link, Database, Info, Save } from "lucide-react";
 import { toast } from "sonner";
 import { useUptime } from "@/hooks/useUptime";
-import { useFetch } from "@/hooks/useFetch";
-
-const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 
 interface SystemInfo {
   uptime: number;
@@ -67,7 +65,7 @@ export default function Settings() {
         </div>
         <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90" onClick={async () => {
           try {
-            await fetch(`${API}/api/system/settings`, {
+            await fetch(`${API_BASE}/api/system/settings`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ agentName, personality, autonomous, limits: { daily: dailyLimit, perTip: perTipMax, weekly: weeklyCap } })

@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { demoTipHistory, demoWallets } from "@/lib/demo-data";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch, API_BASE } from "@/hooks/useFetch";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,8 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Search, Send, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ── chain display helpers ── */
 const chainLabel: Record<string, string> = {
