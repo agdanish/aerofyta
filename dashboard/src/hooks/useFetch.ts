@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 // In production (Railway), frontend is served from same origin as backend
 // In development, backend runs on localhost:3001
@@ -8,6 +8,9 @@ export function useFetch<T>(path: string, demoData: T) {
   const [data, setData] = useState<T>(demoData);
   const [loading, setLoading] = useState(true);
   const [isDemo, setIsDemo] = useState(false);
+  const [tick, setTick] = useState(0);
+
+  const refetch = useCallback(() => setTick((t) => t + 1), []);
 
   useEffect(() => {
     let cancelled = false;
@@ -35,7 +38,7 @@ export function useFetch<T>(path: string, demoData: T) {
 
     fetchData();
     return () => { cancelled = true; };
-  }, [path]);
+  }, [path, tick]);
 
-  return { data, loading, isDemo };
+  return { data, loading, isDemo, refetch };
 }

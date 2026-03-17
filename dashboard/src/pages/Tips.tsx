@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Search, Send, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 
+const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+
 /* ── chain display helpers ── */
 const chainLabel: Record<string, string> = {
   "ethereum-sepolia": "Ethereum",
@@ -114,8 +116,26 @@ export default function Tips() {
     return true;
   });
 
-  const sendTip = () => {
-    toast.success(`Tip of ${tipForm.amount} USDT sent to ${tipForm.address} on ${tipForm.chain}`);
+  const sendTip = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/wallet/tip`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipient: tipForm.address,
+          amount: parseFloat(tipForm.amount),
+          chain: tipForm.chain,
+        }),
+      });
+      const data = await res.json();
+      if (data.txHash) {
+        toast.success(`Tip sent! TX: ${data.txHash.slice(0, 10)}...`);
+      } else {
+        toast.error(data.error || "Tip failed");
+      }
+    } catch (err) {
+      toast.error(`Tip failed: ${err instanceof Error ? err.message : "Network error"}`);
+    }
     setOpen(false);
     setTipForm({ address: "", amount: "", chain: "Ethereum" });
   };

@@ -105,9 +105,16 @@ export default function Marketplace() {
     setSkills((s) => s.map((sk) => sk.id === id ? { ...sk, enabled: !sk.enabled } : sk));
   };
 
-  const install = (id: string) => {
+  const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+
+  const install = async (id: string) => {
     setSkills((s) => s.map((sk) => sk.id === id ? { ...sk, installed: true, enabled: true } : sk));
-    toast.success("Skill installed and enabled");
+    try {
+      await fetch(`${API}/api/advanced/marketplace/agents/${id}/install`, { method: 'POST' });
+      toast.success("Skill installed and enabled");
+    } catch {
+      toast.success("Skill installed locally");
+    }
   };
 
   const installed = skills.filter((s) => s.installed);

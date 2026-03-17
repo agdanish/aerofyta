@@ -133,7 +133,22 @@ export default function Compliance() {
         <div className="lg:col-span-2 rounded-xl border border-border/50 bg-card/50">
           <div className="px-5 py-3 border-b border-border/40 flex items-center justify-between">
             <h3 className="text-sm font-semibold">Transaction Events</h3>
-            <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => toast.success("Export triggered")}>
+            <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => {
+              const entries = !isDemo && auditEntries.length > 0 ? auditEntries : demoTaxEvents.map(e => ({ timestamp: e.date, eventType: e.type, status: "success", details: `${e.amount} to ${e.recipient} on ${e.chain}` }));
+              const csv = ['Date,Type,Status,Details', ...entries.map(e => {
+                const date = ('timestamp' in e ? e.timestamp : '') || '';
+                const type = ('eventType' in e ? e.eventType : '') || '';
+                const status = ('status' in e ? e.status : '') || '';
+                const details = (('details' in e ? e.details : '') || '').replace(/,/g, ';');
+                return `${date},${type},${status},${details}`;
+              })].join('\n');
+              const blob = new Blob([csv], { type: 'text/csv' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url; a.download = 'aerofyta-audit.csv'; a.click();
+              URL.revokeObjectURL(url);
+              toast.success('Audit exported as CSV');
+            }}>
               <Download className="h-3 w-3 mr-1" />Export CSV
             </Button>
           </div>

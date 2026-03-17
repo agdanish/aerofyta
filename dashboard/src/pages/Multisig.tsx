@@ -3,10 +3,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import CountUp from "@/components/shared/CountUp";
 import { useFetch } from "@/hooks/useFetch";
 import { KeyRound, Plus, Check, X, Clock } from "lucide-react";
 import { toast } from "sonner";
+
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ── Demo fallback ── */
 const demoWallets = {
@@ -90,14 +95,36 @@ function timeAgo(iso: string): string {
 
 export default function Multisig() {
   const [signed, setSigned] = useState<Record<string, boolean>>({});
+  const [rejected, setRejected] = useState<Record<string, boolean>>({});
+  const [walletOpen, setWalletOpen] = useState(false);
+  const [newSigners, setNewSigners] = useState("Agent A, Agent B, Agent C");
+  const [newThreshold, setNewThreshold] = useState("2");
   const { data: walletsData, isDemo } = useFetch("/api/advanced/multisig/wallets", demoWallets);
   const { data: txsData } = useFetch("/api/advanced/multisig/transactions", demoTxs);
+
+  const createWallet = async () => {
+    const signers = newSigners.split(",").map((s) => s.trim()).filter(Boolean);
+    const threshold = parseInt(newThreshold, 10);
+    if (signers.length < 2) { toast.error("At least 2 signers required"); return; }
+    if (threshold < 1 || threshold > signers.length) { toast.error("Invalid threshold"); return; }
+    try {
+      await fetch(`${API}/api/advanced/multisig/wallets`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ signers, threshold }),
+      });
+      toast.success('Multisig wallet created');
+      setWalletOpen(false);
+    } catch {
+      toast.error("Failed to create wallet");
+    }
+  };
 
   const wallets: WalletDisplay[] = (walletsData.wallets ?? []).map((w: Record<string, unknown>) => mapWallet(w as Record<string, unknown>));
   const allTxs: TxDisplay[] = (txsData.transactions ?? []).map((t: Record<string, unknown>) => mapTx(t as Record<string, unknown>));
 
-  const pendingTxs = allTxs.filter((t) => t.status === "pending");
-  const historyTxs = allTxs.filter((t) => t.status !== "pending");
+  const pendingTxs = allTxs.filter((t) => t.status === "pending" && !rejected[t.id]);
+  const historyTxs = allTxs.filter((t) => t.status !== "pending" || rejected[t.id]);
 
   const stats = walletsData.stats ?? demoWallets.stats;
 
@@ -111,9 +138,29 @@ export default function Multisig() {
           </div>
           {isDemo && <Badge variant="outline" className="text-[9px] bg-yellow-500/15 text-yellow-400 border-yellow-500/30">DEMO</Badge>}
         </div>
-        <Button size="sm" variant="outline" className="h-8 text-xs" onClick={() => toast.info("Create multisig form coming soon")}>
-          <Plus className="h-3 w-3 mr-1" />New Wallet
-        </Button>
+        <Dialog open={walletOpen} onOpenChange={setWalletOpen}>
+          <DialogTrigger asChild>
+            <Button size="sm" variant="outline" className="h-8 text-xs">
+              <Plus className="h-3 w-3 mr-1" />New Wallet
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create Multisig Wallet</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 pt-2">
+              <div className="space-y-2">
+                <Label htmlFor="ms-signers">Signers (comma-separated)</Label>
+                <Input id="ms-signers" placeholder="Agent A, Agent B, Agent C" value={newSigners} onChange={(e) => setNewSigners(e.target.value)} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="ms-threshold">Threshold</Label>
+                <Input id="ms-threshold" type="number" min={1} value={newThreshold} onChange={(e) => setNewThreshold(e.target.value)} />
+              </div>
+              <Button className="w-full" onClick={createWallet}>Create Wallet</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Stats Row */}
@@ -179,7 +226,7 @@ export default function Multisig() {
                         <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => { setSigned((s) => ({ ...s, [tx.id]: true })); toast.success(`Signed ${tx.id}`); }}>
                           <Check className="h-3 w-3" style={{ color: "#50AF95" }} />
                         </Button>
-                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => toast.error(`Rejected ${tx.id}`)}>
+                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => { setRejected((r) => ({ ...r, [tx.id]: true })); toast.success(`Rejected ${tx.id}`); }}>
                           <X className="h-3 w-3 text-destructive" />
                         </Button>
                       </div>

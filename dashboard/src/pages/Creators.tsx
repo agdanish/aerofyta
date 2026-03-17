@@ -8,6 +8,8 @@ import { Progress } from "@/components/ui/progress";
 import { Search, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+
 const tierColors: Record<string, string> = {
   Diamond: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
   Platinum: "bg-violet-500/15 text-violet-400 border-violet-500/30",
@@ -66,12 +68,13 @@ function normalise(raw: ApiCreator): CreatorRow {
 }
 
 export default function Creators() {
-  const { data: rawData, isDemo } = useFetch<{ creators: ApiCreator[] } | typeof demoCreators>(
+  const { data: rawData, isDemo, refetch } = useFetch<{ creators: ApiCreator[] } | typeof demoCreators>(
     "/api/rumble/creators",
     demoCreators,
   );
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [discovering, setDiscovering] = useState(false);
 
   /* Normalise: real API returns { creators: [...] }, demo is flat array */
   const creators: CreatorRow[] = Array.isArray(rawData)
@@ -94,6 +97,21 @@ export default function Creators() {
     c.categories.some((cat) => cat.toLowerCase().includes(search.toLowerCase()))
   );
 
+  /* ---- Discover ---- */
+  const handleDiscover = async () => {
+    setDiscovering(true);
+    try {
+      const res = await fetch(`${API}/api/creators/discover`);
+      const data = await res.json();
+      toast.success(`Discovered ${data.creators?.length || 0} new creators`);
+      refetch();
+    } catch {
+      toast.error("Could not reach discover API");
+    } finally {
+      setDiscovering(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
@@ -107,10 +125,11 @@ export default function Creators() {
         <Button
           size="sm"
           className="bg-primary hover:bg-primary/90"
-          onClick={() => toast.success("Discovered 12 new creators")}
+          disabled={discovering}
+          onClick={handleDiscover}
         >
           <Sparkles className="h-3.5 w-3.5 mr-2" />
-          Discover
+          {discovering ? "Discovering..." : "Discover"}
         </Button>
       </div>
 

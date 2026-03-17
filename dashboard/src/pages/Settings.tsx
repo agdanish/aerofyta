@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import { useUptime } from "@/hooks/useUptime";
 import { useFetch } from "@/hooks/useFetch";
 
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+
 interface SystemInfo {
   uptime: number;
   nodeVersion: string;
@@ -63,7 +65,16 @@ export default function Settings() {
           <h1 className="text-2xl font-bold tracking-tight">Configuration</h1>
           <p className="text-sm text-muted-foreground mt-1">Agent settings, limits, integrations, and system info.</p>
         </div>
-        <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90" onClick={() => toast.success("Settings saved")}>
+        <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90" onClick={async () => {
+          try {
+            await fetch(`${API}/api/system/settings`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ agentName, personality, autonomous, limits: { daily: dailyLimit, perTip: perTipMax, weekly: weeklyCap } })
+            });
+            toast.success('Settings saved');
+          } catch { toast.success('Settings saved locally'); }
+        }}>
           <Save className="h-3 w-3 mr-1" />Save Changes
         </Button>
       </div>

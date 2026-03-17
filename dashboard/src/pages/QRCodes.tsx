@@ -210,7 +210,7 @@ export default function QRCodes() {
           {generated ? (
             <>
               <div className="h-48 w-48 rounded-xl border border-border/40 bg-white p-3 mb-4 flex items-center justify-center">
-                <svg viewBox="0 0 100 100" className="h-full w-full">
+                <svg viewBox="0 0 100 100" className="h-full w-full qr-svg">
                   <rect width="100" height="100" fill="white"/>
                   {[0,1,2,3,4,5,6].map(r => [0,1,2,3,4,5,6].map(c => {
                     if (r === 0 || r === 6 || c === 0 || c === 6 || (r >= 2 && r <= 4 && c >= 2 && c <= 4))
@@ -235,7 +235,20 @@ export default function QRCodes() {
                 }}>
                   <Copy className="h-3 w-3 mr-1" />Copy
                 </Button>
-                <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => toast.success("QR code downloaded")}>
+                <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => {
+                  const svgEl = document.querySelector('.qr-svg');
+                  if (svgEl) {
+                    const svgData = new XMLSerializer().serializeToString(svgEl);
+                    const blob = new Blob([svgData], { type: 'image/svg+xml' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url; a.download = 'aerofyta-qr.svg'; a.click();
+                    URL.revokeObjectURL(url);
+                    toast.success('QR code downloaded');
+                  } else {
+                    toast.error('Generate a QR code first');
+                  }
+                }}>
                   <Download className="h-3 w-3 mr-1" />Save
                 </Button>
                 <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => {

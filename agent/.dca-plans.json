@@ -16514,19 +16514,24 @@
       "id": "dca_604_1774112311116",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:58:31.116Z",
+      "nextExecutionAt": "2026-03-23T16:58:43.912Z",
       "createdAt": "2026-03-21T16:58:31.116Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T16:58:44.229Z"
+        }
+      ]
     },
     {
       "id": "dca_605_1774112311125",
@@ -16630,19 +16635,24 @@
       "id": "dca_607_1774112311139",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:58:31.139Z",
+      "nextExecutionAt": "2026-03-23T16:58:43.912Z",
       "createdAt": "2026-03-21T16:58:31.139Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:44.690Z"
+        }
+      ]
     },
     {
       "id": "dca_608_1774112311142",
@@ -16666,19 +16676,24 @@
       "id": "dca_609_1774112311148",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:58:31.148Z",
+      "nextExecutionAt": "2026-03-23T16:58:43.912Z",
       "createdAt": "2026-03-21T16:58:31.148Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T16:58:44.690Z"
+        }
+      ]
     },
     {
       "id": "dca_610_1774112311152",
@@ -16855,40 +16870,49 @@
       "id": "dca_616_1774112320611",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:58:40.611Z",
+      "nextExecutionAt": "2026-03-23T16:58:43.912Z",
       "createdAt": "2026-03-21T16:58:40.611Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:45.157Z"
+        }
+      ]
     },
     {
       "id": "dca_617_1774112320615",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:59:26.503Z",
       "createdAt": "2026-03-21T16:58:40.615Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T04:59:26.503Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:59:44.531Z"
         }
       ]
     },
@@ -16978,40 +17002,49 @@
       "id": "dca_622_1774112320636",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:58:40.636Z",
+      "nextExecutionAt": "2026-03-23T16:58:43.912Z",
       "createdAt": "2026-03-21T16:58:40.636Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:45.633Z"
+        }
+      ]
     },
     {
       "id": "dca_623_1774112320639",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:59:26.503Z",
       "createdAt": "2026-03-21T16:58:40.639Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T04:59:26.503Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:59:45.024Z"
         }
       ]
     },
@@ -17083,19 +17116,24 @@
       "id": "dca_627_1774112320653",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:58:40.653Z",
       "createdAt": "2026-03-21T16:58:40.653Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:46.112Z"
+        }
+      ]
     },
     {
       "id": "dca_628_1774112320654",
@@ -17146,40 +17184,49 @@
       "id": "dca_630_1774112320775",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:58:40.775Z",
+      "nextExecutionAt": "2026-03-23T16:58:43.912Z",
       "createdAt": "2026-03-21T16:58:40.775Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:46.606Z"
+        }
+      ]
     },
     {
       "id": "dca_631_1774112320776",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:59:26.503Z",
+      "nextExecutionAt": "2026-03-23T04:59:43.915Z",
       "createdAt": "2026-03-21T16:58:40.776Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T04:59:26.503Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:59:45.500Z"
         }
       ]
     },
@@ -17214,19 +17261,24 @@
       "id": "dca_633_1774112640845",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:00.845Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:00.845Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:04:44.409Z"
+        }
+      ]
     },
     {
       "id": "dca_634_1774112640851",
@@ -17330,19 +17382,24 @@
       "id": "dca_636_1774112640866",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:00.866Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:00.866Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:44.997Z"
+        }
+      ]
     },
     {
       "id": "dca_637_1774112640871",
@@ -17366,19 +17423,24 @@
       "id": "dca_638_1774112640876",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:00.876Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:00.876Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:04:44.997Z"
+        }
+      ]
     },
     {
       "id": "dca_639_1774112640881",
@@ -17555,40 +17617,49 @@
       "id": "dca_645_1774112650289",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:10.289Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:10.289Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:45.506Z"
+        }
+      ]
     },
     {
       "id": "dca_646_1774112650293",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:04:26.531Z",
       "createdAt": "2026-03-21T17:04:10.293Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:04:26.531Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:46.035Z"
         }
       ]
     },
@@ -17678,40 +17749,49 @@
       "id": "dca_651_1774112650316",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:10.316Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:10.316Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:46.767Z"
+        }
+      ]
     },
     {
       "id": "dca_652_1774112650320",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:04:26.531Z",
       "createdAt": "2026-03-21T17:04:10.320Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:04:26.531Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:47.263Z"
         }
       ]
     },
@@ -17783,19 +17863,24 @@
       "id": "dca_656_1774112650335",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:04:10.335Z",
       "createdAt": "2026-03-21T17:04:10.335Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:47.797Z"
+        }
+      ]
     },
     {
       "id": "dca_657_1774112650336",
@@ -17846,40 +17931,49 @@
       "id": "dca_659_1774112650467",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:10.467Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:10.467Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:48.286Z"
+        }
+      ]
     },
     {
       "id": "dca_660_1774112650469",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:26.531Z",
+      "nextExecutionAt": "2026-03-23T05:04:43.949Z",
       "createdAt": "2026-03-21T17:04:10.469Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:04:26.531Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:48.786Z"
         }
       ]
     },
@@ -17914,19 +18008,24 @@
       "id": "dca_662_1774112657918",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:17.918Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:17.919Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:04:49.043Z"
+        }
+      ]
     },
     {
       "id": "dca_663_1774112657925",
@@ -18030,19 +18129,24 @@
       "id": "dca_665_1774112657948",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:17.948Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:17.948Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:49.541Z"
+        }
+      ]
     },
     {
       "id": "dca_666_1774112657952",
@@ -18066,19 +18170,24 @@
       "id": "dca_667_1774112657957",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:17.957Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:17.957Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:04:49.541Z"
+        }
+      ]
     },
     {
       "id": "dca_668_1774112657962",
@@ -18255,40 +18364,49 @@
       "id": "dca_674_1774112667508",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:27.508Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:27.508Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:50.051Z"
+        }
+      ]
     },
     {
       "id": "dca_675_1774112667513",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:26.534Z",
       "createdAt": "2026-03-21T17:04:27.513Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.534Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:44.822Z"
         }
       ]
     },
@@ -18378,40 +18496,49 @@
       "id": "dca_680_1774112667538",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:27.538Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:27.538Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:50.533Z"
+        }
+      ]
     },
     {
       "id": "dca_681_1774112667542",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:26.534Z",
       "createdAt": "2026-03-21T17:04:27.542Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.534Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:45.423Z"
         }
       ]
     },
@@ -18483,19 +18610,24 @@
       "id": "dca_685_1774112667557",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:04:27.557Z",
       "createdAt": "2026-03-21T17:04:27.557Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:51.102Z"
+        }
+      ]
     },
     {
       "id": "dca_686_1774112667559",
@@ -18546,40 +18678,49 @@
       "id": "dca_688_1774112667683",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:27.683Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:27.683Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:51.636Z"
+        }
+      ]
     },
     {
       "id": "dca_689_1774112667685",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:26.534Z",
+      "nextExecutionAt": "2026-03-23T05:05:43.949Z",
       "createdAt": "2026-03-21T17:04:27.685Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.534Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:45.953Z"
         }
       ]
     },
@@ -18614,19 +18755,24 @@
       "id": "dca_691_1774112680728",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:40.728Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:40.729Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:04:51.929Z"
+        }
+      ]
     },
     {
       "id": "dca_692_1774112680742",
@@ -18730,19 +18876,24 @@
       "id": "dca_694_1774112680774",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:40.774Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:40.774Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:04:52.482Z"
+        }
+      ]
     },
     {
       "id": "dca_695_1774112680779",
@@ -18766,19 +18917,24 @@
       "id": "dca_696_1774112680784",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:40.784Z",
+      "nextExecutionAt": "2026-03-23T17:04:43.949Z",
       "createdAt": "2026-03-21T17:04:40.784Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:04:52.482Z"
+        }
+      ]
     },
     {
       "id": "dca_697_1774112680789",
@@ -18955,40 +19111,49 @@
       "id": "dca_703_1774112691163",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:51.163Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:04:51.163Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:46.438Z"
+        }
+      ]
     },
     {
       "id": "dca_704_1774112691167",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:26.534Z",
       "createdAt": "2026-03-21T17:04:51.167Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.535Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:46.921Z"
         }
       ]
     },
@@ -19078,40 +19243,49 @@
       "id": "dca_709_1774112691191",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:51.191Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:04:51.191Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:47.407Z"
+        }
+      ]
     },
     {
       "id": "dca_710_1774112691195",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:26.534Z",
       "createdAt": "2026-03-21T17:04:51.195Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.535Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:47.902Z"
         }
       ]
     },
@@ -19183,19 +19357,24 @@
       "id": "dca_714_1774112691210",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:04:51.210Z",
       "createdAt": "2026-03-21T17:04:51.210Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:48.463Z"
+        }
+      ]
     },
     {
       "id": "dca_715_1774112691211",
@@ -19246,40 +19425,49 @@
       "id": "dca_717_1774112691329",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:04:51.329Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:04:51.329Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:49.034Z"
+        }
+      ]
     },
     {
       "id": "dca_718_1774112691331",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:26.534Z",
+      "nextExecutionAt": "2026-03-23T05:05:43.949Z",
       "createdAt": "2026-03-21T17:04:51.331Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.535Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:49.544Z"
         }
       ]
     },
@@ -19314,19 +19502,24 @@
       "id": "dca_720_1774112703473",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:03.473Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:03.476Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:05:49.807Z"
+        }
+      ]
     },
     {
       "id": "dca_721_1774112703484",
@@ -19430,19 +19623,24 @@
       "id": "dca_723_1774112703494",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:03.494Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:03.494Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:50.362Z"
+        }
+      ]
     },
     {
       "id": "dca_724_1774112703499",
@@ -19466,19 +19664,24 @@
       "id": "dca_725_1774112703503",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:03.503Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:03.503Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:05:50.362Z"
+        }
+      ]
     },
     {
       "id": "dca_726_1774112703508",
@@ -19655,40 +19858,49 @@
       "id": "dca_732_1774112711049",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:11.049Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:11.049Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:50.864Z"
+        }
+      ]
     },
     {
       "id": "dca_733_1774112711053",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:26.534Z",
       "createdAt": "2026-03-21T17:05:11.053Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.535Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:51.355Z"
         }
       ]
     },
@@ -19778,40 +19990,49 @@
       "id": "dca_738_1774112711078",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:11.078Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:11.078Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:51.815Z"
+        }
+      ]
     },
     {
       "id": "dca_739_1774112711082",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:26.534Z",
       "createdAt": "2026-03-21T17:05:11.082Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.535Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:52.306Z"
         }
       ]
     },
@@ -19883,19 +20104,24 @@
       "id": "dca_743_1774112711099",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:11.099Z",
       "createdAt": "2026-03-21T17:05:11.099Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:52.784Z"
+        }
+      ]
     },
     {
       "id": "dca_744_1774112711101",
@@ -19946,40 +20172,49 @@
       "id": "dca_746_1774112711218",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:11.218Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:11.218Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:53.247Z"
+        }
+      ]
     },
     {
       "id": "dca_747_1774112711220",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:26.534Z",
+      "nextExecutionAt": "2026-03-23T05:05:43.949Z",
       "createdAt": "2026-03-21T17:05:11.220Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:05:26.535Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:53.729Z"
         }
       ]
     },
@@ -20014,19 +20249,24 @@
       "id": "dca_749_1774112741519",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:41.519Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:41.520Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:05:53.958Z"
+        }
+      ]
     },
     {
       "id": "dca_750_1774112741528",
@@ -20130,19 +20370,24 @@
       "id": "dca_752_1774112741537",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:41.537Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:41.537Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:05:54.435Z"
+        }
+      ]
     },
     {
       "id": "dca_753_1774112741541",
@@ -20166,19 +20411,24 @@
       "id": "dca_754_1774112741545",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:41.545Z",
+      "nextExecutionAt": "2026-03-23T17:05:43.949Z",
       "createdAt": "2026-03-21T17:05:41.545Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:05:54.436Z"
+        }
+      ]
     },
     {
       "id": "dca_755_1774112741550",
@@ -20355,40 +20605,49 @@
       "id": "dca_761_1774112751851",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:51.851Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:05:51.851Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:44.501Z"
+        }
+      ]
     },
     {
       "id": "dca_762_1774112751855",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:06:26.540Z",
       "createdAt": "2026-03-21T17:05:51.855Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:06:26.540Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:44.986Z"
         }
       ]
     },
@@ -20478,40 +20737,49 @@
       "id": "dca_767_1774112751881",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:51.881Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:05:51.881Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:45.435Z"
+        }
+      ]
     },
     {
       "id": "dca_768_1774112751885",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:06:26.540Z",
       "createdAt": "2026-03-21T17:05:51.885Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:06:26.540Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:45.920Z"
         }
       ]
     },
@@ -20583,19 +20851,24 @@
       "id": "dca_772_1774112751902",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:05:51.902Z",
       "createdAt": "2026-03-21T17:05:51.902Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:46.388Z"
+        }
+      ]
     },
     {
       "id": "dca_773_1774112751904",
@@ -20646,40 +20919,49 @@
       "id": "dca_775_1774112752019",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:52.019Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:05:52.019Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:46.894Z"
+        }
+      ]
     },
     {
       "id": "dca_776_1774112752020",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:06:26.540Z",
+      "nextExecutionAt": "2026-03-23T05:06:43.951Z",
       "createdAt": "2026-03-21T17:05:52.021Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:06:26.540Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:47.384Z"
         }
       ]
     },
@@ -20714,19 +20996,24 @@
       "id": "dca_778_1774112759386",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:59.386Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:05:59.387Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:06:47.655Z"
+        }
+      ]
     },
     {
       "id": "dca_779_1774112759393",
@@ -20830,19 +21117,24 @@
       "id": "dca_781_1774112759405",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:59.405Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:05:59.405Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:48.104Z"
+        }
+      ]
     },
     {
       "id": "dca_782_1774112759409",
@@ -20866,19 +21158,24 @@
       "id": "dca_783_1774112759413",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:05:59.413Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:05:59.413Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:06:48.105Z"
+        }
+      ]
     },
     {
       "id": "dca_784_1774112759423",
@@ -21055,40 +21352,49 @@
       "id": "dca_790_1774112770315",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:06:10.315Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:06:10.315Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:48.544Z"
+        }
+      ]
     },
     {
       "id": "dca_791_1774112770319",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:06:26.540Z",
       "createdAt": "2026-03-21T17:06:10.319Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:06:26.540Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:49.007Z"
         }
       ]
     },
@@ -21178,40 +21484,49 @@
       "id": "dca_796_1774112770343",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:06:10.343Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:06:10.343Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:49.546Z"
+        }
+      ]
     },
     {
       "id": "dca_797_1774112770347",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:06:26.540Z",
       "createdAt": "2026-03-21T17:06:10.347Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:06:26.540Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:50.000Z"
         }
       ]
     },
@@ -21283,19 +21598,24 @@
       "id": "dca_801_1774112770363",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:06:10.363Z",
       "createdAt": "2026-03-21T17:06:10.363Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:50.472Z"
+        }
+      ]
     },
     {
       "id": "dca_802_1774112770364",
@@ -21346,40 +21666,49 @@
       "id": "dca_804_1774112770482",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:06:10.482Z",
+      "nextExecutionAt": "2026-03-23T17:06:43.951Z",
       "createdAt": "2026-03-21T17:06:10.482Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:50.958Z"
+        }
+      ]
     },
     {
       "id": "dca_805_1774112770485",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:06:26.540Z",
+      "nextExecutionAt": "2026-03-23T05:06:43.951Z",
       "createdAt": "2026-03-21T17:06:10.485Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:06:26.540Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:06:51.470Z"
         }
       ]
     },
@@ -21414,19 +21743,24 @@
       "id": "dca_807_1774112842068",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:22.068Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:22.068Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:07:44.314Z"
+        }
+      ]
     },
     {
       "id": "dca_808_1774112842077",
@@ -21530,19 +21864,24 @@
       "id": "dca_810_1774112842086",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:22.086Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:22.086Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:07:44.817Z"
+        }
+      ]
     },
     {
       "id": "dca_811_1774112842090",
@@ -21566,19 +21905,24 @@
       "id": "dca_812_1774112842095",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:22.095Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:22.095Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:07:44.817Z"
+        }
+      ]
     },
     {
       "id": "dca_813_1774112842099",
@@ -21755,40 +22099,49 @@
       "id": "dca_819_1774112852183",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:32.183Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:32.183Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:07:45.298Z"
+        }
+      ]
     },
     {
       "id": "dca_820_1774112852188",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:26.542Z",
       "createdAt": "2026-03-21T17:07:32.188Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.542Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:44.618Z"
         }
       ]
     },
@@ -21878,40 +22231,49 @@
       "id": "dca_825_1774112852216",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:32.216Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:32.216Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:07:45.754Z"
+        }
+      ]
     },
     {
       "id": "dca_826_1774112852220",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:26.542Z",
       "createdAt": "2026-03-21T17:07:32.220Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.542Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:45.100Z"
         }
       ]
     },
@@ -21983,19 +22345,24 @@
       "id": "dca_830_1774112852238",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:07:32.238Z",
       "createdAt": "2026-03-21T17:07:32.238Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:07:46.230Z"
+        }
+      ]
     },
     {
       "id": "dca_831_1774112852240",
@@ -22046,40 +22413,49 @@
       "id": "dca_833_1774112852387",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:32.387Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:32.387Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:07:46.725Z"
+        }
+      ]
     },
     {
       "id": "dca_834_1774112852389",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:26.542Z",
+      "nextExecutionAt": "2026-03-23T05:08:43.968Z",
       "createdAt": "2026-03-21T17:07:32.389Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.542Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:45.578Z"
         }
       ]
     },
@@ -22114,19 +22490,24 @@
       "id": "dca_836_1774112861291",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:41.291Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:41.291Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:07:46.976Z"
+        }
+      ]
     },
     {
       "id": "dca_837_1774112861299",
@@ -22230,19 +22611,24 @@
       "id": "dca_839_1774112861360",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:41.360Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:41.360Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:07:47.496Z"
+        }
+      ]
     },
     {
       "id": "dca_840_1774112861365",
@@ -22266,19 +22652,24 @@
       "id": "dca_841_1774112861371",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:41.371Z",
+      "nextExecutionAt": "2026-03-23T17:07:43.966Z",
       "createdAt": "2026-03-21T17:07:41.371Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:07:47.496Z"
+        }
+      ]
     },
     {
       "id": "dca_842_1774112861376",
@@ -22455,40 +22846,49 @@
       "id": "dca_848_1774112872349",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:52.349Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:07:52.349Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:46.041Z"
+        }
+      ]
     },
     {
       "id": "dca_849_1774112872354",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:26.542Z",
       "createdAt": "2026-03-21T17:07:52.354Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.543Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:46.507Z"
         }
       ]
     },
@@ -22578,40 +22978,49 @@
       "id": "dca_854_1774112872383",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:52.383Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:07:52.383Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:47.062Z"
+        }
+      ]
     },
     {
       "id": "dca_855_1774112872388",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:26.542Z",
       "createdAt": "2026-03-21T17:07:52.388Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.543Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:47.560Z"
         }
       ]
     },
@@ -22683,19 +23092,24 @@
       "id": "dca_859_1774112872406",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:07:52.406Z",
       "createdAt": "2026-03-21T17:07:52.406Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:48.053Z"
+        }
+      ]
     },
     {
       "id": "dca_860_1774112872409",
@@ -22746,40 +23160,49 @@
       "id": "dca_862_1774112872530",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:07:52.530Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:07:52.530Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:48.563Z"
+        }
+      ]
     },
     {
       "id": "dca_863_1774112872533",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:26.542Z",
+      "nextExecutionAt": "2026-03-23T05:08:43.968Z",
       "createdAt": "2026-03-21T17:07:52.533Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.543Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:49.038Z"
         }
       ]
     },
@@ -22814,19 +23237,24 @@
       "id": "dca_865_1774112881322",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:01.322Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:01.322Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:08:49.274Z"
+        }
+      ]
     },
     {
       "id": "dca_866_1774112881330",
@@ -22930,19 +23358,24 @@
       "id": "dca_868_1774112881339",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:01.339Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:01.339Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:49.787Z"
+        }
+      ]
     },
     {
       "id": "dca_869_1774112881346",
@@ -22966,19 +23399,24 @@
       "id": "dca_870_1774112881351",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:01.351Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:01.351Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:08:49.788Z"
+        }
+      ]
     },
     {
       "id": "dca_871_1774112881357",
@@ -23155,40 +23593,49 @@
       "id": "dca_877_1774112890980",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:10.980Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:10.980Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:50.265Z"
+        }
+      ]
     },
     {
       "id": "dca_878_1774112890984",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:26.542Z",
       "createdAt": "2026-03-21T17:08:10.984Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.543Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:50.800Z"
         }
       ]
     },
@@ -23278,40 +23725,49 @@
       "id": "dca_883_1774112891014",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:11.014Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:11.014Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:51.336Z"
+        }
+      ]
     },
     {
       "id": "dca_884_1774112891019",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:26.542Z",
       "createdAt": "2026-03-21T17:08:11.019Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.543Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:51.809Z"
         }
       ]
     },
@@ -23383,19 +23839,24 @@
       "id": "dca_888_1774112891037",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:11.037Z",
       "createdAt": "2026-03-21T17:08:11.037Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:52.293Z"
+        }
+      ]
     },
     {
       "id": "dca_889_1774112891039",
@@ -23446,40 +23907,49 @@
       "id": "dca_891_1774112891164",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:11.164Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:11.164Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:52.730Z"
+        }
+      ]
     },
     {
       "id": "dca_892_1774112891167",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:26.542Z",
+      "nextExecutionAt": "2026-03-23T05:08:43.968Z",
       "createdAt": "2026-03-21T17:08:11.167Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:08:26.543Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:53.477Z"
         }
       ]
     },
@@ -23514,19 +23984,24 @@
       "id": "dca_894_1774112907024",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:27.024Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:27.025Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:08:53.736Z"
+        }
+      ]
     },
     {
       "id": "dca_895_1774112907033",
@@ -23630,19 +24105,24 @@
       "id": "dca_897_1774112907045",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:27.045Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:27.045Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:54.240Z"
+        }
+      ]
     },
     {
       "id": "dca_898_1774112907049",
@@ -23666,19 +24146,24 @@
       "id": "dca_899_1774112907053",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:27.054Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:27.054Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:08:54.240Z"
+        }
+      ]
     },
     {
       "id": "dca_900_1774112907058",
@@ -23855,40 +24340,49 @@
       "id": "dca_906_1774112916092",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:36.092Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:36.092Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:54.757Z"
+        }
+      ]
     },
     {
       "id": "dca_907_1774112916097",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:09:26.552Z",
       "createdAt": "2026-03-21T17:08:36.097Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:09:26.552Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:44.876Z"
         }
       ]
     },
@@ -23978,40 +24472,49 @@
       "id": "dca_912_1774112916130",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:36.130Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:36.130Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:55.340Z"
+        }
+      ]
     },
     {
       "id": "dca_913_1774112916135",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:09:26.552Z",
       "createdAt": "2026-03-21T17:08:36.135Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:09:26.552Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:45.675Z"
         }
       ]
     },
@@ -24083,19 +24586,24 @@
       "id": "dca_917_1774112916156",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:08:36.156Z",
       "createdAt": "2026-03-21T17:08:36.156Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:55.818Z"
+        }
+      ]
     },
     {
       "id": "dca_918_1774112916159",
@@ -24146,40 +24654,49 @@
       "id": "dca_920_1774112916292",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:36.292Z",
+      "nextExecutionAt": "2026-03-23T17:08:43.968Z",
       "createdAt": "2026-03-21T17:08:36.292Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:08:56.317Z"
+        }
+      ]
     },
     {
       "id": "dca_921_1774112916294",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:09:26.552Z",
+      "nextExecutionAt": "2026-03-23T05:09:43.980Z",
       "createdAt": "2026-03-21T17:08:36.294Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:09:26.552Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:46.228Z"
         }
       ]
     },
@@ -24214,19 +24731,24 @@
       "id": "dca_923_1774112937140",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:57.140Z",
+      "nextExecutionAt": "2026-03-23T17:09:43.980Z",
       "createdAt": "2026-03-21T17:08:57.140Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:09:46.549Z"
+        }
+      ]
     },
     {
       "id": "dca_924_1774112937148",
@@ -24330,19 +24852,24 @@
       "id": "dca_926_1774112937161",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:57.161Z",
+      "nextExecutionAt": "2026-03-23T17:09:43.980Z",
       "createdAt": "2026-03-21T17:08:57.161Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:47.149Z"
+        }
+      ]
     },
     {
       "id": "dca_927_1774112937165",
@@ -24366,19 +24893,24 @@
       "id": "dca_928_1774112937190",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:08:57.190Z",
+      "nextExecutionAt": "2026-03-23T17:09:43.980Z",
       "createdAt": "2026-03-21T17:08:57.190Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:09:47.149Z"
+        }
+      ]
     },
     {
       "id": "dca_929_1774112937196",
@@ -24555,40 +25087,49 @@
       "id": "dca_935_1774112983476",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:09:43.476Z",
+      "nextExecutionAt": "2026-03-23T17:09:43.980Z",
       "createdAt": "2026-03-21T17:09:43.476Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:47.691Z"
+        }
+      ]
     },
     {
       "id": "dca_936_1774112983482",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:10:26.564Z",
       "createdAt": "2026-03-21T17:09:43.482Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:10:26.564Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:10:44.741Z"
         }
       ]
     },
@@ -24678,40 +25219,49 @@
       "id": "dca_941_1774112983511",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:09:43.511Z",
+      "nextExecutionAt": "2026-03-23T17:09:43.980Z",
       "createdAt": "2026-03-21T17:09:43.511Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:48.674Z"
+        }
+      ]
     },
     {
       "id": "dca_942_1774112983516",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:10:26.564Z",
       "createdAt": "2026-03-21T17:09:43.516Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:10:26.564Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:10:45.255Z"
         }
       ]
     },
@@ -24783,19 +25333,24 @@
       "id": "dca_946_1774112983533",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:09:43.533Z",
       "createdAt": "2026-03-21T17:09:43.533Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:49.229Z"
+        }
+      ]
     },
     {
       "id": "dca_947_1774112983536",
@@ -24846,40 +25401,49 @@
       "id": "dca_949_1774112983651",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:09:43.651Z",
+      "nextExecutionAt": "2026-03-23T17:09:43.980Z",
       "createdAt": "2026-03-21T17:09:43.651Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:09:49.763Z"
+        }
+      ]
     },
     {
       "id": "dca_950_1774112983653",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:10:26.564Z",
+      "nextExecutionAt": "2026-03-23T05:10:43.987Z",
       "createdAt": "2026-03-21T17:09:43.653Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:10:26.564Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:10:45.804Z"
         }
       ]
     },
@@ -24914,19 +25478,24 @@
       "id": "dca_952_1774113014532",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:10:14.532Z",
+      "nextExecutionAt": "2026-03-23T17:10:43.987Z",
       "createdAt": "2026-03-21T17:10:14.533Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:10:46.075Z"
+        }
+      ]
     },
     {
       "id": "dca_953_1774113014548",
@@ -25030,19 +25599,24 @@
       "id": "dca_955_1774113014566",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:10:14.566Z",
+      "nextExecutionAt": "2026-03-23T17:10:43.987Z",
       "createdAt": "2026-03-21T17:10:14.566Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:10:46.746Z"
+        }
+      ]
     },
     {
       "id": "dca_956_1774113014573",
@@ -25066,19 +25640,24 @@
       "id": "dca_957_1774113014582",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:10:14.582Z",
+      "nextExecutionAt": "2026-03-23T17:10:43.987Z",
       "createdAt": "2026-03-21T17:10:14.582Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:10:46.746Z"
+        }
+      ]
     },
     {
       "id": "dca_958_1774113014590",
@@ -25255,40 +25834,49 @@
       "id": "dca_964_1774113062338",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:11:02.338Z",
+      "nextExecutionAt": "2026-03-23T17:11:43.991Z",
       "createdAt": "2026-03-21T17:11:02.338Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:44.523Z"
+        }
+      ]
     },
     {
       "id": "dca_965_1774113062344",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:11:26.573Z",
       "createdAt": "2026-03-21T17:11:02.344Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:11:26.574Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:44.993Z"
         }
       ]
     },
@@ -25378,40 +25966,49 @@
       "id": "dca_970_1774113062378",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:11:02.378Z",
+      "nextExecutionAt": "2026-03-23T17:11:43.991Z",
       "createdAt": "2026-03-21T17:11:02.378Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:45.482Z"
+        }
+      ]
     },
     {
       "id": "dca_971_1774113062384",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:11:26.573Z",
       "createdAt": "2026-03-21T17:11:02.384Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:11:26.574Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:46.073Z"
         }
       ]
     },
@@ -25483,19 +26080,24 @@
       "id": "dca_975_1774113062414",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:11:02.414Z",
       "createdAt": "2026-03-21T17:11:02.415Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:46.550Z"
+        }
+      ]
     },
     {
       "id": "dca_976_1774113062417",
@@ -25546,40 +26148,49 @@
       "id": "dca_978_1774113062545",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:11:02.545Z",
+      "nextExecutionAt": "2026-03-23T17:11:43.991Z",
       "createdAt": "2026-03-21T17:11:02.545Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:47.005Z"
+        }
+      ]
     },
     {
       "id": "dca_979_1774113062547",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:11:26.573Z",
+      "nextExecutionAt": "2026-03-23T05:11:43.991Z",
       "createdAt": "2026-03-21T17:11:02.547Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:11:26.574Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:47.465Z"
         }
       ]
     },
@@ -25614,19 +26225,24 @@
       "id": "dca_981_1774113070973",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:11:10.973Z",
+      "nextExecutionAt": "2026-03-23T17:11:43.991Z",
       "createdAt": "2026-03-21T17:11:10.973Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:11:47.707Z"
+        }
+      ]
     },
     {
       "id": "dca_982_1774113070986",
@@ -25730,19 +26346,24 @@
       "id": "dca_984_1774113070998",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:11:10.998Z",
+      "nextExecutionAt": "2026-03-23T17:11:43.991Z",
       "createdAt": "2026-03-21T17:11:10.998Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:11:48.154Z"
+        }
+      ]
     },
     {
       "id": "dca_985_1774113071026",
@@ -25766,19 +26387,24 @@
       "id": "dca_986_1774113071032",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:11:11.032Z",
+      "nextExecutionAt": "2026-03-23T17:11:43.991Z",
       "createdAt": "2026-03-21T17:11:11.032Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:11:48.154Z"
+        }
+      ]
     },
     {
       "id": "dca_987_1774113071038",
@@ -25955,40 +26581,49 @@
       "id": "dca_993_1774113120091",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:12:00.091Z",
+      "nextExecutionAt": "2026-03-23T17:12:43.993Z",
       "createdAt": "2026-03-21T17:12:00.091Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:44.562Z"
+        }
+      ]
     },
     {
       "id": "dca_994_1774113120096",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:12:26.584Z",
       "createdAt": "2026-03-21T17:12:00.096Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:12:26.585Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:45.154Z"
         }
       ]
     },
@@ -26078,40 +26713,49 @@
       "id": "dca_999_1774113120127",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:12:00.127Z",
+      "nextExecutionAt": "2026-03-23T17:12:43.993Z",
       "createdAt": "2026-03-21T17:12:00.127Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:45.937Z"
+        }
+      ]
     },
     {
       "id": "dca_1000_1774113120132",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:12:26.584Z",
       "createdAt": "2026-03-21T17:12:00.132Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:12:26.585Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:46.465Z"
         }
       ]
     },
@@ -26183,19 +26827,24 @@
       "id": "dca_1004_1774113120152",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:12:00.152Z",
       "createdAt": "2026-03-21T17:12:00.152Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:46.988Z"
+        }
+      ]
     },
     {
       "id": "dca_1005_1774113120154",
@@ -26246,40 +26895,49 @@
       "id": "dca_1007_1774113120278",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:12:00.278Z",
+      "nextExecutionAt": "2026-03-23T17:12:43.993Z",
       "createdAt": "2026-03-21T17:12:00.278Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:47.503Z"
+        }
+      ]
     },
     {
       "id": "dca_1008_1774113120280",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:12:26.584Z",
+      "nextExecutionAt": "2026-03-23T05:12:43.993Z",
       "createdAt": "2026-03-21T17:12:00.280Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:12:26.585Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:48.000Z"
         }
       ]
     },
@@ -26314,19 +26972,24 @@
       "id": "dca_1010_1774113132978",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:12:12.978Z",
+      "nextExecutionAt": "2026-03-23T17:12:43.993Z",
       "createdAt": "2026-03-21T17:12:12.978Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:12:48.288Z"
+        }
+      ]
     },
     {
       "id": "dca_1011_1774113133003",
@@ -26430,19 +27093,24 @@
       "id": "dca_1013_1774113133056",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:12:13.056Z",
+      "nextExecutionAt": "2026-03-23T17:12:43.993Z",
       "createdAt": "2026-03-21T17:12:13.056Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:12:48.793Z"
+        }
+      ]
     },
     {
       "id": "dca_1014_1774113133063",
@@ -26466,19 +27134,24 @@
       "id": "dca_1015_1774113133068",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:12:13.068Z",
+      "nextExecutionAt": "2026-03-23T17:12:43.993Z",
       "createdAt": "2026-03-21T17:12:13.068Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:12:48.794Z"
+        }
+      ]
     },
     {
       "id": "dca_1016_1774113133074",
@@ -26655,40 +27328,49 @@
       "id": "dca_1022_1774113181969",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:01.969Z",
+      "nextExecutionAt": "2026-03-23T17:13:44.002Z",
       "createdAt": "2026-03-21T17:13:01.969Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:44.606Z"
+        }
+      ]
     },
     {
       "id": "dca_1023_1774113181975",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:13:26.594Z",
       "createdAt": "2026-03-21T17:13:01.975Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:13:26.594Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:45.088Z"
         }
       ]
     },
@@ -26778,40 +27460,49 @@
       "id": "dca_1028_1774113182008",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:02.008Z",
+      "nextExecutionAt": "2026-03-23T17:13:44.002Z",
       "createdAt": "2026-03-21T17:13:02.008Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:45.561Z"
+        }
+      ]
     },
     {
       "id": "dca_1029_1774113182014",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:13:26.594Z",
       "createdAt": "2026-03-21T17:13:02.014Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:13:26.594Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:46.140Z"
         }
       ]
     },
@@ -26883,19 +27574,24 @@
       "id": "dca_1033_1774113182036",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:13:02.036Z",
       "createdAt": "2026-03-21T17:13:02.036Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:46.589Z"
+        }
+      ]
     },
     {
       "id": "dca_1034_1774113182039",
@@ -26946,40 +27642,49 @@
       "id": "dca_1036_1774113182166",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:02.166Z",
+      "nextExecutionAt": "2026-03-23T17:13:44.002Z",
       "createdAt": "2026-03-21T17:13:02.166Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:47.148Z"
+        }
+      ]
     },
     {
       "id": "dca_1037_1774113182169",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:26.594Z",
+      "nextExecutionAt": "2026-03-23T05:13:44.002Z",
       "createdAt": "2026-03-21T17:13:02.169Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:13:26.594Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:47.645Z"
         }
       ]
     },
@@ -27014,19 +27719,24 @@
       "id": "dca_1039_1774113217791",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:37.791Z",
+      "nextExecutionAt": "2026-03-23T17:13:44.002Z",
       "createdAt": "2026-03-21T17:13:37.791Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:13:47.895Z"
+        }
+      ]
     },
     {
       "id": "dca_1040_1774113217801",
@@ -27130,19 +27840,24 @@
       "id": "dca_1042_1774113217829",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:37.829Z",
+      "nextExecutionAt": "2026-03-23T17:13:44.002Z",
       "createdAt": "2026-03-21T17:13:37.829Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:13:48.367Z"
+        }
+      ]
     },
     {
       "id": "dca_1043_1774113217835",
@@ -27166,19 +27881,24 @@
       "id": "dca_1044_1774113217841",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:37.841Z",
+      "nextExecutionAt": "2026-03-23T17:13:44.002Z",
       "createdAt": "2026-03-21T17:13:37.841Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:13:48.367Z"
+        }
+      ]
     },
     {
       "id": "dca_1045_1774113217847",
@@ -27355,40 +28075,49 @@
       "id": "dca_1051_1774113226952",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:46.952Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:13:46.952Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:44.614Z"
+        }
+      ]
     },
     {
       "id": "dca_1052_1774113226958",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:14:26.598Z",
       "createdAt": "2026-03-21T17:13:46.958Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:14:26.598Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:45.132Z"
         }
       ]
     },
@@ -27478,40 +28207,49 @@
       "id": "dca_1057_1774113227000",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:47.000Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:13:47.000Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:45.658Z"
+        }
+      ]
     },
     {
       "id": "dca_1058_1774113227007",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:14:26.598Z",
       "createdAt": "2026-03-21T17:13:47.007Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:14:26.598Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:46.172Z"
         }
       ]
     },
@@ -27583,19 +28321,24 @@
       "id": "dca_1062_1774113227030",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:13:47.030Z",
       "createdAt": "2026-03-21T17:13:47.030Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:46.655Z"
+        }
+      ]
     },
     {
       "id": "dca_1063_1774113227033",
@@ -27646,40 +28389,49 @@
       "id": "dca_1065_1774113227179",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:47.179Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:13:47.179Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:47.116Z"
+        }
+      ]
     },
     {
       "id": "dca_1066_1774113227182",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:26.598Z",
+      "nextExecutionAt": "2026-03-23T05:14:44.010Z",
       "createdAt": "2026-03-21T17:13:47.182Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:14:26.599Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:47.569Z"
         }
       ]
     },
@@ -27714,19 +28466,24 @@
       "id": "dca_1068_1774113234220",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:54.220Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:13:54.220Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:14:47.848Z"
+        }
+      ]
     },
     {
       "id": "dca_1069_1774113234230",
@@ -27830,19 +28587,24 @@
       "id": "dca_1071_1774113234241",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:54.241Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:13:54.241Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:48.394Z"
+        }
+      ]
     },
     {
       "id": "dca_1072_1774113234258",
@@ -27866,19 +28628,24 @@
       "id": "dca_1073_1774113234276",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:13:54.276Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:13:54.276Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:14:48.394Z"
+        }
+      ]
     },
     {
       "id": "dca_1074_1774113234286",
@@ -28055,40 +28822,49 @@
       "id": "dca_1080_1774113245153",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:05.153Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:05.153Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:48.926Z"
+        }
+      ]
     },
     {
       "id": "dca_1081_1774113245158",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:14:26.598Z",
       "createdAt": "2026-03-21T17:14:05.158Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:14:26.599Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:49.454Z"
         }
       ]
     },
@@ -28178,40 +28954,49 @@
       "id": "dca_1086_1774113245192",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:05.192Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:05.192Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:49.990Z"
+        }
+      ]
     },
     {
       "id": "dca_1087_1774113245198",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:14:26.598Z",
       "createdAt": "2026-03-21T17:14:05.198Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:14:26.599Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:50.534Z"
         }
       ]
     },
@@ -28283,19 +29068,24 @@
       "id": "dca_1091_1774113245219",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:14:05.219Z",
       "createdAt": "2026-03-21T17:14:05.219Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:51.077Z"
+        }
+      ]
     },
     {
       "id": "dca_1092_1774113245221",
@@ -28346,40 +29136,49 @@
       "id": "dca_1094_1774113245347",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:05.347Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:05.347Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:51.558Z"
+        }
+      ]
     },
     {
       "id": "dca_1095_1774113245350",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:26.598Z",
+      "nextExecutionAt": "2026-03-23T05:14:44.010Z",
       "createdAt": "2026-03-21T17:14:05.350Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:14:26.599Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:52.055Z"
         }
       ]
     },
@@ -28414,19 +29213,24 @@
       "id": "dca_1097_1774113258562",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:18.562Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:18.562Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:14:52.314Z"
+        }
+      ]
     },
     {
       "id": "dca_1098_1774113258576",
@@ -28530,19 +29334,24 @@
       "id": "dca_1100_1774113258589",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:18.589Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:18.589Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:52.838Z"
+        }
+      ]
     },
     {
       "id": "dca_1101_1774113258594",
@@ -28566,19 +29375,24 @@
       "id": "dca_1102_1774113258603",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:18.603Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:18.603Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:14:52.838Z"
+        }
+      ]
     },
     {
       "id": "dca_1103_1774113258609",
@@ -28755,40 +29569,49 @@
       "id": "dca_1109_1774113267784",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:27.784Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:27.784Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:53.389Z"
+        }
+      ]
     },
     {
       "id": "dca_1110_1774113267790",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:15:26.610Z",
       "createdAt": "2026-03-21T17:14:27.790Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:15:26.610Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:44.572Z"
         }
       ]
     },
@@ -28878,40 +29701,49 @@
       "id": "dca_1115_1774113267824",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:27.824Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:27.824Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:53.870Z"
+        }
+      ]
     },
     {
       "id": "dca_1116_1774113267830",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:15:26.610Z",
       "createdAt": "2026-03-21T17:14:27.830Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:15:26.611Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:45.087Z"
         }
       ]
     },
@@ -28983,19 +29815,24 @@
       "id": "dca_1120_1774113267852",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:14:27.852Z",
       "createdAt": "2026-03-21T17:14:27.852Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:54.398Z"
+        }
+      ]
     },
     {
       "id": "dca_1121_1774113267855",
@@ -29046,40 +29883,49 @@
       "id": "dca_1123_1774113267981",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:27.981Z",
+      "nextExecutionAt": "2026-03-23T17:14:44.010Z",
       "createdAt": "2026-03-21T17:14:27.981Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:14:54.888Z"
+        }
+      ]
     },
     {
       "id": "dca_1124_1774113267984",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:15:26.610Z",
+      "nextExecutionAt": "2026-03-23T05:15:44.024Z",
       "createdAt": "2026-03-21T17:14:27.984Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:15:26.611Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:45.571Z"
         }
       ]
     },
@@ -29114,19 +29960,24 @@
       "id": "dca_1126_1774113291996",
       "recipient": "0x1234567890abcdef1234567890abcdef12345678",
       "totalAmount": 1,
-      "executedAmount": 0,
-      "remainingAmount": 1,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.9,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:51.996Z",
+      "nextExecutionAt": "2026-03-23T17:15:44.024Z",
       "createdAt": "2026-03-21T17:14:51.997Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:15:45.817Z"
+        }
+      ]
     },
     {
       "id": "dca_1127_1774113292004",
@@ -29230,19 +30081,24 @@
       "id": "dca_1129_1774113292015",
       "recipient": "0xccc",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:52.015Z",
+      "nextExecutionAt": "2026-03-23T17:15:44.024Z",
       "createdAt": "2026-03-21T17:14:52.015Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:46.387Z"
+        }
+      ]
     },
     {
       "id": "dca_1130_1774113292023",
@@ -29266,19 +30122,24 @@
       "id": "dca_1131_1774113292033",
       "recipient": "0xeee",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.05,
+      "remainingAmount": 0.05,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.05,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "eth",
       "chainId": "tron-nile",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:14:52.033Z",
+      "nextExecutionAt": "2026-03-23T17:15:44.024Z",
       "createdAt": "2026-03-21T17:14:52.033Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.05,
+          "executedAt": "2026-03-22T17:15:46.387Z"
+        }
+      ]
     },
     {
       "id": "dca_1132_1774113292040",
@@ -29455,40 +30316,49 @@
       "id": "dca_1138_1774113301381",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:15:01.381Z",
+      "nextExecutionAt": "2026-03-23T17:15:44.024Z",
       "createdAt": "2026-03-21T17:15:01.381Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:46.870Z"
+        }
+      ]
     },
     {
       "id": "dca_1139_1774113301386",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:15:26.610Z",
       "createdAt": "2026-03-21T17:15:01.386Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:15:26.611Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:47.350Z"
         }
       ]
     },
@@ -29578,40 +30448,49 @@
       "id": "dca_1144_1774113301421",
       "recipient": "0xR",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:15:01.421Z",
+      "nextExecutionAt": "2026-03-23T17:15:44.024Z",
       "createdAt": "2026-03-21T17:15:01.421Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:47.871Z"
+        }
+      ]
     },
     {
       "id": "dca_1145_1774113301427",
       "recipient": "0xR",
       "totalAmount": 0.02,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.02,
+      "remainingAmount": 0,
       "installments": 2,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:15:26.610Z",
       "createdAt": "2026-03-21T17:15:01.427Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:15:26.611Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:48.363Z"
         }
       ]
     },
@@ -29683,19 +30562,24 @@
       "id": "dca_1149_1774113301449",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:15:01.449Z",
       "createdAt": "2026-03-21T17:15:01.449Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:48.809Z"
+        }
+      ]
     },
     {
       "id": "dca_1150_1774113301451",
@@ -29746,40 +30630,49 @@
       "id": "dca_1152_1774113301570",
       "recipient": "0xR1",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 86400000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:15:01.570Z",
+      "nextExecutionAt": "2026-03-23T17:15:44.024Z",
       "createdAt": "2026-03-21T17:15:01.570Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:49.311Z"
+        }
+      ]
     },
     {
       "id": "dca_1153_1774113301572",
       "recipient": "0xR2",
       "totalAmount": 0.05,
-      "executedAmount": 0.01,
-      "remainingAmount": 0.04,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.030000000000000002,
       "installments": 5,
-      "completedInstallments": 1,
+      "completedInstallments": 2,
       "amountPerInstallment": 0.01,
       "intervalMs": 43200000,
       "intervalLabel": "daily",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:15:26.610Z",
+      "nextExecutionAt": "2026-03-23T05:15:44.024Z",
       "createdAt": "2026-03-21T17:15:01.572Z",
       "history": [
         {
           "amount": 0.01,
           "executedAt": "2026-03-22T05:15:26.611Z"
+        },
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:15:49.767Z"
         }
       ]
     },
@@ -35576,37 +36469,47 @@
       "id": "dca_1396_1774195057990",
       "recipient": "0xaaa",
       "totalAmount": 0.5,
-      "executedAmount": 0,
-      "remainingAmount": 0.5,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.4,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:57:37.990Z",
+      "nextExecutionAt": "2026-03-22T17:57:43.907Z",
       "createdAt": "2026-03-22T15:57:37.990Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T16:57:45.085Z"
+        }
+      ]
     },
     {
       "id": "dca_1397_1774195057998",
       "recipient": "0xbbb",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:57:37.998Z",
+      "nextExecutionAt": "2026-03-22T17:57:43.907Z",
       "createdAt": "2026-03-22T15:57:37.998Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:57:45.814Z"
+        }
+      ]
     },
     {
       "id": "dca_1398_1774195058006",
@@ -35666,19 +36569,24 @@
       "id": "dca_1401_1774195058050",
       "recipient": "0xfff",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:57:38.050Z",
+      "nextExecutionAt": "2026-03-22T17:57:43.907Z",
       "createdAt": "2026-03-22T15:57:38.050Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:57:46.435Z"
+        }
+      ]
     },
     {
       "id": "dca_1402_1774195058060",
@@ -35702,19 +36610,24 @@
       "id": "dca_1403_1774195058080",
       "recipient": "0x222",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.08,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.02,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:57:38.107Z",
+      "nextExecutionAt": "2026-03-22T17:57:43.907Z",
       "createdAt": "2026-03-22T15:57:38.080Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.02,
+          "executedAt": "2026-03-22T16:57:47.458Z"
+        }
+      ]
     },
     {
       "id": "dca_1404_1774195058117",
@@ -35756,19 +36669,24 @@
       "id": "dca_1406_1774195058178",
       "recipient": "0x555",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.08,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.02,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:57:38.178Z",
+      "nextExecutionAt": "2026-03-22T17:57:43.907Z",
       "createdAt": "2026-03-22T15:57:38.178Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.02,
+          "executedAt": "2026-03-22T16:57:47.985Z"
+        }
+      ]
     },
     {
       "id": "dca_1407_1774195070596",
@@ -35828,19 +36746,24 @@
       "id": "dca_1410_1774195070642",
       "recipient": "0xR1",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:57:50.642Z",
       "createdAt": "2026-03-22T15:57:50.642Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:47.134Z"
+        }
+      ]
     },
     {
       "id": "dca_1411_1774195070649",
@@ -35864,19 +36787,24 @@
       "id": "dca_1412_1774195070666",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:57:50.666Z",
       "createdAt": "2026-03-22T15:57:50.666Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:47.658Z"
+        }
+      ]
     },
     {
       "id": "dca_1413_1774195070676",
@@ -35936,37 +36864,47 @@
       "id": "dca_1416_1774195070722",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:57:50.722Z",
       "createdAt": "2026-03-22T15:57:50.722Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:48.153Z"
+        }
+      ]
     },
     {
       "id": "dca_1417_1774195070734",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:57:50.734Z",
       "createdAt": "2026-03-22T15:57:50.734Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:58:48.730Z"
+        }
+      ]
     },
     {
       "id": "dca_1418_1774195070744",
@@ -36008,19 +36946,24 @@
       "id": "dca_1420_1774195070890",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.005,
+      "remainingAmount": 0.005,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.005,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:57:50.890Z",
+      "nextExecutionAt": "2026-03-22T17:58:43.912Z",
       "createdAt": "2026-03-22T15:57:50.890Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.005,
+          "executedAt": "2026-03-22T16:58:49.244Z"
+        }
+      ]
     },
     {
       "id": "dca_1421_1774195070932",
@@ -36098,37 +37041,47 @@
       "id": "dca_1425_1774195170174",
       "recipient": "0xaaa",
       "totalAmount": 0.5,
-      "executedAmount": 0,
-      "remainingAmount": 0.5,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.4,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:59:30.174Z",
+      "nextExecutionAt": "2026-03-22T17:59:43.915Z",
       "createdAt": "2026-03-22T15:59:30.174Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T16:59:46.012Z"
+        }
+      ]
     },
     {
       "id": "dca_1426_1774195170182",
       "recipient": "0xbbb",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:59:30.182Z",
+      "nextExecutionAt": "2026-03-22T17:59:43.915Z",
       "createdAt": "2026-03-22T15:59:30.182Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:59:46.536Z"
+        }
+      ]
     },
     {
       "id": "dca_1427_1774195170195",
@@ -36188,19 +37141,24 @@
       "id": "dca_1430_1774195170254",
       "recipient": "0xfff",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:59:30.254Z",
+      "nextExecutionAt": "2026-03-22T17:59:43.915Z",
       "createdAt": "2026-03-22T15:59:30.254Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T16:59:47.018Z"
+        }
+      ]
     },
     {
       "id": "dca_1431_1774195170267",
@@ -36224,19 +37182,24 @@
       "id": "dca_1432_1774195170297",
       "recipient": "0x222",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.08,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.02,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:59:30.335Z",
+      "nextExecutionAt": "2026-03-22T17:59:43.915Z",
       "createdAt": "2026-03-22T15:59:30.297Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.02,
+          "executedAt": "2026-03-22T16:59:47.519Z"
+        }
+      ]
     },
     {
       "id": "dca_1433_1774195170360",
@@ -36278,19 +37241,24 @@
       "id": "dca_1435_1774195170417",
       "recipient": "0x555",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.08,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.02,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:59:30.417Z",
+      "nextExecutionAt": "2026-03-22T17:59:43.915Z",
       "createdAt": "2026-03-22T15:59:30.417Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.02,
+          "executedAt": "2026-03-22T16:59:48.025Z"
+        }
+      ]
     },
     {
       "id": "dca_1436_1774195185945",
@@ -36350,19 +37318,24 @@
       "id": "dca_1439_1774195185988",
       "recipient": "0xR1",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:59:45.989Z",
       "createdAt": "2026-03-22T15:59:45.989Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:44.667Z"
+        }
+      ]
     },
     {
       "id": "dca_1440_1774195185993",
@@ -36386,19 +37359,24 @@
       "id": "dca_1441_1774195186006",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:59:46.006Z",
       "createdAt": "2026-03-22T15:59:46.006Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:45.133Z"
+        }
+      ]
     },
     {
       "id": "dca_1442_1774195186014",
@@ -36458,37 +37436,47 @@
       "id": "dca_1445_1774195186048",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:59:46.048Z",
       "createdAt": "2026-03-22T15:59:46.048Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:45.611Z"
+        }
+      ]
     },
     {
       "id": "dca_1446_1774195186057",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T16:59:46.057Z",
       "createdAt": "2026-03-22T15:59:46.057Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:46.142Z"
+        }
+      ]
     },
     {
       "id": "dca_1447_1774195186062",
@@ -36530,19 +37518,24 @@
       "id": "dca_1449_1774195186194",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.005,
+      "remainingAmount": 0.005,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.005,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T16:59:46.194Z",
+      "nextExecutionAt": "2026-03-22T18:00:43.923Z",
       "createdAt": "2026-03-22T15:59:46.194Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.005,
+          "executedAt": "2026-03-22T17:00:46.630Z"
+        }
+      ]
     },
     {
       "id": "dca_1450_1774195186224",
@@ -36620,37 +37613,47 @@
       "id": "dca_1454_1774195225137",
       "recipient": "0xaaa",
       "totalAmount": 0.5,
-      "executedAmount": 0,
-      "remainingAmount": 0.5,
+      "executedAmount": 0.1,
+      "remainingAmount": 0.4,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.1,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:00:25.137Z",
+      "nextExecutionAt": "2026-03-22T18:00:43.923Z",
       "createdAt": "2026-03-22T16:00:25.137Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.1,
+          "executedAt": "2026-03-22T17:00:47.126Z"
+        }
+      ]
     },
     {
       "id": "dca_1455_1774195225146",
       "recipient": "0xbbb",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.09000000000000001,
       "installments": 10,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:00:25.146Z",
+      "nextExecutionAt": "2026-03-22T18:00:43.923Z",
       "createdAt": "2026-03-22T16:00:25.146Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:47.620Z"
+        }
+      ]
     },
     {
       "id": "dca_1456_1774195225158",
@@ -36710,19 +37713,24 @@
       "id": "dca_1459_1774195225199",
       "recipient": "0xfff",
       "totalAmount": 0.05,
-      "executedAmount": 0,
-      "remainingAmount": 0.05,
+      "executedAmount": 0.01,
+      "remainingAmount": 0.04,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:00:25.199Z",
+      "nextExecutionAt": "2026-03-22T18:00:43.923Z",
       "createdAt": "2026-03-22T16:00:25.199Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:48.069Z"
+        }
+      ]
     },
     {
       "id": "dca_1460_1774195225212",
@@ -36746,19 +37754,24 @@
       "id": "dca_1461_1774195225254",
       "recipient": "0x222",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.08,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.02,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:00:25.283Z",
+      "nextExecutionAt": "2026-03-22T18:00:43.923Z",
       "createdAt": "2026-03-22T16:00:25.254Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.02,
+          "executedAt": "2026-03-22T17:00:48.587Z"
+        }
+      ]
     },
     {
       "id": "dca_1462_1774195225295",
@@ -36800,19 +37813,24 @@
       "id": "dca_1464_1774195225360",
       "recipient": "0x555",
       "totalAmount": 0.1,
-      "executedAmount": 0,
-      "remainingAmount": 0.1,
+      "executedAmount": 0.02,
+      "remainingAmount": 0.08,
       "installments": 5,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.02,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:00:25.360Z",
+      "nextExecutionAt": "2026-03-22T18:00:43.923Z",
       "createdAt": "2026-03-22T16:00:25.360Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.02,
+          "executedAt": "2026-03-22T17:00:49.078Z"
+        }
+      ]
     },
     {
       "id": "dca_1465_1774195237268",
@@ -36872,19 +37890,24 @@
       "id": "dca_1468_1774195237325",
       "recipient": "0xR1",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:00:37.325Z",
       "createdAt": "2026-03-22T16:00:37.325Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:49.542Z"
+        }
+      ]
     },
     {
       "id": "dca_1469_1774195237331",
@@ -36908,19 +37931,24 @@
       "id": "dca_1470_1774195237348",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:00:37.348Z",
       "createdAt": "2026-03-22T16:00:37.348Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:50.067Z"
+        }
+      ]
     },
     {
       "id": "dca_1471_1774195237357",
@@ -36980,37 +38008,47 @@
       "id": "dca_1474_1774195237399",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:00:37.399Z",
       "createdAt": "2026-03-22T16:00:37.399Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:50.605Z"
+        }
+      ]
     },
     {
       "id": "dca_1475_1774195237412",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.01,
+      "remainingAmount": 0,
       "installments": 1,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.01,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
-      "status": "active",
+      "status": "completed",
       "nextExecutionAt": "2026-03-22T17:00:37.412Z",
       "createdAt": "2026-03-22T16:00:37.412Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.01,
+          "executedAt": "2026-03-22T17:00:51.034Z"
+        }
+      ]
     },
     {
       "id": "dca_1476_1774195237417",
@@ -37052,19 +38090,24 @@
       "id": "dca_1478_1774195237597",
       "recipient": "0xR",
       "totalAmount": 0.01,
-      "executedAmount": 0,
-      "remainingAmount": 0.01,
+      "executedAmount": 0.005,
+      "remainingAmount": 0.005,
       "installments": 2,
-      "completedInstallments": 0,
+      "completedInstallments": 1,
       "amountPerInstallment": 0.005,
       "intervalMs": 3600000,
       "intervalLabel": "hourly",
       "token": "usdt",
       "chainId": "ethereum-sepolia",
       "status": "active",
-      "nextExecutionAt": "2026-03-22T17:00:37.597Z",
+      "nextExecutionAt": "2026-03-22T18:00:43.923Z",
       "createdAt": "2026-03-22T16:00:37.597Z",
-      "history": []
+      "history": [
+        {
+          "amount": 0.005,
+          "executedAt": "2026-03-22T17:00:51.565Z"
+        }
+      ]
     },
     {
       "id": "dca_1479_1774195237630",

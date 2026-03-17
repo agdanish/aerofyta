@@ -6,6 +6,8 @@ import { useFetch } from "@/hooks/useFetch";
 import { CandlestickChart, TrendingUp, TrendingDown, Play, Pause, Check, X, BarChart3 } from "lucide-react";
 import { toast } from "sonner";
 
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+
 /* ── Demo fallback data ── */
 const demoStats = {
   totalTraders: 6, activeTraders: 4, totalTrades: 238, overallWinRate: 78,
@@ -136,7 +138,13 @@ export default function Trading() {
                       {t.pnl >= 0 ? "+" : ""}{typeof t.pnl === "number" ? `$${t.pnl.toFixed(2)}` : "$0.00"}
                     </td>
                     <td className="px-5 py-2.5 text-right">
-                      <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => toast.success(`${t.status === "active" ? "Paused" : "Resumed"} ${t.name}`)}>
+                      <Button size="icon" variant="ghost" className="h-7 w-7" onClick={async () => {
+                        try {
+                          const action = t.status === 'active' ? 'pause' : 'resume';
+                          await fetch(`${API}/api/advanced/trading/traders/${t.id}/${action}`, { method: 'POST' });
+                          toast.success(`Trader ${action}d`);
+                        } catch { toast.error("Failed to update trader"); }
+                      }}>
                         {t.status === "active" ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
                       </Button>
                     </td>

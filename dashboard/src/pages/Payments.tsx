@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Pause, Play, X } from "lucide-react";
 import { toast } from "sonner";
 
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+
 /* ---- real API shapes ---- */
 interface RealDCA {
   id: string;
@@ -129,7 +131,15 @@ export default function Payments() {
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-muted-foreground">{"totalInvested" in d ? d.totalInvested : ""}</span>
                   <Badge variant="outline" className={`text-[10px] ${statusBadge(d.status)}`}>{d.status}</Badge>
-                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast.info(`${d.status === "active" ? "Paused" : "Resumed"} DCA`)}>
+                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={async () => {
+                    const action = d.status === 'active' ? 'pause' : 'resume';
+                    try {
+                      await fetch(`${API}/api/dca/${d.id}/${action}`, { method: 'POST' });
+                      toast.success(`DCA ${action}d`);
+                    } catch (err) {
+                      toast.error(`DCA ${action} failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+                    }
+                  }}>
                     {d.status === "active" ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
                   </Button>
                 </div>
@@ -149,7 +159,14 @@ export default function Payments() {
                 <div className="flex items-center gap-2">
                   <Badge variant="outline" className={`text-[10px] ${statusBadge(s.status)}`}>{s.status}</Badge>
                   {s.status === "active" && (
-                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast.info("Subscription cancelled")}>
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={async () => {
+                      try {
+                        await fetch(`${API}/api/subscriptions/${s.id}/cancel`, { method: 'POST' });
+                        toast.success('Subscription cancelled');
+                      } catch (err) {
+                        toast.error(`Cancel failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+                      }
+                    }}>
                       <X className="h-3 w-3" />
                     </Button>
                   )}
@@ -169,7 +186,14 @@ export default function Payments() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="outline" className={`text-[10px] ${statusBadge(s.status)}`}>{s.status}</Badge>
-                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast.info(`Stream ${s.status === "active" ? "paused" : "resumed"}`)}>
+                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={async () => {
+                    try {
+                      await fetch(`${API}/api/streaming/${s.id}/stop`, { method: 'POST' });
+                      toast.success('Stream stopped');
+                    } catch (err) {
+                      toast.error(`Stream stop failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+                    }
+                  }}>
                     {s.status === "active" ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
                   </Button>
                 </div>

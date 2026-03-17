@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { demoWallets } from "@/lib/demo-data";
 import { useFetch } from "@/hooks/useFetch";
 import CopyButton from "@/components/shared/CopyButton";
@@ -6,6 +6,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { toast } from "sonner";
+
+const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+
+const faucetUrls: Record<string, string> = {
+  "Ethereum Sepolia": "https://cloud.google.com/application/web3/faucet/ethereum/sepolia",
+  "ETH Gasless":      "https://cloud.google.com/application/web3/faucet/ethereum/sepolia",
+  "TON Testnet":      "https://testnet.toncenter.com",
+  "TON Gasless":      "https://testnet.toncenter.com",
+  "Tron Nile":        "https://nileex.io/join/getJoinPage",
+  "Bitcoin Testnet":  "https://coinfaucet.eu/en/btc-testnet",
+  "Solana Devnet":    "https://faucet.solana.com",
+};
 
 /* ── chain metadata for display ── */
 const chainMeta: Record<string, { label: string; symbol: string; color: string }> = {
@@ -145,7 +157,10 @@ export default function Wallets() {
                 variant="ghost"
                 size="sm"
                 className="h-7 text-xs text-muted-foreground hover:text-foreground"
-                onClick={() => toast.info(`Faucet link for ${w.chain} opened`)}
+                onClick={() => {
+                  const url = faucetUrls[w.chain] || "https://cloud.google.com/application/web3/faucet/ethereum/sepolia";
+                  window.open(url, "_blank");
+                }}
               >
                 Fund
               </Button>
@@ -153,7 +168,15 @@ export default function Wallets() {
                 variant="ghost"
                 size="sm"
                 className="h-7 text-xs text-muted-foreground hover:text-foreground"
-                onClick={() => toast.success(`Gasless test sent on ${w.chain}`)}
+                onClick={async () => {
+                  try {
+                    const res = await fetch(`${API_BASE}/api/wallet/gasless-test`, { method: "POST" });
+                    const data = await res.json();
+                    toast.success(`Gasless test: ${data.success ? "Success" : "Failed"} — ${data.txHash || "no tx"}`);
+                  } catch (err) {
+                    toast.error(`Gasless test failed: ${err instanceof Error ? err.message : "Network error"}`);
+                  }
+                }}
               >
                 Gasless Test
               </Button>
@@ -161,6 +184,16 @@ export default function Wallets() {
                 variant="ghost"
                 size="sm"
                 className="h-7 text-xs text-muted-foreground hover:text-foreground ml-auto"
+                onClick={() => {
+                  const blob = new Blob([JSON.stringify(wallets, null, 2)], { type: "application/json" });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "aerofyta-wallets.json";
+                  a.click();
+                  URL.revokeObjectURL(url);
+                  toast.success("Wallets exported");
+                }}
               >
                 <Download className="h-3 w-3" />
               </Button>

@@ -11,6 +11,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Lock, Plus, Key, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 
+const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+
 function Countdown({ seconds }: { seconds: number }) {
   const [remaining, setRemaining] = useState(seconds);
   useEffect(() => {
@@ -81,6 +83,57 @@ export default function Escrow() {
     demoEscrows,
   );
   const [createOpen, setCreateOpen] = useState(false);
+  const [createForm, setCreateForm] = useState({ recipient: "", amount: "", timelock: "2" });
+  const [claimDialogId, setClaimDialogId] = useState<string | null>(null);
+  const [claimSecret, setClaimSecret] = useState("");
+
+  const handleCreateEscrow = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/escrow`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipient: createForm.recipient,
+          amount: parseFloat(createForm.amount),
+          timelockHours: parseInt(createForm.timelock),
+        }),
+      });
+      const data = await res.json();
+      toast.success(`Escrow created! ID: ${data.escrow?.id || "unknown"}, Secret: ${data.secret || "n/a"}`);
+    } catch (err) {
+      toast.error(`Create failed: ${err instanceof Error ? err.message : "Network error"}`);
+    }
+    setCreateOpen(false);
+    setCreateForm({ recipient: "", amount: "", timelock: "2" });
+  };
+
+  const handleClaimEscrow = async (id: string) => {
+    try {
+      const res = await fetch(`${API_BASE}/api/escrow/${id}/claim`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: claimSecret }),
+      });
+      const data = await res.json();
+      if (data.success) toast.success(`Escrow ${id} claimed!`);
+      else toast.error(data.error || `Claim failed for ${id}`);
+    } catch (err) {
+      toast.error(`Claim failed: ${err instanceof Error ? err.message : "Network error"}`);
+    }
+    setClaimDialogId(null);
+    setClaimSecret("");
+  };
+
+  const handleRefundEscrow = async (id: string) => {
+    try {
+      const res = await fetch(`${API_BASE}/api/escrow/${id}/refund`, { method: "POST" });
+      const data = await res.json();
+      if (data.success) toast.success(`Escrow ${id} refunded!`);
+      else toast.error(data.error || `Refund failed for ${id}`);
+    } catch (err) {
+      toast.error(`Refund failed: ${err instanceof Error ? err.message : "Network error"}`);
+    }
+  };
 
   /* map API → EscrowRow[] */
   const escrows: EscrowRow[] = useMemo(() => {
@@ -152,21 +205,21 @@ export default function Escrow() {
           <DialogContent className="bg-card border-border">
             <DialogHeader><DialogTitle>Create HTLC Escrow</DialogTitle></DialogHeader>
             <div className="space-y-4 mt-2">
-              <div><Label className="text-xs">Recipient</Label><Input placeholder="0x..." className="mt-1 bg-background" /></div>
-              <div><Label className="text-xs">Amount (USDT)</Label><Input type="number" placeholder="50.00" className="mt-1 bg-background" /></div>
+              <div><Label className="text-xs">Recipient</Label><Input placeholder="0x..." className="mt-1 bg-background" value={createForm.recipient} onChange={(e) => setCreateForm({ ...createForm, recipient: e.target.value })} /></div>
+              <div><Label className="text-xs">Amount (USDT)</Label><Input type="number" placeholder="50.00" className="mt-1 bg-background" value={createForm.amount} onChange={(e) => setCreateForm({ ...createForm, amount: e.target.value })} /></div>
               <div>
                 <Label className="text-xs">Timelock</Label>
-                <Select defaultValue="7200">
+                <Select value={createForm.timelock} onValueChange={(v) => setCreateForm({ ...createForm, timelock: v })}>
                   <SelectTrigger className="mt-1 bg-background"><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="3600">1 hour</SelectItem>
-                    <SelectItem value="7200">2 hours</SelectItem>
-                    <SelectItem value="14400">4 hours</SelectItem>
-                    <SelectItem value="86400">24 hours</SelectItem>
+                    <SelectItem value="1">1 hour</SelectItem>
+                    <SelectItem value="2">2 hours</SelectItem>
+                    <SelectItem value="4">4 hours</SelectItem>
+                    <SelectItem value="24">24 hours</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-              <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => { toast.success("Escrow created — secret copied to clipboard"); setCreateOpen(false); }}>
+              <Button className="w-full bg-primary hover:bg-primary/90" onClick={handleCreateEscrow} disabled={!createForm.recipient || !createForm.amount}>
                 Create Escrow
               </Button>
             </div>
@@ -208,10 +261,26 @@ export default function Escrow() {
             </div>
             {esc.status === "locked" && (
               <div className="flex gap-2">
-                <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => toast.success(`Escrow ${esc.id} claimed`)}>
-                  <Key className="h-3 w-3 mr-1" />Claim
-                </Button>
-                <Button size="sm" variant="outline" className="flex-1 h-8 text-xs text-muted-foreground" onClick={() => toast.info(`Escrow ${esc.id} refunded`)}>
+                <Dialog open={claimDialogId === esc.id} onOpenChange={(open) => { if (!open) { setClaimDialogId(null); setClaimSecret(""); } }}>
+                  <DialogTrigger asChild>
+                    <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => setClaimDialogId(esc.id)}>
+                      <Key className="h-3 w-3 mr-1" />Claim
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="bg-card border-border">
+                    <DialogHeader><DialogTitle>Claim Escrow {esc.id}</DialogTitle></DialogHeader>
+                    <div className="space-y-4 mt-2">
+                      <div>
+                        <Label className="text-xs">Secret</Label>
+                        <Input placeholder="Enter HTLC secret..." className="mt-1 bg-background" value={claimSecret} onChange={(e) => setClaimSecret(e.target.value)} />
+                      </div>
+                      <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => handleClaimEscrow(esc.id)} disabled={!claimSecret}>
+                        Claim
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+                <Button size="sm" variant="outline" className="flex-1 h-8 text-xs text-muted-foreground" onClick={() => handleRefundEscrow(esc.id)}>
                   <RotateCcw className="h-3 w-3 mr-1" />Refund
                 </Button>
               </div>

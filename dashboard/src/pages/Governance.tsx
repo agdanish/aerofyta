@@ -3,10 +3,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import CountUp from "@/components/shared/CountUp";
 import { useFetch } from "@/hooks/useFetch";
 import { Vote, Plus, Check, X, Users, ThumbsUp, ThumbsDown } from "lucide-react";
 import { toast } from "sonner";
+
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ── Demo fallback ── */
 const demoProposals = {
@@ -58,15 +64,44 @@ function mapProposal(p: Record<string, unknown>): DisplayProposal {
 
 export default function Governance() {
   const [voted, setVoted] = useState<Record<string, string>>({});
+  const [newOpen, setNewOpen] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const [newDesc, setNewDesc] = useState("");
   const { data: proposalsData, isDemo } = useFetch("/api/advanced/governance/proposals", demoProposals);
   const { data: stats } = useFetch("/api/advanced/governance/stats", demoStats);
 
   const rawProposals = proposalsData.proposals ?? [];
   const proposals: DisplayProposal[] = rawProposals.map((p: Record<string, unknown>) => mapProposal(p as Record<string, unknown>));
 
-  const vote = (id: string, direction: string) => {
-    setVoted((v) => ({ ...v, [id]: direction }));
-    toast.success(`Vote recorded: ${direction} on ${id}`);
+  const vote = async (id: string, direction: string) => {
+    try {
+      await fetch(`${API}/api/advanced/governance/proposals/${id}/veto`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ vote: direction }),
+      });
+      setVoted((v) => ({ ...v, [id]: direction }));
+      toast.success(`Vote recorded: ${direction}`);
+    } catch {
+      toast.error("Failed to record vote");
+    }
+  };
+
+  const createProposal = async () => {
+    if (!newTitle.trim()) { toast.error("Title is required"); return; }
+    try {
+      await fetch(`${API}/api/advanced/governance/proposals`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: newTitle, description: newDesc }),
+      });
+      toast.success('Proposal created');
+      setNewTitle("");
+      setNewDesc("");
+      setNewOpen(false);
+    } catch {
+      toast.error("Failed to create proposal");
+    }
   };
 
   const activeVoting = proposals.filter((p) => p.status === "voting").length;
@@ -106,9 +141,29 @@ export default function Governance() {
         <div className="rounded-xl border border-border/50 bg-card/50">
           <div className="px-5 py-3 border-b border-border/40 flex items-center justify-between">
             <h3 className="text-sm font-semibold">Proposals ({proposals.length})</h3>
-            <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => toast.info("Create proposal modal coming soon")}>
-              <Plus className="h-3 w-3 mr-1" />New
-            </Button>
+            <Dialog open={newOpen} onOpenChange={setNewOpen}>
+              <DialogTrigger asChild>
+                <Button size="sm" variant="outline" className="h-7 text-xs">
+                  <Plus className="h-3 w-3 mr-1" />New
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create Proposal</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 pt-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="prop-title">Title</Label>
+                    <Input id="prop-title" placeholder="Proposal title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="prop-desc">Description</Label>
+                    <Textarea id="prop-desc" placeholder="Describe the proposal..." value={newDesc} onChange={(e) => setNewDesc(e.target.value)} rows={3} />
+                  </div>
+                  <Button className="w-full" onClick={createProposal}>Submit Proposal</Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
           <ScrollArea className="h-[380px]">
             <div className="divide-y divide-border/20">

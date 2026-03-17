@@ -187,7 +187,15 @@ export default function Analytics() {
           <Badge variant="outline" className={`text-[10px] ${isDemo ? "text-yellow-400 border-yellow-500/30" : "text-emerald-400 border-emerald-500/30"}`}>
             {isDemo ? <><WifiOff className="h-3 w-3 mr-1" />Demo</> : <><Wifi className="h-3 w-3 mr-1" />Live</>}
           </Badge>
-          <Button variant="outline" size="sm" onClick={() => toast.success("Analytics exported to CSV")}>
+          <Button variant="outline" size="sm" onClick={() => {
+            const exportData = { stats, chartData: { tipsPerDay, chainDist, anomalyChartData }, creators: demoCreators, decisions: demoDecisionLog, exportedAt: new Date() };
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'aerofyta-analytics.json'; a.click();
+            URL.revokeObjectURL(url);
+            toast.success('Analytics exported');
+          }}>
             <Download className="h-3.5 w-3.5 mr-2" />Export
           </Button>
         </div>

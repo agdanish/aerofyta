@@ -10,6 +10,8 @@ import CopyButton from "@/components/shared/CopyButton";
 import { ExternalLink, ArrowRightLeft, Landmark, FileCheck, CheckCircle, XCircle } from "lucide-react";
 import { toast } from "sonner";
 
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
+
 /* ---- Real API shapes ---- */
 interface RealPosition {
   protocol: string;
@@ -65,7 +67,7 @@ export default function DeFi() {
     positions: [], lendingAvailable: false,
   });
   const { data: yieldData, isDemo: isYieldDemo } = useFetch<RealYieldSummary>("/api/lending/yield-summary", demoYield);
-  const { data: proofData, isDemo: isProofDemo } = useFetch<RealProofBundle | null>("/api/proof/bundle", demoProof);
+  const { data: proofData, isDemo: isProofDemo, refetch: refetchProof } = useFetch<RealProofBundle | null>("/api/proof/bundle", demoProof);
 
   const [swapFrom, setSwapFrom] = useState("USDT");
   const [swapTo, setSwapTo] = useState("ETH");
@@ -178,7 +180,19 @@ export default function DeFi() {
             <div className="bg-secondary/30 rounded-md p-2.5 text-xs text-muted-foreground">
               Quote: {swapAmount} {swapFrom} ≈ {(Number(swapAmount) * 0.00054).toFixed(4)} {swapTo}
             </div>
-            <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => toast.success(`Swapped ${swapAmount} ${swapFrom} → ${swapTo}`)}>
+            <Button className="w-full bg-primary hover:bg-primary/90" onClick={async () => {
+              try {
+                const res = await fetch(`${API}/api/swap/quote`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ from: swapFrom, to: swapTo, amount: swapAmount })
+                });
+                const data = await res.json();
+                toast.success(`Swap quote: ${JSON.stringify(data).slice(0, 100)}`);
+              } catch (err) {
+                toast.error(`Swap failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+              }
+            }}>
               Execute Swap
             </Button>
           </div>
@@ -253,7 +267,16 @@ export default function DeFi() {
           ) : (
             <div className="flex flex-col items-center justify-center text-center py-4">
               <p className="text-xs text-muted-foreground mb-4">Verify DeFi transactions on-chain</p>
-              <Button variant="outline" size="sm" onClick={() => toast.success("Proof bundle verified — 3 transactions confirmed on-chain")}>
+              <Button variant="outline" size="sm" onClick={async () => {
+                try {
+                  const res = await fetch(`${API}/api/proof/generate-all`, { method: 'POST' });
+                  const data = await res.json();
+                  toast.success(`Proof generated: ${data.steps?.length || 0} steps`);
+                  refetchProof();
+                } catch (err) {
+                  toast.error(`Proof generation failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+                }
+              }}>
                 Verify Proof Bundle
               </Button>
             </div>

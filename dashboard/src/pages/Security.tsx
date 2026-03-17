@@ -3,6 +3,9 @@ import { demoAdversarialTests, demoPolicies } from "@/lib/demo-data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Shield, ShieldCheck, Play, Trash2, Plus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -50,6 +53,9 @@ export default function Security() {
   const [allRevealed, setAllRevealed] = useState(false);
   const [summary, setSummary] = useState<{ total: number; blocked: number; passed: number } | null>(null);
   const [policies, setPolicies] = useState<Policy[]>(demoPolicies);
+  const [addPolicyOpen, setAddPolicyOpen] = useState(false);
+  const [newPolicyType, setNewPolicyType] = useState("max_amount");
+  const [newPolicyValue, setNewPolicyValue] = useState("");
   const [creditAddr, setCreditAddr] = useState("0x742d35Cc6634C0532925a3b844Bc9e7595f2bD28");
   const [creditScore, setCreditScore] = useState<number | null>(null);
   const [creditLoading, setCreditLoading] = useState(false);
@@ -244,7 +250,7 @@ export default function Security() {
         <div className="rounded-xl border border-border/50 bg-card/50">
           <div className="px-5 py-3 border-b border-border/40 flex items-center justify-between">
             <h3 className="text-sm font-semibold">Security Policies</h3>
-            <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={() => toast.info("Add policy dialog")}>
+            <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={() => setAddPolicyOpen(true)}>
               <Plus className="h-3 w-3 mr-1" />Add
             </Button>
           </div>
@@ -262,6 +268,53 @@ export default function Security() {
             ))}
           </div>
         </div>
+
+        {/* Add Policy Dialog */}
+        <Dialog open={addPolicyOpen} onOpenChange={setAddPolicyOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Add Security Policy</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 py-2">
+              <div>
+                <Label className="text-xs">Policy Type</Label>
+                <Select value={newPolicyType} onValueChange={setNewPolicyType}>
+                  <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="max_amount">Max Amount</SelectItem>
+                    <SelectItem value="daily_cap">Daily Cap</SelectItem>
+                    <SelectItem value="recipient_blacklist">Recipient Blacklist</SelectItem>
+                    <SelectItem value="frequency_limit">Frequency Limit</SelectItem>
+                    <SelectItem value="chain_restriction">Chain Restriction</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label className="text-xs">Value</Label>
+                <Input className="mt-1" placeholder="e.g. 1000 or 0x..." value={newPolicyValue} onChange={(e) => setNewPolicyValue(e.target.value)} />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" size="sm" onClick={() => setAddPolicyOpen(false)}>Cancel</Button>
+              <Button size="sm" onClick={async () => {
+                try {
+                  const res = await fetch(`${API}/api/policies/rules`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: newPolicyType, value: newPolicyValue, enabled: true }),
+                  });
+                  const data = await res.json();
+                  toast.success("Policy added");
+                  setPolicies((prev) => [...prev, { id: data.id ?? Date.now(), name: newPolicyType.replace(/_/g, ' '), value: newPolicyValue, active: true }]);
+                  setNewPolicyValue("");
+                  setAddPolicyOpen(false);
+                } catch (err) {
+                  toast.error(`Failed to add policy: ${err instanceof Error ? err.message : "Unknown error"}`);
+                }
+              }}>Add Policy</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         {/* Credit Score */}
         <div className="rounded-xl border border-border/50 bg-card/50 p-5">

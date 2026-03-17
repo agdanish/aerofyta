@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Plus, Download, Upload, Search } from "lucide-react";
 import { toast } from "sonner";
 import CopyButton from "@/components/shared/CopyButton";
 import { useFetch } from "@/hooks/useFetch";
+
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ---------- Real API types ---------- */
 interface ApiContact {
@@ -56,7 +67,7 @@ const guessChain = (address: string): string => {
 };
 
 export default function Contacts() {
-  const { data: rawData, isDemo } = useFetch<ContactsResponse>(
+  const { data: rawData, isDemo, refetch } = useFetch<ContactsResponse>(
     "/api/contacts",
     demoContacts,
   );
@@ -68,6 +79,17 @@ export default function Contacts() {
 
   const [search, setSearch] = useState("");
   const [ensInput, setEnsInput] = useState("");
+  const [ensLoading, setEnsLoading] = useState(false);
+
+  /* Add Contact dialog state */
+  const [addOpen, setAddOpen] = useState(false);
+  const [newName, setNewName] = useState("");
+  const [newAddress, setNewAddress] = useState("");
+  const [newChain, setNewChain] = useState("");
+  const [addLoading, setAddLoading] = useState(false);
+
+  /* Import file input ref */
+  const importRef = useRef<HTMLInputElement>(null);
 
   const filtered = contacts.filter((c) =>
     c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -78,6 +100,90 @@ export default function Contacts() {
   const groups = [...new Set(contacts.map((c) => c.group))];
   const totalTips = contacts.reduce((s, c) => s + c.tipCount, 0);
   const uniqueChains = new Set(contacts.map((c) => c.chain)).size;
+
+  /* ---- Add Contact ---- */
+  const handleAddContact = async () => {
+    if (!newName.trim() || !newAddress.trim()) {
+      toast.error("Name and address are required");
+      return;
+    }
+    setAddLoading(true);
+    try {
+      const res = await fetch(`${API}/api/contacts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newName.trim(), address: newAddress.trim(), chain: newChain.trim() || undefined }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      toast.success(`Added ${newName.trim()}`);
+      setNewName("");
+      setNewAddress("");
+      setNewChain("");
+      setAddOpen(false);
+      refetch();
+    } catch (err) {
+      toast.error(`Failed to add contact: ${err instanceof Error ? err.message : "Unknown error"}`);
+    } finally {
+      setAddLoading(false);
+    }
+  };
+
+  /* ---- Export ---- */
+  const handleExport = () => {
+    const blob = new Blob([JSON.stringify(contacts, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "contacts.json";
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Contacts exported as JSON");
+  };
+
+  /* ---- Import ---- */
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target?.result as string);
+        const res = await fetch(`${API}/api/contacts/import`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(parsed),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        toast.success(`Imported ${data.imported ?? "?"} contacts`);
+        refetch();
+      } catch (err) {
+        toast.error(`Import failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+      }
+    };
+    reader.readAsText(file);
+    // reset so same file can be re-imported
+    e.target.value = "";
+  };
+
+  /* ---- ENS Resolve ---- */
+  const handleEnsResolve = async () => {
+    if (!ensInput.trim()) return;
+    setEnsLoading(true);
+    try {
+      const res = await fetch(`${API}/api/ens/${encodeURIComponent(ensInput.trim())}`);
+      const data = await res.json();
+      if (data.address) {
+        toast.success(`Resolved: ${data.address}`);
+      } else {
+        toast.error("Not found");
+      }
+    } catch {
+      toast.error("Could not reach ENS API");
+    } finally {
+      setEnsLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -90,15 +196,41 @@ export default function Contacts() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => toast.success("Contacts exported as JSON")}>
+          <Button variant="outline" size="sm" className="h-8 text-xs" onClick={handleExport}>
             <Download className="h-3 w-3 mr-1" />Export
           </Button>
-          <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => toast.info("Upload JSON or CSV to import contacts")}>
+
+          {/* Hidden file input for import */}
+          <input ref={importRef} type="file" accept=".json" className="hidden" onChange={handleImport} />
+          <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => importRef.current?.click()}>
             <Upload className="h-3 w-3 mr-1" />Import
           </Button>
-          <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90" onClick={() => toast.info("Add contact form coming soon")}>
-            <Plus className="h-3 w-3 mr-1" />Add
-          </Button>
+
+          {/* Add Contact Dialog */}
+          <Dialog open={addOpen} onOpenChange={setAddOpen}>
+            <DialogTrigger asChild>
+              <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90">
+                <Plus className="h-3 w-3 mr-1" />Add
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Add Contact</DialogTitle>
+                <DialogDescription>Add a new wallet address to your address book.</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-3 py-2">
+                <Input placeholder="Name" value={newName} onChange={(e) => setNewName(e.target.value)} />
+                <Input placeholder="Wallet address (0x...)" value={newAddress} onChange={(e) => setNewAddress(e.target.value)} className="font-mono" />
+                <Input placeholder="Chain (e.g. Ethereum, TON)" value={newChain} onChange={(e) => setNewChain(e.target.value)} />
+              </div>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setAddOpen(false)}>Cancel</Button>
+                <Button onClick={handleAddContact} disabled={addLoading}>
+                  {addLoading ? "Adding..." : "Add Contact"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
@@ -150,8 +282,8 @@ export default function Contacts() {
           <div className="rounded-xl border border-border/50 bg-card/50 p-4">
             <h3 className="text-sm font-semibold mb-3">ENS Resolution</h3>
             <Input value={ensInput} onChange={(e) => setEnsInput(e.target.value)} placeholder="vitalik.eth" className="bg-card border-border/50 text-xs mb-2" />
-            <Button variant="outline" size="sm" className="w-full h-8 text-xs" onClick={() => { if (ensInput) toast.success(`Resolved: 0xd8dA...6045`); }}>
-              <Search className="h-3 w-3 mr-1" />Resolve
+            <Button variant="outline" size="sm" className="w-full h-8 text-xs" disabled={ensLoading} onClick={handleEnsResolve}>
+              <Search className="h-3 w-3 mr-1" />{ensLoading ? "Resolving..." : "Resolve"}
             </Button>
           </div>
 

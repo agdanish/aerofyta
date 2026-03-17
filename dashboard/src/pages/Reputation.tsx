@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,8 @@ import { useFetch } from "@/hooks/useFetch";
 import CountUp from "@/components/shared/CountUp";
 import { Award, Search, Download, Upload, Trophy, Star, Zap, Globe, Heart, Shield } from "lucide-react";
 import { toast } from "sonner";
+
+const API = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 /* ---------- Real API types ---------- */
 interface ApiReputation {
@@ -60,13 +62,14 @@ const tierBadge = (t: string) => {
 const shortenAddr = (a: string) =>
   a.length > 12 ? `${a.slice(0, 6)}...${a.slice(-4)}` : a;
 
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
-
 export default function Reputation() {
   const [lookupAddress, setLookupAddress] = useState("0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62");
   const [lookupResult, setLookupResult] = useState<ApiReputation | null>(null);
   const [lookupError, setLookupError] = useState<string | null>(null);
   const [looked, setLooked] = useState(false);
+
+  /* Import file input ref */
+  const importRef = useRef<HTMLInputElement>(null);
 
   /* Leaderboard from real API */
   const { data: lbData, isDemo } = useFetch<LeaderboardResponse>(
@@ -80,7 +83,7 @@ export default function Reputation() {
     if (!addr) return;
     setLookupError(null);
     try {
-      const res = await fetch(`${API_BASE}/api/reputation/${encodeURIComponent(addr)}`, {
+      const res = await fetch(`${API}/api/reputation/${encodeURIComponent(addr)}`, {
         signal: AbortSignal.timeout(5000),
       });
       const json = await res.json();
@@ -97,6 +100,48 @@ export default function Reputation() {
       setLookupResult(null);
     }
     setLooked(true);
+  };
+
+  /* ---- Export Passport ---- */
+  const handleExportPassport = async () => {
+    try {
+      const res = await fetch(`${API}/api/reputation/export`);
+      const data = await res.json();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "reputation-passport.json";
+      a.click();
+      URL.revokeObjectURL(url);
+      toast.success("Passport exported with ZK proof");
+    } catch {
+      toast.error("Failed to export passport");
+    }
+  };
+
+  /* ---- Import Passport ---- */
+  const handleImportPassport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target?.result as string);
+        const res = await fetch(`${API}/api/reputation/import`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(parsed),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        toast.success(`Passport imported: score ${data.score ?? "verified"}`);
+      } catch (err) {
+        toast.error(`Import failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
   };
 
   const rep = lookupResult;
@@ -131,7 +176,7 @@ export default function Reputation() {
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Reputation Score</p>
               <div className="text-4xl font-bold tabular-nums" style={{ color: "#FF4E00" }}><CountUp target={rep.score} /></div>
               <p className="text-[10px] text-muted-foreground mt-1">raw: {rep.rawScore}</p>
-              <Progress value={Math.min(100, rep.score / 10)} className="h-2 bg-secondary mt-3 w-full" />
+              <Progress value={Math.min(100, rep.score)} className="h-2 bg-secondary mt-3 w-full" />
             </div>
             <div className="flex flex-col items-center rounded-lg bg-accent/30 p-4">
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Tier</p>
@@ -141,11 +186,13 @@ export default function Reputation() {
             </div>
             <div className="flex flex-col items-center rounded-lg bg-accent/30 p-4">
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Actions</p>
+              {/* Hidden file input for import */}
+              <input ref={importRef} type="file" accept=".json" className="hidden" onChange={handleImportPassport} />
               <div className="flex gap-2 mt-1">
-                <Button size="sm" variant="outline" className="h-8 text-xs" onClick={() => toast.success("Passport JSON exported with ZK proof")}>
+                <Button size="sm" variant="outline" className="h-8 text-xs" onClick={handleExportPassport}>
                   <Download className="h-3 w-3 mr-1" />Export
                 </Button>
-                <Button size="sm" variant="outline" className="h-8 text-xs" onClick={() => toast.info("Upload passport JSON to verify")}>
+                <Button size="sm" variant="outline" className="h-8 text-xs" onClick={() => importRef.current?.click()}>
                   <Upload className="h-3 w-3 mr-1" />Import
                 </Button>
               </div>
