@@ -9,6 +9,7 @@ RUN npm run build
 # Stage 2: Build agent (includes devDeps for tsc)
 FROM node:22-alpine AS agent-build
 WORKDIR /app/agent
+RUN apk add --no-cache python3 make g++ linux-headers
 COPY agent/package.json agent/package-lock.json ./
 RUN npm ci
 COPY agent/ ./
@@ -17,6 +18,9 @@ RUN npx tsc
 # Stage 3: Production runtime
 FROM node:22-alpine
 WORKDIR /app
+
+# Install native build tools for sodium-native
+RUN apk add --no-cache python3 make g++ linux-headers
 
 # Install agent production dependencies only
 COPY agent/package.json agent/package-lock.json ./agent/
