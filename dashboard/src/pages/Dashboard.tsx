@@ -69,14 +69,16 @@ export default function Dashboard() {
   const uptime = useUptime();
   const { data: agent, isDemo } = useFetch("/api/agent/status", demoAgentStatus);
 
-  const MoodIcon = moodIcons[agent.mood.moodType] || Smile;
-  const moodGlow = moodColors[agent.mood.moodType] || "#FF4E00";
+  const moodType = agent?.mood?.moodType || agent?.loop?.walletMood?.mood || "optimistic";
+  const MoodIcon = moodIcons[moodType] || Smile;
+  const moodGlow = moodColors[moodType] || "#FF4E00";
 
+  const pulse = agent?.pulse || agent?.loop?.financialPulse || { liquidity: 50, diversification: 0, velocity: 40, healthScore: 35 };
   const radarData = [
-    { axis: "Liquidity", value: agent.pulse.liquidity },
-    { axis: "Diversification", value: agent.pulse.diversification },
-    { axis: "Velocity", value: agent.pulse.velocity },
-    { axis: "Health", value: agent.pulse.healthScore },
+    { axis: "Liquidity", value: pulse.liquidity ?? pulse.liquidityScore ?? 50 },
+    { axis: "Diversification", value: pulse.diversification ?? pulse.diversificationScore ?? 0 },
+    { axis: "Velocity", value: pulse.velocity ?? pulse.velocityScore ?? 40 },
+    { axis: "Health", value: pulse.healthScore ?? 35 },
   ];
 
   return (
@@ -116,9 +118,9 @@ export default function Dashboard() {
             <div
               className="h-20 w-20 rounded-full"
               style={{
-                background: `radial-gradient(circle, ${agent.online ? "#50AF9544" : "#66666644"} 0%, transparent 70%)`,
-                boxShadow: `0 0 40px ${agent.online ? "#50AF9522" : "#66666622"}, 0 0 80px ${agent.online ? "#50AF9511" : "#66666611"}`,
-                animation: agent.online ? "pulse 3s cubic-bezier(0.4,0,0.6,1) infinite" : "none",
+                background: `radial-gradient(circle, ${agent?.online ?? agent?.loop?.running ?? false ? "#50AF9544" : "#66666644"} 0%, transparent 70%)`,
+                boxShadow: `0 0 40px ${agent?.online ?? agent?.loop?.running ?? false ? "#50AF9522" : "#66666622"}, 0 0 80px ${agent?.online ?? agent?.loop?.running ?? false ? "#50AF9511" : "#66666611"}`,
+                animation: agent?.online ?? agent?.loop?.running ?? false ? "pulse 3s cubic-bezier(0.4,0,0.6,1) infinite" : "none",
               }}
             />
             <div
@@ -126,24 +128,24 @@ export default function Dashboard() {
             >
               <div
                 className="h-10 w-10 rounded-full"
-                style={{ background: agent.online ? "#50AF95" : "#666", boxShadow: `0 0 20px ${agent.online ? "#50AF9566" : "#66666666"}` }}
+                style={{ background: agent?.online ?? agent?.loop?.running ?? false ? "#50AF95" : "#666", boxShadow: `0 0 20px ${agent?.online ?? agent?.loop?.running ?? false ? "#50AF9566" : "#66666666"}` }}
               />
             </div>
           </div>
 
           <h3 className="text-base font-bold">AeroFyta Agent</h3>
           <p className="text-xs text-muted-foreground mt-0.5 font-mono">
-            {agent.online ? `Running — Cycle #${agent.stats.cyclesRun.value}` : "Stopped"}
+            {agent?.online ?? agent?.loop?.running ?? false ? `Running — Cycle #${agent?.stats?.cyclesRun?.value || agent?.loop?.currentCycle || 0}` : "Stopped"}
           </p>
 
           {/* Stats row */}
           <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground">
             <span className="font-mono tabular-nums">{uptime}</span>
             <span className="w-px h-3 bg-border" />
-            <span className="tabular-nums">{agent.stats.tipsSent.value} tips</span>
+            <span className="tabular-nums">{agent?.stats?.tipsSent?.value || agent?.loop?.tipsExecuted || 0} tips</span>
             <span className="w-px h-3 bg-border" />
             <Badge variant="outline" className="text-[10px] px-2 py-0" style={{ borderColor: `${moodGlow}66`, color: moodGlow }}>
-              {agent.mood.name}
+              {agent?.mood?.name || moodType}
             </Badge>
           </div>
 
@@ -165,7 +167,7 @@ export default function Dashboard() {
         <div className="lg:col-span-7 rounded-xl bg-card border border-border p-6">
           {/* Balance header */}
           <div className="flex items-baseline gap-3 mb-1">
-            <span className="text-3xl font-bold tabular-nums tracking-tight">{agent.balance}</span>
+            <span className="text-3xl font-bold tabular-nums tracking-tight">{agent?.balance || "$0.00"}</span>
             <Badge className="text-[10px] bg-emerald-500/15 text-emerald-400 border-emerald-500/25">
               +2.3% 24h
             </Badge>
@@ -243,9 +245,9 @@ export default function Dashboard() {
             >
               <MoodIcon className="h-4 w-4" style={{ color: moodGlow }} />
             </div>
-            <span className="text-sm font-semibold">{agent.mood.name}</span>
+            <span className="text-sm font-semibold">{agent?.mood?.name || moodType}</span>
             <Badge variant="outline" className="text-[10px]" style={{ borderColor: `${moodGlow}44`, color: moodGlow }}>
-              ×{agent.mood.multiplier}
+              ×{agent?.mood?.multiplier || 1.0}
             </Badge>
           </div>
 
