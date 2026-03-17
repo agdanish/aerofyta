@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // TIP QUEUE SERVICE — Event-driven async tip processing for scale
 //
@@ -19,7 +19,13 @@
 // For production: swap to Redis/BullMQ for multi-node scaling.
 
 import { v4 as uuidv4 } from 'uuid';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { logger } from '../utils/logger.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const PERSISTENCE_FILE = resolve(__dirname, '..', '..', '.tip-queue.json');
 
 // ── Types ────────────────────────────────────────────────────────
 
@@ -107,7 +113,44 @@ export class TipQueueService {
   private batchInterval: ReturnType<typeof setInterval> | null = null;
 
   constructor() {
+    this.load();
     logger.info('Tip queue service initialized (in-memory, scalable to Redis/BullMQ)');
+  }
+
+  /** Persist queue + deadLetterQueue to disk */
+  private save(): void {
+    try {
+      const data = {
+        queue: this.queue,
+        deadLetterQueue: this.deadLetterQueue,
+        savedAt: new Date().toISOString(),
+      };
+      writeFileSync(PERSISTENCE_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (err) {
+      logger.error('Failed to persist tip queue', { error: String(err) });
+    }
+  }
+
+  /** Restore queue + deadLetterQueue from disk on startup */
+  private load(): void {
+    try {
+      if (!existsSync(PERSISTENCE_FILE)) return;
+      const raw = readFileSync(PERSISTENCE_FILE, 'utf-8');
+      const data = JSON.parse(raw) as { queue?: QueuedTip[]; deadLetterQueue?: QueuedTip[] };
+      if (Array.isArray(data.queue)) {
+        // Re-queue items that were processing (interrupted by crash)
+        this.queue = data.queue.map((t) => {
+          if (t.status === 'processing') t.status = 'queued';
+          return t;
+        });
+      }
+      if (Array.isArray(data.deadLetterQueue)) {
+        this.deadLetterQueue = data.deadLetterQueue;
+      }
+      logger.info(`Tip queue restored from disk: ${this.queue.length} queued, ${this.deadLetterQueue.length} dead-letter`);
+    } catch (err) {
+      logger.warn('Failed to load persisted tip queue (starting fresh)', { error: String(err) });
+    }
   }
 
   /** Set the tip processor function (called by the agent) */
@@ -194,6 +237,7 @@ export class TipQueueService {
       queueSize: this.queue.length,
     });
 
+    this.save();
     return tip;
   }
 
@@ -281,6 +325,7 @@ export class TipQueueService {
       }
     } finally {
       this.processingTips.delete(tip.id);
+      this.save();
     }
   }
 
@@ -341,6 +386,8 @@ export class TipQueueService {
         totalAmount: totalAmount.toFixed(8),
       });
     }
+
+    this.save();
   }
 
   // ── Query ──────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // CREATOR REVENUE SMOOTHING — Economic sustainability for creators
 //
@@ -7,7 +7,7 @@
 // A creator might earn $50 one week and $2 the next. This unpredictability
 // makes it impossible for creators to rely on tipping as income.
 //
-// SOLUTION: TipFlow's Revenue Smoothing Protocol operates like income
+// SOLUTION: AeroFyta's Revenue Smoothing Protocol operates like income
 // insurance for creators. The agent:
 //   1. Tracks each creator's historical income (rolling average)
 //   2. When income drops below their average, the agent supplements

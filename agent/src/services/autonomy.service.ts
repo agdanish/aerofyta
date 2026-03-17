@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';

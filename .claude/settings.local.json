@@ -21,7 +21,44 @@
       "Bash(sed -i \"s|^import { ReputationPanel }|// import { ReputationPanel }|\" src/App.tsx)",
       "Bash(sed -i \"s|^import { PortfolioSummary }|// import { PortfolioSummary }|\" src/App.tsx)",
       "Bash(npx tsc:*)",
-      "WebFetch(domain:dorahacks.io)"
+      "WebFetch(domain:dorahacks.io)",
+      "WebSearch",
+      "WebFetch(domain:rumble.com)",
+      "Bash(do sed:*)",
+      "Bash(echo \"Updated $f\")",
+      "Bash(done)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s http://localhost:3001/api/health)",
+      "Bash(grep -l \"export class\" /d/Tether-WDK-Hackathon/agent/src/services/*.ts)",
+      "Bash(ls -1 /d/Tether-WDK-Hackathon/dashboard/src/components/*.tsx)",
+      "Bash(xargs grep:*)",
+      "Bash(grep -n \"simulatedScore\\\\|Math.random\\\\|hardcoded\\\\|demo.*only\" /d/Tether-WDK-Hackathon/dashboard/src/components/*.tsx)",
+      "Bash(find D:Tether-WDK-Hackathon -name docker* -o -name .env* -o -name health*)",
+      "Bash(\"D:\\\\Tether-WDK-Hackathon\\\\dashboard\\\\src\\\\components\\\\DecisionAuditTrail.tsx\")",
+      "Bash(find D:/Tether-WDK-Hackathon -name .env* -o -name *secret*)",
+      "Bash(npm test:*)",
+      "Bash(node --import tsx --test src/__tests__/agent.test.ts src/__tests__/services.test.ts)",
+      "Bash(cd /d \"D:\\\\Tether-WDK-Hackathon\")",
+      "Bash(grep -r SwapService D:/Tether-WDK-Hackathon/agent/src --include=*.ts)",
+      "Bash(wc -l src/services/*.ts)",
+      "Bash(ls -la src/__tests__/*.ts)",
+      "Bash(node --import tsx --test src/__tests__/agent.test.ts src/__tests__/services.test.ts src/__tests__/integration.test.ts)",
+      "Bash(timeout 90 node --import tsx --test src/__tests__/integration.test.ts)"
+    ]
+  },
+  "disabledMcpjsonServers": [
+    "Claude Preview"
+  ],
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"continue\": true}'"
+          }
+        ]
+      }
     ]
   }
 }

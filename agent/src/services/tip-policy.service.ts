@@ -1,15 +1,15 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // TIP POLICY ENGINE — Programmable Money for Agentic Tipping
 //
-// This is TipFlow's forward-looking innovation: a declarative policy language
+// This is AeroFyta's forward-looking innovation: a declarative policy language
 // that turns tipping into PROGRAMMABLE MONEY. Instead of hardcoded logic,
 // creators and viewers define policies in a human-readable format that the
 // agent interprets and executes autonomously.
 //
-// This sets a STANDARD that other tipping bots can adopt — any agent that
-// speaks the TipPolicy format can participate in the same tipping ecosystem.
+// This sets a STANDARD that other autonomous payment agents can adopt — any agent that
+// speaks the TipPolicy format can participate in the same payment ecosystem.
 //
 // Example policy:
 //   {
@@ -131,7 +131,7 @@ export interface PolicyEvaluation {
  * The agent evaluates policies every cycle and executes matching ones.
  *
  * This is designed as a STANDARD — any compatible agent can read and
- * execute TipPolicy format, enabling interoperability across tipping bots.
+ * execute TipPolicy format, enabling interoperability across autonomous payment agents.
  */
 export class TipPolicyService {
   private policies: Map<string, TipPolicy> = new Map();

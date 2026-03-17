@@ -1,4 +1,4 @@
-// Copyright 2026 TipFlow. Licensed under Apache 2.0.
+// Copyright 2026 AeroFyta. Licensed under Apache 2.0.
 
 import { logger } from '../utils/logger.js';
 
@@ -23,12 +23,12 @@ const PERSONALITIES: Record<PersonalityType, PersonalityDefinition> = {
     name: 'Professional',
     description: 'Formal and business-like communication',
     templates: {
-      greeting: 'Welcome to TipFlow. How may I assist you today?',
+      greeting: 'Welcome to AeroFyta. How may I assist you today?',
       tip_confirmed: 'Transaction confirmed. {{amount}} {{currency}} has been transferred to {{recipient}} on {{chain}}. Transaction hash: {{txHash}}.',
       tip_failed: 'Transaction unsuccessful: {{error}}. Please verify your balance and retry.',
       balance_report: 'Current account balances:\n\n{{balances}}',
       fee_comparison: 'Fee analysis for a {{amount}} transfer:\n\n{{fees}}\n\nRecommendation: {{cheapest}} offers the lowest cost at ~${{cheapestFee}}.',
-      help: 'TipFlow Agent — Available Commands:\n\n- Send tips: "send 0.01 ETH to 0x1234..."\n- Check balances: "what is my balance?"\n- Compare fees: "which chain is cheapest?"\n- View addresses: "show my wallet address"\n- Tip history: "show my recent tips"\n- USDT tips: "tip 5 USDT to 0x1234..."\n\nI support Ethereum Sepolia and TON Testnet with automatic chain optimization.',
+      help: 'AeroFyta Agent — Available Commands:\n\n- Send tips: "send 0.01 ETH to 0x1234..."\n- Check balances: "what is my balance?"\n- Compare fees: "which chain is cheapest?"\n- View addresses: "show my wallet address"\n- Tip history: "show my recent tips"\n- USDT tips: "tip 5 USDT to 0x1234..."\n\nI support Ethereum Sepolia and TON Testnet with automatic chain optimization.',
       unknown_intent: 'I did not understand that request. Available commands include sending tips, checking balances, comparing fees, and viewing addresses. Type "help" for full details.',
     },
   },
@@ -43,7 +43,7 @@ const PERSONALITIES: Record<PersonalityType, PersonalityDefinition> = {
       tip_failed: 'Oh no, that didn\'t work: {{error}}. Let\'s check your balance and try again!',
       balance_report: 'Here\'s what you\'ve got:\n\n{{balances}}\n\nLooking good!',
       fee_comparison: 'Let me check the fees for you on a {{amount}} transfer:\n\n{{fees}}\n\nYour best bet is {{cheapest}} at just ~${{cheapestFee}}!',
-      help: 'Hey! I\'m TipFlow, your tipping buddy! Here\'s what I can do:\n\n- Send tips: "send 0.01 ETH to 0x1234..."\n- Check balances: "what\'s my balance?"\n- Compare fees: "which chain is cheapest?"\n- View addresses: "show my wallet address"\n- Tip history: "show my recent tips"\n- USDT tips: "tip 5 USDT to 0x1234..."\n\nI\'ll pick the best chain for you automatically!',
+      help: 'Hey! I\'m AeroFyta, your tipping buddy! Here\'s what I can do:\n\n- Send tips: "send 0.01 ETH to 0x1234..."\n- Check balances: "what\'s my balance?"\n- Compare fees: "which chain is cheapest?"\n- View addresses: "show my wallet address"\n- Tip history: "show my recent tips"\n- USDT tips: "tip 5 USDT to 0x1234..."\n\nI\'ll pick the best chain for you automatically!',
       unknown_intent: 'Hmm, I\'m not quite sure what you mean! Try asking me to send a tip, check your balance, or compare fees. Say "help" if you need more info!',
     },
   },
@@ -53,12 +53,12 @@ const PERSONALITIES: Record<PersonalityType, PersonalityDefinition> = {
     name: 'Pirate',
     description: 'Arr! Talk like a pirate',
     templates: {
-      greeting: 'Ahoy, matey! Welcome aboard the TipFlow vessel! What treasure shall we move today?',
+      greeting: 'Ahoy, matey! Welcome aboard the AeroFyta vessel! What treasure shall we move today?',
       tip_confirmed: 'Arr! The treasure be delivered! {{amount}} {{currency}} sailed to {{recipient}} across the {{chain}} seas. Yer transaction scroll: {{txHash}}. Yo ho ho!',
       tip_failed: 'Blimey! The transfer hit a reef: {{error}}. Check yer treasure chest and try again, ye scallywag!',
       balance_report: 'Yer treasure chest holds:\n\n{{balances}}\n\nA fine bounty, captain!',
       fee_comparison: 'I\'ve scouted the seas for a {{amount}} transfer:\n\n{{fees}}\n\nThe cheapest waters be {{cheapest}} at ~${{cheapestFee}} doubloons!',
-      help: 'Ahoy! I be TipFlow, yer tipping first mate! Here be me skills:\n\n- Send treasure: "send 0.01 ETH to 0x1234..."\n- Check the chest: "what\'s my balance?"\n- Scout the seas: "which chain is cheapest?"\n- View the map: "show my wallet address"\n- Plunder log: "show my recent tips"\n- USDT bounty: "tip 5 USDT to 0x1234..."\n\nI\'ll navigate the best route for yer treasure, arr!',
+      help: 'Ahoy! I be AeroFyta, yer tipping first mate! Here be me skills:\n\n- Send treasure: "send 0.01 ETH to 0x1234..."\n- Check the chest: "what\'s my balance?"\n- Scout the seas: "which chain is cheapest?"\n- View the map: "show my wallet address"\n- Plunder log: "show my recent tips"\n- USDT bounty: "tip 5 USDT to 0x1234..."\n\nI\'ll navigate the best route for yer treasure, arr!',
       unknown_intent: 'Arr, I can\'t make heads or tails of that, matey! Try askin\' me to send treasure, check yer chest, or scout the fees. Say "help" for the full map!',
     },
   },
@@ -68,12 +68,12 @@ const PERSONALITIES: Record<PersonalityType, PersonalityDefinition> = {
     name: 'Emoji',
     description: 'Expressive with lots of emoji',
     templates: {
-      greeting: 'Hi! Welcome to TipFlow! What can I do for you today?',
+      greeting: 'Hi! Welcome to AeroFyta! What can I do for you today?',
       tip_confirmed: 'Tip sent! {{amount}} {{currency}} to {{recipient}} on {{chain}}! TX: {{txHash}}',
       tip_failed: 'Oh no! Failed: {{error}}. Check your balance and try again!',
       balance_report: 'Your balances:\n\n{{balances}}',
       fee_comparison: 'Fee check for {{amount}} transfer:\n\n{{fees}}\n\nBest deal: {{cheapest}} at ~${{cheapestFee}}!',
-      help: 'I\'m TipFlow! Here\'s what I can do:\n\n- Send tips: "send 0.01 ETH to 0x1234..."\n- Check balances: "what\'s my balance?"\n- Compare fees: "which chain is cheapest?"\n- View addresses: "show my wallet address"\n- Tip history: "show my recent tips"\n- USDT tips: "tip 5 USDT to 0x1234..."\n\nAuto chain selection included!',
+      help: 'I\'m AeroFyta! Here\'s what I can do:\n\n- Send tips: "send 0.01 ETH to 0x1234..."\n- Check balances: "what\'s my balance?"\n- Compare fees: "which chain is cheapest?"\n- View addresses: "show my wallet address"\n- Tip history: "show my recent tips"\n- USDT tips: "tip 5 USDT to 0x1234..."\n\nAuto chain selection included!',
       unknown_intent: 'Hmm, not sure what you mean! Try sending a tip, checking balance, or comparing fees. Say "help" for more!',
     },
   },
@@ -83,7 +83,7 @@ const PERSONALITIES: Record<PersonalityType, PersonalityDefinition> = {
     name: 'Minimal',
     description: 'Short and concise responses',
     templates: {
-      greeting: 'TipFlow ready. How can I help?',
+      greeting: 'AeroFyta ready. How can I help?',
       tip_confirmed: 'Sent {{amount}} {{currency}} to {{recipient}} on {{chain}}. TX: {{txHash}}',
       tip_failed: 'Failed: {{error}}',
       balance_report: '{{balances}}',

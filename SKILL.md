@@ -1,19 +1,26 @@
 ---
-name: tipflow
-description: AI-powered tipping agent for Rumble creators using Tether WDK. Multi-agent orchestration, predictive tipping, tip streaming, escrow, cross-chain fee arbitrage, cryptographic receipts, and x402 agent commerce. Compatible with OpenClaw and any MCP-compatible agent framework.
+name: aerofyta
+description: Autonomous multi-strategy payment agent powered by Tether WDK. Manages tipping, lending (Aave V3), DeFi (swaps, bridges, rebalancing), and wallet operations across 9 chains — without human intervention. Multi-agent orchestration, predictive tipping, tip streaming, escrow, cross-chain fee arbitrage, cryptographic receipts, and x402 agent commerce. Compatible with OpenClaw and any MCP-compatible agent framework.
 license: Apache-2.0
-compatibility: Requires Node.js 22+, Tether WDK SDK, 7 chains (EVM + TON + TRON + BTC + SOL + Plasma + Stable). OpenClaw compatible.
+compatibility: Requires Node.js 22+, Tether WDK SDK, 9 chains (EVM + TON + TRON + BTC + SOL + ERC-4337 + TON Gasless + Plasma + Stable). OpenClaw compatible.
 metadata:
   author: Danish A
   version: "1.0.0"
   repository: https://github.com/agdanish/Tether-WDK-Hackathon
+  tracks:
+    - tipping-bot
+    - agent-wallets
+    - lending-bot
+    - autonomous-defi
 ---
 
-# TipFlow Agent Skill
+# AeroFyta Agent Skill
 
-TipFlow is an AI-powered tipping agent that extends Rumble's existing WDK-based tipping wallet. It uses Tether WDK to manage multi-chain wallets across 7 chains (Ethereum Sepolia, TON Testnet, TRON Nile, Bitcoin Testnet, Solana Devnet, Plasma, Stable) and lets you send USDT, USAT (USA₮), XAUT, BTC, and native crypto tips through natural language. TipFlow uses the same WDK wallet primitives as Rumble's native wallet — same seed, same keys, same addresses. Compatible with OpenClaw, Claude, Cursor, and any MCP-compatible agent framework via the built-in MCP server (35 wallet tools).
+AeroFyta is an autonomous multi-strategy payment agent that extends Rumble's existing WDK-based tipping wallet. It uses Tether WDK to manage multi-chain wallets across 9 chains (Ethereum Sepolia, TON Testnet, TRON Nile, Bitcoin Testnet, Solana Devnet, ERC-4337 Gasless, TON Gasless, Plasma, Stable) and autonomously executes four strategies: tipping creators, lending idle funds to Aave V3, DeFi operations (swaps, bridges, rebalancing), and wallet health management. AeroFyta uses the same WDK wallet primitives as Rumble's native wallet — same seed, same keys, same addresses. Compatible with OpenClaw, Claude, Cursor, and any MCP-compatible agent framework via the built-in MCP server (55+ tools).
 
-**Unique capabilities:** Multi-Agent Orchestration (3 sub-agents vote on every tip), Predictive Tipping Intelligence, Tip Streaming Protocol, Tip Escrow Protocol, Cross-Chain Fee Arbitrage, Cryptographic Tip Receipts (WDK sign/verify), Social Reputation Engine.
+**Strategies:** Autonomous Tipping (Rumble creator tips), Lending (Aave V3 yield), Autonomous DeFi (swaps, bridges, DCA, fee arbitrage), Agent Wallets (9-chain management, gasless, health monitoring).
+
+**Unique capabilities:** Multi-Agent Orchestration (3 sub-agents vote on every action), Multi-Strategy Engine (4 tracks in one autonomous loop), Predictive Tipping Intelligence, Tip Streaming Protocol, Tip Escrow Protocol, Cross-Chain Fee Arbitrage, Cryptographic Tip Receipts (WDK sign/verify), Social Reputation Engine.
 
 **API Base URL:** `http://localhost:3001/api`
 
@@ -136,7 +143,7 @@ POST /api/tip/parse
 
 ### 5. Chat with the Agent
 
-Have a conversation with TipFlow. The agent understands intents like tipping, balance queries, fee comparisons, history lookups, and help requests. It can execute tips directly from chat.
+Have a conversation with AeroFyta. The agent understands intents like tipping, balance queries, fee comparisons, history lookups, and help requests. It can execute tips directly from chat.
 
 **Endpoint:** `POST /api/chat`
 
@@ -197,7 +204,7 @@ Returns a fee comparison with a `cheapest` recommendation.
 
 ### 10. Register a Rumble Creator
 
-Add a creator to TipFlow for tipping and tracking.
+Add a creator to AeroFyta for tipping and tracking.
 
 **Endpoint:** `POST /api/rumble/creators`
 
@@ -632,7 +639,7 @@ Register conditions that auto-trigger tips.
 
 ## Example Conversations
 
-These show how an AI agent uses TipFlow through natural language, translating user requests into API calls.
+These show how an AI agent uses AeroFyta through natural language, translating user requests into API calls.
 
 ### Sending a Simple Tip
 
@@ -869,6 +876,147 @@ Store and recall agent memories for persistent intelligence.
 **All:** `GET /api/memory`
 **Stats:** `GET /api/memory/stats`
 **Forget:** `DELETE /api/memory/:id`
+
+---
+
+### Multi-Strategy Agent
+
+Get a summary of all 4 strategies and their current state.
+
+**Endpoint:** `GET /api/strategies/summary`
+
+**Response:** Returns status for each strategy (tipping, lending, defi, wallet_management) including active positions, pending actions, and recent decisions.
+
+---
+
+### Lending Bot — Deposit to Aave V3
+
+Deposit idle USDT to Aave V3 for yield generation.
+
+**Endpoint:** `POST /api/strategies/lending/deposit`
+
+**Parameters:**
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `amount` | string | yes | Amount of USDT to deposit |
+| `chain` | string | no | Chain to use (default: ethereum-sepolia) |
+
+**Response:** Returns transaction hash, amount supplied, and current APY.
+
+---
+
+### Lending Bot — Withdraw from Aave V3
+
+Withdraw USDT from Aave V3 lending position.
+
+**Endpoint:** `POST /api/strategies/lending/withdraw`
+
+**Parameters:**
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `amount` | string | yes | Amount to withdraw (or "all") |
+
+---
+
+### Lending Bot — Check Positions
+
+**Endpoint:** `GET /api/strategies/lending/positions`
+
+Returns all active Aave V3 positions with supplied amount, earned yield, health factor, and current APY.
+
+---
+
+### DeFi Agent — Swap Tokens
+
+Execute a token swap via Velora DEX.
+
+**Endpoint:** `POST /api/strategies/defi/swap`
+
+**Parameters:**
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `fromToken` | string | yes | Token to sell |
+| `toToken` | string | yes | Token to buy |
+| `amount` | string | yes | Amount to swap |
+| `slippage` | number | no | Max slippage percentage (default: 0.5) |
+
+---
+
+### DeFi Agent — Bridge USDT0
+
+Bridge USDT0 cross-chain via LayerZero OFT protocol.
+
+**Endpoint:** `POST /api/strategies/defi/bridge`
+
+**Parameters:**
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `fromChain` | string | yes | Source chain |
+| `toChain` | string | yes | Destination chain |
+| `amount` | string | yes | Amount to bridge |
+
+---
+
+### DeFi Agent — Rebalance Treasury
+
+Trigger a treasury rebalance across strategies.
+
+**Endpoint:** `POST /api/strategies/defi/rebalance`
+
+Evaluates current allocation and moves funds to optimize yield vs. liquidity.
+
+---
+
+### DeFi Agent — Execute DCA
+
+Set up or trigger a Dollar Cost Averaging purchase.
+
+**Endpoint:** `POST /api/strategies/defi/dca`
+
+**Parameters:**
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `token` | string | yes | Token to accumulate |
+| `amount` | string | yes | Amount per purchase |
+| `interval` | string | yes | `"hourly"`, `"daily"`, `"weekly"` |
+
+---
+
+### Wallet Manager — Check Health
+
+**Endpoint:** `GET /api/strategies/wallets/health`
+
+Returns health status for all 9 chains: balance, gas availability, last activity, and recommended actions (e.g., refill gas, consolidate funds).
+
+---
+
+### Wallet Manager — Fund Hot Wallet
+
+Transfer funds from treasury to hot wallet for tipping.
+
+**Endpoint:** `POST /api/strategies/wallets/fund`
+
+**Parameters:**
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `amount` | string | yes | Amount to transfer |
+| `chain` | string | no | Target chain (default: cheapest) |
+
+---
+
+### Wallet Manager — Gasless Status
+
+**Endpoint:** `GET /api/strategies/wallets/gasless`
+
+Returns gasless transaction availability for ERC-4337 and TON gasless chains.
+
+---
+
+### All Strategy Decisions
+
+**Endpoint:** `GET /api/strategies/decisions`
+
+Returns all autonomous decisions across all 4 strategies with reasoning, confidence scores, and execution results.
 
 ---
 

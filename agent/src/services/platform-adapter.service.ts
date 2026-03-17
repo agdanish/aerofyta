@@ -1,15 +1,15 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // PLATFORM ADAPTER SERVICE — Plugin architecture for multi-platform scaling
 //
-// TipFlow is not locked to Rumble. The platform adapter system enables
+// AeroFyta is not locked to Rumble. The platform adapter system enables
 // integration with ANY video/content platform through a standard interface.
-// Each platform adapter translates platform-specific events into TipFlow's
+// Each platform adapter translates platform-specific events into AeroFyta's
 // universal tipping format.
 //
 // Architecture:
-//   Platform → Adapter → Normalized Event → TipFlow Engine → WDK
+//   Platform → Adapter → Normalized Event → AeroFyta Engine → WDK
 //
 // Supported adapters:
 //   - Rumble (primary, built-in)
@@ -79,7 +79,7 @@ export interface UniversalTipEvent {
 
 /**
  * Platform Adapter Interface — implement this for each platform.
- * Translates platform-specific APIs into TipFlow's universal format.
+ * Translates platform-specific APIs into AeroFyta's universal format.
  */
 export interface PlatformAdapter {
   /** Platform identifier (e.g., 'rumble', 'youtube', 'twitch') */
@@ -107,7 +107,7 @@ export interface PlatformAdapter {
 
 /**
  * Rumble Platform Adapter — translates Rumble's creator ecosystem
- * into TipFlow's universal format.
+ * into AeroFyta's universal format.
  */
 class RumbleAdapter implements PlatformAdapter {
   platform = 'rumble';
@@ -208,7 +208,7 @@ class RumbleAdapter implements PlatformAdapter {
 
 /**
  * Webhook Platform Adapter — enables any platform to integrate
- * with TipFlow by sending standard webhook events.
+ * with AeroFyta by sending standard webhook events.
  */
 class WebhookAdapter implements PlatformAdapter {
   platform = 'webhook';
@@ -267,7 +267,7 @@ class WebhookAdapter implements PlatformAdapter {
  *
  * Scalability:
  *   - Add new platforms by implementing PlatformAdapter interface
- *   - No code changes to TipFlow core required
+ *   - No code changes to AeroFyta core required
  *   - Events from all platforms flow through the same tipping pipeline
  *   - Engagement scores are platform-agnostic
  */

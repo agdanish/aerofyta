@@ -95,6 +95,8 @@ export interface ConfirmationResult {
   confirmed: boolean;
   blockNumber: number;
   gasUsed: string;
+  /** True if TX was broadcast successfully but confirmation requires chain-specific verification (TON/Tron) */
+  broadcast?: boolean;
 }
 
 /** Transaction result */
@@ -316,8 +318,44 @@ export interface ChatMessage {
 
 /** Detected intent from user chat message */
 export interface ChatIntent {
-  intent: 'tip' | 'balance' | 'fees' | 'address' | 'help' | 'history' | 'unknown';
+  intent:
+    | 'tip' | 'check_balance' | 'view_history' | 'find_creator' | 'set_policy'
+    | 'check_status' | 'help' | 'analytics' | 'bridge' | 'swap' | 'lend'
+    | 'balance' | 'fees' | 'address' | 'history'  // legacy aliases
+    | 'unknown';
   params: Record<string, string>;
+  confidence: number;
+  reasoning: string;
+  entities: ExtractedEntities;
+}
+
+/** Entities extracted from user input by NLP/rule engine */
+export interface ExtractedEntities {
+  amounts: Array<{ value: number; currency: string; raw: string }>;
+  addresses: Array<{ value: string; type: 'evm' | 'ton' | 'tron'; raw: string }>;
+  creators: string[];
+  chains: string[];
+  tokens: string[];
+}
+
+/** Content analysis result from rule-based NLP */
+export interface ContentAnalysis {
+  sentiment: { label: 'positive' | 'negative' | 'neutral'; score: number; keywords: string[] };
+  topics: Array<{ name: string; confidence: number }>;
+  keyPhrases: string[];
+  language: string;
+  wordCount: number;
+}
+
+/** Structured summary of rule-based AI capabilities */
+export interface RuleBasedCapabilities {
+  engine: string;
+  version: string;
+  provider: 'rule-based';
+  intents: Array<{ name: string; description: string; examples: string[] }>;
+  entityTypes: Array<{ name: string; description: string; patterns: string[] }>;
+  analysisFeatures: string[];
+  limitations: string[];
 }
 
 /** Webhook configuration for external notifications */
@@ -484,6 +522,65 @@ export interface TipGoal {
   deadline?: string;
   createdAt: string;
   completed: boolean;
+}
+
+// ── HTLC Escrow Types ────────────────────────────────────────────────
+
+/** HTLC status for hash-time-locked escrows */
+export type HtlcStatus = 'locked' | 'claimed' | 'refunded' | 'expired';
+
+/** HTLC escrow fields added to EscrowTip */
+export interface HtlcEscrowFields {
+  /** SHA-256 hash of the secret preimage (hex-encoded) */
+  hashLock: string;
+  /** Unix timestamp (ms) after which the escrow can be refunded */
+  timelock: number;
+  /** HTLC lifecycle status */
+  htlcStatus: HtlcStatus;
+}
+
+// ── LLM Structured Response Types ────────────────────────────────────
+
+/** LLM provider currently in use */
+export type LLMProvider = 'groq' | 'gemini' | 'rule-based';
+
+/** Structured tip decision from LLM */
+export interface TipDecision {
+  creator: string;
+  amount: number;
+  chain: string;
+  token: string;
+  reason: string;
+  confidence: number;
+}
+
+/** Intent classification result from LLM */
+export interface IntentResult {
+  intent: string;
+  confidence: number;
+  entities: Record<string, unknown>;
+}
+
+/** Chain reasoning result from LLM */
+export interface ChainReasoning {
+  selectedChain: string;
+  reason: string;
+  factors: string[];
+}
+
+/** Risk explanation result from LLM */
+export interface RiskExplanation {
+  level: string;
+  score: number;
+  summary: string;
+  factors: string[];
+}
+
+/** Tip refusal result from the agent's "say NO" logic */
+export interface TipRefusal {
+  refused: boolean;
+  reason: string;
+  suggestion: string;
 }
 
 /** Agent stats for dashboard */

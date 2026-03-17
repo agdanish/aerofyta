@@ -1,11 +1,11 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // AGENT IDENTITY SERVICE — Cryptographic identity for agent-to-agent trust
 //
-// Every TipFlow agent has a unique, verifiable identity derived from its
+// Every AeroFyta agent has a unique, verifiable identity derived from its
 // WDK wallet keys. This enables:
-//   - Agent discovery: find other TipFlow agents on the network
+//   - Agent discovery: find other AeroFyta agents on the network
 //   - Trust verification: prove identity via cryptographic challenge-response
 //   - Capability advertisement: declare what this agent can do
 //   - Reputation portability: identity follows the agent across platforms
@@ -115,8 +115,8 @@ export class AgentIdentityService {
     const agentId = createHash('sha256').update(addressConcat).digest('hex').slice(0, 40);
 
     this.identity = {
-      agentId: `tipflow-${agentId}`,
-      name: 'TipFlow Agent',
+      agentId: `aerofyta-${agentId}`,
+      name: 'AeroFyta Agent',
       version: '1.0.0',
       protocolVersion: '1.0',
       addresses: addresses as Record<string, string>,
@@ -214,7 +214,7 @@ export class AgentIdentityService {
 
     // Use WDK to sign the challenge
     try {
-      const account = await this.walletService.getWdkAccount('ethereum-sepolia' as any);
+      const account = await this.walletService.getWdkAccount('ethereum-sepolia');
       const signature = await account.sign(challenge);
       const address = account.getAddress();
 
@@ -225,7 +225,7 @@ export class AgentIdentityService {
       };
     } catch {
       // Fallback: hash-based proof (if WDK sign not available)
-      const proof = createHash('sha256').update(challenge + ':tipflow').digest('hex');
+      const proof = createHash('sha256').update(challenge + ':aerofyta').digest('hex');
       return {
         signature: proof,
         chainId: 'ethereum-sepolia',

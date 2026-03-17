@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // PROOF-OF-ENGAGEMENT — Cryptographic attestations for verified tipping
 //
@@ -7,7 +7,7 @@
 // watched content before tipping. Fake engagement, bot farms, and wash
 // tipping inflate creator metrics and waste community funds.
 //
-// SOLUTION: TipFlow generates cryptographic Proof-of-Engagement (PoE)
+// SOLUTION: AeroFyta generates cryptographic Proof-of-Engagement (PoE)
 // receipts using WDK's account.sign(). Each receipt proves:
 //   1. WHO watched (viewer's WDK wallet address)
 //   2. WHAT they watched (content ID + creator ID)
@@ -160,7 +160,7 @@ export class ProofOfEngagementService {
 
     try {
       if (this.walletService) {
-        viewerAddress = await this.walletService.getAddress('ethereum-sepolia' as any);
+        viewerAddress = await this.walletService.getAddress('ethereum-sepolia');
         signerAddress = viewerAddress;
       }
     } catch {
@@ -190,7 +190,7 @@ export class ProofOfEngagementService {
     // Sign with WDK wallet
     try {
       if (this.walletService) {
-        const account = await this.walletService.getWdkAccount('ethereum-sepolia' as any);
+        const account = await this.walletService.getWdkAccount('ethereum-sepolia');
         const sig = await account.sign(payloadHash);
         signature = typeof sig === 'string' ? sig : String(sig);
       }

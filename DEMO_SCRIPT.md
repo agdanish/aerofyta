@@ -1,4 +1,4 @@
-# TipFlow Demo Video Script (5 minutes)
+# AeroFyta Demo Video Script (5 minutes)
 
 ## Pre-Recording Setup
 1. Start the agent: `cd agent && npm start`
@@ -20,12 +20,12 @@
 
 ---
 
-## INTRO (0:00 - 0:30) — "What is TipFlow?"
+## INTRO (0:00 - 0:30) — "What is AeroFyta?"
 
 **Show:** Dashboard homepage with Innovation Showcase carousel
 
 **Say:**
-> "TipFlow is an AI-powered tipping agent for Rumble creators, built on Tether WDK. It extends Rumble's existing crypto wallet with autonomous intelligence — the agent watches your behavior, learns your preferences, and autonomously manages tips across Ethereum, TON, and TRON. Same wallet, same keys, same addresses as Rumble's native wallet."
+> "AeroFyta is an AI-powered tipping agent for Rumble creators, built on Tether WDK. It extends Rumble's existing crypto wallet with autonomous intelligence — the agent watches your behavior, learns your preferences, and autonomously manages tips across Ethereum, TON, and TRON. Same wallet, same keys, same addresses as Rumble's native wallet."
 
 **Action:** Scroll the Innovation Showcase carousel to show all 10 patent-worthy innovations.
 
@@ -138,6 +138,6 @@
 ## CLOSING (4:45 - 5:00)
 
 **Say:**
-> "TipFlow: autonomous AI tipping for Rumble creators. 8 WDK packages, 3 chains, multi-agent consensus, predictive intelligence, cryptographic receipts, tip streaming, escrow, DCA. All real testnets, zero mocked calls. Built for Hackathon Galactica. Thank you."
+> "AeroFyta: autonomous AI tipping for Rumble creators. 8 WDK packages, 3 chains, multi-agent consensus, predictive intelligence, cryptographic receipts, tip streaming, escrow, DCA. All real testnets, zero mocked calls. Built for Hackathon Galactica. Thank you."
 
 **Action:** Press Cmd+K to show Command Palette as closing flourish.

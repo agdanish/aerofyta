@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // PREDICTIVE CREATOR DISCOVERY — AI Angel Investing for Content
 //
@@ -7,7 +7,7 @@
 // Small, high-quality creators get zero tips and give up. The tipping
 // economy becomes winner-take-all, killing diversity.
 //
-// SOLUTION: TipFlow's Discovery Engine acts as an AI angel investor.
+// SOLUTION: AeroFyta's Discovery Engine acts as an AI angel investor.
 // It analyzes UNDERVALUED creators (high engagement, low tips) and
 // autonomously directs micro-tips to them BEFORE they blow up.
 //
@@ -19,7 +19,7 @@
 //
 // Early tippers earn a DISCOVERY BONUS:
 //   - First tipper to an undervalued creator gets 2x reputation boost
-//   - "Discovered by TipFlow" badge on the creator's profile
+//   - "Discovered by AeroFyta" badge on the creator's profile
 //   - Discovery leaderboard tracks the best talent scouts
 //
 // WHY THIS CHANGES EVERYTHING:

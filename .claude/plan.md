@@ -1,4 +1,4 @@
-# TipFlow — Critical Gaps Fix Plan
+# AeroFyta — Critical Gaps Fix Plan
 
 ## HACKATHON EVALUATION CRITERIA
 Projects are assessed on:

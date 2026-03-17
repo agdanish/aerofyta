@@ -4,13 +4,24 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import { describe, it } from 'node:test';
+import { describe, it, before } from 'node:test';
 import assert from 'node:assert/strict';
+import { unlinkSync, existsSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { TipPolicyService } from '../services/tip-policy.service.js';
 import { X402Service } from '../services/x402.service.js';
 import { AgentIdentityService } from '../services/agent-identity.service.js';
 import { TipQueueService } from '../services/tip-queue.service.js';
 import { PlatformAdapterService } from '../services/platform-adapter.service.js';
+
+const __testDir = dirname(fileURLToPath(import.meta.url));
+const TIP_QUEUE_FILE = resolve(__testDir, '..', '..', '.tip-queue.json');
+
+// Clean persisted tip queue before tests to avoid data collisions
+before(() => {
+  if (existsSync(TIP_QUEUE_FILE)) unlinkSync(TIP_QUEUE_FILE);
+});
 
 // ── TipPolicy Engine ────────────────────────────────────────────
 
@@ -144,7 +155,7 @@ describe('X402Service', () => {
     const h = svc.getPaymentHeaders(req);
     assert.equal(h['X-Payment-Required'], 'true');
     assert.equal(h['X-Payment-Protocol'], 'x402/1.0');
-    assert.equal(h['X-Payment-Agent'], 'TipFlow/1.0');
+    assert.equal(h['X-Payment-Agent'], 'AeroFyta/1.0');
   });
 
   it('tracks revenue stats', () => {
@@ -161,7 +172,12 @@ describe('X402Service', () => {
 // ── Tip Queue ───────────────────────────────────────────────────
 
 describe('TipQueueService', () => {
+  before(() => {
+    if (existsSync(TIP_QUEUE_FILE)) unlinkSync(TIP_QUEUE_FILE);
+  });
+
   it('priority ordering: urgent before normal before low', () => {
+    if (existsSync(TIP_QUEUE_FILE)) unlinkSync(TIP_QUEUE_FILE);
     const svc = new TipQueueService();
     svc.enqueue({ recipient: '0xA', amount: '1', priority: 'low' });
     svc.enqueue({ recipient: '0xB', amount: '2', priority: 'urgent' });
@@ -173,6 +189,7 @@ describe('TipQueueService', () => {
   });
 
   it('stats reflect queue state', () => {
+    if (existsSync(TIP_QUEUE_FILE)) unlinkSync(TIP_QUEUE_FILE);
     const svc = new TipQueueService();
     svc.enqueue({ recipient: '0xA', amount: '0.01' });
     svc.enqueue({ recipient: '0xB', amount: '0.02' });

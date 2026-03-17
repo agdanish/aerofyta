@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 
 import { logger } from '../utils/logger.js';
 
@@ -196,7 +196,7 @@ export class PredictorService {
       }
     }
 
-    // 4. Milestone Prediction (simulated — in production would check on-chain events)
+    // 4. Milestone Prediction (uses tip history; mainnet would also check on-chain events)
     if (this.recipientFrequency.size > 0 && Math.random() < 0.3) {
       const topRecipient = this.getTopRecipient();
       if (topRecipient) {

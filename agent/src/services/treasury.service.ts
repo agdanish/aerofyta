@@ -1,10 +1,11 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { logger } from '../utils/logger.js';
+import type { LendingService } from './lending.service.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TREASURY_FILE = join(__dirname, '..', '..', '.treasury.json');
@@ -239,9 +240,23 @@ const DEFAULT_CONFIG: TreasuryConfig = {
  */
 export class TreasuryService {
   private config: TreasuryConfig;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private walletService: any = null;
+  private lendingService: LendingService | null = null;
 
   constructor() {
     this.config = this.load();
+  }
+
+  /** Wire wallet service for real WDK fund movement */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setWalletService(ws: any): void {
+    this.walletService = ws;
+  }
+
+  /** Wire lending service for yield deploy/withdraw */
+  setLendingService(ls: LendingService): void {
+    this.lendingService = ls;
   }
 
   // ── Treasury overview ──────────────────────────────────────────
@@ -525,18 +540,39 @@ export class TreasuryService {
         const yields = await this.getYieldOpportunities();
         const bestLowRisk = yields.find(y => y.risk === 'low' && y.protocol === strategy.targetProtocol) ?? yields.find(y => y.risk === 'low');
 
+        // Attempt real WDK fund deployment
+        let deployedOnChain = false;
+        try {
+          if (this.lendingService && typeof this.lendingService.supply === 'function') {
+            const supplyResult = await this.lendingService.supply(String(deployAmount), 'ethereum-sepolia');
+            deployedOnChain = !!supplyResult;
+            logger.info('Treasury rebalance: deployed to yield via lending service', { amount: deployAmount, result: supplyResult });
+          } else if (this.walletService && typeof this.walletService.sendUsdtTransfer === 'function') {
+            // Fallback: send to a yield address (HD wallet index 3 as yield vault)
+            const savedIndex = this.walletService.getActiveAccountIndex();
+            this.walletService.setActiveAccountIndex(3);
+            const yieldAddr = await this.walletService.getAddress('ethereum-sepolia');
+            this.walletService.setActiveAccountIndex(savedIndex);
+            const tx = await this.walletService.sendUsdtTransfer('ethereum-sepolia', yieldAddr, String(deployAmount));
+            deployedOnChain = !!tx?.hash;
+            logger.info('Treasury rebalance: deployed to yield via transfer', { amount: deployAmount, txHash: tx?.hash });
+          }
+        } catch (err) {
+          logger.warn('Treasury rebalance: on-chain deploy failed, updating counter only (local_tracking)', { error: String(err) });
+        }
+
         this.config.yieldDeployed += deployAmount;
         this.config.lastRebalance = new Date().toISOString();
         this.save();
 
         logger.info('Treasury auto-rebalance: deploying idle funds to yield', {
-          amount: deployAmount, protocol: bestLowRisk?.protocol, apy: bestLowRisk?.apy,
+          amount: deployAmount, protocol: bestLowRisk?.protocol, apy: bestLowRisk?.apy, onChain: deployedOnChain,
         });
 
         return {
           action: 'deploy_to_yield',
           amount: Math.round(deployAmount * 1e6) / 1e6,
-          reason: `Deploying ${deployAmount.toFixed(4)} idle USDT to ${bestLowRisk?.protocol ?? strategy.targetProtocol} at ${bestLowRisk?.apy ?? 0}% APY`,
+          reason: `Deploying ${deployAmount.toFixed(4)} idle USDT to ${bestLowRisk?.protocol ?? strategy.targetProtocol} at ${bestLowRisk?.apy ?? 0}% APY${deployedOnChain ? '' : ' (local_tracking)'}`,
           targetProtocol: bestLowRisk?.protocol ?? strategy.targetProtocol,
           targetApy: bestLowRisk?.apy,
         };
@@ -551,18 +587,30 @@ export class TreasuryService {
       // Reserve below 30% of target — critical, withdraw from yield
       const withdrawAmount = Math.min(currentYield, tippingReserveTarget * 0.5);
 
+      // Attempt real WDK withdrawal
+      let withdrawnOnChain = false;
+      try {
+        if (this.lendingService && typeof this.lendingService.withdraw === 'function') {
+          const withdrawResult = await this.lendingService.withdraw(String(withdrawAmount), 'ethereum-sepolia');
+          withdrawnOnChain = !!withdrawResult;
+          logger.info('Treasury rebalance: withdrew from yield via lending service', { amount: withdrawAmount, result: withdrawResult });
+        }
+      } catch (err) {
+        logger.warn('Treasury rebalance: on-chain withdraw failed, updating counter only (local_tracking)', { error: String(err) });
+      }
+
       this.config.yieldDeployed = Math.max(0, this.config.yieldDeployed - withdrawAmount);
       this.config.lastRebalance = new Date().toISOString();
       this.save();
 
       logger.info('Treasury auto-rebalance: withdrawing from yield to replenish tipping reserve', {
-        amount: withdrawAmount, reserveLevel: `${((actualTippingReserve / tippingReserveTarget) * 100).toFixed(0)}%`,
+        amount: withdrawAmount, reserveLevel: `${((actualTippingReserve / tippingReserveTarget) * 100).toFixed(0)}%`, onChain: withdrawnOnChain,
       });
 
       return {
         action: 'withdraw_from_yield',
         amount: Math.round(withdrawAmount * 1e6) / 1e6,
-        reason: `Tipping reserve at ${((actualTippingReserve / tippingReserveTarget) * 100).toFixed(0)}% — withdrawing ${withdrawAmount.toFixed(4)} from yield to replenish`,
+        reason: `Tipping reserve at ${((actualTippingReserve / tippingReserveTarget) * 100).toFixed(0)}% — withdrawing ${withdrawAmount.toFixed(4)} from yield to replenish${withdrawnOnChain ? '' : ' (local_tracking)'}`,
       };
     }
 

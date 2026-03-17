@@ -1,353 +1,311 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow SDK — Build on TipFlow's agentic tipping infrastructure
-//
-// This SDK enables other developers to:
-//   1. Connect to a TipFlow agent instance
-//   2. Send tips through the full AI pipeline
-//   3. Define tip policies (programmable money)
-//   4. Subscribe to tip events in real-time
-//   5. Query engagement scores and creator analytics
-//   6. Integrate x402 micropayments
+// AeroFyta Agent SDK — Plug autonomous payment intelligence into any Tether WDK app.
 //
 // Usage:
-//   import { TipFlowClient } from 'tipflow-sdk';
-//   const client = new TipFlowClient('http://localhost:3001');
-//   await client.sendTip({ recipient: '0x...', amount: '0.01', token: 'usdt' });
+//   import { createAeroFytaAgent } from 'aerofyta-agent/create';
+//   import { AIService, SafetyService } from 'aerofyta-agent';
 
-// ── Types ────────────────────────────────────────────────────────
+// ── Core Agent Intelligence ─────────────────────────────────────────
+/** AI service providing intent detection, chain reasoning, and NLP capabilities */
+export { AIService } from '../services/ai.service.js';
+/** Multi-agent orchestrator for consensus-based decision making */
+export { OrchestratorService } from '../services/orchestrator.service.js';
+/** OpenClaw ReAct reasoning engine with tool use */
+export { OpenClawService } from '../services/openclaw.service.js';
+export type { ToolDefinition, ToolResult } from '../services/openclaw.service.js';
 
-export interface TipFlowConfig {
-  /** TipFlow agent API URL */
-  apiUrl: string;
-  /** Optional API key for x402 monetized endpoints */
-  apiKey?: string;
-  /** Timeout in milliseconds (default: 30000) */
-  timeout?: number;
-}
-
-export interface SendTipParams {
-  recipient: string;
-  amount: string;
-  token?: 'usdt' | 'native' | 'usat' | 'xaut';
-  preferredChain?: string;
-  message?: string;
-}
-
-export interface TipResult {
-  id: string;
-  status: string;
-  chainId: string;
-  txHash: string;
-  from: string;
-  to: string;
-  amount: string;
-  token: string;
-  fee: string;
-  explorerUrl: string;
-  decision: {
-    selectedChain: string;
-    reasoning: string;
-    confidence: number;
-    steps: Array<{ step: number; action: string; detail: string }>;
-  };
-}
-
-export interface EngagementScore {
-  score: number;
-  breakdown: {
-    watchCompletion: number;
-    rewatchBonus: number;
-    frequency: number;
-    loyalty: number;
-    categoryPremium: number;
-  };
-  suggestedMultiplier: number;
-  reasoning: string;
-}
-
-export interface TipPolicy {
-  name: string;
-  description: string;
-  trigger: { type: string; threshold?: number };
-  conditions: Array<{ field: string; operator: string; value: unknown }>;
-  action: {
-    type: string;
-    amount: { mode: string; base: number; min?: number; max?: number };
-    chain: string;
-    token: string;
-  };
-}
-
-// ── SDK Client ───────────────────────────────────────────────────
-
+// ── Wallet-as-Brain ─────────────────────────────────────────────────
 /**
- * TipFlow SDK Client
- *
- * Connect to a TipFlow agent and use its full tipping infrastructure.
- * Designed to be the standard interface for agentic tipping — any
- * developer can build tipping features on top of TipFlow.
- *
+ * Financial pulse metrics that drive the agent's mood and decision-making.
+ * Calculates liquidity, diversification, and velocity scores from on-chain data.
+ */
+export {
+  calculateFinancialPulse,
+  getWalletMood,
+  getMoodPreferredChain,
+  getMoodBatchSize,
+  getMoodRiskTolerance,
+  getMoodModifiers,
+} from '../services/financial-pulse.js';
+export type {
+  FinancialPulse,
+  WalletMood,
+  WalletMoodState,
+  MoodModifiers,
+} from '../services/financial-pulse.js';
+
+// ── Autonomous Loop ─────────────────────────────────────────────────
+/** Service that runs the 60-second autonomous ReAct cycle for proactive agent behavior */
+export { AutonomousLoopService } from '../services/autonomous-loop.service.js';
+
+// ── Multi-Agent Consensus ───────────────────────────────────────────
+/** Alias for OrchestratorService, used for multi-agent consensus workflows */
+export { OrchestratorService as ConsensusOrchestrator } from '../services/orchestrator.service.js';
+
+// ── Safety & Security ───────────────────────────────────────────────
+/** Core safety service enforcing spend limits, kill switch, and policy validation */
+export { SafetyService } from '../services/safety.service.js';
+export type { PolicyValidation, ApprovalTier } from '../services/safety.service.js';
+/** Risk assessment engine computing risk scores for transactions */
+export { RiskEngineService } from '../services/risk-engine.service.js';
+export type { RiskLevel, RiskAssessment } from '../services/risk-engine.service.js';
+/** Rule-based policy enforcement for automated compliance */
+export { PolicyEnforcementService } from '../services/policy-enforcement.service.js';
+/** Statistical anomaly detection using z-score analysis */
+export { AnomalyDetectionService } from '../services/anomaly-detection.service.js';
+/** Credit scoring service for recipient trustworthiness evaluation */
+export { CreditScoringService } from '../services/credit-scoring.service.js';
+export {
+  validateSeverityEscalation,
+} from '../services/orchestrator.service.js';
+export type {
+  SeverityLevel,
+  DataIntegrityResult,
+  DeEscalationAuditEntry,
+} from '../services/orchestrator.service.js';
+
+// ── Payment Primitives ──────────────────────────────────────────────
+/** HTLC-based escrow service for trustless conditional payments */
+export { EscrowService } from '../services/escrow.service.js';
+/** Dollar-cost averaging plan management */
+export { DcaService } from '../services/dca.service.js';
+/** Streaming payment service for continuous micro-payments */
+export { StreamingService } from '../services/streaming.service.js';
+/** Recurring and scheduled payment automation */
+export { AutoPaymentsService } from '../services/auto-payments.service.js';
+/** Tip splitting service for distributing payments among multiple recipients */
+export { TipSplitterService } from '../services/tip-splitter.service.js';
+/** Cross-chain atomic swap service */
+export { AtomicSwapService } from '../services/atomic-swap.service.js';
+/** Advanced escrow with milestone-based releases */
+export { SmartEscrowService } from '../services/smart-escrow.service.js';
+
+// ── Wallet & Chain Operations ───────────────────────────────────────
+/** Multi-chain wallet service wrapping Tether WDK */
+export { WalletService } from '../services/wallet.service.js';
+/** Advanced wallet operations (batch transfers, gas estimation) */
+export { WalletOpsService } from '../services/wallet-ops.service.js';
+/** Token swap service with DEX aggregation */
+export { SwapService } from '../services/swap.service.js';
+/** Cross-chain bridge service */
+export { BridgeService } from '../services/bridge.service.js';
+/** DeFi lending and borrowing integration */
+export { LendingService } from '../services/lending.service.js';
+/** Fee arbitrage service for optimizing transaction costs across chains */
+export { FeeArbitrageService } from '../services/fee-arbitrage.service.js';
+
+// ── Data & Analytics ────────────────────────────────────────────────
+/** Portable reputation passport with cross-chain attestations */
+export { ReputationPassportService } from '../services/reputation-passport.service.js';
+/** Persistent memory service for agent learning and context */
+export { MemoryService } from '../services/memory.service.js';
+/** Zero-knowledge proof generation and verification */
+export { ZKProofService } from '../services/zk-proof.service.js';
+/** Creator analytics with engagement scoring */
+export { CreatorAnalyticsService } from '../services/creator-analytics.service.js';
+/** Creator discovery service for finding and ranking content creators */
+export { CreatorDiscoveryService } from '../services/creator-discovery.service.js';
+/** Address reputation tracking and scoring */
+export { ReputationService } from '../services/reputation.service.js';
+/** Programmable tip policy engine */
+export { TipPolicyService } from '../services/tip-policy.service.js';
+/** Immutable decision audit log */
+export { DecisionLogService } from '../services/decision-log.service.js';
+/** Tax reporting and export service */
+export { TaxReportingService } from '../services/tax-reporting.service.js';
+
+// ── Platform & Identity ────────────────────────────────────────────
+/** Agent identity management (DID, keys, attestations) */
+export { AgentIdentityService } from '../services/agent-identity.service.js';
+/** Multi-platform adapter (Telegram, Discord, web) */
+export { PlatformAdapterService } from '../services/platform-adapter.service.js';
+/** Agent personality and communication style */
+export { PersonalityService } from '../services/personality.service.js';
+/** Rumble video platform integration */
+export { RumbleService } from '../services/rumble.service.js';
+/** Proof-of-engagement verification for content consumption */
+export { ProofOfEngagementService } from '../services/proof-of-engagement.service.js';
+
+// ── Economics ───────────────────────────────────────────────────────
+/** Protocol economics: fee collection, revenue sharing */
+export { EconomicsService } from '../services/economics.service.js';
+/** Treasury management with rebalancing strategies */
+export { TreasuryService } from '../services/treasury.service.js';
+/** Revenue smoothing for predictable agent income */
+export { RevenueSmoothingService } from '../services/revenue-smoothing.service.js';
+/** Self-sustaining agent economics (earn to cover operating costs) */
+export { SelfSustainingService } from '../services/self-sustaining.service.js';
+/** Bitfinex price feed integration */
+export { BitfinexPricingService } from '../services/bitfinex-pricing.service.js';
+
+// ── Advanced ────────────────────────────────────────────────────────
+/** On-chain governance with proposal and voting mechanics */
+export { GovernanceService } from '../services/governance.service.js';
+/** Multi-strategy portfolio management */
+export { MultiStrategyService } from '../services/multi-strategy.service.js';
+/** Trading swarm with consensus-driven execution */
+export { TradingSwarmService } from '../services/trading-swarm.service.js';
+/** Wallet swarm for distributed operations */
+export { WalletSwarmService } from '../services/wallet-swarm.service.js';
+/** Zero-knowledge privacy layer for anonymous transactions */
+export { ZKPrivacyService } from '../services/zk-privacy.service.js';
+/** DeFi strategy service for yield optimization */
+export { DeFiStrategyService } from '../services/defi-strategy.service.js';
+
+// ── Persistence ─────────────────────────────────────────────────────
+/**
+ * Create a persistence provider for durable agent state.
+ * Supports JSON file, SQLite, and PostgreSQL backends.
+ */
+export {
+  createPersistence,
+  JsonFilePersistence,
+  SqlitePersistence,
+} from '../services/persistence.service.js';
+export type {
+  PersistenceProvider,
+  PersistenceMode,
+} from '../services/persistence.service.js';
+
+// ── Service Registry ────────────────────────────────────────────────
+/** Central registry managing all agent service instances */
+export { ServiceRegistry } from '../services/service-registry.js';
+
+// ── SDK Client (HTTP) ───────────────────────────────────────────────
+/**
+ * HTTP client for connecting to a remote AeroFyta agent instance.
+ * Use this when the agent runs as a standalone server.
+ */
+export { TipFlowClient } from './client.js';
+export type { TipFlowConfig, SendTipParams } from './client.js';
+
+// ── Factory ─────────────────────────────────────────────────────────
+/**
+ * Create a fully-configured AeroFyta agent with one function call.
+ * @param config - Agent configuration (seed phrase required, everything else optional)
+ * @returns Agent object with tip(), escrow, swap, ask(), reason(), shutdown(), isHealthy() methods
  * @example
  * ```typescript
- * const client = new TipFlowClient({ apiUrl: 'http://localhost:3001' });
- *
- * // Send a tip through the full AI pipeline
- * const result = await client.sendTip({
- *   recipient: '0x1234...abcd',
- *   amount: '0.01',
- *   token: 'usdt',
- * });
- *
- * // Get engagement score
- * const score = await client.getEngagementScore('user1', 'creator1');
- *
- * // Create a programmable tip policy
- * await client.createPolicy({
- *   name: 'Auto-tip education creators',
- *   trigger: { type: 'watch_time', threshold: 80 },
- *   conditions: [{ field: 'creator_category', operator: 'in', value: ['education'] }],
- *   action: {
- *     type: 'tip',
- *     amount: { mode: 'engagement_weighted', base: 0.01 },
- *     chain: 'cheapest',
- *     token: 'usdt',
- *   },
- * });
- *
- * // Subscribe to real-time tip events
- * client.onTipEvent((event) => {
- *   console.log(`Tip sent: ${event.amount} to ${event.recipient}`);
- * });
+ * const agent = await createAeroFytaAgent({ seed: '...' });
+ * await agent.tip('0x...', 0.01);
+ * const health = agent.isHealthy();
+ * await agent.shutdown();
  * ```
  */
-export class TipFlowClient {
-  private apiUrl: string;
-  private timeout: number;
-  private headers: Record<string, string>;
+export { createAeroFytaAgent } from './create-agent.js';
+export type { AeroFytaConfig, AeroFytaAgent, HealthCheckResult } from './create-agent.js';
 
-  constructor(config: TipFlowConfig | string) {
-    if (typeof config === 'string') {
-      this.apiUrl = config;
-      this.timeout = 30000;
-      this.headers = { 'Content-Type': 'application/json' };
-    } else {
-      this.apiUrl = config.apiUrl;
-      this.timeout = config.timeout ?? 30000;
-      this.headers = {
-        'Content-Type': 'application/json',
-        ...(config.apiKey ? { 'X-API-Key': config.apiKey } : {}),
-      };
-    }
-  }
+// ── Errors ──────────────────────────────────────────────────────────
+/**
+ * Structured error class for all SDK operations.
+ * Includes machine-readable code, originating method, and optional details.
+ */
+export { AeroFytaSDKError, validateNonEmptyString, validatePositiveAmount, validateChainId } from './errors.js';
 
-  // ── Core Tipping ─────────────────────────────────────────────────
+// ── Retry Utility ───────────────────────────────────────────────────
+/**
+ * Retry async operations with exponential backoff.
+ * Used internally by the WDK plugin; also available for custom integrations.
+ */
+export { withRetry } from './retry.js';
 
-  /** Send a tip through the full AI pipeline (10-step execution) */
-  async sendTip(params: SendTipParams): Promise<TipResult> {
-    return this.post<TipResult>('/api/tip', params);
-  }
+// ── Middleware ───────────────────────────────────────────────────────
+/**
+ * Express middleware that injects an AeroFyta agent into every request.
+ * Includes built-in rate limiting (configurable, 60 req/min default).
+ */
+export { aerofytaMiddleware, RateLimiter } from './middleware.js';
+export type { AeroFytaMiddlewareConfig, RateLimitConfig } from './middleware.js';
 
-  /** Parse natural language into a tip intent */
-  async parseTip(text: string): Promise<{
-    recipient: string;
-    amount: string;
-    token: string;
-    chain: string;
-    message: string;
-    confidence: number;
-  }> {
-    return this.post('/api/tip/parse', { text });
-  }
+// ── WDK Protocol Plugin ─────────────────────────────────────────────
+/**
+ * WDK protocol plugin that registers AeroFyta as a first-class protocol
+ * alongside Aave, Velora, etc. in the Tether WDK ecosystem.
+ */
+export { AeroFytaProtocol } from './wdk-plugin.js';
+export type { AeroFytaProtocolConfig, ProtocolTipResult, CreatorEvaluation, Recommendation, ProtocolEscrowParams, ProtocolAgentStatus, ProtocolFinancialPulse } from './wdk-plugin.js';
 
-  /** Get wallet balances across all chains */
-  async getBalances(): Promise<Record<string, { nativeBalance: string; usdtBalance: string }>> {
-    const result = await this.get<{ balances: Record<string, { nativeBalance: string; usdtBalance: string }> }>('/api/wallet/balances');
-    return result.balances;
-  }
+// ── Presets ─────────────────────────────────────────────────────────
+/**
+ * Ready-made agent configurations for common use cases.
+ * Includes tipBot, treasuryManager, escrowAgent, paymentProcessor, and advisor.
+ */
+export { PRESETS, createFromPreset, listPresets } from './presets.js';
+export type { AgentPreset, PresetName } from './presets.js';
 
-  /** Get wallet addresses across all chains */
-  async getAddresses(): Promise<Record<string, string>> {
-    const result = await this.get<{ addresses: Record<string, string> }>('/api/wallet/addresses');
-    return result.addresses;
-  }
+// ── Lifecycle Hooks ─────────────────────────────────────────────────
+/**
+ * Event hook registry for subscribing to agent lifecycle events
+ * (tips, escrows, anomalies, mood changes, cycle events).
+ */
+export { HookRegistry } from './hooks.js';
+export type { HookEvent, HookHandler, TipEventData, BlockEventData, AnomalyEventData, MoodEventData, EscrowEventData, CycleEventData } from './hooks.js';
 
-  // ── Engagement & Analytics ──────────────────────────────────────
+// ── Chain Adapters ──────────────────────────────────────────────────
+/**
+ * Chain adapter layer that normalizes any WDK wallet into a uniform ChainWallet interface.
+ * Supports EVM, TON, Tron, Bitcoin, and Solana chains.
+ */
+export { EVMAdapter, TONAdapter, TronAdapter, BitcoinAdapter, SolanaAdapter, UniversalAdapter } from './adapters/index.js';
+export type { ChainWallet, WDKAccount } from './adapters/index.js';
 
-  /** Calculate engagement score between a user and creator */
-  async getEngagementScore(userId: string, creatorId: string): Promise<EngagementScore> {
-    return this.get(`/api/rumble/engagement/${userId}/${creatorId}`);
-  }
-
-  /** Get engagement-weighted tip recommendations */
-  async getEngagementRecommendations(userId: string, baseTip = 0.01): Promise<Array<{
-    creatorName: string;
-    engagementScore: number;
-    adjustedAmount: number;
-    reasoning: string;
-  }>> {
-    const result = await this.get<{ recommendations: Array<{
-      creatorName: string;
-      engagementScore: number;
-      adjustedAmount: number;
-      reasoning: string;
-    }> }>(`/api/rumble/engagement-tips/${userId}?baseTip=${baseTip}`);
-    return result.recommendations;
-  }
-
-  // ── Programmable Policies ────────────────────────────────────────
-
-  /** Create a programmable tip policy */
-  async createPolicy(policy: TipPolicy & { createdBy?: string }): Promise<{ id: string }> {
-    return this.post('/api/policies', {
-      ...policy,
-      createdBy: policy.createdBy ?? 'sdk',
-    });
-  }
-
-  /** List all tip policies */
-  async listPolicies(): Promise<TipPolicy[]> {
-    const result = await this.get<{ policies: TipPolicy[] }>('/api/policies');
-    return result.policies;
-  }
-
-  /** Evaluate policies against current context */
-  async evaluatePolicies(context: Record<string, unknown>): Promise<Array<{
-    policyName: string;
-    triggered: boolean;
-    conditionsMet: boolean;
-    reason: string;
-  }>> {
-    const result = await this.post<{ evaluations: Array<{
-      policyName: string;
-      triggered: boolean;
-      conditionsMet: boolean;
-      reason: string;
-    }> }>('/api/policies/evaluate', context);
-    return result.evaluations;
-  }
-
-  // ── Real-time Events ────────────────────────────────────────────
-
-  /** Subscribe to real-time tip events via SSE */
-  onTipEvent(callback: (event: {
-    type: string;
-    message: string;
-    detail?: string;
-    chainId?: string;
-    timestamp: string;
-  }) => void): { close: () => void } {
-    const eventSource = new EventSource(`${this.apiUrl}/api/activity/stream`);
-
-    eventSource.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        callback(data);
-      } catch {
-        // Ignore parse errors
-      }
-    };
-
-    return {
-      close: () => eventSource.close(),
-    };
-  }
-
-  // ── Agent State ─────────────────────────────────────────────────
-
-  /** Get current agent state (status, current decision, etc.) */
-  async getAgentState(): Promise<{
-    status: string;
-    currentDecision?: { selectedChain: string; confidence: number; steps: unknown[] };
-  }> {
-    return this.get('/api/agent/state');
-  }
-
-  /** Get tip history */
-  async getHistory(limit = 20): Promise<Array<{
-    id: string;
-    recipient: string;
-    amount: string;
-    token: string;
-    chainId: string;
-    txHash: string;
-    status: string;
-    createdAt: string;
-  }>> {
-    const result = await this.get<{ tips: Array<{
-      id: string;
-      recipient: string;
-      amount: string;
-      token: string;
-      chainId: string;
-      txHash: string;
-      status: string;
-      createdAt: string;
-    }> }>(`/api/agent/history?limit=${limit}`);
-    return result.tips;
-  }
-
-  // ── Fees & Economics ────────────────────────────────────────────
-
-  /** Compare fees across all chains */
-  async compareFees(recipient: string, amount: string): Promise<Array<{
-    chainId: string;
-    chainName: string;
-    estimatedFeeUsd: string;
-    savingsVsHighest: string;
-  }>> {
-    const result = await this.get<{ comparison: Array<{
-      chainId: string;
-      chainName: string;
-      estimatedFeeUsd: string;
-      savingsVsHighest: string;
-    }> }>(`/api/fees/compare?recipient=${recipient}&amount=${amount}`);
-    return result.comparison;
-  }
-
-  // ── Health ──────────────────────────────────────────────────────
-
-  /** Check agent health */
-  async health(): Promise<{ status: string; uptime: number }> {
-    return this.get('/api/health/full');
-  }
-
-  // ── HTTP Helpers ─────────────────────────────────────────────────
-
-  private async get<T>(path: string): Promise<T> {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), this.timeout);
-
-    try {
-      const res = await fetch(`${this.apiUrl}${path}`, {
-        headers: this.headers,
-        signal: controller.signal,
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-      return await res.json() as T;
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-
-  private async post<T>(path: string, body: unknown): Promise<T> {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), this.timeout);
-
-    try {
-      const res = await fetch(`${this.apiUrl}${path}`, {
-        method: 'POST',
-        headers: this.headers,
-        body: JSON.stringify(body),
-        signal: controller.signal,
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-      return await res.json() as T;
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-}
-
-// ── Default export ────────────────────────────────────────────────
-
-export default TipFlowClient;
+// ── Types (re-export all important domain types) ────────────────────
+export type {
+  ChainId,
+  TokenType,
+  ChainConfig,
+  WalletBalance,
+  TipRequest,
+  TipResult,
+  AgentDecision,
+  AgentState,
+  ReasoningStep,
+  ChainAnalysis,
+  FeeComparison,
+  NLPTipParse,
+  ChatIntent,
+  ChatMessage,
+  ExtractedEntities,
+  ContentAnalysis,
+  ConfirmationResult,
+  BatchTipRequest,
+  BatchTipResult,
+  TipHistoryEntry,
+  ScheduledTip,
+  TipTemplate,
+  Contact,
+  SplitRecipient,
+  SplitTipRequest,
+  SplitTipResult,
+  ActivityEvent,
+  ActivityEventType,
+  LeaderboardEntry,
+  Achievement,
+  TipCondition,
+  ConditionType,
+  WebhookConfig,
+  TipReceipt,
+  DerivedWallet,
+  TipLink,
+  PersonalityType,
+  MessageType,
+  AgentSettings,
+  ENSResolveResult,
+  ENSReverseResult,
+  AddressTag,
+  Challenge,
+  StreakData,
+  TipGoal,
+  HtlcStatus,
+  HtlcEscrowFields,
+  LLMProvider,
+  TipDecision,
+  IntentResult,
+  ChainReasoning,
+  RiskExplanation,
+  TipRefusal,
+  AgentStats,
+  CSVImportRow,
+  CSVImportResult,
+  RuleBasedCapabilities,
+} from '../types/index.js';

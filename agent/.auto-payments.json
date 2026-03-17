@@ -1,0 +1,139 @@
+{
+  "bills": [
+    [
+      "bill_17e166dd",
+      {
+        "id": "bill_17e166dd",
+        "title": "Test Dinner",
+        "totalAmount": 100,
+        "token": "USDT",
+        "chainId": "ethereum-sepolia",
+        "createdBy": "0xHost",
+        "participants": [
+          {
+            "address": "0xA",
+            "sharePercent": 25,
+            "shareAmount": 25,
+            "paid": false
+          },
+          {
+            "address": "0xB",
+            "sharePercent": 25,
+            "shareAmount": 25,
+            "paid": false
+          },
+          {
+            "address": "0xC",
+            "sharePercent": 25,
+            "shareAmount": 25,
+            "paid": false
+          },
+          {
+            "address": "0xD",
+            "sharePercent": 25,
+            "shareAmount": 25,
+            "paid": false
+          }
+        ],
+        "status": "pending",
+        "createdAt": "2026-03-21T17:53:44.204Z"
+      }
+    ],
+    [
+      "bill_068b4c68",
+      {
+        "id": "bill_068b4c68",
+        "title": "ToCancel",
+        "totalAmount": 50,
+        "token": "USDT",
+        "chainId": "ethereum-sepolia",
+        "createdBy": "0xHost",
+        "participants": [
+          {
+            "address": "0xA",
+            "sharePercent": 100,
+            "shareAmount": 50,
+            "paid": false
+          }
+        ],
+        "status": "cancelled",
+        "createdAt": "2026-03-21T17:53:44.207Z"
+      }
+    ]
+  ],
+  "subscriptions": [
+    [
+      "sub_580d9261",
+      {
+        "id": "sub_580d9261",
+        "name": "Monthly Support",
+        "type": "subscription",
+        "from": "0xPayer",
+        "to": "0xCreator",
+        "amount": 5,
+        "token": "USDT",
+        "chainId": "ethereum-sepolia",
+        "intervalMs": 2592000000,
+        "intervalLabel": "1 months",
+        "status": "active",
+        "nextPaymentAt": "2026-04-20T17:53:44.210Z",
+        "totalPaid": 0,
+        "paymentCount": 0,
+        "retryCount": 0,
+        "maxRetries": 3,
+        "maxPayments": 12,
+        "createdAt": "2026-03-21T17:53:44.210Z",
+        "history": [],
+        "memo": "Monthly creator support"
+      }
+    ],
+    [
+      "sub_55be3e69",
+      {
+        "id": "sub_55be3e69",
+        "name": "ToPause",
+        "type": "subscription",
+        "from": "0xPayer",
+        "to": "0xCreator",
+        "amount": 1,
+        "token": "USDT",
+        "chainId": "ethereum-sepolia",
+        "intervalMs": 86400000,
+        "intervalLabel": "1 days",
+        "status": "active",
+        "nextPaymentAt": "2026-03-22T17:53:44.216Z",
+        "totalPaid": 0,
+        "paymentCount": 0,
+        "retryCount": 0,
+        "maxRetries": 3,
+        "createdAt": "2026-03-21T17:53:44.213Z",
+        "history": []
+      }
+    ],
+    [
+      "sub_a7d3a2e0",
+      {
+        "id": "sub_a7d3a2e0",
+        "name": "ToCancelSub",
+        "type": "subscription",
+        "from": "0xPayer",
+        "to": "0xCreator",
+        "amount": 2,
+        "token": "USDT",
+        "chainId": "ethereum-sepolia",
+        "intervalMs": 604800000,
+        "intervalLabel": "1 weeks",
+        "status": "cancelled",
+        "nextPaymentAt": "2026-03-28T17:53:44.217Z",
+        "totalPaid": 0,
+        "paymentCount": 0,
+        "retryCount": 0,
+        "maxRetries": 3,
+        "createdAt": "2026-03-21T17:53:44.217Z",
+        "history": []
+      }
+    ]
+  ],
+  "conditionalPayments": [],
+  "settlements": []
+}

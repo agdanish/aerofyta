@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — Cryptographic Tip Receipts (Proof-of-Tip)
+// AeroFyta — Cryptographic Tip Receipts (Proof-of-Tip)
 
 import { createHash, randomUUID } from 'node:crypto';
 import { logger } from '../utils/logger.js';

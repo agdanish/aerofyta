@@ -2,7 +2,7 @@
  * Agent and AI service tests — using Node built-in test runner.
  * Tests agent initialization, NLP regex fallback, leaderboard, and achievements.
  *
- * Since TipFlowAgent requires WalletService which depends on WDK,
+ * Since the AeroFyta agent class requires WalletService which depends on WDK,
  * we test the AIService regex parsing directly (it falls back when Ollama
  * is unavailable) and mock the agent structure where needed.
  *
@@ -163,7 +163,7 @@ describe('Rule-based reasoning (generateReasoning)', () => {
 
 describe('Leaderboard returns expected structure', () => {
   it('getLeaderboard on a fresh agent would return an empty array', () => {
-    // We cannot instantiate TipFlowAgent without WDK, but we can verify
+    // We cannot instantiate the AeroFyta agent class without WDK, but we can verify
     // the expected return type: an array.
     // This is a structural assertion — the actual test runs in api.test.ts
     // via the /api/leaderboard endpoint.

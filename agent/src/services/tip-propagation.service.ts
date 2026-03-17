@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // SOCIAL TIP PROPAGATION — Viral Tipping Through Influence Networks
 //
@@ -7,7 +7,7 @@
 // There's no social proof, no viral loop, no network effect.
 // Tips don't compound into movements.
 //
-// SOLUTION: TipFlow creates a TIPPING SOCIAL GRAPH where:
+// SOLUTION: AeroFyta creates a TIPPING SOCIAL GRAPH where:
 //   1. Every tip creates a "tip wave" that recommends the creator to
 //      the tipper's network
 //   2. Friends-of-tippers get personalized recommendations
@@ -22,7 +22,7 @@
 //
 // EXAMPLE:
 //   Alice tips $0.01 to CreatorX
-//   → TipFlow recommends CreatorX to Bob and Carol (Alice's network)
+//   → AeroFyta recommends CreatorX to Bob and Carol (Alice's network)
 //   → Community amplifier matches Alice's tip 5x → Creator gets $0.06 total
 //   → Bob sees the recommendation, watches the video, engagement-scores → tips
 //   → Viral loop: one small tip seeds a wave of creator support

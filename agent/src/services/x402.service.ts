@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // x402 PAYMENT PROTOCOL — HTTP-Native Micropayments for Agent Commerce
 //
@@ -13,8 +13,8 @@
 //   Agent A pays via WDK, includes payment proof in retry header
 //   Agent B verifies payment and serves the data
 //
-// TipFlow implements BOTH sides:
-//   - x402 SERVER: Monetize TipFlow's API endpoints (creator analytics, predictions)
+// AeroFyta implements BOTH sides:
+//   - x402 SERVER: Monetize AeroFyta's API endpoints (creator analytics, predictions)
 //   - x402 CLIENT: Pay other x402-enabled services autonomously
 //
 // This is the future of agentic finance: agents that can earn and spend money
@@ -87,8 +87,8 @@ export interface x402Stats {
  * x402 Payment Protocol Service
  *
  * Implements HTTP 402 Payment Required protocol for agent-to-agent commerce.
- * Any TipFlow API endpoint can be monetized — other agents pay per request.
- * TipFlow agents can also pay other x402-enabled services autonomously.
+ * Any AeroFyta API endpoint can be monetized — other agents pay per request.
+ * AeroFyta agents can also pay other x402-enabled services autonomously.
  *
  * This demonstrates "the future of agentic finance and programmable money"
  * by enabling autonomous economic actors that earn and spend to accomplish tasks.
@@ -119,6 +119,11 @@ export class X402Service {
   /** Set the wallet address for receiving payments */
   setWalletAddress(address: string): void {
     this.walletAddress = address;
+  }
+
+  /** Get the wallet address for receiving payments */
+  getWalletAddress(): string {
+    return this.walletAddress || 'not set';
   }
 
   // ── Server Side (receive payments) ──────────────────────────────
@@ -272,7 +277,7 @@ export class X402Service {
       'X-Payment-Description': requirement.description,
       'X-Payment-Expires': requirement.expiresAt,
       'X-Payment-Protocol': 'x402/1.0',
-      'X-Payment-Agent': 'TipFlow/1.0',
+      'X-Payment-Agent': 'AeroFyta/1.0',
     };
   }
 }

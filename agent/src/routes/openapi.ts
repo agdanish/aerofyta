@@ -1,5 +1,5 @@
 /**
- * OpenAPI 3.0 specification for the TipFlow API.
+ * OpenAPI 3.0 specification for the AeroFyta API.
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -8,12 +8,12 @@ export function getOpenApiSpec() {
   return {
     openapi: '3.0.3',
     info: {
-      title: 'TipFlow API',
+      title: 'AeroFyta API',
       version: '1.0.0',
       description: 'AI-powered multi-chain tipping agent API',
       license: { name: 'Apache 2.0', url: 'https://www.apache.org/licenses/LICENSE-2.0' },
     },
-    servers: [{ url: '/api', description: 'TipFlow Agent' }],
+    servers: [{ url: '/api', description: 'AeroFyta Agent' }],
     tags: [
       { name: 'System', description: 'Health checks and system info' },
       { name: 'Wallet', description: 'Wallet addresses, balances and receive info' },
@@ -737,7 +737,7 @@ export function getOpenApiSpec() {
         post: {
           tags: ['Chat'],
           summary: 'Chat with agent',
-          description: 'Send a natural language message to the TipFlow agent. Supports tip execution, balance checks, fee queries, and more.',
+          description: 'Send a natural language message to the AeroFyta agent. Supports tip execution, balance checks, fee queries, and more.',
           requestBody: {
             required: true,
             content: {

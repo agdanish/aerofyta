@@ -1,0 +1,41 @@
+{
+  "escrows": [
+    {
+      "id": "escrow_1_1774070879143",
+      "sender": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "recipient": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "amount": "1.0",
+      "token": "usdt",
+      "chainId": "ethereum-sepolia",
+      "status": "released",
+      "createdAt": "2026-03-21T05:27:59.142Z",
+      "expiresAt": "2026-03-22T05:27:59.142Z",
+      "memo": "Test",
+      "releaseCondition": "auto_after_24h",
+      "autoReleaseHours": 24,
+      "hashLock": "bd98a74786533071881a8628c36d75f19e4c2fb197e54cc83955a9edfd5e3633",
+      "timelock": 1774157279142,
+      "htlcStatus": "claimed",
+      "releasedAt": "2026-03-22T05:28:20.234Z"
+    },
+    {
+      "id": "escrow_2_1774070879143",
+      "sender": "0xcccccccccccccccccccccccccccccccccccccccc",
+      "recipient": "0xdddddddddddddddddddddddddddddddddddddddd",
+      "amount": "0.5",
+      "token": "native",
+      "chainId": "ethereum-sepolia",
+      "status": "released",
+      "createdAt": "2026-03-21T05:27:59.143Z",
+      "expiresAt": "2026-03-22T05:27:59.143Z",
+      "releaseCondition": "auto_after_24h",
+      "autoReleaseHours": 24,
+      "hashLock": "a236383a9508b2f5c5c5bda9cb447b004f2e97d496c67a7c27a56898c69968d1",
+      "timelock": 1774157279143,
+      "htlcStatus": "claimed",
+      "releasedAt": "2026-03-21T05:27:59.144Z",
+      "txHash": "0xTxHash"
+    }
+  ],
+  "counter": 2
+}

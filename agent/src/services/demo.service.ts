@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 
 import type { TipHistoryEntry, ActivityEvent, ChainId, TokenType } from '../types/index.js';
 import type { AutonomyPolicy } from './autonomy.service.js';
@@ -19,22 +19,24 @@ export class DemoService {
     walletAddress: string;
     categories: string[];
   }> {
+    // Sepolia testnet addresses — deterministically derived for demo creators.
+    // These are NOT mainnet contract addresses; they are demo-only recipient wallets.
     return [
-      { name: 'TechReviewer', channelUrl: 'https://rumble.com/c/TechReviewer', walletAddress: '0x742d35Cc6634C0532925a3b844Bc9e7595f2bD68', categories: ['tech', 'reviews'] },
-      { name: 'CryptoDaily', channelUrl: 'https://rumble.com/c/CryptoDaily', walletAddress: '0x8ba1f109551bD432803012645Ac136ddd64DBA72', categories: ['crypto', 'finance'] },
+      { name: 'TechReviewer', channelUrl: 'https://rumble.com/c/TechReviewer', walletAddress: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', categories: ['tech', 'reviews'] },
+      { name: 'CryptoDaily', channelUrl: 'https://rumble.com/c/CryptoDaily', walletAddress: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', categories: ['crypto', 'finance'] },
       { name: 'GameStreamPro', channelUrl: 'https://rumble.com/c/GameStreamPro', walletAddress: 'UQBanAkpRVoVeUHJVSLbaCjregNDAejcBdKl1VA3ujWMWpOv', categories: ['gaming', 'entertainment'] },
-      { name: 'NewsAnalyst', channelUrl: 'https://rumble.com/c/NewsAnalyst', walletAddress: '0xdAC17F958D2ee523a2206206994597C13D831ec7', categories: ['news', 'politics'] },
-      { name: 'FitnessGuru', channelUrl: 'https://rumble.com/c/FitnessGuru', walletAddress: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', categories: ['fitness', 'health'] },
-      { name: 'CodingMaster', channelUrl: 'https://rumble.com/c/CodingMaster', walletAddress: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B', categories: ['tech', 'education'] },
-      { name: 'MusicMaven', channelUrl: 'https://rumble.com/c/MusicMaven', walletAddress: '0x2B5AD5c4795c026514f8317c7a215E218DcCD6cF', categories: ['music', 'entertainment'] },
-      { name: 'TravelVlogger', channelUrl: 'https://rumble.com/c/TravelVlogger', walletAddress: '0x6B175474E89094C44Da98b954EedeAC495271d0F', categories: ['travel', 'lifestyle'] },
-      { name: 'ChefSpecial', channelUrl: 'https://rumble.com/c/ChefSpecial', walletAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', categories: ['cooking', 'food'] },
-      { name: 'ScienceExplained', channelUrl: 'https://rumble.com/c/ScienceExplained', walletAddress: '0x514910771AF9Ca656af840dff83E8264EcF986CA', categories: ['science', 'education'] },
-      { name: 'IndieFilmmaker', channelUrl: 'https://rumble.com/c/IndieFilmmaker', walletAddress: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', categories: ['film', 'art'] },
-      { name: 'DebateKing', channelUrl: 'https://rumble.com/c/DebateKing', walletAddress: '0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0', categories: ['politics', 'debate'] },
-      { name: 'PetLovers', channelUrl: 'https://rumble.com/c/PetLovers', walletAddress: '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE', categories: ['animals', 'lifestyle'] },
-      { name: 'BlockchainDev', channelUrl: 'https://rumble.com/c/BlockchainDev', walletAddress: '0x3845badAde8e6dFF049820680d1F14bD3903a5d0', categories: ['crypto', 'tech', 'education'] },
-      { name: 'ComedyClub', channelUrl: 'https://rumble.com/c/ComedyClub', walletAddress: '0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD', categories: ['comedy', 'entertainment'] },
+      { name: 'NewsAnalyst', channelUrl: 'https://rumble.com/c/NewsAnalyst', walletAddress: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', categories: ['news', 'politics'] },
+      { name: 'FitnessGuru', channelUrl: 'https://rumble.com/c/FitnessGuru', walletAddress: '0x90F79bf6EB2c4f870365E785982E1f101E93b906', categories: ['fitness', 'health'] },
+      { name: 'CodingMaster', channelUrl: 'https://rumble.com/c/CodingMaster', walletAddress: '0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65', categories: ['tech', 'education'] },
+      { name: 'MusicMaven', channelUrl: 'https://rumble.com/c/MusicMaven', walletAddress: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc', categories: ['music', 'entertainment'] },
+      { name: 'TravelVlogger', channelUrl: 'https://rumble.com/c/TravelVlogger', walletAddress: '0x976EA74026E726554dB657fA54763abd0C3a0aa9', categories: ['travel', 'lifestyle'] },
+      { name: 'ChefSpecial', channelUrl: 'https://rumble.com/c/ChefSpecial', walletAddress: '0x14dC79964da2C08dfa6B3085B7c31967F4e6d266', categories: ['cooking', 'food'] },
+      { name: 'ScienceExplained', channelUrl: 'https://rumble.com/c/ScienceExplained', walletAddress: '0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f', categories: ['science', 'education'] },
+      { name: 'IndieFilmmaker', channelUrl: 'https://rumble.com/c/IndieFilmmaker', walletAddress: '0xa0Ee7A142d267C1f36714E4a8F75612F20a79720', categories: ['film', 'art'] },
+      { name: 'DebateKing', channelUrl: 'https://rumble.com/c/DebateKing', walletAddress: '0xBcd4042DE499D14e55001CcbB24a551F3b954096', categories: ['politics', 'debate'] },
+      { name: 'PetLovers', channelUrl: 'https://rumble.com/c/PetLovers', walletAddress: '0x71bE63f3384f5fb98995898A86B02Fb2426c5788', categories: ['animals', 'lifestyle'] },
+      { name: 'BlockchainDev', channelUrl: 'https://rumble.com/c/BlockchainDev', walletAddress: '0xFABB0ac9d68B0B445fB7357272Ff202C5651694a', categories: ['crypto', 'tech', 'education'] },
+      { name: 'ComedyClub', channelUrl: 'https://rumble.com/c/ComedyClub', walletAddress: '0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec', categories: ['comedy', 'entertainment'] },
     ];
   }
 
@@ -50,7 +52,7 @@ export class DemoService {
       'Keep up the great content', 'Auto-tip: high watch time', 'Community pool contribution',
       'Weekly recurring tip', 'Exceptional live stream!', 'Your breakdown was spot-on',
       'Supporting your mission', 'This content changed my perspective', 'Quality over quantity — respect',
-      'Engagement-scored tip', 'Top fan reward', 'Consistency bonus from TipFlow agent',
+      'Engagement-scored tip', 'Top fan reward', 'Consistency bonus from AeroFyta agent',
       'Discovered through AI recommendation', 'Viral tip propagation', 'Revenue smoothing contribution',
       'Watch-time milestone reached', 'Weekly supporter tip',
     ];
@@ -77,7 +79,7 @@ export class DemoService {
       const hoursAgo = Math.floor(Math.random() * 720); // up to 30 days
       const chain = chains[i % chains.length];
       const creator = creators[i % creators.length];
-      const txHash = `0x${Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('')}`;
+      // No fake tx hashes — demo entries are clearly marked with no on-chain reference
       const status: 'confirmed' | 'failed' = i < 48 ? 'confirmed' : 'failed';
       tips.push({
         id: `demo_tip_${i + 1}`,
@@ -85,47 +87,48 @@ export class DemoService {
         amount: amounts[i % amounts.length],
         token: tokens[i % tokens.length],
         chainId: chain,
-        txHash,
+        txHash: '', // Empty — demo data, no on-chain tx
         status,
         fee: fees[i % fees.length],
         createdAt: new Date(Date.now() - hoursAgo * 60 * 60 * 1000).toISOString(),
         reasoning: reasonings[i % reasonings.length],
-        memo: memos[i % memos.length],
+        memo: `[Demo] ${memos[i % memos.length]}`,
       });
     }
     // Sort by recency
     return tips.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
-  /** 25 rich activity feed entries showing the full agent capability spectrum */
+  /** 25 rich activity feed entries showing the full agent capability spectrum.
+   *  All demo entries are prefixed with [Demo] so the UI can visually distinguish them from live events. */
   getSampleActivities(): Array<Omit<ActivityEvent, 'id' | 'timestamp'> & { timestamp: string }> {
     const now = Date.now();
     return [
-      { type: 'tip_sent', message: 'Tipped CryptoDaily 0.005 USDT', detail: 'Ethereum Sepolia · Fee: $0.0001 · Watch time: 94%', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 30_000).toISOString() },
-      { type: 'system', message: 'Multi-agent consensus: APPROVED', detail: 'TipExecutor: approve (95%) · Guardian: approve (88%) · Treasury: approve (92%)', timestamp: new Date(now - 60_000).toISOString() },
-      { type: 'tip_sent', message: 'Auto-tipped TechReviewer 0.003 USDT', detail: 'Watch time 340 min · Engagement score: 87/100 · TON Testnet', chainId: 'ton-testnet' as ChainId, timestamp: new Date(now - 180_000).toISOString() },
-      { type: 'system', message: 'Risk assessment completed', detail: 'Score: 12/100 (LOW) · All 8 factors within safe range', timestamp: new Date(now - 300_000).toISOString() },
-      { type: 'condition_triggered', message: 'Engagement threshold reached', detail: 'CodingMaster engagement score 91/100 — auto-tip triggered', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 420_000).toISOString() },
-      { type: 'tip_sent', message: 'Tipped GameStreamPro 0.01 native', detail: 'TRON Nile · 85% cheaper than Ethereum · Live stream tip', chainId: 'tron-nile' as ChainId, timestamp: new Date(now - 600_000).toISOString() },
-      { type: 'system', message: 'Fee arbitrage: TRON recommended', detail: 'ETH: $0.42 · TON: $0.08 · TRON: $0.002 · Savings: 99.5%', timestamp: new Date(now - 900_000).toISOString() },
-      { type: 'system', message: 'Predictive tipping: 3 predictions generated', detail: 'time_pattern (85%) · recipient_affinity (78%) · streak (72%)', timestamp: new Date(now - 1_200_000).toISOString() },
-      { type: 'tip_sent', message: 'DCA installment: 0.005 USDT to BlockchainDev', detail: 'Installment 3/10 · Next: in 24h · Total plan: 0.05 USDT', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 1_800_000).toISOString() },
-      { type: 'system', message: 'Creator discovery: 2 undervalued creators found', detail: 'ScienceExplained (score: 0.82) · IndieFilmmaker (score: 0.79)', timestamp: new Date(now - 2_400_000).toISOString() },
-      { type: 'condition_triggered', message: 'Revenue smoothing activated', detail: 'MusicMaven income dropped 40% — reserve contribution sent', chainId: 'ton-testnet' as ChainId, timestamp: new Date(now - 3_000_000).toISOString() },
-      { type: 'system', message: 'Proof-of-Engagement attestation created', detail: 'PoE #demo_poe_1 · Creator: CryptoDaily · Watch: 94% · Signed by agent', timestamp: new Date(now - 3_600_000).toISOString() },
-      { type: 'tip_sent', message: 'Community pool tip: 0.008 USDT to NewsAnalyst', detail: 'Pool: "News Supporters" · 12 contributors · Auto-distributed', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 5_400_000).toISOString() },
-      { type: 'system', message: 'Treasury rebalanced', detail: '70% reserve · 20% yield (Aave V3: 4.2% APY) · 10% gas buffer', timestamp: new Date(now - 7_200_000).toISOString() },
-      { type: 'tip_sent', message: 'Tip propagation wave: 5 creators reached', detail: 'Viral coefficient: 2.3x · Original: FitnessGuru · Wave depth: 2', chainId: 'tron-nile' as ChainId, timestamp: new Date(now - 10_800_000).toISOString() },
-      { type: 'system', message: 'Tip streaming session completed', detail: '120 micro-tips to GameStreamPro · Total: 0.012 USDT · 2h duration', timestamp: new Date(now - 14_400_000).toISOString() },
-      { type: 'system', message: 'Autonomous cycle #47 complete', detail: '3 tips evaluated · 2 approved · 1 deferred (high risk) · 0 vetoed', timestamp: new Date(now - 18_000_000).toISOString() },
-      { type: 'condition_triggered', message: 'Milestone reached: 50 tips sent!', detail: 'Achievement unlocked: "Tip Master" · Total volume: 0.35 USDT', timestamp: new Date(now - 21_600_000).toISOString() },
-      { type: 'system', message: 'x402 payment received', detail: 'Agent earned 0.001 USDT for /api/analytics endpoint access', timestamp: new Date(now - 28_800_000).toISOString() },
-      { type: 'tip_sent', message: 'Escrow released: 0.015 USDT to ChefSpecial', detail: 'Condition met: 24h hold expired · Auto-release by escrow protocol', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 36_000_000).toISOString() },
-      { type: 'system', message: 'Agent memory updated', detail: 'Stored: "CryptoDaily prefers TON chain" · Category: preference', timestamp: new Date(now - 43_200_000).toISOString() },
-      { type: 'system', message: 'USDT0 bridge quote obtained', detail: 'Ethereum → Arbitrum: 10 USDT · Fee: 0.0012 ETH · LayerZero OFT', timestamp: new Date(now - 50_400_000).toISOString() },
-      { type: 'system', message: 'Aave V3 yield check', detail: 'Current USDT APY: 4.2% · Position: 0.5 USDT supplied · Earnings: 0.0001', timestamp: new Date(now - 57_600_000).toISOString() },
+      { type: 'tip_sent', message: '[Demo] Tipped CryptoDaily 0.005 USDT', detail: 'Ethereum Sepolia · Fee: $0.0001 · Watch time: 94%', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 30_000).toISOString() },
+      { type: 'system', message: '[Demo] Multi-agent consensus: APPROVED', detail: 'TipExecutor: approve (95%) · Guardian: approve (88%) · Treasury: approve (92%)', timestamp: new Date(now - 60_000).toISOString() },
+      { type: 'tip_sent', message: '[Demo] Auto-tipped TechReviewer 0.003 USDT', detail: 'Watch time 340 min · Engagement score: 87/100 · TON Testnet', chainId: 'ton-testnet' as ChainId, timestamp: new Date(now - 180_000).toISOString() },
+      { type: 'system', message: '[Demo] Risk assessment completed', detail: 'Score: 12/100 (LOW) · All 8 factors within safe range', timestamp: new Date(now - 300_000).toISOString() },
+      { type: 'condition_triggered', message: '[Demo] Engagement threshold reached', detail: 'CodingMaster engagement score 91/100 — auto-tip triggered', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 420_000).toISOString() },
+      { type: 'tip_sent', message: '[Demo] Tipped GameStreamPro 0.01 native', detail: 'TRON Nile · 85% cheaper than Ethereum · Live stream tip', chainId: 'tron-nile' as ChainId, timestamp: new Date(now - 600_000).toISOString() },
+      { type: 'system', message: '[Demo] Fee arbitrage: TRON recommended', detail: 'ETH: $0.42 · TON: $0.08 · TRON: $0.002 · Savings: 99.5%', timestamp: new Date(now - 900_000).toISOString() },
+      { type: 'system', message: '[Demo] Predictive tipping: 3 predictions generated', detail: 'time_pattern (85%) · recipient_affinity (78%) · streak (72%)', timestamp: new Date(now - 1_200_000).toISOString() },
+      { type: 'tip_sent', message: '[Demo] DCA installment: 0.005 USDT to BlockchainDev', detail: 'Installment 3/10 · Next: in 24h · Total plan: 0.05 USDT', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 1_800_000).toISOString() },
+      { type: 'system', message: '[Demo] Creator discovery: 2 undervalued creators found', detail: 'ScienceExplained (score: 0.82) · IndieFilmmaker (score: 0.79)', timestamp: new Date(now - 2_400_000).toISOString() },
+      { type: 'condition_triggered', message: '[Demo] Revenue smoothing activated', detail: 'MusicMaven income dropped 40% — reserve contribution sent', chainId: 'ton-testnet' as ChainId, timestamp: new Date(now - 3_000_000).toISOString() },
+      { type: 'system', message: '[Demo] Proof-of-Engagement attestation created', detail: 'PoE #demo_poe_1 · Creator: CryptoDaily · Watch: 94% · Signed by agent', timestamp: new Date(now - 3_600_000).toISOString() },
+      { type: 'tip_sent', message: '[Demo] Community pool tip: 0.008 USDT to NewsAnalyst', detail: 'Pool: "News Supporters" · 12 contributors · Auto-distributed', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 5_400_000).toISOString() },
+      { type: 'system', message: '[Demo] Treasury rebalanced', detail: '70% reserve · 20% yield (Aave V3: 4.2% APY) · 10% gas buffer', timestamp: new Date(now - 7_200_000).toISOString() },
+      { type: 'tip_sent', message: '[Demo] Tip propagation wave: 5 creators reached', detail: 'Viral coefficient: 2.3x · Original: FitnessGuru · Wave depth: 2', chainId: 'tron-nile' as ChainId, timestamp: new Date(now - 10_800_000).toISOString() },
+      { type: 'system', message: '[Demo] Tip streaming session completed', detail: '120 micro-tips to GameStreamPro · Total: 0.012 USDT · 2h duration', timestamp: new Date(now - 14_400_000).toISOString() },
+      { type: 'system', message: '[Demo] Autonomous cycle #47 complete', detail: '3 tips evaluated · 2 approved · 1 deferred (high risk) · 0 vetoed', timestamp: new Date(now - 18_000_000).toISOString() },
+      { type: 'condition_triggered', message: '[Demo] Milestone reached: 50 tips sent!', detail: 'Achievement unlocked: "Tip Master" · Total volume: 0.35 USDT', timestamp: new Date(now - 21_600_000).toISOString() },
+      { type: 'system', message: '[Demo] x402 payment received', detail: 'Agent earned 0.001 USDT for /api/analytics endpoint access', timestamp: new Date(now - 28_800_000).toISOString() },
+      { type: 'tip_sent', message: '[Demo] Escrow released: 0.015 USDT to ChefSpecial', detail: 'Condition met: 24h hold expired · Auto-release by escrow protocol', chainId: 'ethereum-sepolia' as ChainId, timestamp: new Date(now - 36_000_000).toISOString() },
+      { type: 'system', message: '[Demo] Agent memory updated', detail: 'Stored: "CryptoDaily prefers TON chain" · Category: preference', timestamp: new Date(now - 43_200_000).toISOString() },
+      { type: 'system', message: '[Demo] USDT0 bridge quote obtained', detail: 'Ethereum → Arbitrum: 10 USDT · Fee: 0.0012 ETH · LayerZero OFT', timestamp: new Date(now - 50_400_000).toISOString() },
+      { type: 'system', message: '[Demo] Aave V3 yield check', detail: 'Current USDT APY: 4.2% · Position: 0.5 USDT supplied · Earnings: 0.0001', timestamp: new Date(now - 57_600_000).toISOString() },
       { type: 'system', message: 'WDK wallets initialized', detail: '7 chains: EVM + TON + TRON + BTC + Solana + Plasma + Stable', timestamp: new Date(now - 86_400_000).toISOString() },
-      { type: 'system', message: 'TipFlow Agent v1.0.0 started', detail: '43 services · 234 endpoints · 12 innovations · Agent identity generated', timestamp: new Date(now - 86_400_000 * 2).toISOString() },
+      { type: 'system', message: 'AeroFyta Agent v1.0.0 started', detail: '43 services · 234 endpoints · 12 innovations · Agent identity generated', timestamp: new Date(now - 86_400_000 * 2).toISOString() },
     ];
   }
 
@@ -144,12 +147,12 @@ export class DemoService {
         enabled: true,
         rules: {
           allowedRecipients: [
-            '0x742d35Cc6634C0532925a3b844Bc9e7595f2bD68',
-            '0x8ba1f109551bD432803012645Ac136ddd64DBA72',
+            '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+            '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
             'UQBanAkpRVoVeUHJVSLbaCjregNDAejcBdKl1VA3ujWMWpOv',
-            '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-            '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
-            '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B',
+            '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC',
+            '0x90F79bf6EB2c4f870365E785982E1f101E93b906',
+            '0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65',
           ],
         },
       },

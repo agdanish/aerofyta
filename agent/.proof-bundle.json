@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-03-22T12:06:57.449Z",
+  "walletAddress": "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62",
+  "network": "sepolia",
+  "steps": [
+    {
+      "step": "1_check_balance",
+      "status": "success",
+      "timestamp": "2026-03-22T12:06:40.921Z"
+    },
+    {
+      "step": "2_self_transfer",
+      "status": "success",
+      "txHash": "0xfeedcddb2c9610d335df017889c6c4799ee8b48cc8b74de4acefdc164f364b2b",
+      "etherscanUrl": "https://sepolia.etherscan.io/tx/0xfeedcddb2c9610d335df017889c6c4799ee8b48cc8b74de4acefdc164f364b2b",
+      "timestamp": "2026-03-22T12:06:49.739Z"
+    },
+    {
+      "step": "3_aave_mint",
+      "status": "failed",
+      "error": "Error: execution reverted (no data present; likely require(false) occurred (action=\"estimateGas\", data=\"0x\", reason=\"require(false)\", transaction={ \"data\": \"0x9a2b961c000000000000000000000000aa8e23fb1079ea71e0a56f48a2aa51851d8433d000000000000000000000000074118b69ac22fb7e46081400bd5ef9d9a0ac9b620000000000000000000000000000000000000000000000000000000005f5e100\", \"from\": \"0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62\", \"to\": \"0xC959483DBa39aa9E78757139af0e9a2EDEb3f42D\" }, invocation=null, revert=null, code=CALL_EXCEPTION, version=6.14.3)",
+      "timestamp": "2026-03-22T12:06:50.200Z"
+    },
+    {
+      "step": "4_aave_supply",
+      "status": "failed",
+      "error": "Aave V3 supply attempted via WDK AaveProtocolEvm (3 retries) — Error: No lending protocol registered for label: aave-v3. — fell back to local position tracking with live APY",
+      "timestamp": "2026-03-22T12:06:57.449Z"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "succeeded": 2,
+    "failed": 2
+  }
+}

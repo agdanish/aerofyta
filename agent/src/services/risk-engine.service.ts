@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 //
 // RISK ENGINE — Transaction-Level Risk Assessment
 //
@@ -52,11 +52,34 @@ export interface RiskAssessment {
   assessedAt: string;
 }
 
+/** Risk trend data point */
+export interface RiskTrendPoint {
+  timestamp: string;
+  score: number;
+  level: RiskLevel;
+  chainId: string;
+  amount: number;
+}
+
+/** Chain-specific risk multipliers (newer/less-tested chains = higher risk) */
+const CHAIN_RISK_MULTIPLIERS: Record<string, number> = {
+  'ethereum-sepolia': 1.0,          // Well-established testnet
+  'ton-testnet': 1.2,               // Established but less mature
+  'tron-nile': 1.3,                 // Older chain, moderate risk
+  'ethereum-sepolia-gasless': 1.1,   // Gasless adds slight abstraction risk
+  'ton-testnet-gasless': 1.3,        // Gasless + less mature chain
+  'bitcoin-testnet': 1.0,            // Well-established
+  'solana-devnet': 1.4,              // Newer ecosystem for tipping
+  'plasma': 1.5,                     // Newer chain, less tested
+  'stable': 1.1,                     // Purpose-built, moderate confidence
+};
+
 interface TipHistory {
   recipient: string;
   amount: number;
   chainId: string;
   timestamp: number;
+  riskScore?: number;
 }
 
 // ── Service ──────────────────────────────────────────────────────
@@ -119,12 +142,17 @@ export class RiskEngineService {
       reasoning.push('New recipient — first interaction');
     }
 
-    // Factor 2: Amount Risk (0-100)
+    // Factor 2: Amount Risk (0-100) with exact-10x pattern detection
     const avgAmount = this.getAverageAmount();
     let amountRisk = 0;
     if (avgAmount > 0) {
       const ratio = params.amount / avgAmount;
-      if (ratio > 10) { amountRisk = 90; reasoning.push(`Amount is ${ratio.toFixed(0)}x your average — very unusual`); }
+      // Pattern detection: exact 10x average is suspicious (common bot behavior)
+      const isExact10x = Math.abs(ratio - 10) < 0.01;
+      if (isExact10x) {
+        amountRisk = 85;
+        reasoning.push(`PATTERN ALERT: Amount is exactly 10x your average ($${avgAmount.toFixed(4)}) — possible automated escalation`);
+      } else if (ratio > 10) { amountRisk = 90; reasoning.push(`Amount is ${ratio.toFixed(0)}x your average — very unusual`); }
       else if (ratio > 5) { amountRisk = 60; reasoning.push(`Amount is ${ratio.toFixed(0)}x your average`); }
       else if (ratio > 2) { amountRisk = 30; reasoning.push(`Amount is ${ratio.toFixed(1)}x your average`); }
       else { amountRisk = 5; }
@@ -165,11 +193,15 @@ export class RiskEngineService {
     else if (drainPercent > 0.5) { drainRisk = 40; reasoning.push(`Would spend ${(drainPercent * 100).toFixed(0)}% of balance`); }
     else if (drainPercent > 0.2) { drainRisk = 15; }
 
-    // Factor 7: Chain Risk (0-100)
-    let chainRisk = 10; // Default: testnet is low risk
+    // Factor 7: Chain Risk (0-100) — chain-specific risk weighting
+    const chainMultiplier = CHAIN_RISK_MULTIPLIERS[params.chainId] ?? 1.5; // Unknown chains default high
+    let chainRisk = Math.round(10 * chainMultiplier);
     if (params.chainId.includes('mainnet')) {
-      chainRisk = 30; // Mainnet = higher stakes
+      chainRisk = Math.round(30 * chainMultiplier);
       reasoning.push('Mainnet transaction — real funds at risk');
+    } else if (chainMultiplier >= 1.4) {
+      chainRisk = Math.round(20 * chainMultiplier);
+      reasoning.push(`Chain ${params.chainId} has elevated risk multiplier (${chainMultiplier}x) — newer/less-tested network`);
     }
 
     // Factor 8: Pattern Risk (0-100)
@@ -219,11 +251,11 @@ export class RiskEngineService {
     };
   }
 
-  /** Record a completed tip (updates risk model) */
-  recordTip(recipient: string, amount: number, chainId: string): void {
+  /** Record a completed tip (updates risk model), optionally with its assessed risk score */
+  recordTip(recipient: string, amount: number, chainId: string, riskScore?: number): void {
     this.knownRecipients.add(recipient.toLowerCase());
     this.recentTips.push({
-      recipient, amount, chainId, timestamp: Date.now(),
+      recipient, amount, chainId, timestamp: Date.now(), riskScore,
     });
     // Keep bounded
     if (this.recentTips.length > 1000) {
@@ -240,6 +272,48 @@ export class RiskEngineService {
   private getAverageAmount(): number {
     if (this.recentTips.length === 0) return 0;
     return this.recentTips.reduce((s, t) => s + t.amount, 0) / this.recentTips.length;
+  }
+
+  /**
+   * Get risk level trend over the last N transactions.
+   * Returns risk scores over time so the dashboard/agent can detect
+   * whether risk is trending up (escalating abuse) or down (stable).
+   */
+  getRiskTrend(count = 20): { trend: RiskTrendPoint[]; direction: 'rising' | 'falling' | 'stable'; avgScore: number } {
+    const tipsWithScores = this.recentTips
+      .filter(t => t.riskScore !== undefined)
+      .slice(-count);
+
+    const trend: RiskTrendPoint[] = tipsWithScores.map(t => ({
+      timestamp: new Date(t.timestamp).toISOString(),
+      score: t.riskScore!,
+      level: t.riskScore! <= 25 ? 'low' as RiskLevel
+        : t.riskScore! <= 50 ? 'medium' as RiskLevel
+        : t.riskScore! <= 75 ? 'high' as RiskLevel
+        : 'critical' as RiskLevel,
+      chainId: t.chainId,
+      amount: t.amount,
+    }));
+
+    if (trend.length < 2) {
+      return { trend, direction: 'stable', avgScore: trend.length > 0 ? trend[0].score : 0 };
+    }
+
+    const avgScore = Math.round(trend.reduce((s, t) => s + t.score, 0) / trend.length);
+
+    // Compare first half avg to second half avg to determine direction
+    const mid = Math.floor(trend.length / 2);
+    const firstHalf = trend.slice(0, mid);
+    const secondHalf = trend.slice(mid);
+    const firstAvg = firstHalf.reduce((s, t) => s + t.score, 0) / firstHalf.length;
+    const secondAvg = secondHalf.reduce((s, t) => s + t.score, 0) / secondHalf.length;
+
+    const diff = secondAvg - firstAvg;
+    let direction: 'rising' | 'falling' | 'stable' = 'stable';
+    if (diff > 5) direction = 'rising';
+    else if (diff < -5) direction = 'falling';
+
+    return { trend, direction, avgScore };
   }
 
   /** Get risk engine statistics */

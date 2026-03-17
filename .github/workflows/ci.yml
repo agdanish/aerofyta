@@ -1,0 +1,32 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install agent deps
+        run: cd agent && npm ci
+
+      - name: Install dashboard deps
+        run: cd dashboard && npm ci
+
+      - name: TypeScript check (agent)
+        run: cd agent && npx tsc --noEmit
+
+      - name: TypeScript check (dashboard)
+        run: cd dashboard && npx tsc --noEmit
+
+      - name: Unit tests
+        run: cd agent && npm test
+
+      - name: Build dashboard
+        run: cd dashboard && npm run build

@@ -1,7 +1,13 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { logger } from '../utils/logger.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const PERSISTENCE_FILE = resolve(__dirname, '..', '..', '.dca-plans.json');
 
 export interface DcaPlan {
   id: string;
@@ -41,8 +47,33 @@ export class DcaService {
   private walletService?: any;
 
   constructor() {
+    this.load();
     this.timer = setInterval(() => this.processDuePlans(), 60_000);
     logger.info('DCA tipping service initialized');
+  }
+
+  private load(): void {
+    try {
+      if (existsSync(PERSISTENCE_FILE)) {
+        const raw = readFileSync(PERSISTENCE_FILE, 'utf-8');
+        const data = JSON.parse(raw) as { plans?: DcaPlan[]; counter?: number };
+        if (data.plans) this.plans = data.plans;
+        if (data.counter) this.counter = data.counter;
+        logger.info(`Loaded DCA plans from disk (${this.plans.length} plans)`);
+      }
+    } catch (err) {
+      logger.warn('Failed to load DCA plans — starting fresh', { error: String(err) });
+      this.plans = [];
+      this.counter = 0;
+    }
+  }
+
+  private save(): void {
+    try {
+      writeFileSync(PERSISTENCE_FILE, JSON.stringify({ plans: this.plans, counter: this.counter }, null, 2), 'utf-8');
+    } catch (err) {
+      logger.warn('Failed to save DCA plans', { error: String(err) });
+    }
   }
 
   /** Set wallet service for real on-chain execution */
@@ -88,6 +119,7 @@ export class DcaService {
     };
 
     this.plans.push(plan);
+    this.save();
     logger.info('DCA plan created', { id: plan.id, total: plan.totalAmount, installments: plan.installments });
     return plan;
   }
@@ -96,6 +128,7 @@ export class DcaService {
     const plan = this.plans.find(p => p.id === id);
     if (!plan || plan.status !== 'active') return undefined;
     plan.status = 'paused';
+    this.save();
     return plan;
   }
 
@@ -104,6 +137,7 @@ export class DcaService {
     if (!plan || plan.status !== 'paused') return undefined;
     plan.status = 'active';
     plan.nextExecutionAt = new Date(Date.now() + plan.intervalMs).toISOString();
+    this.save();
     return plan;
   }
 
@@ -111,6 +145,7 @@ export class DcaService {
     const plan = this.plans.find(p => p.id === id);
     if (!plan || (plan.status !== 'active' && plan.status !== 'paused')) return undefined;
     plan.status = 'cancelled';
+    this.save();
     return plan;
   }
 
@@ -187,6 +222,8 @@ export class DcaService {
         amount: plan.amountPerInstallment,
       });
     }
+
+    this.save();
   }
 
   dispose(): void {

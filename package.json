@@ -1,9 +1,10 @@
 {
-  "name": "tipflow",
+  "name": "aerofyta",
   "version": "1.0.0",
-  "description": "TipFlow — AI-Powered Multi-Chain Tipping Agent built with Tether WDK",
+  "description": "AeroFyta — Autonomous Multi-Strategy Payment Agent for Tether WDK Hackathon Galactica",
   "private": true,
   "scripts": {
+    "postinstall": "cd agent && npm install && cd ../dashboard && npm install",
     "install:all": "cd agent && npm install && cd ../dashboard && npm install",
     "dev": "concurrently -n agent,dashboard -c green,blue \"cd agent && npm run dev\" \"cd dashboard && npm run dev\"",
     "dev:agent": "cd agent && npm run dev",

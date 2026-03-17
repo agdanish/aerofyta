@@ -1,12 +1,12 @@
-# TipFlow Protocol Specification v1.0
+# AeroFyta Protocol Specification v1.0
 
 > **A standard for autonomous, engagement-driven tipping on decentralized infrastructure**
 
 ## Abstract
 
-TipFlow Protocol defines an open standard for AI agents to autonomously discover creators, evaluate engagement, calculate fair compensation, and settle tips onchain — all without human intervention for each transaction. The protocol is chain-agnostic, agent-framework-agnostic, and designed for composability with other agentic finance protocols.
+AeroFyta Protocol defines an open standard for AI agents to autonomously discover creators, evaluate engagement, calculate fair compensation, and settle tips onchain — all without human intervention for each transaction. The protocol is chain-agnostic, agent-framework-agnostic, and designed for composability with other agentic finance protocols.
 
-Any conforming implementation can interoperate with TipFlow agents, enabling a multi-platform tipping ecosystem across Rumble, YouTube, Twitch, and future video platforms.
+Any conforming implementation can interoperate with AeroFyta agents, enabling a multi-platform tipping ecosystem across Rumble, YouTube, Twitch, and future video platforms.
 
 ## 1. Protocol Layers
 
@@ -35,7 +35,7 @@ Any conforming implementation can interoperate with TipFlow agents, enabling a m
 
 ## 2. Agent Identity
 
-Every TipFlow agent derives its identity from its WDK seed phrase:
+Every AeroFyta agent derives its identity from its WDK seed phrase:
 
 ```
 Agent ID = keccak256(WDK_PUBLIC_KEY_ETH + WDK_PUBLIC_KEY_TON + WDK_PUBLIC_KEY_TRON)
@@ -182,7 +182,7 @@ HTTP-native micropayments for agent-to-agent commerce:
 ### Request Flow
 
 ```
-Agent A                              Agent B (TipFlow)
+Agent A                              Agent B (AeroFyta)
    │                                      │
    │  GET /api/predictions/generate       │
    │  ──────────────────────────────►     │
@@ -248,8 +248,8 @@ Three specialized sub-agents evaluate every tip:
 ### For Developers (SDK)
 
 ```typescript
-import { TipFlowClient } from 'tipflow-sdk';
-const client = new TipFlowClient('http://localhost:3001');
+import { AeroFytaClient } from 'aerofyta-sdk';
+const client = new AeroFytaClient('http://localhost:3001');
 
 // Send tip through full AI pipeline
 const result = await client.sendTip({
@@ -277,9 +277,9 @@ await client.createPolicy({
 
 ### For AI Agents (MCP)
 
-TipFlow exposes 35 wallet tools via Model Context Protocol:
+AeroFyta exposes 35 wallet tools via Model Context Protocol:
 ```
-npx tipflow-mcp --seed "your seed phrase"
+npx aerofyta-mcp --seed "your seed phrase"
 ```
 
 Any MCP-compatible agent (Claude, GPT, OpenClaw) can:
@@ -288,7 +288,7 @@ Any MCP-compatible agent (Claude, GPT, OpenClaw) can:
 - Bridge USDT0 cross-chain
 - Supply/withdraw from Aave V3
 
-### For Other Tipping Bots (TipPolicy)
+### For Other Autonomous Payment Agents (TipPolicy)
 
 Export and import policies between compatible agents:
 ```
@@ -299,7 +299,7 @@ POST /api/policies/evaluate → Test policy against context
 
 ## 9. WDK Integration Depth
 
-TipFlow uses 10 official Tether WDK packages:
+AeroFyta uses 10 official Tether WDK packages:
 
 | Package | Purpose |
 |---------|---------|
@@ -316,11 +316,11 @@ TipFlow uses 10 official Tether WDK packages:
 
 ## 10. License
 
-TipFlow Protocol is released under **Apache License 2.0**.
+AeroFyta Protocol is released under **Apache License 2.0**.
 
-Any implementation that conforms to this specification may use the TipFlow Protocol name and interoperate with TipFlow agents.
+Any implementation that conforms to this specification may use the AeroFyta Protocol name and interoperate with AeroFyta agents.
 
 ---
 
-*TipFlow Protocol v1.0 — March 2026*
+*AeroFyta Protocol v1.0 — March 2026*
 *Built for Tether Hackathon Galactica: WDK Edition 1*

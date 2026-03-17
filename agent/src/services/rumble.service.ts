@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// TipFlow — AI-Powered Multi-Chain Tipping Agent
+// AeroFyta — AI-Powered Multi-Chain Tipping Agent
 // Rumble Integration Service — Creator tipping ecosystem for Rumble platform
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -501,7 +501,7 @@ export class RumbleService {
 
   // === Engagement Score Algorithm (CORE INNOVATION) ===
   //
-  // This is TipFlow's key differentiator: instead of flat-rate tipping,
+  // This is AeroFyta's key differentiator: instead of flat-rate tipping,
   // the agent calculates a dynamic "engagement score" that determines
   // how much to tip. Higher engagement = higher tip. This creates an
   // economic feedback loop:
@@ -666,6 +666,308 @@ export class RumbleService {
 
     // Sort by engagement score (highest first)
     return recommendations.sort((a, b) => b.engagementScore - a.engagementScore);
+  }
+
+  // ── Real Rumble Platform Integration ──────────────────────────
+
+  /** Fetch real channel data from Rumble */
+  async fetchChannelData(channelName: string): Promise<{
+    name: string;
+    subscribers: string;
+    totalVideos: number;
+    recentVideos: Array<{ title: string; videoId: string; views: string; uploadDate: string; duration: string }>;
+    verified: boolean;
+  }> {
+    // Fetch the channel page HTML
+    const url = `https://rumble.com/c/${encodeURIComponent(channelName)}`;
+    let html: string;
+    try {
+      const resp = await fetch(url, {
+        headers: { 'User-Agent': 'AeroFyta-TipBot/1.0 (Hackathon; +https://github.com/AeroFyta)' },
+        signal: AbortSignal.timeout(10000),
+      });
+
+      if (!resp.ok) throw new Error(`Rumble channel fetch failed: ${resp.status}`);
+      html = await resp.text();
+    } catch (err) {
+      logger.error(`fetchChannelData failed for "${channelName}":`, err);
+      return { name: channelName, subscribers: 'unknown', totalVideos: 0, recentVideos: [], verified: false };
+    }
+
+    // Parse subscriber count from HTML
+    const subMatch = html.match(/(\d[\d,.]*[KMB]?)\s*(?:Followers|Subscribers|Rumbles)/i);
+    const subscribers = subMatch?.[1] ?? 'unknown';
+
+    // Parse channel display name
+    const nameMatch = html.match(/<h1[^>]*class="[^"]*channel-header--title[^"]*"[^>]*>([^<]+)/i)
+      ?? html.match(/<title>([^<]+?)(?:\s*[-–|].*)?<\/title>/);
+    const displayName = nameMatch?.[1]?.trim() ?? channelName;
+
+    // Parse verified badge
+    const verified = /verified-badge|is-verified|verification-badge/i.test(html);
+
+    // Parse video listings from the page
+    const videoRegex = /<a[^>]*class="[^"]*videostream__link[^"]*"[^>]*href="\/([^"]+?)-([a-z0-9]+)\.html"[^>]*>[\s\S]*?<h3[^>]*>([^<]+)<\/h3>[\s\S]*?(?:(\d[\d,.]*)\s*(?:views|watching))?[\s\S]*?(?:class="[^"]*videostream__data[^"]*"[^>]*>([^<]*)<)/gi;
+    const recentVideos: Array<{ title: string; videoId: string; views: string; uploadDate: string; duration: string }> = [];
+
+    let match;
+    while ((match = videoRegex.exec(html)) !== null && recentVideos.length < 20) {
+      recentVideos.push({
+        title: match[3]?.trim() ?? '',
+        videoId: match[2] ?? '',
+        views: match[4] ?? '0',
+        uploadDate: match[5]?.trim() ?? '',
+        duration: '',
+      });
+    }
+
+    // Fallback: simpler parsing for video links
+    if (recentVideos.length === 0) {
+      const simpleVideoRegex = /href="\/([^"]+?)-([a-z0-9]{5,})\.html"[^>]*>[\s\S]*?<h3[^>]*>([^<]+)<\/h3>/gi;
+      while ((match = simpleVideoRegex.exec(html)) !== null && recentVideos.length < 20) {
+        recentVideos.push({
+          title: match[3]?.trim() ?? '',
+          videoId: match[2] ?? '',
+          views: '0',
+          uploadDate: '',
+          duration: '',
+        });
+      }
+    }
+
+    logger.info(`Fetched Rumble channel: ${displayName} (${subscribers} subscribers, ${recentVideos.length} videos)`);
+
+    return {
+      name: displayName,
+      subscribers,
+      totalVideos: recentVideos.length,
+      recentVideos,
+      verified,
+    };
+  }
+
+  /** Search Rumble for creators/videos */
+  async searchRumble(query: string, type: 'video' | 'channel' = 'video'): Promise<Array<{
+    title: string;
+    url: string;
+    channelName: string;
+    views: string;
+    date: string;
+    thumbnail: string;
+  }>> {
+    const url = `https://rumble.com/search/${type}?q=${encodeURIComponent(query)}`;
+    let html: string;
+    try {
+      const resp = await fetch(url, {
+        headers: { 'User-Agent': 'AeroFyta-TipBot/1.0 (Hackathon; +https://github.com/AeroFyta)' },
+        signal: AbortSignal.timeout(10000),
+      });
+
+      if (!resp.ok) throw new Error(`Rumble search failed: ${resp.status}`);
+      html = await resp.text();
+    } catch (err) {
+      logger.error(`searchRumble failed for "${query}":`, err);
+      return [];
+    }
+
+    const results: Array<{ title: string; url: string; channelName: string; views: string; date: string; thumbnail: string }> = [];
+
+    // Parse search results
+    const resultRegex = /<a[^>]*href="(\/[^"]+\.html)"[^>]*>[\s\S]*?<h3[^>]*>([^<]+)<\/h3>[\s\S]*?<address[^>]*>[\s\S]*?<a[^>]*>([^<]+)<\/a>/gi;
+    let m;
+    while ((m = resultRegex.exec(html)) !== null && results.length < 20) {
+      results.push({
+        title: m[2]?.trim() ?? '',
+        url: `https://rumble.com${m[1]}`,
+        channelName: m[3]?.trim() ?? '',
+        views: '0',
+        date: '',
+        thumbnail: '',
+      });
+    }
+
+    // Try thumbnail extraction
+    const thumbRegex = /<img[^>]*class="[^"]*video-item--img[^"]*"[^>]*src="([^"]+)"/gi;
+    let i = 0;
+    while ((m = thumbRegex.exec(html)) !== null && i < results.length) {
+      results[i].thumbnail = m[1] ?? '';
+      i++;
+    }
+
+    logger.info(`Rumble search "${query}": ${results.length} results`);
+    return results;
+  }
+
+  /** Auto-discover and register creators from Rumble search */
+  async discoverAndRegisterCreators(query: string, defaultWallet: string): Promise<Creator[]> {
+    const searchResults = await this.searchRumble(query, 'channel');
+    const registered: Creator[] = [];
+
+    for (const result of searchResults.slice(0, 10)) {
+      // Extract channel name from URL
+      const channelMatch = result.url.match(/\/c\/([^/?#]+)/);
+      const channelName = channelMatch?.[1] ?? result.channelName;
+
+      // Fetch channel details
+      try {
+        const channelData = await this.fetchChannelData(channelName);
+
+        const creator = this.registerCreator(
+          channelData.name,
+          `https://rumble.com/c/${channelName}`,
+          defaultWallet, // Placeholder until creator registers their own wallet
+          ['rumble-creator'],
+        );
+
+        // Update subscriber count from real data
+        const subNum = this.parseSubscriberCount(channelData.subscribers);
+        creator.subscriberCount = subNum;
+        this.save();
+
+        registered.push(creator);
+      } catch (err) {
+        logger.warn(`Failed to fetch channel ${channelName}: ${err}`);
+      }
+    }
+
+    logger.info(`Discovered ${registered.length} creators from Rumble search: "${query}"`);
+    return registered;
+  }
+
+  /** Parse subscriber count string to number */
+  private parseSubscriberCount(s: string): number {
+    if (!s || s === 'unknown') return 0;
+    const cleaned = s.replace(/,/g, '').trim();
+    const multipliers: Record<string, number> = { K: 1_000, M: 1_000_000, B: 1_000_000_000 };
+    const subMatch = cleaned.match(/^([\d.]+)\s*([KMB])?$/i);
+    if (!subMatch) return parseInt(cleaned, 10) || 0;
+    const num = parseFloat(subMatch[1]);
+    const mult = subMatch[2] ? multipliers[subMatch[2].toUpperCase()] ?? 1 : 1;
+    return Math.round(num * mult);
+  }
+
+  /** Fetch trending/popular videos from Rumble front page for tip suggestions */
+  async fetchTrendingVideos(): Promise<Array<{
+    title: string;
+    videoId: string;
+    channelName: string;
+    views: string;
+    url: string;
+  }>> {
+    let html: string;
+    try {
+      const resp = await fetch('https://rumble.com', {
+        headers: { 'User-Agent': 'AeroFyta-TipBot/1.0 (Hackathon; +https://github.com/AeroFyta)' },
+        signal: AbortSignal.timeout(10000),
+      });
+
+      if (!resp.ok) throw new Error(`Rumble trending fetch failed: ${resp.status}`);
+      html = await resp.text();
+    } catch (err) {
+      logger.error('fetchTrendingVideos failed:', err);
+      return [];
+    }
+
+    const videos: Array<{ title: string; videoId: string; channelName: string; views: string; url: string }> = [];
+    const regex = /href="\/([^"]+?)-([a-z0-9]{5,})\.html"[^>]*>[\s\S]*?<h3[^>]*>([^<]+)<\/h3>/gi;
+    let m;
+    while ((m = regex.exec(html)) !== null && videos.length < 30) {
+      videos.push({
+        title: m[3]?.trim() ?? '',
+        videoId: m[2] ?? '',
+        channelName: '',
+        views: '0',
+        url: `https://rumble.com/${m[1]}-${m[2]}.html`,
+      });
+    }
+
+    logger.info(`Fetched ${videos.length} trending Rumble videos`);
+    return videos;
+  }
+
+  /** Build a Rumble-native tip link (deep link into Rumble's WDK wallet) */
+  buildRumbleTipLink(creatorChannelUrl: string, amount: number, token: 'USDT' | 'XAUT' | 'BTC' = 'USDT', message?: string): string {
+    const params = new URLSearchParams({
+      action: 'tip',
+      amount: amount.toString(),
+      token,
+      ...(message ? { message } : {}),
+      source: 'aerofyta',
+    });
+    return `${creatorChannelUrl}?${params.toString()}`;
+  }
+
+  /** Get engagement-weighted tip suggestions based on real watch data + Rumble channel popularity */
+  async getSmartTipSuggestions(userId: string): Promise<Array<{
+    creatorId: string;
+    creatorName: string;
+    channelUrl: string;
+    walletAddress: string;
+    suggestedAmount: number;
+    reason: string;
+    engagementScore: number;
+    rumblePopularity: number;
+  }>> {
+    const suggestions: Array<{
+      creatorId: string;
+      creatorName: string;
+      channelUrl: string;
+      walletAddress: string;
+      suggestedAmount: number;
+      reason: string;
+      engagementScore: number;
+      rumblePopularity: number;
+    }> = [];
+
+    // Get user's watch history
+    const userSessions = this.watchSessions.filter(s => s.userId === userId);
+    if (userSessions.length === 0) return suggestions;
+
+    // Calculate per-creator engagement
+    const creatorEngagement = new Map<string, { totalWatch: number; sessions: number; avgWatch: number }>();
+    for (const session of userSessions) {
+      const existing = creatorEngagement.get(session.creatorId) ?? { totalWatch: 0, sessions: 0, avgWatch: 0 };
+      existing.totalWatch += session.watchPercent;
+      existing.sessions += 1;
+      existing.avgWatch = existing.totalWatch / existing.sessions;
+      creatorEngagement.set(session.creatorId, existing);
+    }
+
+    // Rank by engagement and generate suggestions
+    const ranked = Array.from(creatorEngagement.entries())
+      .sort((a, b) => b[1].avgWatch - a[1].avgWatch)
+      .slice(0, 10);
+
+    for (const [creatorId, engagement] of ranked) {
+      const creator = this.creators.get(creatorId);
+      if (!creator) continue;
+
+      const engagementScore = Math.min(1.0, engagement.avgWatch / 100);
+      const popularityScore = Math.min(1.0, Math.log10(Math.max(1, creator.subscriberCount)) / 7);
+
+      // Higher engagement = higher tip suggestion; inversely weighted by popularity (support smaller creators more)
+      const baseAmount = 1.0; // $1 base
+      const engagementMultiplier = 0.5 + engagementScore * 2.5; // 0.5x - 3.0x
+      const underdogBonus = 1.0 + (1.0 - popularityScore) * 0.5; // Small creators get up to 1.5x bonus
+      const suggestedAmount = parseFloat((baseAmount * engagementMultiplier * underdogBonus).toFixed(2));
+
+      let reason = `Avg ${engagement.avgWatch.toFixed(0)}% watch time across ${engagement.sessions} videos`;
+      if (popularityScore < 0.3) reason += ' (undervalued creator bonus)';
+      if (engagementScore > 0.8) reason += ' (super fan!)';
+
+      suggestions.push({
+        creatorId,
+        creatorName: creator.name,
+        channelUrl: creator.channelUrl,
+        walletAddress: creator.walletAddress,
+        suggestedAmount,
+        reason,
+        engagementScore,
+        rumblePopularity: popularityScore,
+      });
+    }
+
+    return suggestions;
   }
 
   // === Persistence ===
