@@ -278,5 +278,205 @@
       "withinPerTipLimit": true,
       "knownRecipient": true
     }
+  },
+  {
+    "id": "decision-1774204246031-1187",
+    "timestamp": "2026-03-22T18:30:46.031Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 4 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 2 previous tips at this time",
+      "confidenceScore": 0.7
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204306043-1194",
+    "timestamp": "2026-03-22T18:31:46.043Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 5 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 2 previous tips at this time",
+      "confidenceScore": 0.75
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204366058-1202",
+    "timestamp": "2026-03-22T18:32:46.058Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 6 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 3 previous tips at this time",
+      "confidenceScore": 0.9
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204426060-1210",
+    "timestamp": "2026-03-22T18:33:46.060Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 7 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 4 previous tips at this time",
+      "confidenceScore": 0.95
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204486062-1218",
+    "timestamp": "2026-03-22T18:34:46.062Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 8 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 5 previous tips at this time",
+      "confidenceScore": 0.95
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204546073-1226",
+    "timestamp": "2026-03-22T18:35:46.073Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 9 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 6 previous tips at this time",
+      "confidenceScore": 0.95
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204606078-1234",
+    "timestamp": "2026-03-22T18:36:46.078Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 10 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 7 previous tips at this time",
+      "confidenceScore": 0.95
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204666086-1242",
+    "timestamp": "2026-03-22T18:37:46.086Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 11 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 8 previous tips at this time",
+      "confidenceScore": 0.95
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204726098-1250",
+    "timestamp": "2026-03-22T18:38:46.098Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 12 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 9 previous tips at this time",
+      "confidenceScore": 0.95
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
+  },
+  {
+    "id": "decision-1774204786102-1258",
+    "timestamp": "2026-03-22T18:39:46.102Z",
+    "recipient": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "amount": 0.001,
+    "chain": "ethereum-sepolia",
+    "reasoning": {
+      "trigger": "Pattern detected: frequent tipping on Mondays",
+      "recipientReason": "Top recipient with 13 previous tips (avg 0.0010)",
+      "amountReason": "Based on historical average of 0.0010 to this address",
+      "timingReason": "Monday at 0:00 matches 10 previous tips at this time",
+      "confidenceScore": 0.95
+    },
+    "status": "executed",
+    "policyCompliance": {
+      "withinDailyLimit": true,
+      "withinPerTipLimit": true,
+      "knownRecipient": true
+    }
   }
 ]

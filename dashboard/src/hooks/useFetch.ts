@@ -2,10 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 
 // In production (Railway/Render), frontend is served from same origin as backend
 // In development, backend runs on localhost:3001
-const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
+export const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 export function useFetch<T>(path: string, demoData: T) {
-  // Start with null — don't show demo data while API is loading
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [isDemo, setIsDemo] = useState(false);
@@ -16,6 +15,7 @@ export function useFetch<T>(path: string, demoData: T) {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
+    setData(null); // Reset data on refetch to prevent stale flash
 
     async function fetchData() {
       try {
@@ -42,6 +42,5 @@ export function useFetch<T>(path: string, demoData: T) {
     return () => { cancelled = true; };
   }, [path, tick]);
 
-  // Return demoData as fallback when data is null (shouldn't happen after loading)
   return { data: (data ?? demoData) as T, loading, isDemo, refetch };
 }
