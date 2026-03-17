@@ -11,6 +11,11 @@ import { handleWalletCommand } from './wallet-commands.js';
 import { handlePaymentCommand } from './payment-commands.js';
 import { handleSecurityCommand } from './security-commands.js';
 import { handleDataCommand } from './data-commands.js';
+import { handleAgentCommand } from './agent-commands.js';
+import { handleAnalyticsCommand } from './analytics-commands.js';
+import { handleDefiCommand } from './defi-commands.js';
+import { handleMcpCommand } from './mcp-commands.js';
+import { handleSystemCommand } from './system-commands.js';
 
 // ── ANSI helpers (zero deps) ────────────────────────────────────────
 const c = {
@@ -30,8 +35,6 @@ const c = {
 
 const ok = `${c.green}\u2705${c.reset}`;
 const fail = `${c.red}\u274C${c.reset}`;
-const brain = `${c.magenta}\uD83E\uDDE0${c.reset}`;
-const money = `${c.yellow}\uD83D\uDCB0${c.reset}`;
 const warn = `${c.yellow}\u26A0${c.reset}`;
 const infoIcon = `${c.blue}\u2139\uFE0F${c.reset}`;
 
@@ -104,100 +107,6 @@ function maskValue(key: string, value: string): string {
 }
 
 // ── Commands ────────────────────────────────────────────────────────
-
-async function cmdDemo(): Promise<void> {
-  heading('Interactive Demo');
-  console.log(`  ${brain} Starting AeroFyta agent demo...\n`);
-
-  const pulse = {
-    liquidityScore: 72,
-    diversificationScore: 58,
-    velocityScore: 41,
-    healthScore: 64,
-    totalAvailableUsdt: 1250.50,
-    activeChainsCount: 3,
-  };
-
-  const moods: Array<{ threshold: number; mood: string; emoji: string }> = [
-    { threshold: 70, mood: 'Generous', emoji: '\uD83D\uDE0A' },
-    { threshold: 40, mood: 'Strategic', emoji: '\uD83E\uDDD0' },
-    { threshold: 0, mood: 'Cautious', emoji: '\uD83E\uDD14' },
-  ];
-  const moodEntry = moods.find(m => pulse.healthScore >= m.threshold) ?? moods[2];
-
-  heading('Financial Pulse');
-  row('Liquidity', `${bar(pulse.liquidityScore)} ${pulse.liquidityScore}%`);
-  row('Diversification', `${bar(pulse.diversificationScore)} ${pulse.diversificationScore}%`);
-  row('Velocity', `${bar(pulse.velocityScore)} ${pulse.velocityScore}%`);
-  row('Health Score', `${c.bold}${pulse.healthScore}%${c.reset}`);
-  row('Total USDT', `${money} $${pulse.totalAvailableUsdt.toFixed(2)}`);
-  row('Active Chains', `${pulse.activeChainsCount}`);
-
-  heading('Agent Mood');
-  console.log(`  ${moodEntry.emoji}  Mood: ${c.bold}${moodEntry.mood}${c.reset}`);
-  console.log(`  ${c.dim}The agent adjusts tip sizes and risk tolerance based on its mood.${c.reset}`);
-
-  heading('Tip Validation');
-  const scenarios = [
-    { to: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', amt: '2.50', chain: 'Ethereum Sepolia', valid: true },
-    { to: 'invalid-address', amt: '10', chain: 'Unknown', valid: false },
-    { to: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', amt: '999999', chain: 'Ethereum Sepolia', valid: false },
-  ];
-  for (const s of scenarios) {
-    const icon = s.valid ? ok : fail;
-    const status = s.valid ? `${c.green}APPROVED${c.reset}` : `${c.red}REJECTED${c.reset}`;
-    console.log(`  ${icon} Tip $${s.amt} to ${truncAddr(s.to)} on ${s.chain} \u2192 ${status}`);
-  }
-
-  heading('Adversarial Safety');
-  const attacks = [
-    { name: 'Prompt injection in memo', blocked: true },
-    { name: 'Tip exceeds daily limit', blocked: true },
-    { name: 'Unrecognized chain target', blocked: true },
-    { name: 'Normal tip to known creator', blocked: false },
-  ];
-  for (const a of attacks) {
-    const icon = a.blocked ? `${c.red}\uD83D\uDEE1\uFE0F  BLOCKED${c.reset}` : `${c.green}\u2705 ALLOWED${c.reset}`;
-    console.log(`  ${icon}  ${a.name}`);
-  }
-
-  heading('Supported Chains');
-  const chains = [
-    { name: 'Ethereum Sepolia', token: 'USDT', status: 'active' },
-    { name: 'TON Testnet', token: 'USDT', status: 'active' },
-    { name: 'Tron Nile', token: 'USDT', status: 'active' },
-    { name: 'Bitcoin Testnet', token: 'BTC', status: 'beta' },
-    { name: 'Solana Devnet', token: 'USDT', status: 'beta' },
-  ];
-  for (const ch of chains) {
-    const badge = ch.status === 'active'
-      ? `${c.green}\u25CF${c.reset}`
-      : `${c.yellow}\u25CB${c.reset}`;
-    console.log(`  ${badge} ${ch.name.padEnd(20)} ${c.dim}${ch.token}${c.reset}`);
-  }
-
-  console.log(`\n  ${c.dim}Demo complete. Run \`aerofyta help\` for all commands.${c.reset}\n`);
-}
-
-async function cmdStatus(): Promise<void> {
-  heading('Agent Status');
-  const port = process.env['PORT'] || '3001';
-  try {
-    const res = await fetch(serverUrl('/api/agent/status'), { signal: AbortSignal.timeout(3000) });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json() as Record<string, unknown>;
-    console.log(`  ${ok} Agent is ${c.green}${c.bold}running${c.reset} on port ${port}\n`);
-    if (data['agentName']) row('Name', String(data['agentName']));
-    if (data['mood']) row('Mood', String(data['mood']));
-    if (data['uptime']) row('Uptime', String(data['uptime']));
-    if (data['chains']) row('Chains', String(data['chains']));
-    if (data['totalTips'] !== undefined) row('Total Tips', String(data['totalTips']));
-    if (data['version']) row('Version', String(data['version']));
-  } catch {
-    console.log(`  ${fail} Agent is ${c.red}not running${c.reset} on port ${port}`);
-    console.log(`\n  ${c.dim}Start it with:${c.reset} ${c.cyan}cd agent && npm run dev${c.reset}\n`);
-  }
-}
 
 function generateEnvContent(): string {
   const seedHex = randomBytes(32).toString('hex');
@@ -541,47 +450,6 @@ async function cmdDoctor(): Promise<void> {
   }
 }
 
-function cmdInfo(): void {
-  const pkg = getPkg();
-  heading('Package Info');
-  row('Name', `${c.cyan}@xzashr/aerofyta${c.reset}`);
-  row('Version', pkg.version);
-  row('License', 'Apache-2.0');
-  row('Runtime', `Node.js ${process.version}`);
-  row('Repository', pkg.homepage || 'https://github.com/xzashr/aerofyta');
-
-  heading('Features');
-  const features = [
-    'Multi-chain tipping (EVM, TON, Tron, BTC, Solana)',
-    'ReAct autonomous reasoning loop',
-    'Wallet-as-Brain financial pulse',
-    'Multi-agent consensus (3-agent voting)',
-    'Smart escrow with milestones',
-    'Rumble creator discovery & RSS',
-    'Adversarial safety engine',
-    'MCP server for AI tool integration',
-  ];
-  for (const f of features) {
-    console.log(`  ${c.green}\u2022${c.reset} ${f}`);
-  }
-
-  heading('WDK Integrations');
-  const wdk = [
-    '@tetherto/wdk (core)',
-    '@tetherto/wdk-wallet-evm',
-    '@tetherto/wdk-wallet-ton',
-    '@tetherto/wdk-wallet-btc',
-    '@tetherto/wdk-wallet-solana',
-    '@tetherto/wdk-wallet-tron',
-    '@tetherto/wdk-wallet-evm-erc-4337 (gasless)',
-    '@tetherto/wdk-wallet-ton-gasless',
-  ];
-  for (const w of wdk) {
-    console.log(`  ${c.dim}\u251C${c.reset} ${w}`);
-  }
-  console.log();
-}
-
 function cmdHelp(): void {
   const pkg = getPkg();
   console.log(`  ${c.bold}AeroFyta v${pkg.version}${c.reset} ${c.dim}\u2014 Autonomous Payment Agent${c.reset}\n`);
@@ -682,13 +550,87 @@ function cmdHelp(): void {
     console.log(`    ${c.cyan}${cmd.padEnd(28)}${c.reset}${desc}`);
   }
 
+  // ── Agent ──
+  console.log(`\n  ${c.bold}${c.green}Agent${c.reset}`);
+  const agentCmds: Array<[string, string]> = [
+    ['agent', 'Agent overview'],
+    ['demo', 'Run interactive demo showcasing capabilities'],
+    ['status', 'Check if agent server is running'],
+    ['pulse', 'Show financial pulse metrics'],
+    ['mood', 'Show current agent mood'],
+    ['reason', 'Show recent reasoning traces'],
+    ['ask', 'Ask the agent a question'],
+    ['tool-use', 'Show recent tool usage'],
+    ['logs', 'Show agent logs'],
+  ];
+  for (const [cmd, desc] of agentCmds) {
+    console.log(`    ${c.cyan}${cmd.padEnd(28)}${c.reset}${desc}`);
+  }
+
+  // ── Analytics ──
+  console.log(`\n  ${c.bold}${c.green}Analytics${c.reset}`);
+  const analyticsCmds: Array<[string, string]> = [
+    ['analytics overview', 'Analytics overview dashboard'],
+    ['analytics tips', 'Tip analytics breakdown'],
+    ['analytics creators', 'Top creators analytics'],
+    ['analytics chains', 'Chain usage analytics'],
+    ['analytics decisions', 'Decision history analytics'],
+    ['analytics export', 'Export analytics data'],
+  ];
+  for (const [cmd, desc] of analyticsCmds) {
+    console.log(`    ${c.cyan}${cmd.padEnd(28)}${c.reset}${desc}`);
+  }
+
+  // ── DeFi ──
+  console.log(`\n  ${c.bold}${c.green}DeFi${c.reset}`);
+  const defiCmds: Array<[string, string]> = [
+    ['deploy', 'Deploy a smart contract'],
+    ['proof', 'Generate a ZK proof'],
+    ['yield', 'Show yield opportunities'],
+    ['swap', 'Execute a token swap'],
+    ['bridge', 'Bridge assets cross-chain'],
+    ['lend', 'Lending protocol operations'],
+  ];
+  for (const [cmd, desc] of defiCmds) {
+    console.log(`    ${c.cyan}${cmd.padEnd(28)}${c.reset}${desc}`);
+  }
+
+  // ── MCP / SDK / Plugin ──
+  console.log(`\n  ${c.bold}${c.green}MCP / SDK / Plugin${c.reset}`);
+  const mcpCmds: Array<[string, string]> = [
+    ['mcp tools', 'List all 97+ MCP tools'],
+    ['mcp status', 'Check MCP server status'],
+    ['sdk presets', 'Show SDK presets'],
+    ['sdk hooks list', 'Show SDK hook event types'],
+    ['sdk adapters', 'Show chain adapters'],
+    ['plugin status', 'Show registered service modules'],
+  ];
+  for (const [cmd, desc] of mcpCmds) {
+    console.log(`    ${c.cyan}${cmd.padEnd(28)}${c.reset}${desc}`);
+  }
+
+  // ── System ──
+  console.log(`\n  ${c.bold}${c.green}System${c.reset}`);
+  const sysCmds: Array<[string, string]> = [
+    ['info', 'Show features, WDK integrations, and package info'],
+    ['docs', 'Show documentation links'],
+    ['health', 'Detailed health check'],
+    ['modules', 'List loaded modules'],
+    ['architecture', 'Show system architecture'],
+    ['persistence', 'Show persistence layer status'],
+    ['auth', 'Show authentication status'],
+    ['zk', 'Show zero-knowledge proof status'],
+    ['benchmark', 'Run performance benchmarks'],
+  ];
+  for (const [cmd, desc] of sysCmds) {
+    console.log(`    ${c.cyan}${cmd.padEnd(28)}${c.reset}${desc}`);
+  }
+
   // ── Info & Maintenance ──
   console.log(`\n  ${c.bold}${c.green}Info & Maintenance${c.reset}`);
   const infoCmds: Array<[string, string]> = [
-    ['info', 'Show features, WDK integrations, and package info'],
     ['version', 'Show version and runtime info'],
     ['update', 'Update AeroFyta to the latest version'],
-    ['demo', 'Run interactive demo showcasing capabilities'],
     ['help', 'Show this help message'],
   ];
   for (const [cmd, desc] of infoCmds) {
@@ -749,19 +691,6 @@ function cmdHelp(): void {
   console.log(`    ${c.dim}$${c.reset} npx @xzashr/aerofyta demo\n`);
 }
 
-// ── Helpers ─────────────────────────────────────────────────────────
-
-function bar(pct: number): string {
-  const filled = Math.round(pct / 5);
-  const empty = 20 - filled;
-  return `${c.green}${'█'.repeat(filled)}${c.dim}${'░'.repeat(empty)}${c.reset}`;
-}
-
-function truncAddr(addr: string): string {
-  if (addr.length <= 12) return addr;
-  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-}
-
 // ── Main ────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
@@ -770,12 +699,55 @@ const command = args[0] || 'help';
 banner();
 
 switch (command) {
+  // ── Agent commands ──
+  case 'agent':
   case 'demo':
-    await cmdDemo();
-    break;
   case 'status':
-    await cmdStatus();
+  case 'pulse':
+  case 'mood':
+  case 'reason':
+  case 'ask':
+  case 'tool-use':
+  case 'logs':
+    await handleAgentCommand(command, args.slice(1));
     break;
+
+  // ── Analytics commands ──
+  case 'analytics':
+    await handleAnalyticsCommand(args[1], args.slice(2));
+    break;
+
+  // ── DeFi commands ──
+  case 'deploy':
+  case 'proof':
+  case 'yield':
+  case 'swap':
+  case 'bridge':
+  case 'lend':
+    await handleDefiCommand(command, args[1], args.slice(2));
+    break;
+
+  // ── MCP / SDK / Plugin commands ──
+  case 'mcp':
+  case 'sdk':
+  case 'plugin':
+    await handleMcpCommand(command, args[1], args.slice(2));
+    break;
+
+  // ── System commands ──
+  case 'info':
+  case 'docs':
+  case 'health':
+  case 'modules':
+  case 'architecture':
+  case 'persistence':
+  case 'auth':
+  case 'zk':
+  case 'benchmark':
+    await handleSystemCommand(command, args[1], args.slice(2));
+    break;
+
+  // ── Core commands ──
   case 'init':
     cmdInit();
     break;
@@ -847,9 +819,6 @@ switch (command) {
   case 'webhooks':
   case 'notifications':
     await handleDataCommand(command, args[1], args.slice(2));
-    break;
-  case 'info':
-    cmdInfo();
     break;
   case 'help':
   case '-h':

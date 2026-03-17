@@ -14543,5 +14543,3989 @@
       "createdAt": "2026-03-22T04:07:46.900Z",
       "lastTriggeredAt": "2026-03-22T04:07:46.906Z"
     }
+  },
+  {
+    "id": "d3251a2c-7c69-4096-8fed-a6ad9eeb7c9c",
+    "name": "Watch Time Reward",
+    "description": "Tip when viewer watches 80%+ of a video",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "test-user",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 0,
+      "maxPerDay": 100,
+      "maxPerWeek": 500
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:38.464Z"
+    }
+  },
+  {
+    "id": "b1bafe4d-e51b-4bbd-af50-efdabc123f51",
+    "name": "Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:41.697Z"
+    }
+  },
+  {
+    "id": "3d8a9404-7712-434e-bece-5eb024117beb",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:41.712Z"
+    }
+  },
+  {
+    "id": "93d5ac7c-d752-4e30-b4ce-d04ed46c2c8a",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 95
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:41.762Z"
+    }
+  },
+  {
+    "id": "b187df7a-3595-40b1-aa93-af69eb679529",
+    "name": "Test Policy",
+    "description": "A test policy",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:41.955Z"
+    }
+  },
+  {
+    "id": "1af7431c-be55-49a0-9c1c-feac256297bd",
+    "name": "Default Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:41.975Z"
+    }
+  },
+  {
+    "id": "a9fec21b-1693-4329-af3d-cd63cbba3edd",
+    "name": "Custom Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 30,
+      "maxPerDay": 5,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:41.980Z"
+    }
+  },
+  {
+    "id": "05c55760-ee8b-40a9-a556-4105905399c6",
+    "name": "Get Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "new_video"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:41.991Z"
+    }
+  },
+  {
+    "id": "818a5bf8-84a4-4390-b821-e68bae973eac",
+    "name": "Toggle Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.008Z"
+    }
+  },
+  {
+    "id": "5888c4fe-1262-4e63-bffa-c3df4642ebfb",
+    "name": "GT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "balance",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.035Z"
+    }
+  },
+  {
+    "id": "3c0fc9f9-a1b2-4560-873b-fa45d4b34b1b",
+    "name": "LT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "gas_fee_usd",
+        "operator": "<",
+        "value": 0.05
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.043Z"
+    }
+  },
+  {
+    "id": "a8512666-b8f3-4117-9e5b-059dad46dccf",
+    "name": "EQ Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "day_of_week",
+        "operator": "==",
+        "value": 1
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.049Z"
+    }
+  },
+  {
+    "id": "b5819635-7e49-46e0-990f-ec3e3577f3ec",
+    "name": "GTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "engagement_score",
+        "operator": ">=",
+        "value": 50
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.056Z"
+    }
+  },
+  {
+    "id": "f4771397-772e-406f-bbbb-742dfdd524fb",
+    "name": "LTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "hour_of_day",
+        "operator": "<=",
+        "value": 12
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.082Z"
+    }
+  },
+  {
+    "id": "095b8f1d-96c9-454d-a7de-ad2bdc116663",
+    "name": "Missing Field",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "nonexistent_field",
+        "operator": ">",
+        "value": 0
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.094Z"
+    }
+  },
+  {
+    "id": "fe6a9117-00d3-4149-8071-949fb4598eef",
+    "name": "Watch Time Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.117Z"
+    }
+  },
+  {
+    "id": "02eaaff5-f133-4c4b-981c-206c67d638dd",
+    "name": "Watch Time Below",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.126Z"
+    }
+  },
+  {
+    "id": "e8cf672f-a7e5-4bd9-8da8-5faad168ebdf",
+    "name": "Schedule Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.133Z"
+    }
+  },
+  {
+    "id": "da1969a6-234e-4797-bcdd-20d129e56a47",
+    "name": "Milestone Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "milestone"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:57:42.142Z"
+    }
+  },
+  {
+    "id": "eabc654d-0254-4108-8360-f77550ce015e",
+    "name": "Exec Stats",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 1,
+      "totalAmountSent": 0.01,
+      "createdAt": "2026-03-22T15:57:42.153Z",
+      "lastTriggeredAt": "2026-03-22T15:57:42.157Z"
+    }
+  },
+  {
+    "id": "97ee92c8-c711-423a-8faa-0ad78535238e",
+    "name": "Watch Time Reward",
+    "description": "Tip when viewer watches 80%+ of a video",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "test-user",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 0,
+      "maxPerDay": 100,
+      "maxPerWeek": 500
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:32.238Z"
+    }
+  },
+  {
+    "id": "377e0210-fb5b-48de-bdce-1eab58b9a2b2",
+    "name": "Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:34.819Z"
+    }
+  },
+  {
+    "id": "8a84f4fd-768c-41df-8c94-e99cfd5b2fdd",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:34.831Z"
+    }
+  },
+  {
+    "id": "dccd8a95-f223-4482-9db7-bfbb20696e6b",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 95
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:34.845Z"
+    }
+  },
+  {
+    "id": "a6f39b8e-31a9-409b-9087-ba7c2e9f8305",
+    "name": "Test Policy",
+    "description": "A test policy",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.185Z"
+    }
+  },
+  {
+    "id": "ca2243b5-b1a2-4876-abd7-326697c06be2",
+    "name": "Default Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.191Z"
+    }
+  },
+  {
+    "id": "15d56d58-c905-4e41-91cc-3138c7ee7867",
+    "name": "Custom Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 30,
+      "maxPerDay": 5,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.195Z"
+    }
+  },
+  {
+    "id": "2149fad0-5591-4d99-8c04-e1f8d24a1db3",
+    "name": "Get Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "new_video"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.202Z"
+    }
+  },
+  {
+    "id": "ec1bea34-89bf-4a64-b83b-df73d7373c10",
+    "name": "Toggle Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.222Z"
+    }
+  },
+  {
+    "id": "e4dea2fa-0742-4c2c-91a0-d741be7f8304",
+    "name": "GT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "balance",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.236Z"
+    }
+  },
+  {
+    "id": "350f8690-08da-4a0d-91ec-865b017edf3f",
+    "name": "LT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "gas_fee_usd",
+        "operator": "<",
+        "value": 0.05
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.244Z"
+    }
+  },
+  {
+    "id": "ecb63f32-fae2-4aaf-9081-b04b03c2b450",
+    "name": "EQ Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "day_of_week",
+        "operator": "==",
+        "value": 1
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.253Z"
+    }
+  },
+  {
+    "id": "82ee3cbb-2527-4ca3-83db-93dc6bfc62be",
+    "name": "GTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "engagement_score",
+        "operator": ">=",
+        "value": 50
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.265Z"
+    }
+  },
+  {
+    "id": "6247f2b6-dc0b-45df-9e8a-b0c594d77080",
+    "name": "LTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "hour_of_day",
+        "operator": "<=",
+        "value": 12
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.275Z"
+    }
+  },
+  {
+    "id": "891e2c8d-d35c-48d3-8c34-bab4fb67aad7",
+    "name": "Missing Field",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "nonexistent_field",
+        "operator": ">",
+        "value": 0
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.281Z"
+    }
+  },
+  {
+    "id": "8122bd18-d51d-4f6f-a5eb-37d102354897",
+    "name": "Watch Time Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.289Z"
+    }
+  },
+  {
+    "id": "64808f33-2e6f-4708-ac62-14cc14492746",
+    "name": "Watch Time Below",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.296Z"
+    }
+  },
+  {
+    "id": "7a326b85-2b3c-4834-9352-a137fdbf2f50",
+    "name": "Schedule Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.306Z"
+    }
+  },
+  {
+    "id": "2e1a9c56-269a-4816-aedd-455bd14df8cc",
+    "name": "Milestone Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "milestone"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T15:59:35.313Z"
+    }
+  },
+  {
+    "id": "8915d07a-be43-48cb-b782-59721910d46f",
+    "name": "Exec Stats",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 1,
+      "totalAmountSent": 0.01,
+      "createdAt": "2026-03-22T15:59:35.320Z",
+      "lastTriggeredAt": "2026-03-22T15:59:35.325Z"
+    }
+  },
+  {
+    "id": "7e2e49a6-1c5e-4d25-9d9d-e0e4d38898cb",
+    "name": "Watch Time Reward",
+    "description": "Tip when viewer watches 80%+ of a video",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "test-user",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 0,
+      "maxPerDay": 100,
+      "maxPerWeek": 500
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:26.508Z"
+    }
+  },
+  {
+    "id": "450eb9f1-7632-4e35-af1e-5853b49eb50d",
+    "name": "Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:27.952Z"
+    }
+  },
+  {
+    "id": "c3d0f13a-8910-45fe-a4ac-ca28f90cd16d",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:27.964Z"
+    }
+  },
+  {
+    "id": "dbf73f5a-cdf9-4678-a58f-75be769de933",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 95
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:27.981Z"
+    }
+  },
+  {
+    "id": "134645e6-acd2-43e1-8de8-0ab8ac08c4a3",
+    "name": "Test Policy",
+    "description": "A test policy",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.195Z"
+    }
+  },
+  {
+    "id": "f26066d5-300b-4ec9-9df2-d8cda807e1e7",
+    "name": "Default Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.201Z"
+    }
+  },
+  {
+    "id": "a39d4c35-d679-4289-97e2-42fa599fd3ac",
+    "name": "Custom Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 30,
+      "maxPerDay": 5,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.205Z"
+    }
+  },
+  {
+    "id": "d90bec7c-30cf-4ad4-af18-8320dbe98972",
+    "name": "Get Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "new_video"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.212Z"
+    }
+  },
+  {
+    "id": "3244d261-1bbc-4580-a2da-62869ccf31b7",
+    "name": "Toggle Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.226Z"
+    }
+  },
+  {
+    "id": "dc3abcd0-d145-4d6f-971a-1e5381d76c60",
+    "name": "GT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "balance",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.237Z"
+    }
+  },
+  {
+    "id": "f9605600-e0b4-442e-a183-c291d906bd4c",
+    "name": "LT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "gas_fee_usd",
+        "operator": "<",
+        "value": 0.05
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.246Z"
+    }
+  },
+  {
+    "id": "b1efd589-5c69-4cee-beab-cc56a3be2a36",
+    "name": "EQ Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "day_of_week",
+        "operator": "==",
+        "value": 1
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.252Z"
+    }
+  },
+  {
+    "id": "3e6c6d28-4090-4cf7-8c0a-d50e4671d5dd",
+    "name": "GTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "engagement_score",
+        "operator": ">=",
+        "value": 50
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.264Z"
+    }
+  },
+  {
+    "id": "34167d01-5c31-43b4-b5aa-63481c344ea5",
+    "name": "LTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "hour_of_day",
+        "operator": "<=",
+        "value": 12
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.277Z"
+    }
+  },
+  {
+    "id": "4e1fd0ff-ced3-4bd1-b77b-1d66f8e32dc0",
+    "name": "Missing Field",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "nonexistent_field",
+        "operator": ">",
+        "value": 0
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.286Z"
+    }
+  },
+  {
+    "id": "db9b3bee-83ec-4abb-b6d5-5342a9ac3f0e",
+    "name": "Watch Time Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.303Z"
+    }
+  },
+  {
+    "id": "603b756a-aefd-41fa-8486-fbfc8fd1ceda",
+    "name": "Watch Time Below",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.312Z"
+    }
+  },
+  {
+    "id": "b795a2cb-e87c-470e-9a4d-1ce40eaa711a",
+    "name": "Schedule Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.321Z"
+    }
+  },
+  {
+    "id": "bd1e2774-c10c-4a42-8b40-1db1ba44dbef",
+    "name": "Milestone Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "milestone"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:00:28.347Z"
+    }
+  },
+  {
+    "id": "cc82d1e0-5fbe-43c4-bad6-c0235e62243d",
+    "name": "Exec Stats",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 1,
+      "totalAmountSent": 0.01,
+      "createdAt": "2026-03-22T16:00:28.365Z",
+      "lastTriggeredAt": "2026-03-22T16:00:28.368Z"
+    }
+  },
+  {
+    "id": "26c45d94-ee57-41dd-b66c-4c87560ed072",
+    "name": "Watch Time Reward",
+    "description": "Tip when viewer watches 80%+ of a video",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "test-user",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 0,
+      "maxPerDay": 100,
+      "maxPerWeek": 500
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:41.676Z"
+    }
+  },
+  {
+    "id": "2cd31777-ca50-4ac2-922c-f54ce3f78dcb",
+    "name": "Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:43.825Z"
+    }
+  },
+  {
+    "id": "c322761a-e084-44e3-9dcd-f87d70d5f34e",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:43.840Z"
+    }
+  },
+  {
+    "id": "aad3a1a3-1bd0-422c-a046-ec5a0d50b9a2",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 95
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:43.856Z"
+    }
+  },
+  {
+    "id": "f10b740c-ce41-40a5-9ce1-fbfec4adfbec",
+    "name": "Test Policy",
+    "description": "A test policy",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.112Z"
+    }
+  },
+  {
+    "id": "5a3d0955-575c-4103-8524-181c4eb391da",
+    "name": "Default Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.118Z"
+    }
+  },
+  {
+    "id": "3bde5978-1e6b-47bd-8bb8-88fdf72e6ed4",
+    "name": "Custom Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 30,
+      "maxPerDay": 5,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.122Z"
+    }
+  },
+  {
+    "id": "88448568-ff2c-44f7-b8b4-ab635b7e7671",
+    "name": "Get Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "new_video"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.128Z"
+    }
+  },
+  {
+    "id": "8efc0ff3-80e9-4676-83d7-a3dabe48d429",
+    "name": "Toggle Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.143Z"
+    }
+  },
+  {
+    "id": "68429b65-55c4-4ed7-a543-3e2d00e5c82a",
+    "name": "GT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "balance",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.185Z"
+    }
+  },
+  {
+    "id": "d7f4ef2b-0af3-4830-989c-f1ed1698a0db",
+    "name": "LT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "gas_fee_usd",
+        "operator": "<",
+        "value": 0.05
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.193Z"
+    }
+  },
+  {
+    "id": "3afee89c-b380-499d-89a3-6026736b250c",
+    "name": "EQ Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "day_of_week",
+        "operator": "==",
+        "value": 1
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.204Z"
+    }
+  },
+  {
+    "id": "f7bbf638-9c73-4b22-8893-1eccbbfb575c",
+    "name": "GTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "engagement_score",
+        "operator": ">=",
+        "value": 50
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.248Z"
+    }
+  },
+  {
+    "id": "b5eaf766-8062-48ef-8ceb-ffb68e11440f",
+    "name": "LTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "hour_of_day",
+        "operator": "<=",
+        "value": 12
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.257Z"
+    }
+  },
+  {
+    "id": "10f4ae14-8ce2-415e-90fe-70d10a3c90c1",
+    "name": "Missing Field",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "nonexistent_field",
+        "operator": ">",
+        "value": 0
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.263Z"
+    }
+  },
+  {
+    "id": "3a872dd9-a46d-47ce-8382-d2b0939a6a3e",
+    "name": "Watch Time Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.272Z"
+    }
+  },
+  {
+    "id": "2499ca7f-e6ce-4c85-a1bf-5681a7e2f2b6",
+    "name": "Watch Time Below",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.282Z"
+    }
+  },
+  {
+    "id": "ab0408e3-1d89-4215-be07-1c00eb988e64",
+    "name": "Schedule Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.290Z"
+    }
+  },
+  {
+    "id": "078ae9c1-ce7e-441e-9e2e-d74d9eb07278",
+    "name": "Milestone Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "milestone"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:25:44.297Z"
+    }
+  },
+  {
+    "id": "6c57a110-06b3-4240-972e-e930492fb2e3",
+    "name": "Exec Stats",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 1,
+      "totalAmountSent": 0.01,
+      "createdAt": "2026-03-22T16:25:44.305Z",
+      "lastTriggeredAt": "2026-03-22T16:25:44.310Z"
+    }
+  },
+  {
+    "id": "a8e12f87-26bd-41d8-94e0-66815dd7e5ae",
+    "name": "Watch Time Reward",
+    "description": "Tip when viewer watches 80%+ of a video",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "test-user",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 0,
+      "maxPerDay": 100,
+      "maxPerWeek": 500
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:51.247Z"
+    }
+  },
+  {
+    "id": "167b5417-72d5-4f61-b73b-878ea9e516f5",
+    "name": "Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.265Z"
+    }
+  },
+  {
+    "id": "a98e934d-8700-44d0-ba51-a903d60904c7",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.281Z"
+    }
+  },
+  {
+    "id": "6c5cc795-c7f9-4e82-9396-23fcaae96c88",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 95
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.300Z"
+    }
+  },
+  {
+    "id": "4265ddb3-aa62-4f5c-85d2-9326301c0a49",
+    "name": "Test Policy",
+    "description": "A test policy",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.807Z"
+    }
+  },
+  {
+    "id": "5cc5f880-1421-4844-9bd5-3ecd591a48b8",
+    "name": "Default Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.813Z"
+    }
+  },
+  {
+    "id": "10fb7676-4d55-4234-9867-0c892d5d4c3e",
+    "name": "Custom Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 30,
+      "maxPerDay": 5,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.817Z"
+    }
+  },
+  {
+    "id": "6f3e6233-2f8a-41d5-85ff-3856d4a264db",
+    "name": "Get Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "new_video"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.822Z"
+    }
+  },
+  {
+    "id": "544a968c-d79c-4905-8f45-97063ef03426",
+    "name": "Toggle Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.851Z"
+    }
+  },
+  {
+    "id": "72ce654d-ab12-44e9-9f4d-53ca6db9760e",
+    "name": "GT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "balance",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.869Z"
+    }
+  },
+  {
+    "id": "9175e753-6fb5-4d2a-8bf5-1fc92d795e20",
+    "name": "LT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "gas_fee_usd",
+        "operator": "<",
+        "value": 0.05
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.877Z"
+    }
+  },
+  {
+    "id": "12d87d78-ad8e-4faf-a359-0e1a14089ead",
+    "name": "EQ Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "day_of_week",
+        "operator": "==",
+        "value": 1
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.888Z"
+    }
+  },
+  {
+    "id": "52abe91a-0ded-4efe-bbf9-544c77691eb4",
+    "name": "GTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "engagement_score",
+        "operator": ">=",
+        "value": 50
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.896Z"
+    }
+  },
+  {
+    "id": "6e96c731-0cc8-4651-917c-621f011dcfe2",
+    "name": "LTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "hour_of_day",
+        "operator": "<=",
+        "value": 12
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.907Z"
+    }
+  },
+  {
+    "id": "56bd718c-6af4-424a-a5be-84b6ca60b041",
+    "name": "Missing Field",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "nonexistent_field",
+        "operator": ">",
+        "value": 0
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.916Z"
+    }
+  },
+  {
+    "id": "5ec103dd-ba91-44be-ab6d-f16455dd07ad",
+    "name": "Watch Time Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.925Z"
+    }
+  },
+  {
+    "id": "7a434070-7c43-45af-856c-b9aa03c78c82",
+    "name": "Watch Time Below",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.938Z"
+    }
+  },
+  {
+    "id": "05fb23d9-b12a-497f-affc-5198dc1411b3",
+    "name": "Schedule Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.945Z"
+    }
+  },
+  {
+    "id": "44b72160-c4cc-45e0-b0dd-418b5d6cc02d",
+    "name": "Milestone Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "milestone"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:44:53.953Z"
+    }
+  },
+  {
+    "id": "67cd805e-9fdb-4663-8c7e-7129429fa3e0",
+    "name": "Exec Stats",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 1,
+      "totalAmountSent": 0.01,
+      "createdAt": "2026-03-22T16:44:53.976Z",
+      "lastTriggeredAt": "2026-03-22T16:44:53.985Z"
+    }
+  },
+  {
+    "id": "b8ac4900-ed04-43fd-adb1-82ae69f0ef8c",
+    "name": "Watch Time Reward",
+    "description": "Tip when viewer watches 80%+ of a video",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "test-user",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 0,
+      "maxPerDay": 100,
+      "maxPerWeek": 500
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:50.872Z"
+    }
+  },
+  {
+    "id": "d7aaee4d-709b-4aa4-a6ea-5e7614fea21c",
+    "name": "Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.161Z"
+    }
+  },
+  {
+    "id": "aedfb636-5afd-4ac0-a6b1-ca85442d1fbf",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.174Z"
+    }
+  },
+  {
+    "id": "0d468939-1078-49f0-b4b1-5f30d64d7cf3",
+    "name": "T",
+    "description": "t",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "u",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 95
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.198Z"
+    }
+  },
+  {
+    "id": "03c8e1dd-01e8-4af8-9e8d-87f23a607843",
+    "name": "Test Policy",
+    "description": "A test policy",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.517Z"
+    }
+  },
+  {
+    "id": "99cec215-d6d7-42db-a67b-045fffb48465",
+    "name": "Default Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.527Z"
+    }
+  },
+  {
+    "id": "31ca64e3-1475-47d1-91ca-2ae77f22a1a6",
+    "name": "Custom Cooldown",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 30,
+      "maxPerDay": 5,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.533Z"
+    }
+  },
+  {
+    "id": "e6bea557-0a56-4779-aa7a-210a98a7fa0c",
+    "name": "Get Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "new_video"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.538Z"
+    }
+  },
+  {
+    "id": "18d75806-2f19-4907-bc81-91a0ff56d6de",
+    "name": "Toggle Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.558Z"
+    }
+  },
+  {
+    "id": "6dc159b8-54a1-491d-8b11-ddbc5a22adc5",
+    "name": "GT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "balance",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.569Z"
+    }
+  },
+  {
+    "id": "5071cd40-bd7e-40df-a8e6-0dc492ac3516",
+    "name": "LT Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "gas_fee_usd",
+        "operator": "<",
+        "value": 0.05
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.578Z"
+    }
+  },
+  {
+    "id": "33b7428e-f3d8-498a-a419-8f91e732e4ec",
+    "name": "EQ Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "day_of_week",
+        "operator": "==",
+        "value": 1
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.608Z"
+    }
+  },
+  {
+    "id": "ec191d74-346e-4045-85c1-f98d1623b845",
+    "name": "GTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "engagement_score",
+        "operator": ">=",
+        "value": 50
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.617Z"
+    }
+  },
+  {
+    "id": "9c8588e4-937e-49da-ab95-2289cba94fcc",
+    "name": "LTE Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "hour_of_day",
+        "operator": "<=",
+        "value": 12
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.624Z"
+    }
+  },
+  {
+    "id": "88af49e0-5569-4379-b071-b6e4a342c220",
+    "name": "Missing Field",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [
+      {
+        "field": "nonexistent_field",
+        "operator": ">",
+        "value": 0
+      }
+    ],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.633Z"
+    }
+  },
+  {
+    "id": "dad20ea5-2d84-440c-941e-29435e7f32df",
+    "name": "Watch Time Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.641Z"
+    }
+  },
+  {
+    "id": "714aeb38-699e-4b64-8896-2ece1d6f563c",
+    "name": "Watch Time Below",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "watch_time",
+      "threshold": 80
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.649Z"
+    }
+  },
+  {
+    "id": "4c543eef-9e7a-46b2-b9cf-4042f4ca7227",
+    "name": "Schedule Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.660Z"
+    }
+  },
+  {
+    "id": "64514309-0ed3-46b3-bea9-a2883cb69d69",
+    "name": "Milestone Test",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "milestone"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 0,
+      "totalAmountSent": 0,
+      "createdAt": "2026-03-22T16:45:53.667Z"
+    }
+  },
+  {
+    "id": "895c2e0b-8185-4408-b92e-01ad7d824668",
+    "name": "Exec Stats",
+    "description": "test",
+    "enabled": true,
+    "priority": 50,
+    "createdBy": "user1",
+    "trigger": {
+      "type": "schedule"
+    },
+    "conditions": [],
+    "action": {
+      "type": "tip",
+      "amount": {
+        "mode": "fixed",
+        "base": 0.01
+      },
+      "chain": "cheapest",
+      "token": "usdt"
+    },
+    "cooldown": {
+      "minIntervalMinutes": 60,
+      "maxPerDay": 10,
+      "maxPerWeek": 50
+    },
+    "stats": {
+      "timesTriggered": 1,
+      "totalAmountSent": 0.01,
+      "createdAt": "2026-03-22T16:45:53.678Z",
+      "lastTriggeredAt": "2026-03-22T16:45:53.684Z"
+    }
   }
 ]

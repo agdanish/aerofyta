@@ -14,9 +14,11 @@ pragma solidity ^0.8.24;
  */
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract AeroFytaEscrow is ReentrancyGuard {
+    using SafeERC20 for IERC20;
     struct Escrow {
         address sender;
         address recipient;
@@ -59,10 +61,11 @@ contract AeroFytaEscrow is ReentrancyGuard {
         uint256 timelock
     ) external {
         require(escrows[id].sender == address(0), "Escrow exists");
+        require(recipient != address(0), "Recipient is zero address");
         require(amount > 0, "Amount must be > 0");
         require(timelock > block.timestamp, "Timelock must be future");
 
-        IERC20(token).transferFrom(msg.sender, address(this), amount);
+        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
 
         escrows[id] = Escrow(msg.sender, recipient, token, amount, hashLock, timelock, false, false);
         emit EscrowCreated(id, msg.sender, recipient, amount, hashLock, timelock);
@@ -80,7 +83,7 @@ contract AeroFytaEscrow is ReentrancyGuard {
         require(keccak256(abi.encodePacked(secret)) == e.hashLock, "Invalid secret");
 
         e.claimed = true;
-        IERC20(e.token).transfer(e.recipient, e.amount);
+        IERC20(e.token).safeTransfer(e.recipient, e.amount);
         emit EscrowClaimed(id, secret);
     }
 
@@ -95,7 +98,7 @@ contract AeroFytaEscrow is ReentrancyGuard {
         require(msg.sender == e.sender, "Not sender");
 
         e.refunded = true;
-        IERC20(e.token).transfer(e.sender, e.amount);
+        IERC20(e.token).safeTransfer(e.sender, e.amount);
         emit EscrowRefunded(id);
     }
 }

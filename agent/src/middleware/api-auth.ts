@@ -8,6 +8,7 @@
 // - Unprotected routes: GET endpoints (read-only)
 // - Returns 401 with { error: 'Invalid API key', code: 'UNAUTHORIZED' }
 
+import { timingSafeEqual } from 'node:crypto';
 import { Request, Response, NextFunction, Router } from 'express';
 import { logger } from '../utils/logger.js';
 
@@ -46,7 +47,11 @@ export function apiAuthMiddleware(req: Request, res: Response, next: NextFunctio
   // Check X-API-Key header or ?apiKey query param
   const providedKey = (req.headers['x-api-key'] as string) || (req.query.apiKey as string);
 
-  if (!providedKey || providedKey !== expectedKey) {
+  const isValid = providedKey
+    && providedKey.length === expectedKey.length
+    && timingSafeEqual(Buffer.from(providedKey), Buffer.from(expectedKey));
+
+  if (!isValid) {
     logger.warn('Unauthorized API request blocked', {
       method: req.method,
       path: req.path,

@@ -117,7 +117,7 @@ const USDT0_ADDRESSES: Record<string, string> = {
  * TESTNET LIMITATION: USDT0 (LayerZero OFT) is not deployed on Sepolia.
  * On mainnet, this service executes real cross-chain bridge calls via WDK.
  * The WDK protocol registration and call patterns are production-ready.
- * See: https://github.com/nicetytether — WDK USDT0 bridge protocol docs
+ * See: https://github.com/tetherto — WDK USDT0 bridge protocol docs
  *
  * Uses `@tetherto/wdk-protocol-bridge-usdt0-evm` for REAL onchain bridge execution.
  * The bridge protocol is registered per-account via WDK's `registerProtocol()` method.

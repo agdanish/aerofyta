@@ -1,7 +1,7 @@
 {
   "creators": [
     {
-      "id": "45ae7571-5034-42ab-8cba-3ba19df7fc59",
+      "id": "9d84c90e-c15f-49a8-b66b-afa5fdcc34d8",
       "name": "TestCreator",
       "channelUrl": "https://rumble.com/test",
       "walletAddress": "0xabc",
@@ -11,10 +11,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.776Z"
+      "registeredAt": "2026-03-22T16:45:52.399Z"
     },
     {
-      "id": "5c46ccdb-ff8c-447b-ad19-d2bf52c12afe",
+      "id": "3783aa90-f576-4240-a5bc-1f23c2516a8b",
       "name": "NewName",
       "channelUrl": "https://rumble.com/dup",
       "walletAddress": "0x222",
@@ -24,10 +24,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.784Z"
+      "registeredAt": "2026-03-22T16:45:52.414Z"
     },
     {
-      "id": "2181728e-0ee1-4315-ab07-e70287eebd9b",
+      "id": "189c9b1a-8fd9-41fa-9087-1a4bd65db165",
       "name": "Low",
       "channelUrl": "https://rumble.com/low",
       "walletAddress": "0x1",
@@ -37,10 +37,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.788Z"
+      "registeredAt": "2026-03-22T16:45:52.418Z"
     },
     {
-      "id": "846d6f49-a497-4800-bf33-0ba356643532",
+      "id": "1f615ad8-9c6a-4db7-849f-8a7c7acf4c0a",
       "name": "High",
       "channelUrl": "https://rumble.com/high",
       "walletAddress": "0x2",
@@ -50,10 +50,10 @@
       "totalTipsReceived": 1,
       "totalTipAmount": 0.5,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.789Z"
+      "registeredAt": "2026-03-22T16:45:52.420Z"
     },
     {
-      "id": "286aec6d-94c7-4615-9c57-62e8d6405355",
+      "id": "3f4b9f0d-7158-4dde-91fd-dae3f9edb539",
       "name": "WatchMe",
       "channelUrl": "https://rumble.com/watch",
       "walletAddress": "0xw",
@@ -63,10 +63,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.796Z"
+      "registeredAt": "2026-03-22T16:45:52.424Z"
     },
     {
-      "id": "6c700fd4-56b2-41cf-bbe6-fff35825f0e8",
+      "id": "811b252e-b76a-4770-a0d5-9d69b6d96759",
       "name": "AutoCreator",
       "channelUrl": "https://rumble.com/auto",
       "walletAddress": "0xa",
@@ -76,10 +76,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.801Z"
+      "registeredAt": "2026-03-22T16:45:52.429Z"
     },
     {
-      "id": "740435fb-daad-4feb-8327-7b79f3250782",
+      "id": "80031771-5fc2-4351-94ae-1b49d8d067d2",
       "name": "LowWatch",
       "channelUrl": "https://rumble.com/loww",
       "walletAddress": "0xl",
@@ -89,10 +89,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.805Z"
+      "registeredAt": "2026-03-22T16:45:52.433Z"
     },
     {
-      "id": "db532efa-4cf0-4856-94ff-f5649b97d272",
+      "id": "8b88c596-898d-4a5e-b28e-8b8c81ef141a",
       "name": "PoolCreator",
       "channelUrl": "https://rumble.com/pool",
       "walletAddress": "0xp",
@@ -102,23 +102,23 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.811Z"
+      "registeredAt": "2026-03-22T16:45:52.438Z"
     },
     {
-      "id": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
+      "id": "ee044932-415f-481e-bea3-7bb335396435",
       "name": "GoalCreator",
       "channelUrl": "https://rumble.com/goal",
       "walletAddress": "0xg",
       "categories": [
         "finance"
       ],
-      "totalTipsReceived": 20,
-      "totalTipAmount": 0.41000000000000014,
+      "totalTipsReceived": 2,
+      "totalTipAmount": 0.11,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.814Z"
+      "registeredAt": "2026-03-22T16:45:52.440Z"
     },
     {
-      "id": "04cae69d-172c-4aa0-ba7c-d077ef8e40ef",
+      "id": "ac3019fe-212a-4fc6-a82b-1254ea6ad8c9",
       "name": "DoneCreator",
       "channelUrl": "https://rumble.com/done",
       "walletAddress": "0xd",
@@ -128,10 +128,10 @@
       "totalTipsReceived": 1,
       "totalTipAmount": 0.01,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.820Z"
+      "registeredAt": "2026-03-22T16:45:52.446Z"
     },
     {
-      "id": "acdf35cf-9177-4b1e-96ed-4be3f8606394",
+      "id": "54ce2085-e0a0-4ef3-97d3-80bb6ffbf222",
       "name": "ActivePool",
       "channelUrl": "https://rumble.com/active",
       "walletAddress": "0xap",
@@ -141,10 +141,10 @@
       "totalTipsReceived": 1,
       "totalTipAmount": 0.01,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.824Z"
+      "registeredAt": "2026-03-22T16:45:52.453Z"
     },
     {
-      "id": "f14876cc-b429-4c28-b1ad-48303862136e",
+      "id": "201387e4-8653-41a2-ab0d-2a7008f07e1d",
       "name": "NoHistory",
       "channelUrl": "https://rumble.com/nh",
       "walletAddress": "0xnh",
@@ -154,10 +154,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.828Z"
+      "registeredAt": "2026-03-22T16:45:52.458Z"
     },
     {
-      "id": "6d4ffe47-99df-42b8-bd7c-644b96912e78",
+      "id": "83545910-1924-423a-ae25-16a30ad6bf5f",
       "name": "EngCreator",
       "channelUrl": "https://rumble.com/eng",
       "walletAddress": "0xeng",
@@ -167,10 +167,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.830Z"
+      "registeredAt": "2026-03-22T16:45:52.463Z"
     },
     {
-      "id": "e1323743-46bb-4bc5-8743-7988fa8dd448",
+      "id": "9d0c4bac-5bae-4e4d-901c-39807b9d4f8d",
       "name": "EduCreator",
       "channelUrl": "https://rumble.com/edu",
       "walletAddress": "0xedu",
@@ -180,10 +180,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.835Z"
+      "registeredAt": "2026-03-22T16:45:52.470Z"
     },
     {
-      "id": "b20cd6e1-ed09-4bc1-b9df-e20677af65b7",
+      "id": "0e8dc334-7cfd-41a3-9f84-2e06a78d3c9f",
       "name": "GamCreator",
       "channelUrl": "https://rumble.com/gam",
       "walletAddress": "0xgam",
@@ -193,10 +193,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.837Z"
+      "registeredAt": "2026-03-22T16:45:52.472Z"
     },
     {
-      "id": "609ceee7-58b7-4c05-a412-7f5c7fe5eea9",
+      "id": "9b267793-5908-42d7-8796-738dea8132ee",
       "name": "TrigCreator",
       "channelUrl": "https://rumble.com/trig",
       "walletAddress": "0xt",
@@ -206,23 +206,23 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.839Z"
+      "registeredAt": "2026-03-22T16:45:52.475Z"
     },
     {
-      "id": "2b77764c-a25b-4b82-971f-f6d340885b66",
+      "id": "26469d9f-e5a3-4dda-a900-1858284afd5c",
       "name": "EventCreator",
       "channelUrl": "https://rumble.com/event",
       "walletAddress": "0xe",
       "categories": [
         "tech"
       ],
-      "totalTipsReceived": 13,
-      "totalTipAmount": 0.17600000000000002,
+      "totalTipsReceived": 1,
+      "totalTipAmount": 0.05,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.842Z"
+      "registeredAt": "2026-03-22T16:45:52.478Z"
     },
     {
-      "id": "7530918a-0f00-4fef-bc30-49af47f453cc",
+      "id": "7d1ad40c-bf90-44a0-8941-cd9472220783",
       "name": "NoEvent",
       "channelUrl": "https://rumble.com/noe",
       "walletAddress": "0xne",
@@ -232,10 +232,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.846Z"
+      "registeredAt": "2026-03-22T16:45:52.494Z"
     },
     {
-      "id": "521b44e0-7c82-4dab-90cc-60e338585dfc",
+      "id": "aceb2ebb-b793-4a93-848e-b1916d77e5aa",
       "name": "LB1",
       "channelUrl": "https://rumble.com/lb1",
       "walletAddress": "0xlb1",
@@ -245,10 +245,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.848Z"
+      "registeredAt": "2026-03-22T16:45:52.497Z"
     },
     {
-      "id": "6c67401c-86ae-4f18-93c2-8ecfe2ae3185",
+      "id": "514bdb37-020f-4811-95f9-847295eddf75",
       "name": "LB2",
       "channelUrl": "https://rumble.com/lb2",
       "walletAddress": "0xlb2",
@@ -258,10 +258,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.849Z"
+      "registeredAt": "2026-03-22T16:45:52.497Z"
     },
     {
-      "id": "2ab6cc40-efc7-4533-a39e-75f196493019",
+      "id": "5f404cd1-dab1-46e9-a808-0ee1ab2fd2e0",
       "name": "Collab1",
       "channelUrl": "https://rumble.com/c1",
       "walletAddress": "0xc1",
@@ -271,10 +271,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.851Z"
+      "registeredAt": "2026-03-22T16:45:52.499Z"
     },
     {
-      "id": "aa1f58da-c718-4a5e-8876-c07e4ba53ba9",
+      "id": "04886305-9348-42ed-a7f7-e3dc9a019aa0",
       "name": "Collab2",
       "channelUrl": "https://rumble.com/c2",
       "walletAddress": "0xc2",
@@ -284,10 +284,10 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.853Z"
+      "registeredAt": "2026-03-22T16:45:52.500Z"
     },
     {
-      "id": "55463120-3109-40fe-a273-f0193bc121e4",
+      "id": "7c18e681-2aa8-45f3-8479-7fa0f022a11c",
       "name": "BadSplit",
       "channelUrl": "https://rumble.com/bs",
       "walletAddress": "0xbs",
@@ -297,3537 +297,86 @@
       "totalTipsReceived": 0,
       "totalTipAmount": 0,
       "subscriberCount": 0,
-      "registeredAt": "2026-03-22T04:07:45.857Z"
-    },
-    {
-      "id": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "name": "TechReviewer",
-      "channelUrl": "https://rumble.com/c/TechReviewer",
-      "walletAddress": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-      "categories": [
-        "tech",
-        "reviews"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.345Z"
-    },
-    {
-      "id": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "name": "CryptoDaily",
-      "channelUrl": "https://rumble.com/c/CryptoDaily",
-      "walletAddress": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-      "categories": [
-        "crypto",
-        "finance"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.346Z"
-    },
-    {
-      "id": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "name": "GameStreamPro",
-      "channelUrl": "https://rumble.com/c/GameStreamPro",
-      "walletAddress": "UQBanAkpRVoVeUHJVSLbaCjregNDAejcBdKl1VA3ujWMWpOv",
-      "categories": [
-        "gaming",
-        "entertainment"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.347Z"
-    },
-    {
-      "id": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "name": "NewsAnalyst",
-      "channelUrl": "https://rumble.com/c/NewsAnalyst",
-      "walletAddress": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-      "categories": [
-        "news",
-        "politics"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.347Z"
-    },
-    {
-      "id": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "name": "FitnessGuru",
-      "channelUrl": "https://rumble.com/c/FitnessGuru",
-      "walletAddress": "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
-      "categories": [
-        "fitness",
-        "health"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.348Z"
-    },
-    {
-      "id": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "name": "CodingMaster",
-      "channelUrl": "https://rumble.com/c/CodingMaster",
-      "walletAddress": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
-      "categories": [
-        "tech",
-        "education"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.348Z"
-    },
-    {
-      "id": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "name": "MusicMaven",
-      "channelUrl": "https://rumble.com/c/MusicMaven",
-      "walletAddress": "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
-      "categories": [
-        "music",
-        "entertainment"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.348Z"
-    },
-    {
-      "id": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "name": "TravelVlogger",
-      "channelUrl": "https://rumble.com/c/TravelVlogger",
-      "walletAddress": "0x976EA74026E726554dB657fA54763abd0C3a0aa9",
-      "categories": [
-        "travel",
-        "lifestyle"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.349Z"
-    },
-    {
-      "id": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "name": "ChefSpecial",
-      "channelUrl": "https://rumble.com/c/ChefSpecial",
-      "walletAddress": "0x14dC79964da2C08dfa6B3085B7c31967F4e6d266",
-      "categories": [
-        "cooking",
-        "food"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.349Z"
-    },
-    {
-      "id": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "name": "ScienceExplained",
-      "channelUrl": "https://rumble.com/c/ScienceExplained",
-      "walletAddress": "0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f",
-      "categories": [
-        "science",
-        "education"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.350Z"
-    },
-    {
-      "id": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "name": "IndieFilmmaker",
-      "channelUrl": "https://rumble.com/c/IndieFilmmaker",
-      "walletAddress": "0xa0Ee7A142d267C1f36714E4a8F75612F20a79720",
-      "categories": [
-        "film",
-        "art"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.350Z"
-    },
-    {
-      "id": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "name": "DebateKing",
-      "channelUrl": "https://rumble.com/c/DebateKing",
-      "walletAddress": "0xBcd4042DE499D14e55001CcbB24a551F3b954096",
-      "categories": [
-        "politics",
-        "debate"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.350Z"
-    },
-    {
-      "id": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "name": "PetLovers",
-      "channelUrl": "https://rumble.com/c/PetLovers",
-      "walletAddress": "0x71bE63f3384f5fb98995898A86B02Fb2426c5788",
-      "categories": [
-        "animals",
-        "lifestyle"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.351Z"
-    },
-    {
-      "id": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "name": "BlockchainDev",
-      "channelUrl": "https://rumble.com/c/BlockchainDev",
-      "walletAddress": "0xFABB0ac9d68B0B445fB7357272Ff202C5651694a",
-      "categories": [
-        "crypto",
-        "tech",
-        "education"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.352Z"
-    },
-    {
-      "id": "28d06283-452e-419a-952e-ecb19837329a",
-      "name": "ComedyClub",
-      "channelUrl": "https://rumble.com/c/ComedyClub",
-      "walletAddress": "0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec",
-      "categories": [
-        "comedy",
-        "entertainment"
-      ],
-      "totalTipsReceived": 0,
-      "totalTipAmount": 0,
-      "subscriberCount": 0,
-      "registeredAt": "2026-03-22T06:11:48.352Z"
+      "registeredAt": "2026-03-22T16:45:52.503Z"
     }
   ],
   "watchSessions": [
     {
-      "id": "2d4254db-4395-4299-b29e-f285e8edacdc",
+      "id": "8b7ec264-1e82-4eea-97cb-37bcb2eb4e07",
       "userId": "user1",
-      "creatorId": "286aec6d-94c7-4615-9c57-62e8d6405355",
+      "creatorId": "3f4b9f0d-7158-4dde-91fd-dae3f9edb539",
       "videoId": "vid1",
       "watchPercent": 85,
-      "timestamp": "2026-03-22T04:07:45.797Z",
+      "timestamp": "2026-03-22T16:45:52.425Z",
       "autoTipTriggered": false
     },
     {
-      "id": "aea0075e-d8fe-4ee6-9edc-896f34e84651",
+      "id": "8be415bf-d72a-4fcf-a142-5a5a58a09785",
       "userId": "user2",
-      "creatorId": "6c700fd4-56b2-41cf-bbe6-fff35825f0e8",
+      "creatorId": "811b252e-b76a-4770-a0d5-9d69b6d96759",
       "videoId": "vid2",
       "watchPercent": 90,
-      "timestamp": "2026-03-22T04:07:45.802Z",
+      "timestamp": "2026-03-22T16:45:52.431Z",
       "autoTipTriggered": true
     },
     {
-      "id": "2bc0df07-3806-40a4-bbb9-5dde5b4517d0",
+      "id": "bbb63daa-e650-4efc-b958-4e33f5719e66",
       "userId": "user3",
-      "creatorId": "740435fb-daad-4feb-8327-7b79f3250782",
+      "creatorId": "80031771-5fc2-4351-94ae-1b49d8d067d2",
       "videoId": "vid3",
       "watchPercent": 50,
-      "timestamp": "2026-03-22T04:07:45.807Z",
+      "timestamp": "2026-03-22T16:45:52.434Z",
       "autoTipTriggered": false
     },
     {
-      "id": "9053c2ac-4a82-44fe-a8c5-6ebc86497f0b",
+      "id": "62f76883-e117-4b7b-b95f-497ced36167b",
       "userId": "engUser",
-      "creatorId": "6d4ffe47-99df-42b8-bd7c-644b96912e78",
+      "creatorId": "83545910-1924-423a-ae25-16a30ad6bf5f",
       "videoId": "v1",
       "watchPercent": 90,
-      "timestamp": "2026-03-22T04:07:45.831Z",
+      "timestamp": "2026-03-22T16:45:52.464Z",
       "autoTipTriggered": false
     },
     {
-      "id": "38d642ce-159d-46e4-bdcc-eaacb178747d",
+      "id": "10d5b281-6d6e-4228-98a3-167731fea3ab",
       "userId": "engUser",
-      "creatorId": "6d4ffe47-99df-42b8-bd7c-644b96912e78",
+      "creatorId": "83545910-1924-423a-ae25-16a30ad6bf5f",
       "videoId": "v2",
       "watchPercent": 85,
-      "timestamp": "2026-03-22T04:07:45.833Z",
+      "timestamp": "2026-03-22T16:45:52.465Z",
       "autoTipTriggered": false
     },
     {
-      "id": "c5ff3eb3-2e7a-4820-88d6-1f52772d2d7d",
+      "id": "a588278f-ed98-4174-9e67-27dd3ebd5cea",
       "userId": "engUser",
-      "creatorId": "6d4ffe47-99df-42b8-bd7c-644b96912e78",
+      "creatorId": "83545910-1924-423a-ae25-16a30ad6bf5f",
       "videoId": "v1",
       "watchPercent": 95,
-      "timestamp": "2026-03-22T04:07:45.834Z",
+      "timestamp": "2026-03-22T16:45:52.467Z",
       "autoTipTriggered": false
     },
     {
-      "id": "5be63c1a-1595-475a-94bc-5a7da0e52532",
+      "id": "d6a56dc8-89ed-4929-b280-d354dd5fd4df",
       "userId": "eduUser",
-      "creatorId": "e1323743-46bb-4bc5-8743-7988fa8dd448",
+      "creatorId": "9d0c4bac-5bae-4e4d-901c-39807b9d4f8d",
       "videoId": "v1",
       "watchPercent": 90,
-      "timestamp": "2026-03-22T04:07:45.835Z",
+      "timestamp": "2026-03-22T16:45:52.471Z",
       "autoTipTriggered": false
     },
     {
-      "id": "78c81f6e-e27b-48f6-9530-d755a6e792ff",
+      "id": "cf339ef3-8921-47fe-9acc-5d4f18206917",
       "userId": "gamUser",
-      "creatorId": "b20cd6e1-ed09-4bc1-b9df-e20677af65b7",
+      "creatorId": "0e8dc334-7cfd-41a3-9f84-2e06a78d3c9f",
       "videoId": "v1",
       "watchPercent": 90,
-      "timestamp": "2026-03-22T04:07:45.837Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c7e402f7-2cdb-4558-98bc-c1f597de5e7e",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:11:48.388Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c0381120-7cbd-47ee-8783-78df06c3dd84",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:11:48.389Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "14d706a8-2d8b-4e66-8eaa-7731640b0f67",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:11:48.389Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2f826ba8-bb38-41fe-bda7-9e34cdae03bf",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:11:48.389Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "03187d3a-1597-41ae-9c67-3125996d4a5e",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:11:48.390Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "850b43d9-f6f6-4635-956d-156f112f32ab",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:11:48.390Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "7265db8f-cfef-4ecb-833c-cc60a9cecbb8",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.390Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "747b3a02-1118-4864-8b38-284df719e5f4",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:11:48.391Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "da83f56d-9732-4c68-b687-e5acc562cd90",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:11:48.391Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "148ad22c-5861-4891-812a-f77883ee639b",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.392Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a2ddd832-7503-4693-a58e-030b854cd30a",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_3",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:11:48.392Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6ad6c2ed-67ed-4de6-ad9e-216f5837fb4d",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_4",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:11:48.392Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "045e3978-63c0-4777-96c6-8e4aa8289bb5",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:11:48.393Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4f55f1a6-849d-4cec-8fd5-2721c1ef223b",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.393Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "952768c0-c573-4f2f-85fc-5c34574596da",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:11:48.393Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6c114630-0f72-40e0-95c4-9badd1c86a11",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.394Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0cc11303-266b-47e3-9f40-b28a02a6041e",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:11:48.394Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c8180007-2a2f-4b8a-ab7e-2c6be0e51dbd",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:11:48.395Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c2360a00-c9f5-4af4-a61b-806d336324df",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:11:48.395Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2aea5238-23ba-49e8-a52d-31256799e0e2",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_0",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:11:48.395Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d70d5f45-e6a4-4b60-944e-784d47e28f89",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_1",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:11:48.396Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "60a272ae-489f-4230-a668-98e026023c91",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_2",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:11:48.396Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9e0de14f-0c3a-4962-aeef-57251ad0e4c4",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_3",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:11:48.396Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "88300d9a-55ea-4d43-a626-3fc862f32775",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_4",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:11:48.397Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d5cd65ab-6c8a-4bd2-89d1-1e1f7de9e57b",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_0",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:11:48.397Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a214d86c-cbdc-47bc-87c1-da5d518aa5b2",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_1",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:11:48.397Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0ea3df24-abe6-4b45-9004-d7a701d29ffe",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_2",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:11:48.398Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "25f250b8-45e1-4821-b46b-8e57e6e0098a",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_0",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:11:48.398Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "67646bfb-3ef8-4957-b212-12f0e321edf0",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_1",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:11:48.398Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d8c41e23-6c7e-41ad-9d81-ac6e49cdaa5f",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_2",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:11:48.399Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "16a17132-c600-46c8-a69e-5994a37c99c7",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_3",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:11:48.399Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "676e39ea-ca36-4aa0-9cd5-e31b26c1cdfd",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_0",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:11:48.400Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "7b25c7be-363c-4133-8386-fc80be750fa1",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_1",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:11:48.400Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "539e18aa-a65e-45a8-ade1-cfe608d59ccc",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_2",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:11:48.400Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "50256c85-1031-4038-ac0f-c743f27b2f78",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_3",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:11:48.401Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "900f8271-4c58-4bba-8144-9ff7d1766394",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_4",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:11:48.401Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4949e4dd-2be3-4a79-91e9-d4eecf28c51a",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_0",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:11:48.402Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "555866c5-e52d-4fa0-872f-e877ecdf8ee3",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_1",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:11:48.402Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "12d7d8a5-2272-4cb6-a470-d9be7a5a4142",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_2",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:11:48.402Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9c514838-fe4c-4121-9b18-5ab7d635f3d7",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:11:48.403Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5ab99a97-c021-42ad-a1af-99ce5b5c6b4c",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:11:48.403Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5c1eed2f-cec8-49c9-a6e7-e8a50792a97c",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:11:48.403Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b16d127a-659b-424c-872e-d6e47f34fa8c",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_3",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:11:48.404Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6dda0969-a7b5-49b8-a0e6-1e0ef850c400",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:11:48.404Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fb31d26c-7840-4b6a-91bd-747ab835bdc7",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:11:48.404Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2107b1ec-169f-4626-99a4-fab707c3d147",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:11:48.405Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c02fcbad-4777-4efa-a213-c26520bd039b",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.405Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "75c6e3ea-075f-4ec8-8ece-03ceab48e9a5",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_4",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:11:48.405Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "066af497-1cf5-4c5d-a288-735dabf8c8d9",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:11:48.406Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c53a9d6b-e7fb-4316-b91d-3e1a14fa8630",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:11:48.406Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fecfd67f-905b-430f-90dd-a831c459f212",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.406Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b724edac-0c93-40aa-8c40-fa29d1f49ccf",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:11:48.407Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b4cd1990-baea-43bc-9230-e3b064ee5c5d",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.408Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2d158a09-6831-4025-9fdc-6e6739fae01e",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:11:48.408Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3f001e70-be4b-4ecc-8e93-45e9ffe862df",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_3",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:11:48.408Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "df5e7122-dc2f-4ca6-85ef-70d6f70bc869",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:11:48.409Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b17b3768-0b4b-4245-9a76-21027d74ba07",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:11:48.409Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "52a5a357-0d7c-4f8b-8a9b-aa7f33a5857c",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:11:48.410Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6ad7b36d-6019-41ad-a84d-0b95233147aa",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:11:48.410Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4d514fda-71e6-4ac9-a7ed-b365f3d1ab98",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_4",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:11:48.410Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8ef6b54f-a95e-4f41-bffb-06a465eaae0b",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:12:22.134Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "d6ef923c-321d-4b9a-9313-e99b23f8cb1b",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:12:22.135Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "27924275-9e34-4fcc-98b5-58447b53b54b",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:12:22.135Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c4be9b62-d67d-4686-afec-423222f68386",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:12:22.136Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "c537d3ae-c22b-429e-ae4f-f58b25db65e9",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:12:22.136Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "bf9c04c8-3561-4806-a0d5-39ca0ea97118",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:12:22.136Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "497aa39c-1841-45cf-bc98-5b36519c1664",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.137Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "b863f7db-8ab7-4c19-9a42-f43b7b862a87",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:12:22.137Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "06c63e80-2c59-4881-86cd-b2ecd856a75b",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:12:22.138Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b30980be-e8e1-421c-886d-1c99c3193064",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.138Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "e42007f7-c47a-4633-9bd6-2a9d7779ea7d",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_3",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:12:22.138Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fec9e2d9-ee25-43ed-89f4-841c31ba5201",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_4",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:12:22.139Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "2c8c8077-017c-4ef4-af71-211fc335d5e0",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:12:22.139Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9cf99d26-9a96-4d5c-a5ad-1c4458433597",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.140Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d02cb9ae-a7ba-4f82-af30-25e70db76c54",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:12:22.140Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "479ba43f-1c2e-4698-9836-fd987c2c19dd",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.140Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "168470d1-b5e3-4911-b99e-efd948290219",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:12:22.141Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4659bc42-23e8-4a0f-aa5f-5bb642cec3cf",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:12:22.141Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "39353440-8def-446d-9169-733c8567fffa",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:12:22.142Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0bb199cb-f550-49b2-b15f-89ae2bb358bb",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_0",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:12:22.142Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "836db8da-947e-42a8-9c8a-b8b5aab47c1e",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_1",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:12:22.142Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ca5bf70f-086d-41e8-8585-fd57e5d2f815",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_2",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:12:22.143Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "532359fb-6971-40b5-8776-2457f81df665",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_3",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:12:22.143Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "681db2c6-0095-43b9-9c83-da88491740a0",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_4",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:12:22.144Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9dec180b-d579-450b-bcc8-823ff36079dc",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_0",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:12:22.144Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "7d9795e6-db72-41c2-a593-49ddb3c219ac",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_1",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:12:22.145Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "24556134-9692-4548-a099-edf8e2e65c6e",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_2",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:12:22.145Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "feab6719-63b5-4ebe-87f9-50b57a009583",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_0",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:12:22.145Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "05721e36-c021-4943-a661-674e734083bd",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_1",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:12:22.146Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ff9d0446-fdfe-4b78-9a6e-f74bf91773d5",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_2",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:12:22.146Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "208faa39-4ef9-4264-8995-230783d6377a",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_3",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:12:22.147Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4e17c0ba-7a93-403b-8585-aa39967f9172",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_0",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:12:22.147Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "00531424-ea3c-4797-ba12-9206895b5dfd",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_1",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:12:22.147Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3ea89bc3-5905-4f40-8b6a-4035b98d0fad",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_2",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:12:22.148Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "19a66871-256b-49fe-921d-07f44106cb33",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_3",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:12:22.148Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6baca212-01d8-4543-8a69-6cfb9fadc94d",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_4",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:12:22.148Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9fbaabf5-12f5-496a-9ebb-25eff64927a8",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_0",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:12:22.149Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a145beff-b335-44b6-a593-32e97efd5ead",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_1",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:12:22.149Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a341825d-2829-41dd-9582-11b24d71ee26",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_2",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:12:22.150Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "1deb40a1-51da-4e90-a9bb-ede8abccb1aa",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:12:22.150Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c00021f0-63e6-4521-b0d8-6bf9b38cd849",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:12:22.151Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f1218836-d4fd-416a-9fb7-78de45ee3d02",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:12:22.151Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0205f8e2-f396-4874-9f12-e116489d46f2",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_3",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:12:22.151Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fe96618e-440c-49ed-8bf5-ce71b89f252e",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:12:22.152Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f330df34-f2fc-41a6-8d96-9a7a02fbdde1",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:12:22.152Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "bac32898-ee21-4b58-bc02-d29aa5f4b4ab",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:12:22.153Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a557e073-b04f-4179-a667-297c3578fc50",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.153Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b8f27cb0-d7ee-4007-a170-678c2ed3d99a",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_4",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:12:22.153Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3c85ea6c-72f1-4795-bd09-90a72ce79648",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:12:22.154Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fdb94a50-67c3-470f-ace7-7bc0b11db7da",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:12:22.154Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fc0e6c28-279f-4933-8176-7a1459c4e5cb",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.155Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "56e75e08-039c-4c97-90bc-08abd640b65f",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:12:22.155Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "16f1251f-d2a0-4f59-b75d-c722b84c81e7",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.155Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ee597523-9d4c-40d3-9c0d-f3cdf17ec608",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:12:22.156Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5d05912e-c506-4e53-a04a-98951a6b80a5",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_3",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:12:22.156Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6a6ce900-4c81-49ea-9092-f6f2c1f67b12",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:12:22.157Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "2c5d38bb-4465-4bc4-86d0-895841902628",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:12:22.157Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "17ce1f0c-a266-4440-82ac-07095405b429",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:12:22.158Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "064c2b92-52bd-48a7-a73b-2883e20534bd",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:12:22.158Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "7a0f0605-0479-486c-b408-4c007ec7d653",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_4",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:12:22.158Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c24f5b3a-c3d1-4e26-8a66-ff4132acd358",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:18:30.631Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "69070191-49f3-4aa2-9b9b-8ef87b5a46c7",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:18:30.632Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "794f4cf7-50ba-41a7-9ed3-95c477b0b700",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:18:30.632Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3cb698fa-d441-4627-9755-fe0c44b18967",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:18:30.633Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6bbc82ac-bab5-4e1d-baea-10e276ed420d",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:18:30.633Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "83e0a959-7272-45f8-877b-37e1d5297842",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:18:30.634Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a615b145-62fe-40e7-82d7-344fcfa6167b",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.634Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "01cfd268-48a4-4d66-8cf5-40c94228da2a",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:18:30.634Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6be50843-0414-4037-8486-b68ddc066356",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:18:30.635Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6a03f7f0-1870-4796-a31c-977cd9406d35",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.635Z",
-      "autoTipTriggered": true
-    },
-    {
-      "id": "37e0af5d-2a23-48cd-a09c-dca84a6956de",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_3",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:18:30.636Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "73aab7b1-7c79-4af0-83e2-d734cacfdaee",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_4",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:18:30.636Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "041caff3-6536-45a3-aac0-ca7dd4e4f20a",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:18:30.637Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "631a40a1-ebf9-4529-9a24-50e854d27b2d",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.637Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "81d3dac2-1b5b-4704-ae4e-478cf6fa2e58",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:18:30.637Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "e9b283ce-e896-45c3-abd2-57ef601cfd5c",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.638Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6c0e4f5f-ed64-4437-8f0a-79c8c30583ae",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:18:30.638Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "85f34266-65d5-428d-a132-bdd7654895a7",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:18:30.639Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c43ea037-f8a5-4aee-8936-45979c4a6fa9",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:18:30.639Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3fa29bc4-97b5-4ea0-aee9-d9bbe91c571f",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_0",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:18:30.640Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "18b11825-7c3a-4590-aec6-9ed1e5f563c4",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_1",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:18:30.640Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6874d43f-a0f6-4262-a0af-fa8c94a47e19",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_2",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:18:30.640Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a31ea775-6127-4a71-88b8-58079bc29960",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_3",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:18:30.641Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2c178c73-9003-4132-9858-e2aabefede19",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_4",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:18:30.641Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ffd6dd5b-e954-485e-a45c-8491bfe1c3de",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_0",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:18:30.642Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "e6bb0d05-2a2f-4a92-945b-554bd7382e7c",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_1",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:18:30.642Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9eb1b851-9681-4a31-82de-60e7e1a81285",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_2",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:18:30.643Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "e2c94830-0b9a-46a7-ae2e-48653c170932",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_0",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:18:30.643Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "56ae6e72-8bad-4903-9f78-cb2ed02b29b1",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_1",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:18:30.644Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2c008e92-017d-43c9-9340-023a55386d03",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_2",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:18:30.644Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "01dcbadd-3849-43e2-b629-9daad6eb1ffb",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_3",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:18:30.645Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9110549a-afe0-4af0-a77f-41fb8c23d6a5",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_0",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:18:30.645Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "03950f30-87e7-466c-a04c-e8aedbf6fdf3",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_1",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:18:30.646Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "503d6628-09c9-48fd-87e9-cea3577de5a1",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_2",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:18:30.646Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6b30122b-cb3a-4786-b784-5dffdad3975d",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_3",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:18:30.647Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "911a6324-5a4b-4324-95da-a9a5b0cf1997",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_4",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:18:30.647Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "bc7c3b1d-4551-49cd-a2cb-c0e5e299ab8c",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_0",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:18:30.648Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "e075e80e-55d9-4a78-895b-56f495f46222",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_1",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:18:30.648Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2867b872-2506-403d-945b-9e874f5cbf16",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_2",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:18:30.649Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0439bfda-3be5-44b8-95ba-927f550f2ee1",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:18:30.649Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "438abf58-4f1a-4a2d-9dca-5027dd4914e7",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:18:30.649Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "cb2154e0-c830-438c-976f-26d6e5314752",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:18:30.650Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b8c977b0-5b4e-43a4-ab3f-3db750771dd9",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_3",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:18:30.650Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "727940bf-9538-4172-9b6a-99f44f931cbf",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:18:30.651Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c8d6705d-f06d-4901-b415-f635702d05b9",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:18:30.651Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "38c68b8d-1d57-481c-b4c3-e7674976e2f5",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:18:30.652Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "93681138-964d-47d0-b751-8eaeef4b3ca2",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.652Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "541f882c-c4cb-46b5-a867-668a14b71927",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_4",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:18:30.653Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d2e7a1ed-7627-4772-ad91-95f16ddd4488",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:18:30.653Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ac4689bb-194e-4e8e-a381-6dc0e7bb83ce",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:18:30.654Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b143e72b-1983-4ba1-8fa1-72c687680e55",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.654Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "12cb930d-46aa-4eca-919d-8d8c311c894d",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:18:30.655Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ec1d1b06-f256-4d73-93a2-40e044a0fe47",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.655Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "db1bd34b-6135-4ca5-92a6-8c42c8b1141d",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:18:30.656Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "7f3d923d-d795-4055-ae82-486e6be75a7d",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_3",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:18:30.656Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "48869676-c26e-49fa-a452-f80c620994d1",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:18:30.657Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "50f19341-8e04-4319-a54e-ac7fed5012d8",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:18:30.657Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fcf4e1b7-79d2-4a69-b721-fb38c736920b",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:18:30.658Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f77ee01c-c74a-44b4-a1a5-33d5b4e85e0f",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:18:30.658Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "bbc8d6e0-4087-44e9-99eb-25da6006c6d3",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_4",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:18:30.659Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "420e8986-4235-41d6-af0b-92f25adb4630",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:21:03.136Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "7c1927bc-1541-4f2b-b18d-e924c0e9bc34",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:21:03.136Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a0ea590f-395d-4361-b97e-29e21e2f5a0d",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:21:03.137Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a6e029aa-9dd9-4784-a51b-39b114e3ad6d",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:21:03.138Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "18936994-6e6f-4774-897f-5561c6e922a0",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:21:03.138Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6f6762a5-bf6d-4703-bb8f-3d94180ac436",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:21:03.139Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "56a33f7a-89ca-45d3-ba20-ef48b19f3c70",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.140Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "552e4730-c339-455b-9d1d-55856c290794",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:21:03.140Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b02a6dea-3a68-40b2-a3a9-1556a65a030b",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:21:03.141Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "73f724d5-5ec1-4bbf-9ce8-2faf8ad20b39",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.141Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c72497f9-bc15-4765-b959-848aed9d2ec2",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_3",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:21:03.142Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "85d43768-06cf-4090-99c1-8a7160b17a0a",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_4",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:21:03.142Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "56bd5688-6703-4a90-89ff-336b718e693c",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:21:03.143Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c55b9862-0e2f-457a-a0ec-db97aed83182",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.143Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "42d2f96b-5043-469a-b2ed-8f2bdcd6573c",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:21:03.144Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8e3a4146-c208-4556-8d5a-ade5fa12bd2a",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.144Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "750590d4-fcb4-4cab-a145-5165e37e8ccb",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:21:03.145Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2035cc2d-1086-4290-ba1a-c4906c4b29d2",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:21:03.146Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "e8cc9c40-469b-44e2-bb6e-5dcb0c2b5b03",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:21:03.147Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9dff0655-c887-4c83-92e7-650ee9e63346",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_0",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:21:03.147Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "dee41c81-32b6-4377-b517-97542472e208",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_1",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:21:03.148Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2ec53c42-3bbb-4b3f-bd77-50f2d1e65c68",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_2",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:21:03.148Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8b530f10-e677-48d4-ada1-136fef08846f",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_3",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:21:03.149Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5e2714a5-4ca0-408e-bfdb-973394ff2693",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_4",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:21:03.149Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "23324ad5-d368-4827-82ed-e9744b6b15f1",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_0",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:21:03.150Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0be9fa6b-fa71-4d8b-9974-293df6e9739b",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_1",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:21:03.150Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f89add8c-dfec-441f-8017-6aa31dbef449",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_2",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:21:03.151Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9d58eb3c-0865-4052-9dca-2903b94d1386",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_0",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:21:03.152Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "852e2152-b378-447b-be84-2d7cb007f5fe",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_1",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:21:03.152Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3abe1b96-3b0b-4be1-8cf2-360fbf6505a7",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_2",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:21:03.153Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fbe44cd2-ff9e-497f-b3dd-6c8637b0f484",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_3",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:21:03.153Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "218540e7-0cde-464e-ae53-3598e7f69b4e",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_0",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:21:03.154Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "32ebf424-ae9c-471a-9d4e-b7212d0e82ed",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_1",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:21:03.154Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b3d24133-7cda-45fe-a57a-80be6deae94d",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_2",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:21:03.155Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "84ad8fc4-a829-4aeb-ac42-d4d409eefb18",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_3",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:21:03.156Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "306ac7df-dd9f-44b4-949c-a53ff45e6d08",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_4",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:21:03.156Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d4779f28-e2c5-4f6d-bf89-98dc9eb3e299",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_0",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:21:03.157Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "86604dcf-e57f-4f18-ac17-f78886b907b3",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_1",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:21:03.159Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2005991a-d001-498a-9366-aa469e418fd4",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_2",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:21:03.160Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "27ef3495-519a-4b84-b987-26aa1d6a497b",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:21:03.160Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "cd6eaba8-212c-4a2a-9e40-380274a4e2bc",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:21:03.161Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f849c910-4e01-463f-a497-a47ec288ca86",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:21:03.162Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9a9a3b3d-7a46-4631-8f7b-047c034832a0",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_3",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:21:03.162Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4fc44e30-baac-4cb1-804a-40d2f84a04b2",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:21:03.163Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c1e4c7a0-6817-40a1-9b19-5e615cdbe558",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:21:03.163Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c988f745-4298-4952-8dc6-d2e5d1091938",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:21:03.164Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fa69cef1-ec8b-4592-ab5d-b3af621e4acf",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.164Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b6125c47-e1ce-4adc-be2e-c364bac95b72",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_4",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:21:03.165Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c34ebc76-4bc9-4187-a1bc-c37dca484316",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:21:03.165Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "49ed697e-6059-4e11-b4be-d885e453baea",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:21:03.166Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "01e4e75d-adba-4cab-b887-a7705957ef15",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.166Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a1e4059f-de7f-4322-8c6e-37375a275416",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:21:03.167Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ba65765e-8e2c-457a-a666-bcb7b156f595",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.167Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2e89cc13-2c04-4e83-b76a-572bb8ce677c",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:21:03.168Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8a28e7ad-390c-4c99-bdd4-addd0085d671",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_3",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:21:03.168Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4beccba5-753a-440b-9fbd-a71d30f6b014",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:21:03.169Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "17f48771-1af7-4d34-afef-6089de1dc007",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:21:03.169Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f81e8bd1-c6aa-469d-8272-b09e45ee262f",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:21:03.170Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "19423a3a-ba52-45c5-93b3-47a4f96748b1",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:21:03.170Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b2933695-0633-4fbf-bd3f-bd57bf6f4803",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_4",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:21:03.171Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5421f14c-d4fd-456c-8165-fa3394557545",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:29:09.648Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "45d79376-47cd-4de0-aaea-8de58002244d",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:29:09.649Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5a894008-a9f3-41ca-b057-ee7556441656",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:29:09.650Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0e015aa7-d52f-4adb-a30b-4d3fef0296d6",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:29:09.650Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "1c5c5170-4936-4d9c-b88e-6aa509f8cc80",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:29:09.651Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "153ef5e0-c49f-476a-ab89-d89ffbfb1a36",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:29:09.651Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "9abfde84-0453-4d55-920f-21ca8594cd62",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.652Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a8d0519d-9be1-48f4-9521-30914906b924",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:29:09.652Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c177f6a8-a30b-4253-b832-b977a8b2c80f",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:29:09.653Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0f3204e0-246a-4b63-82b8-529779c27251",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.653Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "92d9ef93-0ffd-4a09-ad02-ff9d5abebc8e",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_3",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:29:09.654Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ff65f56c-db37-45d7-9a27-cf3275cad316",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_4",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:29:09.654Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "bfbff5ea-aaf4-4235-9263-55ded0940f06",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:29:09.655Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ff04c5b0-3af0-4d7a-8279-bc7bef48218f",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.655Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ddef339e-6489-47e6-985a-8360daef7d3b",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:29:09.656Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "e637dbd7-1082-4295-b2cc-ec332ac7841c",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.656Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "389739ca-ca5d-4e1c-aaa9-e3bc5960b712",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:29:09.657Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c9387f69-1483-4d3c-a29e-74650d997a5d",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:29:09.657Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "39ca9069-2ffb-4eaf-88b8-8224d0719f15",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:29:09.658Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "dda21bde-0294-4ee1-bc4e-6c57bd21e930",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_0",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:29:09.658Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a47435a8-aa32-4330-a06a-f3cbfd44231e",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_1",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:29:09.659Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8315084c-ed4a-4b94-8c69-a5777b284dda",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_2",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:29:09.659Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ae0a06fd-6781-48c3-85ac-6354bfc893fd",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_3",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:29:09.660Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a4f42f5e-0d61-4d8e-9df1-3c6fbff9d355",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_4",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:29:09.660Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2fcd2c19-6aa9-4f88-b41f-f645b7c36d42",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_0",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:29:09.661Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "16d9ec81-54c2-4133-a98c-7e4bf8587217",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_1",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:29:09.662Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "634aa633-07a6-4517-af18-99a9d0383ab2",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_2",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:29:09.662Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "adc2403e-852f-4887-833f-9a1395ecfde8",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_0",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:29:09.663Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8976ba43-8337-41bd-97c4-b8b124459c17",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_1",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:29:09.663Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d0bf5086-01ce-4b7d-ad5c-0c8dce5b5f33",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_2",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:29:09.664Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c8290946-f8d2-4b29-80b7-c99aa28382d9",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_3",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:29:09.664Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ecf7b16b-041a-4840-b533-e655681962ff",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_0",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:29:09.665Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d2d60fcc-5aa8-4a1f-8df1-93b89c1f088b",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_1",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:29:09.665Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "89a95db6-5ecd-410b-be55-c7291d97cf11",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_2",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:29:09.666Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "eaa83c69-2b46-45d5-9ab4-c22411bfb13e",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_3",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:29:09.666Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "283be01b-f2bb-463c-9e5d-9c8537ce90f6",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_4",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:29:09.667Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "cfbb7e53-310c-4aac-a382-52db726bd168",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_0",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T06:29:09.667Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "329d9d11-578a-4e1c-bb95-c247140fb5ab",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_1",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:29:09.668Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "79319613-e820-49f1-a47d-e5bbeaaabbfd",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_2",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:29:09.668Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8269b5c3-3cb2-40bc-b3c0-474361fc4cf4",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T06:29:09.669Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "04fe9923-82fd-4c4f-813d-dfa456b1fda6",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:29:09.670Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f78bb543-83a0-4c53-8b5a-7656e86c5fa6",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:29:09.670Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a211e85b-d9bb-4e41-8972-99225d69333d",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_3",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:29:09.671Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "bc6880ab-5758-40d7-a619-6893b3ab08c4",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T06:29:09.671Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5b2cd015-4108-41e0-b2df-966ce272100c",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:29:09.672Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "05afba76-1900-42e2-a81a-e948285b3e01",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:29:09.672Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "448f7ebd-b101-47b2-a54b-7c928731c375",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.673Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "1c532695-7536-4242-8c3e-c7ee23f41ba8",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_4",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:29:09.673Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ebe675b9-5736-4471-ace2-4da1c680de76",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T06:29:09.674Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6a7ecae7-c06b-4992-92d6-f8e30e5d8b64",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:29:09.674Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0f3de6e7-f4bc-4567-b9a4-1120e6dad7cd",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.675Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d449cbeb-376b-4e96-98d6-5248e45281ef",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T06:29:09.675Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "12b38954-3eaf-4720-9d7d-e2d8752ba86d",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.676Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a15a541a-19eb-450b-b2d6-bc2a015ff8d9",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:29:09.676Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "87451e75-16eb-46cf-b9c2-8248b47c0680",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_3",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:29:09.677Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "64929775-7dd5-4b18-8773-c4f52ca21734",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T06:29:09.677Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8a7add9a-5e41-41ec-9463-1e696e34b8c2",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T06:29:09.678Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "38fd4ae2-5369-49fe-ab5a-9251acf0ffcf",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T06:29:09.679Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "73c50ff6-d8d7-47e4-a654-2c94d7e5253b",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T06:29:09.679Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4c760bb9-f92d-4920-8e4f-9005d8bb6837",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_4",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T06:29:09.680Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5cfc8964-b3fb-4019-9fa2-e9d0e8a438ff",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T11:34:54.321Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "016594f2-0638-48b3-822d-f4c13f704681",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T11:34:54.322Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "880689e2-68bb-4dc3-97cd-a39c390ced29",
-      "userId": "demo-user",
-      "creatorId": "9ff6c928-877f-46c6-bb8e-5a11db271c3e",
-      "videoId": "video_0_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T11:34:54.323Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "1db5b8b9-9a82-443f-b80e-2d208a532c06",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T11:34:54.323Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "89702ffd-e9b4-41bf-b36c-276d285745d4",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T11:34:54.324Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4fccc550-a0eb-4f53-a313-b3b5a2583b62",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T11:34:54.325Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4f0d1f1e-ab05-4753-8939-4b70d64675d3",
-      "userId": "demo-user",
-      "creatorId": "8254cfdd-04d8-4012-9dca-3c1dd41f7637",
-      "videoId": "video_1_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.326Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "65821809-c34c-4022-9540-b4691224ad58",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T11:34:54.327Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "26c2d286-dd48-4253-8086-68ac35d2dee2",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T11:34:54.327Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a14b39c5-cc9b-4e06-a264-0ae7955d668b",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.328Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4be38bc7-53ea-4d18-8b79-270cb2f9080a",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_3",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T11:34:54.328Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2ee34680-7e83-41e5-90b5-de2fb2aa0085",
-      "userId": "demo-user",
-      "creatorId": "37faa244-3bba-47e5-b842-95ea33aec478",
-      "videoId": "video_2_4",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T11:34:54.329Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "55607b42-6991-419a-ab9c-92d4af0dad25",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T11:34:54.329Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8ce9c80b-da20-4350-b748-a3bb8c2e9564",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.330Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "a027d5ef-9a01-4296-a2c0-a239207c781b",
-      "userId": "demo-user",
-      "creatorId": "9d8d4930-de6e-45cd-b285-f84bd766c656",
-      "videoId": "video_3_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T11:34:54.331Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "ef82d629-f0f9-499f-b2bd-f4285adb4c61",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.331Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8cc5f720-d063-4450-855e-d79debafcfdd",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T11:34:54.332Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "75fe5040-3390-4f55-b4f5-aa5600d1cd4d",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T11:34:54.332Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "aeba064e-2f90-4e8f-a3ee-5993cde8ff94",
-      "userId": "demo-user",
-      "creatorId": "23748c2d-c130-4721-9d8e-572c6e3f9107",
-      "videoId": "video_4_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T11:34:54.333Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "1447c961-15f3-4178-8e7e-1caafbd46156",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_0",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T11:34:54.334Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d5bc1897-7eee-45b7-a874-b30876cabe30",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_1",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T11:34:54.335Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "8b653eda-9524-4172-9eed-ac2137a6ac38",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_2",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T11:34:54.335Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3dde52b1-305e-4d11-8d88-74427cbb53cf",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_3",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T11:34:54.336Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "223379a5-70d9-4f2f-b811-1f880b62d8ea",
-      "userId": "demo-user",
-      "creatorId": "80e2ce3a-5b7f-46df-97f6-e77c92ad5dc6",
-      "videoId": "video_5_4",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T11:34:54.337Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2a8cb74c-4e41-4ece-a716-b603c4701f9e",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_0",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T11:34:54.337Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d0576764-6e62-41d1-87fb-4c26bad508f0",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_1",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T11:34:54.338Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fbd40a54-b698-4105-b574-adb06037230a",
-      "userId": "demo-user",
-      "creatorId": "24dd3457-0acd-4d30-9020-23b32ec20338",
-      "videoId": "video_6_2",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T11:34:54.338Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "dd715ea1-0c0b-4cd0-9c52-8f2eb8cf2bbb",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_0",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T11:34:54.339Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "74968f9d-34a8-4f89-af7c-f0d98585e114",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_1",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T11:34:54.340Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b31ffe0d-4f93-4c1d-8e90-c8f14bfb2ca6",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_2",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T11:34:54.341Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "213c24df-7388-4313-ae7c-f2eccb38d8ab",
-      "userId": "demo-user",
-      "creatorId": "e2f20e41-7c44-472e-90c7-290792a88169",
-      "videoId": "video_7_3",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T11:34:54.342Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "abfebd68-85b5-4296-a588-88e960727bb9",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_0",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T11:34:54.342Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "781d85b0-182c-4e3b-bc06-6381e8b8d928",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_1",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T11:34:54.343Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "f7c06ef9-dea7-4aaa-b3eb-7e6794792fbb",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_2",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T11:34:54.343Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "26cffa65-0b26-461b-8c23-7aefdc8117e3",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_3",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T11:34:54.344Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5ad93385-d31d-44e8-9f1e-058429dba602",
-      "userId": "demo-user",
-      "creatorId": "97100b5c-235a-4be6-a9d3-bcaafc0376a4",
-      "videoId": "video_8_4",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T11:34:54.344Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "fd1efedb-bc7e-4683-a1c2-0af94d218456",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_0",
-      "watchPercent": 73,
-      "timestamp": "2026-03-22T11:34:54.345Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "1d5b952e-9dc6-4048-9a4a-541dc2978c72",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_1",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T11:34:54.346Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "b6180996-26e4-49ff-a620-b8d8bda90087",
-      "userId": "demo-user",
-      "creatorId": "ddb8d441-0005-47d9-bef5-f4f7b9ae330a",
-      "videoId": "video_9_2",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T11:34:54.346Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5b3b617a-2788-495b-92a6-5cff9a6ce15b",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_0",
-      "watchPercent": 95,
-      "timestamp": "2026-03-22T11:34:54.347Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "15274ee7-ccd9-43b3-9ef8-f65031fa3fbb",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_1",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T11:34:54.348Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "7897b6f2-0c3c-4775-81ef-3796848f17a2",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_2",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T11:34:54.348Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2daa4a4d-1e95-494a-9040-71d362c916f9",
-      "userId": "demo-user",
-      "creatorId": "3a060426-664e-4bad-8afe-ef6dec1759ad",
-      "videoId": "video_10_3",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T11:34:54.349Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "7193e5a6-8670-428a-b072-94d854b466f3",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_0",
-      "watchPercent": 82,
-      "timestamp": "2026-03-22T11:34:54.350Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "14689e8e-7d27-4a2e-ae30-f821250227cd",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_1",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T11:34:54.350Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "35dc3f1a-8e4e-43bc-9321-b83de7cf3d8e",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_2",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T11:34:54.351Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "d6840e24-f209-4cb2-8dca-ac5ac3d24ecc",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_3",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.351Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "3e3083d1-e4d9-42a5-a534-06f3221ae16b",
-      "userId": "demo-user",
-      "creatorId": "86265c41-7923-41b9-9a32-e71c66caf3a8",
-      "videoId": "video_11_4",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T11:34:54.352Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "5677b84f-3d66-4ea4-8f29-7e06c2904ecb",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_0",
-      "watchPercent": 67,
-      "timestamp": "2026-03-22T11:34:54.353Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "c3710e67-548e-41be-b974-a0a1b0b5d0eb",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_1",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T11:34:54.353Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "792e5ac0-8d19-4bc3-8614-54b726343c2a",
-      "userId": "demo-user",
-      "creatorId": "5d39a7ef-bd27-4562-845a-a1d36f97c6c9",
-      "videoId": "video_12_2",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.354Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "af5d3b31-6cc6-49ec-95b0-ed3732bd2981",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_0",
-      "watchPercent": 44,
-      "timestamp": "2026-03-22T11:34:54.354Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "16618483-fa7c-44f0-81c5-e9f84f6ee959",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_1",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.355Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "0d6e73aa-2a0d-4c7d-871f-082e578cb846",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_2",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T11:34:54.356Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "6b39efc8-ea55-4596-bf76-06209de45794",
-      "userId": "demo-user",
-      "creatorId": "e72c2549-0f66-4cc8-aeb7-5da60d837156",
-      "videoId": "video_13_3",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T11:34:54.357Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "175f8cba-1f17-43db-a415-ed086a11230c",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_0",
-      "watchPercent": 100,
-      "timestamp": "2026-03-22T11:34:54.357Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "4f0fa3ae-aaef-4095-ad57-8f5dffb4d109",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_1",
-      "watchPercent": 78,
-      "timestamp": "2026-03-22T11:34:54.358Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "2156cf5a-f275-4ed0-ab05-c7324fba64b9",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_2",
-      "watchPercent": 91,
-      "timestamp": "2026-03-22T11:34:54.359Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "1df869f8-c7e8-42d3-a9c1-b7b9c1b51dfb",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_3",
-      "watchPercent": 55,
-      "timestamp": "2026-03-22T11:34:54.360Z",
-      "autoTipTriggered": false
-    },
-    {
-      "id": "400af230-c1ac-458b-9c6b-e1e40bc09de6",
-      "userId": "demo-user",
-      "creatorId": "28d06283-452e-419a-952e-ecb19837329a",
-      "videoId": "video_14_4",
-      "watchPercent": 88,
-      "timestamp": "2026-03-22T11:34:54.360Z",
+      "timestamp": "2026-03-22T16:45:52.473Z",
       "autoTipTriggered": false
     }
   ],
   "autoTipRules": [
     {
-      "id": "ca0af1b8-51bc-4186-a7fb-a6d31ae00b32",
+      "id": "6db0972b-6487-4afe-affb-eb6c40c474a8",
       "userId": "user2",
       "minWatchPercent": 70,
       "tipAmount": 0.01,
@@ -3836,10 +385,10 @@
         "tech"
       ],
       "enabled": true,
-      "createdAt": "2026-03-22T04:07:45.802Z"
+      "createdAt": "2026-03-22T16:45:52.430Z"
     },
     {
-      "id": "0aaa481d-ac19-41ee-8ca6-960f9a9edae7",
+      "id": "c6f5218d-061a-4b6a-8868-686091e6a01e",
       "userId": "user3",
       "minWatchPercent": 80,
       "tipAmount": 0.01,
@@ -3848,52 +397,13 @@
         "tech"
       ],
       "enabled": true,
-      "createdAt": "2026-03-22T04:07:45.806Z"
-    },
-    {
-      "id": "36352cbb-7e43-4186-b410-83c9eed9e42a",
-      "userId": "demo-user",
-      "minWatchPercent": 80,
-      "tipAmount": 0.003,
-      "maxTipsPerDay": 5,
-      "enabledCategories": [
-        "tech",
-        "crypto"
-      ],
-      "enabled": true,
-      "createdAt": "2026-03-22T11:34:54.363Z"
-    },
-    {
-      "id": "b6030a12-3aa9-4ea6-b918-938ac4be6b13",
-      "userId": "demo-user",
-      "minWatchPercent": 70,
-      "tipAmount": 0.005,
-      "maxTipsPerDay": 3,
-      "enabledCategories": [
-        "finance",
-        "education"
-      ],
-      "enabled": true,
-      "createdAt": "2026-03-22T11:34:54.363Z"
-    },
-    {
-      "id": "b805e628-82fb-4579-bafc-4431779a53dd",
-      "userId": "demo-user",
-      "minWatchPercent": 90,
-      "tipAmount": 0.002,
-      "maxTipsPerDay": 10,
-      "enabledCategories": [
-        "gaming",
-        "entertainment"
-      ],
-      "enabled": true,
-      "createdAt": "2026-03-22T11:34:54.363Z"
+      "createdAt": "2026-03-22T16:45:52.433Z"
     }
   ],
   "tipPools": [
     {
-      "id": "ac499973-9230-4c68-9d2c-b0f24b84eaf3",
-      "creatorId": "846d6f49-a497-4800-bf33-0ba356643532",
+      "id": "d0fb6d2c-e43d-4324-9ba6-8ff4b9ba2c9f",
+      "creatorId": "1f615ad8-9c6a-4db7-849f-8a7c7acf4c0a",
       "creatorName": "High",
       "title": "fund",
       "goalAmount": 1,
@@ -3902,26 +412,26 @@
         {
           "contributor": "user1",
           "amount": 0.5,
-          "timestamp": "2026-03-22T04:07:45.792Z"
+          "timestamp": "2026-03-22T16:45:52.422Z"
         }
       ],
       "completed": false,
-      "createdAt": "2026-03-22T04:07:45.790Z"
+      "createdAt": "2026-03-22T16:45:52.421Z"
     },
     {
-      "id": "045a4310-75c3-4c78-93a4-2b7a01675eb7",
-      "creatorId": "db532efa-4cf0-4856-94ff-f5649b97d272",
+      "id": "9c355c40-ba65-47bf-8f36-c5be58828bc1",
+      "creatorId": "8b88c596-898d-4a5e-b28e-8b8c81ef141a",
       "creatorName": "PoolCreator",
       "title": "Equipment Fund",
       "goalAmount": 1,
       "currentAmount": 0,
       "contributors": [],
       "completed": false,
-      "createdAt": "2026-03-22T04:07:45.812Z"
+      "createdAt": "2026-03-22T16:45:52.438Z"
     },
     {
-      "id": "e2422358-8f9c-4f26-98e9-824fbbff094e",
-      "creatorId": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
+      "id": "2b5416b5-0668-4ecf-b017-444d9af35ec7",
+      "creatorId": "ee044932-415f-481e-bea3-7bb335396435",
       "creatorName": "GoalCreator",
       "title": "Goal Test",
       "goalAmount": 0.1,
@@ -3930,20 +440,20 @@
         {
           "contributor": "u1",
           "amount": 0.06,
-          "timestamp": "2026-03-22T04:07:45.815Z"
+          "timestamp": "2026-03-22T16:45:52.441Z"
         },
         {
           "contributor": "u2",
           "amount": 0.05,
-          "timestamp": "2026-03-22T04:07:45.817Z"
+          "timestamp": "2026-03-22T16:45:52.442Z"
         }
       ],
       "completed": true,
-      "createdAt": "2026-03-22T04:07:45.814Z"
+      "createdAt": "2026-03-22T16:45:52.441Z"
     },
     {
-      "id": "4751665b-8af4-4423-94a1-6e5f352f4d3e",
-      "creatorId": "04cae69d-172c-4aa0-ba7c-d077ef8e40ef",
+      "id": "883d1aa5-6ed5-48f0-ba54-b4b3312226bf",
+      "creatorId": "ac3019fe-212a-4fc6-a82b-1254ea6ad8c9",
       "creatorName": "DoneCreator",
       "title": "Done Pool",
       "goalAmount": 0.01,
@@ -3952,26 +462,26 @@
         {
           "contributor": "u1",
           "amount": 0.01,
-          "timestamp": "2026-03-22T04:07:45.822Z"
+          "timestamp": "2026-03-22T16:45:52.451Z"
         }
       ],
       "completed": true,
-      "createdAt": "2026-03-22T04:07:45.821Z"
+      "createdAt": "2026-03-22T16:45:52.450Z"
     },
     {
-      "id": "0a9aaded-ae64-4359-9627-deb5084260f2",
-      "creatorId": "acdf35cf-9177-4b1e-96ed-4be3f8606394",
+      "id": "551db21c-49e0-4d50-93aa-a8738322a86b",
+      "creatorId": "54ce2085-e0a0-4ef3-97d3-80bb6ffbf222",
       "creatorName": "ActivePool",
       "title": "Active",
       "goalAmount": 10,
       "currentAmount": 0,
       "contributors": [],
       "completed": false,
-      "createdAt": "2026-03-22T04:07:45.825Z"
+      "createdAt": "2026-03-22T16:45:52.454Z"
     },
     {
-      "id": "5aa67276-72d3-435f-abb2-2d1a1204cfa6",
-      "creatorId": "acdf35cf-9177-4b1e-96ed-4be3f8606394",
+      "id": "01a6ffe4-420f-482a-901c-407f110eee39",
+      "creatorId": "54ce2085-e0a0-4ef3-97d3-80bb6ffbf222",
       "creatorName": "ActivePool",
       "title": "Complete",
       "goalAmount": 0.01,
@@ -3980,348 +490,54 @@
         {
           "contributor": "u",
           "amount": 0.01,
-          "timestamp": "2026-03-22T04:07:45.827Z"
+          "timestamp": "2026-03-22T16:45:52.455Z"
         }
       ],
       "completed": true,
-      "createdAt": "2026-03-22T04:07:45.826Z"
-    },
-    {
-      "id": "067d8117-e6fc-448d-9bf6-36c9ab0f928f",
-      "creatorId": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
-      "creatorName": "GoalCreator",
-      "title": "Crypto Education Fund",
-      "goalAmount": 0.1,
-      "currentAmount": 0.049999999999999996,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.025,
-          "timestamp": "2026-03-22T06:11:48.414Z"
-        },
-        {
-          "contributor": "demo-user-2",
-          "amount": 0.018,
-          "timestamp": "2026-03-22T06:11:48.415Z"
-        },
-        {
-          "contributor": "demo-user-3",
-          "amount": 0.007,
-          "timestamp": "2026-03-22T06:11:48.415Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:11:48.414Z"
-    },
-    {
-      "id": "7d569d15-0f97-4157-911a-a3d548f87712",
-      "creatorId": "2b77764c-a25b-4b82-971f-f6d340885b66",
-      "creatorName": "EventCreator",
-      "title": "Gaming Community Tips",
-      "goalAmount": 0.05,
-      "currentAmount": 0.020999999999999998,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.012,
-          "timestamp": "2026-03-22T06:11:48.416Z"
-        },
-        {
-          "contributor": "demo-user-4",
-          "amount": 0.009,
-          "timestamp": "2026-03-22T06:11:48.416Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:11:48.416Z"
-    },
-    {
-      "id": "cf59ba6b-1c92-4071-bd13-e2590cf216ed",
-      "creatorId": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
-      "creatorName": "GoalCreator",
-      "title": "Crypto Education Fund",
-      "goalAmount": 0.1,
-      "currentAmount": 0.049999999999999996,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.025,
-          "timestamp": "2026-03-22T06:12:22.162Z"
-        },
-        {
-          "contributor": "demo-user-2",
-          "amount": 0.018,
-          "timestamp": "2026-03-22T06:12:22.163Z"
-        },
-        {
-          "contributor": "demo-user-3",
-          "amount": 0.007,
-          "timestamp": "2026-03-22T06:12:22.163Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:12:22.162Z"
-    },
-    {
-      "id": "6cd7d8c9-6278-4e53-ac49-ece5060e700f",
-      "creatorId": "2b77764c-a25b-4b82-971f-f6d340885b66",
-      "creatorName": "EventCreator",
-      "title": "Gaming Community Tips",
-      "goalAmount": 0.05,
-      "currentAmount": 0.020999999999999998,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.012,
-          "timestamp": "2026-03-22T06:12:22.164Z"
-        },
-        {
-          "contributor": "demo-user-4",
-          "amount": 0.009,
-          "timestamp": "2026-03-22T06:12:22.164Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:12:22.164Z"
-    },
-    {
-      "id": "41e60f89-f353-4a05-8643-65eba21fcea9",
-      "creatorId": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
-      "creatorName": "GoalCreator",
-      "title": "Crypto Education Fund",
-      "goalAmount": 0.1,
-      "currentAmount": 0.049999999999999996,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.025,
-          "timestamp": "2026-03-22T06:18:30.663Z"
-        },
-        {
-          "contributor": "demo-user-2",
-          "amount": 0.018,
-          "timestamp": "2026-03-22T06:18:30.663Z"
-        },
-        {
-          "contributor": "demo-user-3",
-          "amount": 0.007,
-          "timestamp": "2026-03-22T06:18:30.664Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:18:30.662Z"
-    },
-    {
-      "id": "081f17f7-fd6d-447e-b8cf-03ae7de0d195",
-      "creatorId": "2b77764c-a25b-4b82-971f-f6d340885b66",
-      "creatorName": "EventCreator",
-      "title": "Gaming Community Tips",
-      "goalAmount": 0.05,
-      "currentAmount": 0.020999999999999998,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.012,
-          "timestamp": "2026-03-22T06:18:30.665Z"
-        },
-        {
-          "contributor": "demo-user-4",
-          "amount": 0.009,
-          "timestamp": "2026-03-22T06:18:30.665Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:18:30.664Z"
-    },
-    {
-      "id": "c15e21a7-47d0-45d1-a3b7-baa67b64be61",
-      "creatorId": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
-      "creatorName": "GoalCreator",
-      "title": "Crypto Education Fund",
-      "goalAmount": 0.1,
-      "currentAmount": 0.049999999999999996,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.025,
-          "timestamp": "2026-03-22T06:21:03.175Z"
-        },
-        {
-          "contributor": "demo-user-2",
-          "amount": 0.018,
-          "timestamp": "2026-03-22T06:21:03.176Z"
-        },
-        {
-          "contributor": "demo-user-3",
-          "amount": 0.007,
-          "timestamp": "2026-03-22T06:21:03.177Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:21:03.175Z"
-    },
-    {
-      "id": "86fafb5b-110e-47bd-be04-2dce7ec019a4",
-      "creatorId": "2b77764c-a25b-4b82-971f-f6d340885b66",
-      "creatorName": "EventCreator",
-      "title": "Gaming Community Tips",
-      "goalAmount": 0.05,
-      "currentAmount": 0.020999999999999998,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.012,
-          "timestamp": "2026-03-22T06:21:03.178Z"
-        },
-        {
-          "contributor": "demo-user-4",
-          "amount": 0.009,
-          "timestamp": "2026-03-22T06:21:03.178Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:21:03.177Z"
-    },
-    {
-      "id": "6ed1929a-6fdd-4090-b8d1-af63b42db0df",
-      "creatorId": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
-      "creatorName": "GoalCreator",
-      "title": "Crypto Education Fund",
-      "goalAmount": 0.1,
-      "currentAmount": 0.049999999999999996,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.025,
-          "timestamp": "2026-03-22T06:29:09.684Z"
-        },
-        {
-          "contributor": "demo-user-2",
-          "amount": 0.018,
-          "timestamp": "2026-03-22T06:29:09.684Z"
-        },
-        {
-          "contributor": "demo-user-3",
-          "amount": 0.007,
-          "timestamp": "2026-03-22T06:29:09.685Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:29:09.683Z"
-    },
-    {
-      "id": "ce4b9917-263e-49c4-9f7c-74e602851908",
-      "creatorId": "2b77764c-a25b-4b82-971f-f6d340885b66",
-      "creatorName": "EventCreator",
-      "title": "Gaming Community Tips",
-      "goalAmount": 0.05,
-      "currentAmount": 0.020999999999999998,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.012,
-          "timestamp": "2026-03-22T06:29:09.686Z"
-        },
-        {
-          "contributor": "demo-user-4",
-          "amount": 0.009,
-          "timestamp": "2026-03-22T06:29:09.686Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T06:29:09.685Z"
-    },
-    {
-      "id": "87572090-6a1a-4d12-b69d-b63cadf148d2",
-      "creatorId": "56eb2987-f741-4fe2-bdf1-7ca2b3dc4351",
-      "creatorName": "GoalCreator",
-      "title": "Crypto Education Fund",
-      "goalAmount": 0.1,
-      "currentAmount": 0.049999999999999996,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.025,
-          "timestamp": "2026-03-22T11:34:54.365Z"
-        },
-        {
-          "contributor": "demo-user-2",
-          "amount": 0.018,
-          "timestamp": "2026-03-22T11:34:54.366Z"
-        },
-        {
-          "contributor": "demo-user-3",
-          "amount": 0.007,
-          "timestamp": "2026-03-22T11:34:54.366Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T11:34:54.364Z"
-    },
-    {
-      "id": "e6f74b88-a4bc-4c0c-b791-4e13852d24d5",
-      "creatorId": "2b77764c-a25b-4b82-971f-f6d340885b66",
-      "creatorName": "EventCreator",
-      "title": "Gaming Community Tips",
-      "goalAmount": 0.05,
-      "currentAmount": 0.020999999999999998,
-      "contributors": [
-        {
-          "contributor": "demo-user-1",
-          "amount": 0.012,
-          "timestamp": "2026-03-22T11:34:54.368Z"
-        },
-        {
-          "contributor": "demo-user-4",
-          "amount": 0.009,
-          "timestamp": "2026-03-22T11:34:54.369Z"
-        }
-      ],
-      "completed": false,
-      "createdAt": "2026-03-22T11:34:54.367Z"
+      "createdAt": "2026-03-22T16:45:52.454Z"
     }
   ],
   "eventTriggers": [
     {
-      "id": "0aafbcee-e7a0-4287-bfd5-8da070f1788b",
-      "creatorId": "609ceee7-58b7-4c05-a412-7f5c7fe5eea9",
+      "id": "c3ac0080-92e1-489a-b2c3-acaf28e4b1b8",
+      "creatorId": "9b267793-5908-42d7-8796-738dea8132ee",
       "event": "new_video",
       "tipAmount": 0.01,
       "enabled": true,
       "triggerCount": 0,
-      "createdAt": "2026-03-22T04:07:45.840Z"
+      "createdAt": "2026-03-22T16:45:52.476Z"
     },
     {
-      "id": "0ff7c6a8-2bcf-4dde-b63e-b429cb0f05a2",
-      "creatorId": "2b77764c-a25b-4b82-971f-f6d340885b66",
+      "id": "3e9fa177-1e55-4334-8f0d-e10040e15606",
+      "creatorId": "26469d9f-e5a3-4dda-a900-1858284afd5c",
       "event": "milestone",
       "tipAmount": 0.05,
       "enabled": true,
       "triggerCount": 1,
-      "createdAt": "2026-03-22T04:07:45.843Z",
-      "lastTriggered": "2026-03-22T04:07:45.843Z"
+      "createdAt": "2026-03-22T16:45:52.479Z",
+      "lastTriggered": "2026-03-22T16:45:52.492Z"
     }
   ],
   "collabSplits": [
     {
-      "id": "676e03f8-f7fd-4409-a970-8fad1845813c",
+      "id": "f496a8f6-b4ae-40a1-ba46-16de98e19404",
       "videoId": "video1",
       "creators": [
         {
-          "creatorId": "2ab6cc40-efc7-4533-a39e-75f196493019",
+          "creatorId": "5f404cd1-dab1-46e9-a808-0ee1ab2fd2e0",
           "creatorName": "Collab1",
           "percentage": 60,
           "walletAddress": "0xc1"
         },
         {
-          "creatorId": "aa1f58da-c718-4a5e-8876-c07e4ba53ba9",
+          "creatorId": "04886305-9348-42ed-a7f7-e3dc9a019aa0",
           "creatorName": "Collab2",
           "percentage": 40,
           "walletAddress": "0xc2"
         }
       ],
       "totalTipAmount": 0,
-      "createdAt": "2026-03-22T04:07:45.855Z"
+      "createdAt": "2026-03-22T16:45:52.501Z"
     }
   ]
 }

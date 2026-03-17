@@ -1,6 +1,6 @@
 [
   {
-    "address": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaa19d13ba3906",
+    "address": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaa19d167048a9",
     "rawScore": 350,
     "totalReceived": 5,
     "tipCount": 1,
@@ -8,8 +8,8 @@
       "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     ],
     "avgTipAmount": 5,
-    "firstTipAt": "2026-03-22T04:07:44.646Z",
-    "lastTipAt": "2026-03-22T04:07:44.646Z",
+    "firstTipAt": "2026-03-22T16:45:50.633Z",
+    "lastTipAt": "2026-03-22T16:45:50.633Z",
     "scoreHistory": [
       {
         "date": "2026-03-22",
@@ -39,8 +39,8 @@
       "0x0000000000000000000000000000000000000009"
     ],
     "avgTipAmount": 10,
-    "firstTipAt": "2026-03-22T04:07:44.648Z",
-    "lastTipAt": "2026-03-22T04:07:44.654Z",
+    "firstTipAt": "2026-03-22T16:45:50.636Z",
+    "lastTipAt": "2026-03-22T16:45:50.643Z",
     "scoreHistory": [
       {
         "date": "2026-03-22",
@@ -61,8 +61,8 @@
       "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     ],
     "avgTipAmount": 5,
-    "firstTipAt": "2026-03-22T04:07:44.654Z",
-    "lastTipAt": "2026-03-22T04:07:44.654Z",
+    "firstTipAt": "2026-03-22T16:45:50.644Z",
+    "lastTipAt": "2026-03-22T16:45:50.644Z",
     "scoreHistory": [
       {
         "date": "2026-03-22",
@@ -83,8 +83,8 @@
       "0x6666666666666666666666666666666666666666"
     ],
     "avgTipAmount": 10,
-    "firstTipAt": "2026-03-22T04:07:44.655Z",
-    "lastTipAt": "2026-03-22T04:07:44.655Z",
+    "firstTipAt": "2026-03-22T16:45:50.647Z",
+    "lastTipAt": "2026-03-22T16:45:50.647Z",
     "scoreHistory": [
       {
         "date": "2026-03-22",
@@ -97,16 +97,16 @@
     "weightedTipTotal": 10
   },
   {
-    "address": "0xddddddddddddddddddddddddddddd19d13ba391a",
+    "address": "0xddddddddddddddddddddddddddddd19d167048c5",
     "rawScore": 404,
     "totalReceived": 10,
     "tipCount": 3,
     "uniqueTippersList": [
-      "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeee19d13ba391a"
+      "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeee19d167048c5"
     ],
     "avgTipAmount": 3.3333333333333335,
-    "firstTipAt": "2026-03-22T04:07:44.666Z",
-    "lastTipAt": "2026-03-22T04:07:44.668Z",
+    "firstTipAt": "2026-03-22T16:45:50.661Z",
+    "lastTipAt": "2026-03-22T16:45:50.662Z",
     "scoreHistory": [
       {
         "date": "2026-03-22",
@@ -127,8 +127,8 @@
       "0x3333333333333333333333333333333333333333"
     ],
     "avgTipAmount": 0.01,
-    "firstTipAt": "2026-03-22T04:07:53.624Z",
-    "lastTipAt": "2026-03-22T04:07:53.628Z",
+    "firstTipAt": "2026-03-22T16:46:01.383Z",
+    "lastTipAt": "2026-03-22T16:46:01.388Z",
     "scoreHistory": [
       {
         "date": "2026-03-22",
@@ -150,8 +150,8 @@
       "0xUser1"
     ],
     "avgTipAmount": 0.010000000000000002,
-    "firstTipAt": "2026-03-22T04:07:53.657Z",
-    "lastTipAt": "2026-03-22T04:07:53.672Z",
+    "firstTipAt": "2026-03-22T16:46:01.426Z",
+    "lastTipAt": "2026-03-22T16:46:01.441Z",
     "scoreHistory": [
       {
         "date": "2026-03-22",
@@ -162,357 +162,5 @@
       "ethereum-sepolia"
     ],
     "weightedTipTotal": 0.25000000000000006
-  },
-  {
-    "address": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
-    "rawScore": 365,
-    "totalReceived": 0.09600000000000003,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.008000000000000002,
-    "firstTipAt": "2026-03-22T06:11:48.371Z",
-    "lastTipAt": "2026-03-22T11:34:54.312Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 365
-      }
-    ],
-    "chains": [
-      "tron-nile"
-    ],
-    "weightedTipTotal": 0.09600000000000003
-  },
-  {
-    "address": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-    "rawScore": 376,
-    "totalReceived": 0.08,
-    "tipCount": 16,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.005,
-    "firstTipAt": "2026-03-22T06:11:48.372Z",
-    "lastTipAt": "2026-03-22T11:34:54.318Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 376
-      }
-    ],
-    "chains": [
-      "ton-testnet"
-    ],
-    "weightedTipTotal": 0.08
-  },
-  {
-    "address": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-    "rawScore": 374,
-    "totalReceived": 0.032000000000000015,
-    "tipCount": 16,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.002000000000000001,
-    "firstTipAt": "2026-03-22T06:11:48.372Z",
-    "lastTipAt": "2026-03-22T11:34:54.316Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 374
-      }
-    ],
-    "chains": [
-      "ethereum-sepolia"
-    ],
-    "weightedTipTotal": 0.032000000000000015
-  },
-  {
-    "address": "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
-    "rawScore": 363,
-    "totalReceived": 0.048000000000000015,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.004000000000000001,
-    "firstTipAt": "2026-03-22T06:11:48.372Z",
-    "lastTipAt": "2026-03-22T11:34:54.308Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 363
-      }
-    ],
-    "chains": [
-      "ethereum-sepolia"
-    ],
-    "weightedTipTotal": 0.048000000000000015
-  },
-  {
-    "address": "0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec",
-    "rawScore": 362,
-    "totalReceived": 0.018,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.0014999999999999998,
-    "firstTipAt": "2026-03-22T06:11:48.373Z",
-    "lastTipAt": "2026-03-22T11:34:54.309Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 362
-      }
-    ],
-    "chains": [
-      "tron-nile"
-    ],
-    "weightedTipTotal": 0.018
-  },
-  {
-    "address": "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
-    "rawScore": 375,
-    "totalReceived": 0.04800000000000001,
-    "tipCount": 16,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.0030000000000000005,
-    "firstTipAt": "2026-03-22T06:11:48.373Z",
-    "lastTipAt": "2026-03-22T11:34:54.314Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 375
-      }
-    ],
-    "chains": [
-      "ton-testnet"
-    ],
-    "weightedTipTotal": 0.04800000000000001
-  },
-  {
-    "address": "0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f",
-    "rawScore": 364,
-    "totalReceived": 0.072,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.005999999999999999,
-    "firstTipAt": "2026-03-22T06:11:48.374Z",
-    "lastTipAt": "2026-03-22T11:34:54.318Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 364
-      }
-    ],
-    "chains": [
-      "ethereum-sepolia"
-    ],
-    "weightedTipTotal": 0.072
-  },
-  {
-    "address": "UQBanAkpRVoVeUHJVSLbaCjregNDAejcBdKl1VA3ujWMWpOv",
-    "rawScore": 379,
-    "totalReceived": 0.16,
-    "tipCount": 16,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.01,
-    "firstTipAt": "2026-03-22T06:11:48.374Z",
-    "lastTipAt": "2026-03-22T11:34:54.320Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 379
-      }
-    ],
-    "chains": [
-      "tron-nile"
-    ],
-    "weightedTipTotal": 0.16
-  },
-  {
-    "address": "0xFABB0ac9d68B0B445fB7357272Ff202C5651694a",
-    "rawScore": 365,
-    "totalReceived": 0.10799999999999997,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.008999999999999998,
-    "firstTipAt": "2026-03-22T06:11:48.375Z",
-    "lastTipAt": "2026-03-22T11:34:54.316Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 365
-      }
-    ],
-    "chains": [
-      "ton-testnet"
-    ],
-    "weightedTipTotal": 0.10799999999999997
-  },
-  {
-    "address": "0xa0Ee7A142d267C1f36714E4a8F75612F20a79720",
-    "rawScore": 367,
-    "totalReceived": 0.144,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.011999999999999999,
-    "firstTipAt": "2026-03-22T06:11:48.375Z",
-    "lastTipAt": "2026-03-22T11:34:54.320Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 367
-      }
-    ],
-    "chains": [
-      "ton-testnet"
-    ],
-    "weightedTipTotal": 0.144
-  },
-  {
-    "address": "0xBcd4042DE499D14e55001CcbB24a551F3b954096",
-    "rawScore": 365,
-    "totalReceived": 0.08400000000000002,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.007000000000000002,
-    "firstTipAt": "2026-03-22T06:11:48.376Z",
-    "lastTipAt": "2026-03-22T11:34:54.320Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 365
-      }
-    ],
-    "chains": [
-      "tron-nile"
-    ],
-    "weightedTipTotal": 0.08400000000000002
-  },
-  {
-    "address": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-    "rawScore": 374,
-    "totalReceived": 0.016000000000000007,
-    "tipCount": 16,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.0010000000000000005,
-    "firstTipAt": "2026-03-22T06:11:48.376Z",
-    "lastTipAt": "2026-03-22T11:34:54.319Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 374
-      }
-    ],
-    "chains": [
-      "ethereum-sepolia"
-    ],
-    "weightedTipTotal": 0.016000000000000007
-  },
-  {
-    "address": "0x14dC79964da2C08dfa6B3085B7c31967F4e6d266",
-    "rawScore": 370,
-    "totalReceived": 0.23999999999999996,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.019999999999999997,
-    "firstTipAt": "2026-03-22T06:11:48.378Z",
-    "lastTipAt": "2026-03-22T11:34:54.316Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 370
-      }
-    ],
-    "chains": [
-      "tron-nile"
-    ],
-    "weightedTipTotal": 0.23999999999999996
-  },
-  {
-    "address": "0x71bE63f3384f5fb98995898A86B02Fb2426c5788",
-    "rawScore": 372,
-    "totalReceived": 0.3,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.024999999999999998,
-    "firstTipAt": "2026-03-22T06:11:48.379Z",
-    "lastTipAt": "2026-03-22T11:34:54.320Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 372
-      }
-    ],
-    "chains": [
-      "ethereum-sepolia"
-    ],
-    "weightedTipTotal": 0.3
-  },
-  {
-    "address": "0x976EA74026E726554dB657fA54763abd0C3a0aa9",
-    "rawScore": 368,
-    "totalReceived": 0.18000000000000005,
-    "tipCount": 12,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.015000000000000005,
-    "firstTipAt": "2026-03-22T06:11:48.380Z",
-    "lastTipAt": "2026-03-22T11:34:54.315Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 368
-      }
-    ],
-    "chains": [
-      "ton-testnet"
-    ],
-    "weightedTipTotal": 0.18000000000000005
-  },
-  {
-    "address": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-    "rawScore": 335,
-    "totalReceived": 0.006,
-    "tipCount": 6,
-    "uniqueTippersList": [
-      "0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62"
-    ],
-    "avgTipAmount": 0.001,
-    "firstTipAt": "2026-03-22T06:13:14.746Z",
-    "lastTipAt": "2026-03-22T06:19:15.590Z",
-    "scoreHistory": [
-      {
-        "date": "2026-03-22",
-        "score": 335
-      }
-    ],
-    "chains": [
-      "ethereum-sepolia"
-    ],
-    "weightedTipTotal": 0.006
   }
 ]

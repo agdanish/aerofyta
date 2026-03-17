@@ -14,9 +14,11 @@ pragma solidity ^0.8.24;
  */
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract AeroFytaTipSplitter is ReentrancyGuard {
+    using SafeERC20 for IERC20;
     struct SplitConfig {
         address[] recipients;
         uint256[] shares; // basis points (10000 = 100%)
@@ -83,7 +85,7 @@ contract AeroFytaTipSplitter is ReentrancyGuard {
         require(amount > 0, "Amount must be > 0");
 
         // Transfer total amount from sender to this contract
-        IERC20(token).transferFrom(msg.sender, address(this), amount);
+        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
 
         // Distribute to each recipient according to shares
         uint256 distributed = 0;
@@ -96,7 +98,7 @@ contract AeroFytaTipSplitter is ReentrancyGuard {
                 share = (amount * cfg.shares[i]) / BPS_DENOMINATOR;
             }
             distributed += share;
-            IERC20(token).transfer(cfg.recipients[i], share);
+            IERC20(token).safeTransfer(cfg.recipients[i], share);
         }
 
         emit TipSplit(splitId, token, amount, msg.sender);

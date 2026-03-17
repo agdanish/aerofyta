@@ -1,22 +1,29 @@
 # Stage 1: Build dashboard
 FROM node:22-alpine AS dashboard-build
 WORKDIR /app/dashboard
-COPY dashboard/package.json dashboard/package-lock.json dashboard/.npmrc ./
+COPY dashboard/package.json dashboard/package-lock.json ./
 RUN npm ci
 COPY dashboard/ ./
 RUN npm run build
 
-# Stage 2: Production
+# Stage 2: Build agent (includes devDeps for tsc)
+FROM node:22-alpine AS agent-build
+WORKDIR /app/agent
+COPY agent/package.json agent/package-lock.json ./
+RUN npm ci
+COPY agent/ ./
+RUN npx tsc
+
+# Stage 3: Production runtime
 FROM node:22-alpine
 WORKDIR /app
 
-# Install agent production dependencies
+# Install agent production dependencies only
 COPY agent/package.json agent/package-lock.json ./agent/
 RUN cd agent && npm ci --omit=dev
 
-# Copy agent source and build
-COPY agent/ ./agent/
-RUN cd agent && npx tsc
+# Copy compiled agent output
+COPY --from=agent-build /app/agent/dist ./agent/dist
 
 # Copy dashboard build output
 COPY --from=dashboard-build /app/dashboard/dist ./dashboard/dist

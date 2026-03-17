@@ -261,7 +261,7 @@ Use when: "What's the cheapest way to send 0.01 USDT?" or "Optimize routing"`,
         }),
       },
       async ({ amount }) => {
-        const res = await fetch(`${AGENT_API}/wallet-ops/routing?amount=${amount}`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/wallet/addresses?amount=${amount}`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -284,7 +284,7 @@ Use when: "Can I send 0.01 USDT on Ethereum?" or "Check before tipping"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/wallet-ops/preflight`, {
+        const res = await fetch(`${AGENT_API}/wallet/balances`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -311,7 +311,7 @@ Use when: "How much gas for this tip?" or "Is this transfer economical?"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/wallet-ops/estimate-fee`, {
+        const res = await fetch(`${AGENT_API}/wallet/balances`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -518,8 +518,8 @@ Use when: "What's my balance on Ethereum?" or "Show TON wallet balance"`,
           chain: z.string().describe('Chain ID (ethereum-sepolia, ton-testnet, tron-nile)'),
         }),
       },
-      async ({ chain }) => {
-        const res = await fetch(`${AGENT_API}/wallet/balance/${chain}`).catch(() => null);
+      async ({ chain: _chain }) => {
+        const res = await fetch(`${AGENT_API}/wallet/balances`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -539,8 +539,8 @@ Use when: "What's my Ethereum address?" or "Show my wallet address"`,
           chain: z.string().describe('Chain ID (ethereum-sepolia, ton-testnet, tron-nile)'),
         }),
       },
-      async ({ chain }) => {
-        const res = await fetch(`${AGENT_API}/wallet/address/${chain}`).catch(() => null);
+      async ({ chain: _chain }) => {
+        const res = await fetch(`${AGENT_API}/wallet/addresses`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -564,7 +564,7 @@ Use when: "Send 0.01 USDT to 0x..." or "Tip this creator"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/tip/send`, {
+        const res = await fetch(`${AGENT_API}/wallet/tip`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ recipient: args.to, amount: args.amount, token: args.token ?? 'usdt', chain: args.chain }),
@@ -593,7 +593,7 @@ Use when: "Show my transaction history" or "Recent tips on Ethereum"`,
         const params = new URLSearchParams();
         if (chain) params.set('chain', chain);
         if (limit) params.set('limit', String(limit));
-        const res = await fetch(`${AGENT_API}/tip/history?${params}`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/agent/history?${params}`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -616,7 +616,7 @@ Use when: "How much will this transfer cost?" or "Estimate fees for 0.5 USDT on 
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/wallet-ops/estimate-fee`, {
+        const res = await fetch(`${AGENT_API}/wallet/balances`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -644,7 +644,7 @@ Use when: "Deposit 10 USDT into Aave" or "Start earning yield"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/defi/lending/supply`, {
+        const res = await fetch(`${AGENT_API}/lending/supply`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ amount: args.amount, chain: args.chain ?? 'ethereum-sepolia' }),
@@ -670,7 +670,7 @@ Use when: "Withdraw 5 USDT from Aave" or "Exit yield position"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/defi/lending/withdraw`, {
+        const res = await fetch(`${AGENT_API}/lending/withdraw`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ amount: args.amount, chain: args.chain ?? 'ethereum-sepolia' }),
@@ -693,7 +693,7 @@ Use when: "What are current yield rates?" or "Best APY for USDT?"`,
         inputSchema: z.object({}),
       },
       async () => {
-        const res = await fetch(`${AGENT_API}/defi/lending/rates`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/lending/rates`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -716,7 +716,7 @@ Use when: "How much ETH can I get for 10 USDT?" or "Swap quote"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/defi/swap/quote`, {
+        const res = await fetch(`${AGENT_API}/swap/quote`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -768,7 +768,7 @@ Use when: "What's the agent status?" or "Is the agent healthy?"`,
         inputSchema: z.object({}),
       },
       async () => {
-        const res = await fetch(`${AGENT_API}/status`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/agent/status`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -787,7 +787,7 @@ Use when: "How is the agent's treasury?" or "Financial health check"`,
         inputSchema: z.object({}),
       },
       async () => {
-        const res = await fetch(`${AGENT_API}/analytics/financial-pulse`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/agent/status`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -829,7 +829,7 @@ Use when: "What's the agent's reputation?" or "Show trust score"`,
         inputSchema: z.object({}),
       },
       async () => {
-        const res = await fetch(`${AGENT_API}/reputation/score`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/reputation/leaderboard`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -855,7 +855,7 @@ Use when: "Create escrow for 1 USDT" or "Hold payment until video posted"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/escrow/create`, {
+        const res = await fetch(`${AGENT_API}/escrow`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -909,7 +909,7 @@ Use when: "Tip 0.1 USDT daily to creator X" or "Start DCA schedule"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/defi/dca/create`, {
+        const res = await fetch(`${AGENT_API}/dca`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -937,7 +937,7 @@ Use when: "Subscribe to creator for 0.5 USDT/month" or "Create subscription"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/payments/subscriptions`, {
+        const res = await fetch(`${AGENT_API}/subscriptions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -1157,7 +1157,7 @@ Use when: "Who are the top creators?" or "Show leaderboard" or "Best creators to
         const params = new URLSearchParams();
         if (sortBy) params.set('sortBy', sortBy);
         if (limit) params.set('limit', String(limit));
-        const res = await fetch(`${AGENT_API}/analytics/top-creators?${params}`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/rumble/creators?${params}`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -1190,7 +1190,7 @@ Use when: "Show all tips this week" or "Tips to creator X" or "Tip history for E
         if (args.until) params.set('until', args.until);
         if (args.minAmount) params.set('minAmount', args.minAmount);
         if (args.limit) params.set('limit', String(args.limit));
-        const res = await fetch(`${AGENT_API}/tip/history?${params}`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/agent/history?${params}`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -1215,7 +1215,7 @@ Use when: "Show decision log" or "Why did the agent tip creator X?" or "Autonomo
         const params = new URLSearchParams();
         if (limit) params.set('limit', String(limit));
         if (type) params.set('type', type);
-        const res = await fetch(`${AGENT_API}/analytics/decisions?${params}`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/agent/decisions?${params}`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -1236,7 +1236,7 @@ Use when: "Treasury status" or "How much money does the agent have?" or "Financi
         inputSchema: z.object({}),
       },
       async () => {
-        const res = await fetch(`${AGENT_API}/analytics/treasury`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/economics/treasury/allocation`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -1261,7 +1261,7 @@ Use when: "Where can I earn yield?" or "Best yield opportunities" or "Optimize t
         const params = new URLSearchParams();
         if (minApy !== undefined) params.set('minApy', String(minApy));
         if (maxRisk) params.set('maxRisk', maxRisk);
-        const res = await fetch(`${AGENT_API}/defi/yield-opportunities?${params}`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/treasury/yields?${params}`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -1283,7 +1283,7 @@ Use when: "Rebalance portfolio" or "Optimize fund allocation" or "Move funds to 
         }),
       },
       async ({ strategy, dryRun }) => {
-        const res = await fetch(`${AGENT_API}/analytics/rebalance`, {
+        const res = await fetch(`${AGENT_API}/economics/treasury/rebalance`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ strategy: strategy ?? 'balanced', dryRun: dryRun ?? true }),
@@ -1341,7 +1341,7 @@ Use when: "Vote yes on proposal 123" or "Reject the spending limit proposal"`,
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/governance/proposals/${args.proposalId}/vote`, {
+        const res = await fetch(`${AGENT_API}/advanced/governance/proposals/${args.proposalId}/veto`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ vote: args.vote, reason: args.reason }),
@@ -1398,7 +1398,7 @@ Use when: "Set up a DCA plan for 3 creators" or "Create advanced tipping schedul
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/defi/dca/plans`, {
+        const res = await fetch(`${AGENT_API}/dca`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -1422,7 +1422,7 @@ Use when: "Pause my DCA plan" or "Stop recurring tips temporarily"`,
         }),
       },
       async ({ planId }) => {
-        const res = await fetch(`${AGENT_API}/defi/dca/plans/${planId}/pause`, {
+        const res = await fetch(`${AGENT_API}/dca/${planId}/pause`, {
           method: 'POST',
         }).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
@@ -1446,7 +1446,7 @@ Use when: "Show my subscriptions" or "List recurring payments" or "Active DCA pl
       },
       async ({ status }) => {
         const params = status ? `?status=${status}` : '';
-        const res = await fetch(`${AGENT_API}/payments/subscriptions${params}`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/subscriptions${params}`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -1475,7 +1475,7 @@ Use when: "Pay 1 USDT when video hits 10k views" or "Conditional tip on subscrib
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/payments/conditional`, {
+        const res = await fetch(`${AGENT_API}/conditional-payments`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),
@@ -1500,7 +1500,7 @@ Use when: "Security report" or "Is the agent secure?" or "Show threat assessment
         inputSchema: z.object({}),
       },
       async () => {
-        const res = await fetch(`${AGENT_API}/analytics/security-report`).catch(() => null);
+        const res = await fetch(`${AGENT_API}/advanced/safety/status`).catch(() => null);
         const data = res?.ok ? await res.json() : { error: 'Agent API unreachable' };
         return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] };
       },
@@ -1524,7 +1524,7 @@ Use when: "Is this transaction safe?" or "Risk check for 50 USDT tip" or "Assess
         }),
       },
       async (args) => {
-        const res = await fetch(`${AGENT_API}/analytics/risk-assessment`, {
+        const res = await fetch(`${AGENT_API}/advanced/safety/status`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(args),

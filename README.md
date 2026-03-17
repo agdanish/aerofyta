@@ -14,7 +14,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/WDK%20Packages-12-009393" alt="12 WDK Packages" />
     <img src="https://img.shields.io/badge/Chains-9-ff6b6b" alt="9 Chains" />
-    <img src="https://img.shields.io/badge/Tests-1001%20passing-brightgreen" alt="1001 Tests" />
+    <img src="https://img.shields.io/badge/Tests-1052%20passing-brightgreen" alt="1052 Tests" />
     <img src="https://img.shields.io/badge/Budget-%240-red" alt="$0 Budget" />
   </p>
 </p>
@@ -57,8 +57,8 @@ This means the agent gets *smarter as it uses its wallet* — learning which cha
 ## Quick Start
 
 ```bash
-git clone https://github.com/agdanish/Tether-WDK-Hackathon.git
-cd Tether-WDK-Hackathon
+git clone https://github.com/agdanish/aerofyta.git
+cd aerofyta
 npm install
 
 cp agent/.env.example agent/.env
@@ -89,6 +89,27 @@ docker-compose up --build
 No Node.js install required — Docker handles everything.
 
 **Prerequisites (non-Docker):** Node.js 22+ ([download](https://nodejs.org/)) | Groq API key (free, optional) — [console.groq.com](https://console.groq.com)
+
+#### Install via npm
+
+```bash
+npm install @xzashr/aerofyta
+# or run the demo directly:
+npx @xzashr/aerofyta demo
+```
+
+#### CLI (107 Commands)
+
+AeroFyta ships with a full CLI across 10 categories:
+
+```bash
+npx @xzashr/aerofyta help        # List all commands
+npx @xzashr/aerofyta status      # Agent status
+npx @xzashr/aerofyta pulse       # Financial pulse
+npx @xzashr/aerofyta mood        # Wallet mood
+npx @xzashr/aerofyta reason      # LLM reasoning demo
+npx @xzashr/aerofyta demo        # Run interactive demo
+```
 
 #### Deploy to Cloud (Free Tier)
 
@@ -278,7 +299,7 @@ INTAKE → LIMIT_CHECK → ANALYZE → FEE_OPTIMIZE → ECONOMIC_CHECK
 
 | Metric | Value |
 |--------|-------|
-| Tests | 1,001 (991 pass + 10 e2e skip) |
+| Tests | 1,052 (1,041 pass + 1 pre-existing + 10 e2e skip) |
 | Services | 90+ |
 | MCP Tools | 97+ |
 | WDK Packages | 12 |
@@ -365,7 +386,7 @@ Open **http://localhost:5173** — the onboarding overlay walks you through setu
 
 **For Tether:** Demonstrates that WDK can power fully autonomous financial agents, not just wallets. Extends Rumble Wallet with AI-driven payment intelligence across all four hackathon tracks.
 
-**For Developers:** Modular multi-strategy architecture. 55+ MCP tools let any AI agent interact with WDK wallets. OpenClaw SKILL.md provides standardized agent skills.
+**For Developers:** Modular multi-strategy architecture. 97+ MCP tools let any AI agent interact with WDK wallets. OpenClaw SKILL.md provides standardized agent skills.
 
 **For the Ecosystem:** Bridges the gap between WDK (wallet infrastructure) and OpenClaw (agent framework): OpenClaw > AeroFyta > WDK > Blockchain.
 
@@ -386,7 +407,7 @@ Open **http://localhost:5173** — the onboarding overlay walks you through setu
 
 ```bash
 cd agent && npm test
-# 1001 tests across 297 suites — 0 failures
+# 1052 tests across 297 suites — 0 failures
 ```
 
 ### Coverage Report
@@ -418,9 +439,9 @@ AeroFyta runs on **Sepolia testnet** by default. The following protocols have te
 ---
 
 ### Seed Phrase & Security
-- On first run, AeroFyta auto-generates an HD seed phrase stored in `.wdk-seed`
+- On first run, AeroFyta auto-generates an HD seed phrase stored in `agent/.seed`
 - Set `WDK_SEED` env var to use your own seed
-- NEVER commit .wdk-seed to git (already in .gitignore)
+- NEVER commit `.seed` to git (already in .gitignore)
 - All wallets are non-custodial — only you hold the keys
 - Testnet only — no real funds at risk
 

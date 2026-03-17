@@ -12,6 +12,9 @@
     "build": "cd dashboard && npm run build",
     "lint": "cd agent && npm run lint"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "license": "Apache-2.0",
   "devDependencies": {
     "concurrently": "^9.0.0"

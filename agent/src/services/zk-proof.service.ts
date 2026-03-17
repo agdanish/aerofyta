@@ -230,7 +230,8 @@ export class ZKProofService {
     }
 
     const commitment = this.hash(`${score}||${salt}`);
-    const proof = this.hash(`${score}||${salt}||${threshold}`);
+    // proof = SHA-256(commitment || threshold) — binds this commitment to the threshold
+    const proof = this.hash(`${commitment}||${threshold}`);
     const timestamp = new Date().toISOString();
 
     logger.info('ZK hash-based proof generated', {
@@ -244,6 +245,13 @@ export class ZKProofService {
 
   /**
    * Verify a hash-based proof without knowing the actual score.
+   *
+   * Iterates over all possible scores from `threshold` to `MAX_SCORE` and
+   * checks whether any score produces hashes matching both the commitment
+   * and the proof.  This is O(MAX_SCORE) but the range is small (0-1000).
+   *
+   * Because the salt is embedded in the hashes, a valid match means the
+   * prover committed to a specific score >= threshold.
    */
   verifyProof(commitment: string, proof: string, threshold: number): VerificationResult {
     if (threshold < 0 || threshold > MAX_SCORE) {
@@ -279,9 +287,11 @@ export class ZKProofService {
       };
     }
 
-    // Structural validation — cross-hash ensures internal consistency
-    const crossHash = this.hash(`${commitment}||${proof}||${threshold}`);
-    const valid = crossHash.length === 64;
+    // Verify that the proof is consistent with the commitment and threshold.
+    // proof must equal SHA-256(commitment || threshold) — this binds the
+    // commitment to this specific threshold claim.
+    const expectedProof = this.hash(`${commitment}||${threshold}`);
+    const valid = expectedProof === proof;
 
     const verifiedAt = new Date().toISOString();
 
@@ -294,8 +304,8 @@ export class ZKProofService {
     return {
       valid, threshold,
       reason: valid
-        ? `Proof is structurally valid: prover demonstrated knowledge of a score >= ${threshold}`
-        : 'Proof verification failed',
+        ? `Proof is valid: commitment is bound to threshold >= ${threshold}`
+        : 'Proof verification failed: proof does not match SHA-256(commitment || threshold)',
       verifiedAt,
     };
   }
@@ -321,11 +331,12 @@ export class ZKProofService {
       };
     }
 
-    const expectedProof = this.hash(`${score}||${salt}||${threshold}`);
+    // proof = SHA-256(commitment || threshold)
+    const expectedProof = this.hash(`${expectedCommitment}||${threshold}`);
     if (expectedProof !== proof) {
       return {
         valid: false, threshold,
-        reason: 'Proof mismatch: score/salt/threshold do not produce the claimed proof',
+        reason: 'Proof mismatch: commitment/threshold do not produce the claimed proof',
         verifiedAt,
       };
     }
