@@ -4,10 +4,8 @@ import ConfidenceMeter from "@/components/shared/ConfidenceMeter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Play, Square, Brain, Zap, Eye, MessageCircle, CheckCircle, Wifi, WifiOff } from "lucide-react";
+import { Play, Square, Brain, Zap, Eye, MessageCircle, CheckCircle } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
-import { API_BASE } from "@/hooks/useFetch";
 
 interface ReasoningCard {
   type: string;
@@ -29,20 +27,17 @@ const prefilledTrace: ReasoningCard[] = [
   { type: "thought", label: "Thought", content: "Analyzing top creator engagement scores across Rumble and YouTube...", confidence: 22, source: "Engagement Scanner" },
   { type: "action", label: "Action", content: "Calling price_check tool for ETH/USDT pair on CoinGecko oracle.", confidence: 40, source: "Tool Executor" },
   { type: "observation", label: "Observation", content: "ETH price: $3,245. Gas: 12 gwei. Fee ratio: 2.3% for a 0.01 USDT tip.", confidence: 58, source: "Price Oracle" },
-  { type: "reflection", label: "Reflection", content: "Fee ratio is 2.3% -- acceptable for this tip amount. Creator @sarah_creates has Diamond tier with 94% engagement.", confidence: 74, source: "Risk Engine" },
+  { type: "reflection", label: "Reflection", content: "Fee ratio is 2.3% — acceptable for this tip amount. Creator @sarah_creates has Diamond tier with 94% engagement.", confidence: 74, source: "Risk Engine" },
   { type: "decision", label: "Decision", content: "Approve tip of 0.01 USDT to 0xABC...def on ethereum-sepolia. Confidence: 87%. Guardian review: PASS.", confidence: 87, source: "Consensus Engine" },
 ];
 
 export default function Reasoning() {
   const [prompt, setPrompt] = useState("Analyze portfolio and recommend next action");
-  const [cards, setCards] = useState<ReasoningCard[]>([]);
+  const [cards, setCards] = useState<ReasoningCard[]>(prefilledTrace);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [confidence, setConfidence] = useState(0);
+  const [confidence, setConfidence] = useState(87);
   const [hasRun, setHasRun] = useState(false);
-  const [totalSteps, setTotalSteps] = useState(0);
-  const [isLive, setIsLive] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const eventSourceRef = useRef<EventSource | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
 
   const scrollToBottom = useCallback(() => {
@@ -55,85 +50,11 @@ export default function Reasoning() {
     scrollToBottom();
   }, [cards, scrollToBottom]);
 
-  // Clean up on unmount
-  useEffect(() => {
-    return () => {
-      eventSourceRef.current?.close();
-      clearInterval(intervalRef.current);
-    };
-  }, []);
-
   const startReasoning = () => {
     setIsStreaming(true);
     setCards([]);
     setConfidence(0);
     setHasRun(true);
-    setTotalSteps(0);
-
-    // Try real SSE first
-    const url = `${API_BASE}/api/reasoning/stream?prompt=${encodeURIComponent(prompt)}`;
-
-    try {
-      const es = new EventSource(url);
-      eventSourceRef.current = es;
-      let stepCount = 0;
-      let gotData = false;
-
-      es.onmessage = (event) => {
-        gotData = true;
-        setIsLive(true);
-        try {
-          const data = JSON.parse(event.data);
-
-          // Map SSE data to our ReasoningCard format
-          const card: ReasoningCard = {
-            type: data.type || "thought",
-            label: (data.type || "thought").charAt(0).toUpperCase() + (data.type || "thought").slice(1),
-            content: data.content || "",
-            confidence: data.confidence ?? Math.min(95, (stepCount + 1) * 10),
-            source: data.source || "Agent",
-          };
-
-          stepCount++;
-          setCards((prev) => [...prev, card]);
-          setConfidence(card.confidence);
-          setTotalSteps(stepCount);
-
-          // Check for completion signals
-          if (data.type === "decision" || data.type === "complete" || data.done) {
-            es.close();
-            eventSourceRef.current = null;
-            setIsStreaming(false);
-          }
-        } catch {
-          // Non-JSON event, ignore
-        }
-      };
-
-      es.onerror = () => {
-        es.close();
-        eventSourceRef.current = null;
-
-        if (!gotData) {
-          // SSE failed before getting any data -- fall back to demo
-          setIsLive(false);
-          fallbackToDemo();
-        } else {
-          // Had data but connection closed (normal SSE end)
-          setIsStreaming(false);
-        }
-      };
-    } catch {
-      // EventSource constructor failed -- fall back to demo
-      setIsLive(false);
-      fallbackToDemo();
-    }
-  };
-
-  const fallbackToDemo = () => {
-    setCards([]);
-    setConfidence(0);
-    setTotalSteps(demoReasoningSteps.length);
     let i = 0;
 
     intervalRef.current = setInterval(() => {
@@ -150,22 +71,15 @@ export default function Reasoning() {
   };
 
   const stopReasoning = () => {
-    eventSourceRef.current?.close();
-    eventSourceRef.current = null;
     clearInterval(intervalRef.current);
     setIsStreaming(false);
   };
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Live Agent Reasoning</h1>
-          <p className="text-sm text-muted-foreground mt-1">Watch the agent think in real time.</p>
-        </div>
-        <Badge variant="outline" className={`text-[10px] ${isLive ? "text-emerald-400 border-emerald-500/30" : "text-yellow-400 border-yellow-500/30"}`}>
-          {isLive ? <><Wifi className="h-3 w-3 mr-1" />Live SSE</> : <><WifiOff className="h-3 w-3 mr-1" />Demo</>}
-        </Badge>
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold tracking-tight">Live Agent Reasoning</h1>
+        <p className="text-sm text-muted-foreground mt-1">Watch the agent think in real time.</p>
       </div>
 
       {/* Input */}
@@ -240,7 +154,7 @@ export default function Reasoning() {
           </div>
           <div className="rounded-xl border border-border/50 bg-card/50 p-4 w-full text-center">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Steps</p>
-            <p className="text-lg font-bold tabular-nums">{cards.length}<span className="text-muted-foreground text-sm font-normal">/{totalSteps || "?"}</span></p>
+            <p className="text-lg font-bold tabular-nums">{cards.length}<span className="text-muted-foreground text-sm font-normal">/{hasRun ? demoReasoningSteps.length : prefilledTrace.length}</span></p>
           </div>
         </div>
       </div>

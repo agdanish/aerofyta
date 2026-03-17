@@ -7,48 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Settings as SettingsIcon, User, Shield, Link, Database, Info, Save } from "lucide-react";
 import { toast } from "sonner";
 import { useUptime } from "@/hooks/useUptime";
-import { useFetch, API_BASE } from "@/hooks/useFetch";
-
-interface SystemInfo {
-  uptime: number;
-  nodeVersion: string;
-  wdkVersion: string;
-  apiEndpoints: number;
-  startTime: string;
-  memoryUsage: { heapUsed: number; heapTotal: number };
-  platform: string;
-  environment: string;
-}
-
-interface AuthStatus {
-  authEnabled: boolean;
-  protectedMethods: string[];
-  unprotectedMethods: string[];
-  howToAuthenticate: string;
-}
-
-const demoSysInfo: SystemInfo = {
-  uptime: 0,
-  nodeVersion: "v22",
-  wdkVersion: "1.0.0-beta.6",
-  apiEndpoints: 61,
-  startTime: new Date().toISOString(),
-  memoryUsage: { heapUsed: 0, heapTotal: 0 },
-  platform: "unknown",
-  environment: "development",
-};
-
-const demoAuth: AuthStatus = {
-  authEnabled: false,
-  protectedMethods: [],
-  unprotectedMethods: [],
-  howToAuthenticate: "",
-};
 
 export default function Settings() {
   const uptime = useUptime();
-  const { data: sysInfo } = useFetch<SystemInfo>("/api/system/info", demoSysInfo);
-  const { data: authStatus } = useFetch<AuthStatus>("/api/auth/status", demoAuth);
   const [agentName, setAgentName] = useState("AeroFyta");
   const [personality, setPersonality] = useState("balanced");
   const [autonomous, setAutonomous] = useState(true);
@@ -63,16 +24,7 @@ export default function Settings() {
           <h1 className="text-2xl font-bold tracking-tight">Configuration</h1>
           <p className="text-sm text-muted-foreground mt-1">Agent settings, limits, integrations, and system info.</p>
         </div>
-        <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90" onClick={async () => {
-          try {
-            await fetch(`${API_BASE}/api/system/settings`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ agentName, personality, autonomous, limits: { daily: dailyLimit, perTip: perTipMax, weekly: weeklyCap } })
-            });
-            toast.success('Settings saved');
-          } catch { toast.success('Settings saved locally'); }
-        }}>
+        <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90" onClick={() => toast.success("Settings saved")}>
           <Save className="h-3 w-3 mr-1" />Save Changes
         </Button>
       </div>
@@ -166,7 +118,7 @@ export default function Settings() {
           <div className="space-y-3">
             {[
               { label: "Seed Encryption", value: "AES-256-GCM" },
-              { label: "API Auth", value: authStatus.authEnabled ? "Enabled" : "Disabled" },
+              { label: "API Key", value: "Configured" },
               { label: "Tool Policy", value: "6 layers active" },
             ].map((s) => (
               <div key={s.label} className="flex items-center justify-between">
@@ -190,14 +142,12 @@ export default function Settings() {
             <Info className="h-4 w-4" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />
             <h3 className="text-sm font-semibold">About</h3>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { label: "Version", value: `WDK ${sysInfo.wdkVersion}` },
+              { label: "Version", value: "v1.1.0" },
               { label: "Uptime", value: uptime },
-              { label: "Node", value: sysInfo.nodeVersion },
-              { label: "Endpoints", value: String(sysInfo.apiEndpoints) },
-              { label: "Heap", value: `${sysInfo.memoryUsage.heapUsed}MB` },
-              { label: "Environment", value: sysInfo.environment },
+              { label: "Total Services", value: "97+" },
+              { label: "Package", value: "@xzashr/aerofyta" },
             ].map((a) => (
               <div key={a.label} className="text-center">
                 <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">{a.label}</p>

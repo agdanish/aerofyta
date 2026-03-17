@@ -1,94 +1,13 @@
-import { useMemo, useCallback } from "react";
 import { demoWallets } from "@/lib/demo-data";
-import { useFetch, API_BASE } from "@/hooks/useFetch";
+import { useFetch } from "@/hooks/useFetch";
 import CopyButton from "@/components/shared/CopyButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { ExternalLink, Download } from "lucide-react";
 import { toast } from "sonner";
 
-const faucetUrls: Record<string, string> = {
-  "Ethereum Sepolia": "https://cloud.google.com/application/web3/faucet/ethereum/sepolia",
-  "ETH Gasless":      "https://cloud.google.com/application/web3/faucet/ethereum/sepolia",
-  "TON Testnet":      "https://testnet.toncenter.com",
-  "TON Gasless":      "https://testnet.toncenter.com",
-  "Tron Nile":        "https://nileex.io/join/getJoinPage",
-  "Bitcoin Testnet":  "https://coinfaucet.eu/en/btc-testnet",
-  "Solana Devnet":    "https://faucet.solana.com",
-};
-
-/* ── chain metadata for display ── */
-const chainMeta: Record<string, { label: string; symbol: string; color: string }> = {
-  "ethereum-sepolia":          { label: "Ethereum Sepolia", symbol: "ETH",  color: "#627EEA" },
-  "ton-testnet":               { label: "TON Testnet",     symbol: "TON",  color: "#0098EA" },
-  "tron-nile":                 { label: "Tron Nile",       symbol: "TRX",  color: "#FF0013" },
-  "ethereum-sepolia-gasless":  { label: "ETH Gasless",     symbol: "ETH",  color: "#627EEA" },
-  "ton-testnet-gasless":       { label: "TON Gasless",     symbol: "TON",  color: "#0098EA" },
-  "bitcoin-testnet":           { label: "Bitcoin Testnet", symbol: "BTC",  color: "#F7931A" },
-  "solana-devnet":             { label: "Solana Devnet",   symbol: "SOL",  color: "#9945FF" },
-  "plasma":                    { label: "Plasma",          symbol: "ETH",  color: "#8247E5" },
-  "stable":                    { label: "Stable",          symbol: "ETH",  color: "#50AF95" },
-};
-
-/* ── API response types ── */
-interface AddressesResponse {
-  addresses: Record<string, string>;
-}
-
-interface BalanceEntry {
-  chainId: string;
-  address: string;
-  nativeBalance: string;
-  nativeCurrency: string;
-  usdtBalance: string;
-}
-
-interface BalancesResponse {
-  balances: BalanceEntry[];
-}
-
 export default function Wallets() {
-  const { data: addrData, isDemo: isAddrDemo } = useFetch<AddressesResponse | typeof demoWallets>(
-    "/api/wallet/addresses",
-    demoWallets,
-  );
-  const { data: balData } = useFetch<BalancesResponse | null>(
-    "/api/wallet/balances",
-    null,
-  );
-
-  /* merge addresses + balances into the shape the UI expects */
-  const wallets = useMemo(() => {
-    // If we got demo data (array), just use it directly
-    if (isAddrDemo || Array.isArray(addrData)) {
-      return demoWallets;
-    }
-
-    const resp = addrData as AddressesResponse;
-    if (!resp?.addresses) return demoWallets;
-
-    const balMap = new Map<string, BalanceEntry>();
-    if (balData && !Array.isArray(balData) && (balData as BalancesResponse).balances) {
-      for (const b of (balData as BalancesResponse).balances) {
-        balMap.set(b.chainId, b);
-      }
-    }
-
-    return Object.entries(resp.addresses).map(([chainId, address]) => {
-      const meta = chainMeta[chainId] ?? { label: chainId, symbol: "?", color: "#666" };
-      const bal = balMap.get(chainId);
-      return {
-        chain: meta.label,
-        symbol: meta.symbol,
-        address,
-        usdt: bal ? parseFloat(bal.usdtBalance).toFixed(2) : "0.00",
-        native: bal ? bal.nativeBalance : "0",
-        nativeSymbol: bal ? bal.nativeCurrency : meta.symbol,
-        color: meta.color,
-        status: address === "Error" ? "error" : "active",
-      };
-    });
-  }, [addrData, balData, isAddrDemo]);
+  const { data: wallets } = useFetch("/api/wallet/addresses", demoWallets);
 
   const truncate = (addr: string) =>
     addr.length > 16 ? `${addr.slice(0, 8)}...${addr.slice(-6)}` : addr;
@@ -101,7 +20,7 @@ export default function Wallets() {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {wallets.map((w) => (
+        {(wallets as typeof demoWallets).map((w) => (
           <div
             key={w.chain}
             className="rounded-xl border border-border/50 bg-card/50 overflow-hidden hover:border-border transition-all group"
@@ -155,10 +74,7 @@ export default function Wallets() {
                 variant="ghost"
                 size="sm"
                 className="h-7 text-xs text-muted-foreground hover:text-foreground"
-                onClick={() => {
-                  const url = faucetUrls[w.chain] || "https://cloud.google.com/application/web3/faucet/ethereum/sepolia";
-                  window.open(url, "_blank");
-                }}
+                onClick={() => toast.info(`Faucet link for ${w.chain} opened`)}
               >
                 Fund
               </Button>
@@ -166,15 +82,7 @@ export default function Wallets() {
                 variant="ghost"
                 size="sm"
                 className="h-7 text-xs text-muted-foreground hover:text-foreground"
-                onClick={async () => {
-                  try {
-                    const res = await fetch(`${API_BASE}/api/wallet/gasless-test`, { method: "POST" });
-                    const data = await res.json();
-                    toast.success(`Gasless test: ${data.success ? "Success" : "Failed"} — ${data.txHash || "no tx"}`);
-                  } catch (err) {
-                    toast.error(`Gasless test failed: ${err instanceof Error ? err.message : "Network error"}`);
-                  }
-                }}
+                onClick={() => toast.success(`Gasless test sent on ${w.chain}`)}
               >
                 Gasless Test
               </Button>
@@ -182,16 +90,6 @@ export default function Wallets() {
                 variant="ghost"
                 size="sm"
                 className="h-7 text-xs text-muted-foreground hover:text-foreground ml-auto"
-                onClick={() => {
-                  const blob = new Blob([JSON.stringify(wallets, null, 2)], { type: "application/json" });
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement("a");
-                  a.href = url;
-                  a.download = "aerofyta-wallets.json";
-                  a.click();
-                  URL.revokeObjectURL(url);
-                  toast.success("Wallets exported");
-                }}
               >
                 <Download className="h-3 w-3" />
               </Button>

@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 
-// In production (Railway/Render), frontend is served from same origin as backend
-// In development, backend runs on localhost:3001
 export const API_BASE = import.meta.env.PROD ? "" : "http://localhost:3001";
 
 export function useFetch<T>(path: string, demoData: T) {
@@ -15,7 +13,7 @@ export function useFetch<T>(path: string, demoData: T) {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    setData(null); // Reset data on refetch to prevent stale flash
+    setData(null);
 
     async function fetchData() {
       try {

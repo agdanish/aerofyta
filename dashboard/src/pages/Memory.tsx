@@ -1,132 +1,48 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { BrainCircuit, CheckCircle, XCircle, Loader2 } from "lucide-react";
-import { API_BASE } from "@/hooks/useFetch";
+import { BrainCircuit, CheckCircle, XCircle } from "lucide-react";
 
-/* ---------- types matching real /api/agent/memory ---------- */
-interface CreatorPref {
-  name: string;
-  interactions: number;
-  avgEngagement: number;
-  tipCount: number;
-  confidence: number;
-}
-interface ChainPerf {
-  chain: string;
-  transactions: number;
-  avgFee: number;
-  avgConfirmMs: number;
-  successRate: number;
-  successes: number;
-}
-interface PeakTime {
-  day: string;
-  hour: number;
-  observations: number;
-  avgEvents: number;
-}
-interface MemoryResponse {
-  creatorPreferences: CreatorPref[];
-  chainPerformance: ChainPerf[];
-  peakActivityTimes: PeakTime[];
-  tipEffectiveness: unknown[];
-  totalMemories: number;
-  contextSummary: string;
-}
-
-/* ---------- map API data to table rows ---------- */
-interface MemoryEntry {
-  key: string;
-  value: string;
-  confidence: number;
-  importance: number;
-  source: string;
-  lastAccessed: string;
-}
-
-function mapApiToEntries(api: MemoryResponse): MemoryEntry[] {
-  const entries: MemoryEntry[] = [];
-  api.creatorPreferences.forEach((c) => {
-    entries.push({
-      key: `creator_${c.name}`,
-      value: `${c.interactions} interactions, engagement ${(c.avgEngagement * 100).toFixed(0)}%, tipped ${c.tipCount}x`,
-      confidence: c.confidence,
-      importance: Math.min(100, Math.round(c.avgEngagement * 100)),
-      source: "observed",
-      lastAccessed: "live",
-    });
-  });
-  api.chainPerformance.forEach((ch) => {
-    entries.push({
-      key: `chain_${ch.chain}`,
-      value: `${ch.transactions} txs, avg fee $${ch.avgFee.toFixed(4)}, success ${(ch.successRate * 100).toFixed(0)}%`,
-      confidence: Math.round(ch.successRate * 100),
-      importance: Math.min(100, ch.transactions * 10 + 50),
-      source: "observed",
-      lastAccessed: "live",
-    });
-  });
-  api.peakActivityTimes.slice(0, 4).forEach((p) => {
-    entries.push({
-      key: `peak_${p.day}_${p.hour}`,
-      value: `${p.day} at ${p.hour}:00 — ${p.observations} observations, avg ${p.avgEvents.toFixed(1)} events`,
-      confidence: Math.min(100, p.observations * 3),
-      importance: Math.min(100, Math.round(p.avgEvents * 20)),
-      source: "inferred",
-      lastAccessed: "live",
-    });
-  });
-  return entries;
-}
-
-/* ---------- extract learned facts from contextSummary ---------- */
-interface LearnedFact {
-  title: string;
-  detail: string;
-}
-
-function extractLearned(api: MemoryResponse): LearnedFact[] {
-  const facts: LearnedFact[] = [];
-  if (api.creatorPreferences.length > 0) {
-    const names = api.creatorPreferences.map((c) => `${c.name} (${(c.avgEngagement * 100).toFixed(0)}%)`).join(", ");
-    facts.push({ title: "Known Creators", detail: names });
-  }
-  if (api.chainPerformance.length > 0) {
-    const chains = api.chainPerformance.map((c) => `${c.chain}: ${c.transactions} txs, ${(c.successRate * 100).toFixed(0)}% success`).join(" | ");
-    facts.push({ title: "Chain Performance", detail: chains });
-  }
-  if (api.peakActivityTimes.length > 0) {
-    const peaks = api.peakActivityTimes.slice(0, 3).map((p) => `${p.day} ${p.hour}:00`).join(", ");
-    facts.push({ title: "Peak Activity Times", detail: peaks });
-  }
-  facts.push({ title: "Total Memories", detail: `${api.totalMemories} stored memory entries` });
-  return facts;
-}
-
-/* ---------- demo fallback ---------- */
-const demoEntries: MemoryEntry[] = [
+const memoryEntries = [
   { key: "trusted_creators", value: "sarah_creates, dev_marcus, music_maya", confidence: 94, importance: 92, source: "observed", lastAccessed: "2m ago" },
   { key: "eth_gas_threshold", value: "15 gwei (optimal)", confidence: 88, importance: 85, source: "inferred", lastAccessed: "5m ago" },
-  { key: "best_tip_hours", value: "14:00-18:00 UTC", confidence: 82, importance: 78, source: "inferred", lastAccessed: "12m ago" },
+  { key: "best_tip_hours", value: "14:00–18:00 UTC", confidence: 82, importance: 78, source: "inferred", lastAccessed: "12m ago" },
   { key: "max_safe_tip", value: "10 USDT per tx", confidence: 96, importance: 95, source: "user", lastAccessed: "1h ago" },
   { key: "polygon_preferred", value: "true (lowest fees for tips)", confidence: 91, importance: 80, source: "observed", lastAccessed: "18m ago" },
+  { key: "creator_tier_weights", value: "Diamond:3x, Platinum:2x, Gold:1.5x", confidence: 90, importance: 88, source: "user", lastAccessed: "30m ago" },
+  { key: "risk_tolerance", value: "moderate", confidence: 97, importance: 93, source: "user", lastAccessed: "2h ago" },
+  { key: "aave_yield_min", value: "3.5% APY", confidence: 85, importance: 72, source: "inferred", lastAccessed: "45m ago" },
 ];
 
-const demoLearned: LearnedFact[] = [
-  { title: "Trusted Creators", detail: "Sarah Mitchell (94%), Marcus Rivera (87%), Maya Chen (82%)" },
-  { title: "Gas Thresholds", detail: "ETH: <15 gwei optimal, Polygon: always cheap, TON: near-zero" },
-  { title: "Best Tipping Hours", detail: "14:00-18:00 UTC yields 23% higher engagement" },
-];
-
-const demoContext = `{
+const contextPreview = `{
   "wallet_state": { "total": "$12,847.32", "chains": 9 },
   "mood": "optimistic", "multiplier": 1.2,
-  "top_creators": ["sarah_creates (94%)"],
-  "memory_count": 8,
+  "top_creators": ["sarah_creates (94%)", "dev_marcus (87%)"],
+  "gas": { "eth": "12 gwei", "polygon": "30 gwei" },
+  "risk_tolerance": "moderate",
+  "recent_actions": ["tip @sarah 2.5 USDT", "escrow E-0047"],
+  "memory_count": ${memoryEntries.length},
   "session_decisions": 20
 }`;
+
+const decisions = [
+  { id: 1, time: "14:32", action: "Tip @sarah_creates 2.5 USDT", outcome: "success", learned: "Engagement spike confirms Diamond tier accuracy" },
+  { id: 2, time: "14:28", action: "Skip tip @unknown_user", outcome: "success", learned: "Low-engagement creators correctly filtered" },
+  { id: 3, time: "14:15", action: "Swap 100 USDT → ETH", outcome: "success", learned: "Gas below 15 gwei is optimal window" },
+  { id: 4, time: "13:55", action: "Tip @dev_marcus 5 USDT", outcome: "success", learned: "Polygon saves 98% on gas vs Ethereum" },
+  { id: 5, time: "13:40", action: "Create Escrow E-0047", outcome: "success", learned: "2h timelock sufficient for creator claims" },
+  { id: 6, time: "13:22", action: "Tip @risky_account 50 USDT", outcome: "fail", learned: "Guardian veto: amount exceeded risk threshold" },
+  { id: 7, time: "13:10", action: "DCA 25 USDT → ETH", outcome: "success", learned: "Daily DCA smooths volatility effectively" },
+  { id: 8, time: "12:55", action: "Supply 500 USDT to Aave", outcome: "success", learned: "4.2% APY above minimum threshold" },
+  { id: 9, time: "12:30", action: "Bridge 200 USDT ETH→Polygon", outcome: "success", learned: "Bridge time ~4min acceptable" },
+  { id: 10, time: "12:15", action: "Tip @music_maya 1.5 USDT", outcome: "success", learned: "TON chain fastest for small tips" },
+  { id: 11, time: "11:58", action: "Reject suspicious withdraw", outcome: "success", learned: "Anomaly score >0.9 warrants block" },
+  { id: 12, time: "11:42", action: "Rebalance portfolio", outcome: "success", learned: "Monthly rebalance keeps diversification >80%" },
+  { id: 13, time: "11:20", action: "Tip @crypto_claire 3 USDT", outcome: "success", learned: "Solana ideal for mid-range tips" },
+  { id: 14, time: "11:05", action: "Skip staking opportunity", outcome: "fail", learned: "Missed 5.1% APY — raise yield threshold awareness" },
+  { id: 15, time: "10:48", action: "Update gas threshold", outcome: "success", learned: "12 gwei new baseline after network upgrade" },
+];
 
 const sourceBadge = (s: string) => {
   if (s === "user") return "bg-primary/15 text-primary border-primary/30";
@@ -135,57 +51,11 @@ const sourceBadge = (s: string) => {
 };
 
 export default function Memory() {
-  const [memoryEntries, setMemoryEntries] = useState<MemoryEntry[]>(demoEntries);
-  const [learned, setLearned] = useState<LearnedFact[]>(demoLearned);
-  const [contextPreview, setContextPreview] = useState(demoContext);
-  const [loading, setLoading] = useState(true);
-  const [isDemo, setIsDemo] = useState(false);
-  const [initialLoading, setInitialLoading] = useState(true);
-
-  useEffect(() => {
-    let cancelled = false;
-    async function load() {
-      try {
-        const res = await fetch(`${API_BASE}/api/agent/memory`, { signal: AbortSignal.timeout(5000) });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const api: MemoryResponse = await res.json();
-        if (cancelled) return;
-        setMemoryEntries(mapApiToEntries(api));
-        setLearned(extractLearned(api));
-        setContextPreview(api.contextSummary);
-        setIsDemo(false);
-      } catch {
-        if (!cancelled) setIsDemo(true);
-      } finally {
-        if (!cancelled) { setLoading(false); setInitialLoading(false); }
-      }
-    }
-    load();
-    return () => { cancelled = true; };
-  }, []);
-
-  if (initialLoading) {
-    return (
-      <div className="space-y-4">
-        <div className="animate-pulse bg-white/5 rounded-lg h-8 w-64" />
-        <div className="animate-pulse bg-white/5 rounded-lg h-32" />
-        <div className="grid lg:grid-cols-2 gap-4">
-          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
-          <div className="animate-pulse bg-white/5 rounded-lg h-32" />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between flex-wrap gap-2">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Agent Memory & Learning</h1>
-          <p className="text-sm text-muted-foreground mt-1">Persistent memory, learned patterns, and decision history.</p>
-        </div>
-        {isDemo && <Badge variant="outline" className="text-[9px] bg-amber-500/15 text-amber-400 border-amber-500/30">Demo Data</Badge>}
-        {loading && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />}
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold tracking-tight">Agent Memory & Learning</h1>
+        <p className="text-sm text-muted-foreground mt-1">Persistent memory, learned patterns, and decision history.</p>
       </div>
 
       {/* Memory Entries */}
@@ -242,7 +112,13 @@ export default function Memory() {
             What the Agent Has Learned
           </h3>
           <div className="space-y-3">
-            {learned.map((item) => (
+            {[
+              { title: "Trusted Creators", detail: "Sarah Mitchell (Diamond, 94%), Marcus Rivera (Platinum, 87%), Maya Chen (Gold, 82%)" },
+              { title: "Gas Thresholds", detail: "ETH: <15 gwei optimal, Polygon: always cheap, TON: near-zero" },
+              { title: "Best Tipping Hours", detail: "14:00–18:00 UTC yields 23% higher engagement response" },
+              { title: "Chain Selection", detail: "Polygon for tips <$5, Ethereum for >$10, TON for micro-tips" },
+              { title: "Risk Patterns", detail: "Anomaly scores >0.9 always block, 0.7–0.9 require consensus" },
+            ].map((item) => (
               <div key={item.title} className="rounded-lg bg-accent/30 p-3">
                 <p className="text-xs font-medium mb-0.5">{item.title}</p>
                 <p className="text-[11px] text-muted-foreground leading-relaxed">{item.detail}</p>
@@ -253,12 +129,37 @@ export default function Memory() {
 
         {/* Context Builder Preview */}
         <div className="rounded-xl border border-border/50 bg-card/50 p-5">
-          <h3 className="text-sm font-semibold mb-4">Context Summary</h3>
-          <pre className="text-[11px] font-mono text-foreground/80 bg-secondary/30 rounded-lg p-4 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[300px] overflow-y-auto">
+          <h3 className="text-sm font-semibold mb-4">Context Sent to LLM</h3>
+          <pre className="text-[11px] font-mono text-foreground/80 bg-secondary/30 rounded-lg p-4 overflow-x-auto whitespace-pre leading-relaxed">
             {contextPreview}
           </pre>
           <p className="text-[10px] text-muted-foreground mt-3">This context is assembled from memory + wallet state before every agent reasoning cycle.</p>
         </div>
+      </div>
+
+      {/* Decision History */}
+      <div className="rounded-xl border border-border/50 bg-card/50">
+        <div className="px-5 py-3 border-b border-border/40">
+          <h3 className="text-sm font-semibold">Decision History</h3>
+        </div>
+        <ScrollArea className="h-[360px]">
+          <div className="divide-y divide-border/20">
+            {decisions.map((d) => (
+              <div key={d.id} className="px-5 py-3 flex items-start gap-3 hover:bg-accent/30 transition-colors">
+                {d.outcome === "success" ? (
+                  <CheckCircle className="h-4 w-4 mt-0.5 shrink-0" strokeWidth={1.5} style={{ color: "#50AF95" }} />
+                ) : (
+                  <XCircle className="h-4 w-4 mt-0.5 shrink-0" strokeWidth={1.5} style={{ color: "#ef4444" }} />
+                )}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm">{d.action}</p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">{d.learned}</p>
+                  <span className="text-[10px] text-muted-foreground/60 mt-0.5 block">{d.time}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
       </div>
     </div>
   );

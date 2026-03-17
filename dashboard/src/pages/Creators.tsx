@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { demoCreators } from "@/lib/demo-data";
-import { useFetch, API_BASE } from "@/hooks/useFetch";
+import { useFetch } from "@/hooks/useFetch";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,118 +16,30 @@ const tierColors: Record<string, string> = {
   Bronze: "bg-orange-700/15 text-orange-400 border-orange-700/30",
 };
 
-/* Real API shape from /api/rumble/creators */
-interface ApiCreator {
-  id: string;
-  name: string;
-  channelUrl: string;
-  walletAddress: string;
-  categories: string[];
-  totalTipsReceived: number;
-  totalTipAmount: number;
-  subscriberCount: number;
-  registeredAt: string;
-}
-
-/* Normalised row used by the UI */
-interface CreatorRow {
-  id: string;
-  name: string;
-  platform: string;
-  engagement: number;
-  tips: number;
-  tier: string;
-  avatar: string;
-  walletAddress: string;
-  categories: string[];
-}
-
-function tierFromTips(tips: number): string {
-  if (tips >= 40) return "Diamond";
-  if (tips >= 25) return "Platinum";
-  if (tips >= 15) return "Gold";
-  if (tips >= 5) return "Silver";
-  return "Bronze";
-}
-
-function normalise(raw: ApiCreator): CreatorRow {
-  const engagement = Math.min(100, Math.round(raw.totalTipAmount * 100 + raw.totalTipsReceived * 3 + raw.subscriberCount * 0.01));
-  return {
-    id: raw.id,
-    name: raw.name,
-    platform: "Rumble",
-    engagement,
-    tips: raw.totalTipsReceived,
-    tier: tierFromTips(raw.totalTipsReceived),
-    avatar: raw.name.slice(0, 2).toUpperCase(),
-    walletAddress: raw.walletAddress,
-    categories: raw.categories,
-  };
-}
-
 export default function Creators() {
-  const { data: rawData, loading, isDemo, refetch } = useFetch<{ creators: ApiCreator[] } | typeof demoCreators>(
-    "/api/rumble/creators",
-    demoCreators,
-  );
+  const { data: creators } = useFetch("/api/rumble/creators", demoCreators);
   const [search, setSearch] = useState("");
-  const [expanded, setExpanded] = useState<string | null>(null);
-  const [discovering, setDiscovering] = useState(false);
+  const [expanded, setExpanded] = useState<number | null>(null);
 
-  /* Normalise: real API returns { creators: [...] }, demo is flat array */
-  const creators: CreatorRow[] = Array.isArray(rawData)
-    ? (rawData as typeof demoCreators).map((c) => ({
-        id: String(c.id),
-        name: c.name,
-        platform: c.platform,
-        engagement: c.engagement,
-        tips: c.tips,
-        tier: c.tier,
-        avatar: c.avatar,
-        walletAddress: "",
-        categories: [],
-      }))
-    : ((rawData as { creators: ApiCreator[] }).creators ?? []).map(normalise);
-
-  const filtered = creators.filter((c) =>
+  const filtered = (creators as typeof demoCreators).filter((c) =>
     c.name.toLowerCase().includes(search.toLowerCase()) ||
-    c.platform.toLowerCase().includes(search.toLowerCase()) ||
-    c.categories.some((cat) => cat.toLowerCase().includes(search.toLowerCase()))
+    c.platform.toLowerCase().includes(search.toLowerCase())
   );
-
-  /* ---- Discover ---- */
-  const handleDiscover = async () => {
-    setDiscovering(true);
-    try {
-      const res = await fetch(`${API_BASE}/api/creators/discover`);
-      const data = await res.json();
-      toast.success(`Discovered ${data.creators?.length || 0} new creators`);
-      refetch();
-    } catch {
-      toast.error("Could not reach discover API");
-    } finally {
-      setDiscovering(false);
-    }
-  };
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Creator Intelligence</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Track, discover, and tip creators across platforms.
-            {isDemo && <Badge variant="outline" className="ml-2 text-[9px] bg-yellow-500/15 text-yellow-400 border-yellow-500/30">Demo</Badge>}
-          </p>
+          <p className="text-sm text-muted-foreground mt-1">Track, discover, and tip creators across platforms.</p>
         </div>
         <Button
           size="sm"
           className="bg-primary hover:bg-primary/90"
-          disabled={discovering}
-          onClick={handleDiscover}
+          onClick={() => toast.success("Discovered 12 new creators")}
         >
           <Sparkles className="h-3.5 w-3.5 mr-2" />
-          {discovering ? "Discovering..." : "Discover"}
+          Discover
         </Button>
       </div>
 
@@ -153,23 +65,7 @@ export default function Creators() {
               <span className="text-right">Tier</span>
             </div>
             <div className="divide-y divide-border/30">
-              {loading && (
-                <>
-                  {[1, 2, 3, 4].map((n) => (
-                    <div key={n} className="grid grid-cols-[1fr_100px_140px_80px_90px] gap-4 px-5 py-3 animate-pulse items-center">
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-muted" />
-                        <div className="h-3 w-24 bg-muted rounded" />
-                      </div>
-                      <div className="h-3 w-12 bg-muted/60 rounded" />
-                      <div className="h-1.5 w-full bg-muted/40 rounded" />
-                      <div className="h-3 w-8 bg-muted/60 rounded ml-auto" />
-                      <div className="h-5 w-16 bg-muted/40 rounded ml-auto" />
-                    </div>
-                  ))}
-                </>
-              )}
-              {!loading && filtered.map((c) => (
+              {filtered.map((c) => (
                 <div key={c.id}>
                   <button
                     className="w-full grid grid-cols-[1fr_100px_140px_80px_90px] gap-4 px-5 py-3 text-sm hover:bg-accent/30 transition-colors items-center text-left"
@@ -199,25 +95,11 @@ export default function Creators() {
                         <div><span className="text-muted-foreground">Engagement Score:</span> <span className="font-medium">{c.engagement}%</span></div>
                         <div><span className="text-muted-foreground">Total Tips:</span> <span className="font-medium">{c.tips}</span></div>
                         <div><span className="text-muted-foreground">Reputation:</span> <span className="font-medium">{c.tier}</span></div>
-                        {c.walletAddress && (
-                          <div className="sm:col-span-3"><span className="text-muted-foreground">Wallet:</span> <span className="font-mono font-medium">{c.walletAddress}</span></div>
-                        )}
-                        {c.categories.length > 0 && (
-                          <div className="sm:col-span-3">
-                            <span className="text-muted-foreground">Categories:</span>{" "}
-                            {c.categories.map((cat) => (
-                              <Badge key={cat} variant="outline" className="text-[9px] ml-1">{cat}</Badge>
-                            ))}
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
                 </div>
               ))}
-              {!loading && filtered.length === 0 && (
-                <div className="px-5 py-8 text-center text-sm text-muted-foreground">No creators found.</div>
-              )}
             </div>
           </div>
         </div>

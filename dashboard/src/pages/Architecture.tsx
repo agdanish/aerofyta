@@ -6,51 +6,6 @@ import {
 import { type LucideIcon } from "lucide-react";
 import CountUp from "@/components/shared/CountUp";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import { useFetch } from "@/hooks/useFetch";
-
-interface ArchitectureData {
-  framework: string;
-  pattern: string;
-  decorators: string[];
-  totalServices: number;
-  totalRoutes: number;
-  totalTests: number;
-  persistence: string[];
-  authentication: string;
-  documentation: string;
-  deployment: string[];
-  wdkIntegration: {
-    packages: string[];
-    chains: string[];
-    features: string[];
-  };
-  aiCapabilities: {
-    providers: string[];
-    features: string[];
-  };
-}
-
-const demoArchData: ArchitectureData = {
-  framework: "Express 4 with NestJS-style Controllers",
-  pattern: "Service Registry + Domain Routers + Decorator Controllers",
-  decorators: [],
-  totalServices: 93,
-  totalRoutes: 150,
-  totalTests: 1001,
-  persistence: ["JSON", "SQLite", "PostgreSQL"],
-  authentication: "API Key (optional)",
-  documentation: "OpenAPI 3.0 + Swagger UI",
-  deployment: ["Docker", "Railway", "Render", "npm run dev"],
-  wdkIntegration: {
-    packages: ["@tetherto/wdk", "@tetherto/wdk-wallet-evm", "@tetherto/wdk-wallet-ton"],
-    chains: ["Ethereum", "TON", "Polygon", "Arbitrum", "Optimism"],
-    features: ["Multi-chain wallets", "USDT transfers", "Cross-chain bridges", "Gasless transactions"],
-  },
-  aiCapabilities: {
-    providers: ["OpenRouter (free)", "Groq", "Ollama"],
-    features: ["NLP intent parsing", "Entity extraction", "Agentic tool-use", "ReAct reasoning"],
-  },
-};
 
 const pipelineSteps: { label: string; sub: string; icon: LucideIcon }[] = [
   { label: "YouTube API", sub: "RSS + Webhooks", icon: MonitorPlay },
@@ -70,15 +25,14 @@ const securityLayers = [
   { name: "De-escalation Guard", desc: "Automatic cooldown after blocked events", color: "text-emerald-400" },
 ];
 
-export default function Architecture() {
-  const { data: arch } = useFetch<ArchitectureData>("/api/architecture", demoArchData);
+const stats = [
+  { value: 603, label: "API Endpoints" },
+  { value: 97, label: "MCP Tools", suffix: "+" },
+  { value: 107, label: "CLI Commands" },
+  { value: 1001, label: "Tests" },
+];
 
-  const stats = [
-    { value: arch.totalRoutes, label: "API Routes" },
-    { value: arch.totalServices, label: "Services", suffix: "+" },
-    { value: 107, label: "CLI Commands" },
-    { value: arch.totalTests, label: "Tests" },
-  ];
+export default function Architecture() {
   return (
     <div>
       <div className="mb-8">

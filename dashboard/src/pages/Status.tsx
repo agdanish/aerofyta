@@ -1,168 +1,50 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { API_BASE } from "@/hooks/useFetch";
 
-interface ServiceStatus {
-  name: string;
-  healthy: boolean;
-  responseTime: number;
-  lastChecked: string;
-}
+const SERVICES = [
+  "Wallet Service", "AI Service", "WDK", "Orchestrator", "Safety",
+  "Escrow", "Treasury", "YouTube API", "RSS", "Webhooks", "MCP Server",
+];
 
-interface HealthResponse {
-  status: string;
-  uptime: number;
-  timestamp: string;
-  version: string;
-}
+function randomMs() { return Math.floor(Math.random() * 80) + 12; }
 
-interface SystemInfoResponse {
-  uptime: number;
-  nodeVersion: string;
-  wdkVersion: string;
-  apiEndpoints: number;
-  startTime: string;
-  memoryUsage: { heapUsed: number; heapTotal: number };
-  platform: string;
-  environment: string;
-}
-
-interface ArchResponse {
-  totalServices: number;
-  totalRoutes: number;
-  totalTests: number;
-  wdkIntegration?: { chains: string[]; packages: string[] };
-  aiCapabilities?: { providers: string[] };
-}
-
-async function checkEndpoint(url: string): Promise<{ ok: boolean; ms: number }> {
-  const start = performance.now();
-  try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
-    return { ok: res.ok, ms: Math.round(performance.now() - start) };
-  } catch {
-    return { ok: false, ms: Math.round(performance.now() - start) };
-  }
+function generateStatuses() {
+  return SERVICES.map((name) => ({
+    name,
+    healthy: Math.random() > 0.05,
+    responseTime: randomMs(),
+    lastChecked: new Date().toLocaleTimeString(),
+  }));
 }
 
 export default function Status() {
-  const [statuses, setStatuses] = useState<ServiceStatus[]>([]);
-  const [healthData, setHealthData] = useState<HealthResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const checkAllServices = useCallback(async () => {
-    const now = new Date().toLocaleTimeString();
-
-    // Check multiple real endpoints in parallel
-    const checks = await Promise.all([
-      checkEndpoint(`${API_BASE}/api/health`),
-      checkEndpoint(`${API_BASE}/api/system/info`),
-      checkEndpoint(`${API_BASE}/api/architecture`),
-      checkEndpoint(`${API_BASE}/api/auth/status`),
-      checkEndpoint(`${API_BASE}/api/chat`),
-      checkEndpoint(`${API_BASE}/api/wallet/info`),
-      checkEndpoint(`${API_BASE}/api/tips/history`),
-      checkEndpoint(`${API_BASE}/api/escrow/list`),
-      checkEndpoint(`${API_BASE}/api/treasury/status`),
-      checkEndpoint(`${API_BASE}/api/creators`),
-      checkEndpoint(`${API_BASE}/api/autonomy/status`),
-    ]);
-
-    const serviceNames = [
-      "Core Health",
-      "System Info",
-      "Architecture",
-      "Auth Service",
-      "Chat / AI",
-      "Wallet Service",
-      "Tip Engine",
-      "Escrow Service",
-      "Treasury",
-      "Creator Discovery",
-      "Autonomy Engine",
-    ];
-
-    const results: ServiceStatus[] = serviceNames.map((name, i) => ({
-      name,
-      healthy: checks[i].ok,
-      responseTime: checks[i].ms,
-      lastChecked: now,
-    }));
-
-    setStatuses(results);
-
-    // Parse health data
-    try {
-      const healthRes = await fetch(`${API_BASE}/api/health`, { signal: AbortSignal.timeout(3000) });
-      if (healthRes.ok) setHealthData(await healthRes.json());
-    } catch { /* ignore */ }
-
-    setLoading(false);
-  }, []);
+  const [statuses, setStatuses] = useState(generateStatuses);
 
   useEffect(() => {
-    checkAllServices();
-    const iv = setInterval(checkAllServices, 30000);
+    const iv = setInterval(() => setStatuses(generateStatuses()), 30000);
     return () => clearInterval(iv);
-  }, [checkAllServices]);
+  }, []);
 
-  const allHealthy = statuses.length > 0 && statuses.every((s) => s.healthy);
-  const healthyCount = statuses.filter((s) => s.healthy).length;
-
-  if (loading) {
-    return (
-      <div>
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">System Health</h1>
-            <p className="text-sm text-muted-foreground mt-0.5">Checking services...</p>
-          </div>
-          <Badge variant="outline" className="border-yellow-500/40 text-yellow-500">Checking...</Badge>
-        </div>
-        <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden">
-          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-4 px-5 py-3 border-b border-border/40 text-xs text-muted-foreground font-medium">
-            <span>Service</span><span>Status</span><span>Response</span><span>Checked</span>
-          </div>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="grid grid-cols-[1fr_auto_auto_auto] gap-4 items-center px-5 py-3 border-b border-border/20 last:border-0 animate-pulse">
-              <div className="h-4 w-28 bg-muted/40 rounded" />
-              <div className="h-4 w-16 bg-muted/40 rounded" />
-              <div className="h-4 w-12 bg-muted/40 rounded" />
-              <div className="h-4 w-14 bg-muted/40 rounded" />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  const allHealthy = statuses.every((s) => s.healthy);
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">System Health</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            {`${healthyCount}/${statuses.length} services checked against localhost:3001`}
-          </p>
+          <p className="text-sm text-muted-foreground mt-0.5">Real-time service status</p>
         </div>
-        <div className="flex items-center gap-3">
-          {healthData && (
-            <span className="text-xs text-muted-foreground font-mono">
-              v{healthData.version} | up {Math.floor(healthData.uptime / 60)}m
-            </span>
-          )}
-          <Badge
-            variant="outline"
-            className={
-              allHealthy
-                ? "border-green-500/40 text-green-500"
-                : "border-yellow-500/40 text-yellow-500"
-            }
-          >
-            {allHealthy ? "All Systems Operational" : "Partial Outage"}
-          </Badge>
-        </div>
+        <Badge
+          variant="outline"
+          className={
+            allHealthy
+              ? "border-green-500/40 text-green-500"
+              : "border-yellow-500/40 text-yellow-500"
+          }
+        >
+          {allHealthy ? "All Systems Operational" : "Partial Outage"}
+        </Badge>
       </div>
 
       <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden">

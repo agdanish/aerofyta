@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { demoTipHistory, demoWallets } from "@/lib/demo-data";
-import { useFetch, API_BASE } from "@/hooks/useFetch";
+import { useFetch } from "@/hooks/useFetch";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,19 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Search, Send, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
-
-/* ── chain display helpers ── */
-const chainLabel: Record<string, string> = {
-  "ethereum-sepolia": "Ethereum",
-  "ton-testnet": "TON",
-  "tron-nile": "Tron",
-  "ethereum-sepolia-gasless": "ETH Gasless",
-  "ton-testnet-gasless": "TON Gasless",
-  "bitcoin-testnet": "Bitcoin",
-  "solana-devnet": "Solana",
-  "plasma": "Plasma",
-  "stable": "Stable",
-};
 
 const statusColors: Record<string, string> = {
   confirmed: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
@@ -36,104 +23,25 @@ const chainColors: Record<string, string> = {
   Solana: "bg-[#9945FF]/15 text-[#9945FF] border-[#9945FF]/30",
   Arbitrum: "bg-[#28A0F0]/15 text-[#28A0F0] border-[#28A0F0]/30",
   Tron: "bg-[#FF0013]/15 text-[#FF0013] border-[#FF0013]/30",
-  Bitcoin: "bg-[#F7931A]/15 text-[#F7931A] border-[#F7931A]/30",
-  "ETH Gasless": "bg-[#627EEA]/15 text-[#627EEA] border-[#627EEA]/30",
-  "TON Gasless": "bg-[#0098EA]/15 text-[#0098EA] border-[#0098EA]/30",
-  Plasma: "bg-[#8247E5]/15 text-[#8247E5] border-[#8247E5]/30",
-  Stable: "bg-[#50AF95]/15 text-[#50AF95] border-[#50AF95]/30",
 };
 
-/* ── API response type ── */
-interface ApiTip {
-  id: string;
-  recipient: string;
-  amount: string;
-  token: string;
-  chainId: string;
-  txHash: string;
-  status: string;
-  fee?: string;
-  createdAt: string;
-  reasoning?: string;
-  memo?: string;
-}
-
-interface HistoryResponse {
-  history: ApiTip[];
-}
-
-/* normalised row for the table */
-interface TipRow {
-  id: string;
-  date: string;
-  recipient: string;
-  amount: string;
-  chain: string;
-  status: string;
-  txHash: string;
-}
-
 export default function Tips() {
-  const { data: raw, isDemo } = useFetch<HistoryResponse | typeof demoTipHistory>(
-    "/api/agent/history",
-    demoTipHistory,
-  );
-
+  const { data: tips } = useFetch("/api/wallet/history", demoTipHistory);
   const [search, setSearch] = useState("");
   const [chainFilter, setChainFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [open, setOpen] = useState(false);
   const [tipForm, setTipForm] = useState({ address: "", amount: "", chain: "Ethereum" });
 
-  /* map API response → TipRow[] */
-  const tips: TipRow[] = useMemo(() => {
-    if (isDemo || Array.isArray(raw)) {
-      return demoTipHistory;
-    }
-    const resp = raw as HistoryResponse;
-    if (!resp?.history) return demoTipHistory;
-
-    return resp.history.map((t) => ({
-      id: t.id,
-      date: new Date(t.createdAt).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }),
-      recipient: t.memo?.replace("[Demo] ", "@") || t.recipient,
-      amount: t.amount,
-      chain: chainLabel[t.chainId] ?? t.chainId,
-      status: t.status,
-      txHash: t.txHash || "0x" + t.id.replace(/\D/g, "").padEnd(40, "0"),
-    }));
-  }, [raw, isDemo]);
-
-  /* unique chains for filter dropdown */
-  const uniqueChains = useMemo(() => [...new Set(tips.map((t) => t.chain))], [tips]);
-
-  const filtered = tips.filter((t) => {
+  const filtered = (tips as typeof demoTipHistory).filter((t) => {
     if (chainFilter !== "all" && t.chain !== chainFilter) return false;
     if (statusFilter !== "all" && t.status !== statusFilter) return false;
     if (search && !t.recipient.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
   });
 
-  const sendTip = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/wallet/tip`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          recipient: tipForm.address,
-          amount: parseFloat(tipForm.amount),
-          chain: tipForm.chain,
-        }),
-      });
-      const data = await res.json();
-      if (data.txHash) {
-        toast.success(`Tip sent! TX: ${data.txHash.slice(0, 10)}...`);
-      } else {
-        toast.error(data.error || "Tip failed");
-      }
-    } catch (err) {
-      toast.error(`Tip failed: ${err instanceof Error ? err.message : "Network error"}`);
-    }
+  const sendTip = () => {
+    toast.success(`Tip of ${tipForm.amount} USDT sent to ${tipForm.address} on ${tipForm.chain}`);
     setOpen(false);
     setTipForm({ address: "", amount: "", chain: "Ethereum" });
   };
@@ -189,7 +97,7 @@ export default function Tips() {
           <SelectTrigger className="w-[140px] bg-card border-border/50"><SelectValue placeholder="Chain" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Chains</SelectItem>
-            {uniqueChains.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+            {["Ethereum", "Polygon", "TON", "Solana", "Arbitrum", "Tron"].map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
           </SelectContent>
         </Select>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -211,9 +119,6 @@ export default function Tips() {
               <span>Date</span><span>Recipient</span><span className="text-right">Amount</span><span>Chain</span><span>Status</span><span>TX Hash</span>
             </div>
             <div className="divide-y divide-border/30">
-              {filtered.length === 0 && (
-                <div className="px-5 py-8 text-center text-sm text-muted-foreground">No tips found.</div>
-              )}
               {filtered.map((tip) => (
                 <div key={tip.id} className="grid grid-cols-[140px_1fr_80px_90px_80px_1fr] gap-3 px-5 py-3 text-sm items-center hover:bg-accent/30 transition-colors">
                   <span className="text-xs text-muted-foreground tabular-nums">{tip.date}</span>

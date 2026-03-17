@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import ShimmerSkeleton from "@/components/shared/ShimmerSkeleton";
 import { SendHorizontal, Bot, User, Sparkles, Cpu } from "lucide-react";
-import { API_BASE } from "@/hooks/useFetch";
 
 interface Message {
   id: number;
@@ -13,172 +11,62 @@ interface Message {
   text: string;
   intent?: string;
   confidence?: number;
+  actions?: string[];
 }
 
-/* ---------- types from /api/ai/capabilities ---------- */
-interface IntentDef {
-  name: string;
-  description: string;
-}
-interface CapabilitiesResponse {
-  engine: string;
-  version: string;
-  provider: string;
-  intents: IntentDef[];
-  currentProvider: string;
-  llmAvailable: boolean;
-}
-
-/* ---------- types from /api/chat ---------- */
-interface ChatApiResponse {
-  message: {
-    id: string;
-    role: string;
-    content: string;
-    timestamp: string;
-  };
-}
-
-/* ---------- demo data ---------- */
-const demoCapabilities: CapabilitiesResponse = {
-  engine: "AeroFyta Rule-Based Intelligence Engine",
-  version: "2.0.0",
-  provider: "rule-based",
-  intents: [
-    { name: "tip", description: "Send a tip" },
-    { name: "check_balance", description: "Check wallet balances" },
-    { name: "view_history", description: "View tip history" },
-    { name: "find_creator", description: "Find a creator" },
-    { name: "set_policy", description: "Set agent policies" },
-    { name: "check_status", description: "Check agent status" },
-    { name: "help", description: "Get help" },
-    { name: "analytics", description: "View analytics" },
-    { name: "bridge", description: "Bridge tokens" },
-    { name: "swap", description: "Swap tokens" },
-    { name: "lend", description: "Lending operations" },
-    { name: "fees", description: "Check fees" },
-    { name: "address", description: "Show wallet addresses" },
-  ],
-  currentProvider: "rule-based",
-  llmAvailable: false,
-};
+const capabilities = [
+  "check_balance", "send_tip", "create_escrow", "claim_escrow",
+  "swap_tokens", "check_gas", "analyze_creator", "get_reputation",
+  "dca_setup", "yield_check", "portfolio_report", "security_scan", "explain_reasoning",
+];
 
 const demoMessages: Message[] = [
   { id: 1, role: "user", text: "Who should I tip today?" },
   {
-    id: 2, role: "agent",
-    text: "Based on engagement analysis, I recommend tipping @sarah_creates (Diamond tier, 94% engagement spike in last 2h) and @dev_marcus (Platinum, new video with 12k views). Both are on Polygon for lowest fees.",
-    intent: "find_creator", confidence: 91,
+    id: 2, role: "agent", text: "Based on engagement analysis, I recommend tipping @sarah_creates (Diamond tier, 94% engagement spike in last 2h) and @dev_marcus (Platinum, new video with 12k views). Both are on Polygon for lowest fees.",
+    intent: "analyze_creator", confidence: 91,
+    actions: ["Tip @sarah_creates 2.5 USDT", "Tip @dev_marcus 1.0 USDT", "View creator profiles"],
   },
 ];
 
-const suggestions = ["help", "check my balance", "show fees", "tip 1 USDT to @creator", "show my address", "analytics"];
+const suggestions = ["Who should I tip?", "Check my balance", "Analyze gas fees", "Show portfolio health"];
 
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>(demoMessages);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [capabilities, setCapabilities] = useState<CapabilitiesResponse | null>(null);
-  const [capsDemo, setCapsDemo] = useState(false);
-  const [pageLoading, setPageLoading] = useState(true);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
-  /* load capabilities from real API */
-  useEffect(() => {
-    let cancelled = false;
-    async function load() {
-      setPageLoading(true);
-      try {
-        const res = await fetch(`${API_BASE}/api/ai/capabilities`, { signal: AbortSignal.timeout(5000) });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json: CapabilitiesResponse = await res.json();
-        if (!cancelled) {
-          setCapabilities(json);
-          setCapsDemo(false);
-        }
-      } catch {
-        if (!cancelled) {
-          setCapabilities(demoCapabilities);
-          setCapsDemo(true);
-        }
-      } finally {
-        if (!cancelled) setPageLoading(false);
-      }
-    }
-    load();
-    return () => { cancelled = true; };
-  }, []);
-
-  /* scroll to bottom on new messages */
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+  const agentResponses: Record<string, Omit<Message, "id" | "role">> = {
+    "check my balance": { text: "Your total balance is $12,847.32 across 5 chains. ETH: $8,234 | USDT: $3,597 | SOL: $645 | TRX: $215 | MATIC: $156. Liquidity ratio: 78%.", intent: "check_balance", confidence: 98, actions: ["View wallets", "Transfer funds"] },
+    "analyze gas fees": { text: "Current gas: ETH 12 gwei (low), Polygon 0.003 gwei (very low), Solana 0.00025 SOL. Recommendation: use Polygon for tips under $5, Ethereum for amounts over $10. Optimal window: next 2 hours.", intent: "check_gas", confidence: 94, actions: ["Set gas alert", "Switch to Polygon"] },
+    "show portfolio health": { text: "Health Score: 87/100. Diversification: 85% (good). Risk: 23/100 (low). Yield: 4.2% avg APY. Suggestion: consider rebalancing 5% from stables to ETH staking for better yield.", intent: "portfolio_report", confidence: 89, actions: ["Rebalance now", "View yield options"] },
+  };
 
   const send = async () => {
     if (!input.trim()) return;
     const userMsg: Message = { id: Date.now(), role: "user", text: input };
     setMessages((m) => [...m, userMsg]);
-    const query = input;
+    const q = input.toLowerCase().trim();
     setInput("");
     setLoading(true);
-
-    try {
-      const res = await fetch(`${API_BASE}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: query }),
-        signal: AbortSignal.timeout(15000),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json: ChatApiResponse = await res.json();
-      const agentMsg: Message = {
-        id: Date.now() + 1,
-        role: "agent",
-        text: json.message.content,
-      };
-      setMessages((m) => [...m, agentMsg]);
-    } catch {
-      /* fallback: show error as agent message */
-      const agentMsg: Message = {
-        id: Date.now() + 1,
-        role: "agent",
-        text: `Sorry, I couldn't reach the backend. Make sure the agent is running on localhost:3001. Your message was: "${query}"`,
-      };
-      setMessages((m) => [...m, agentMsg]);
-    } finally {
-      setLoading(false);
-    }
+    await new Promise((r) => setTimeout(r, 800 + Math.random() * 600));
+    const match = agentResponses[q];
+    const agentMsg: Message = {
+      id: Date.now() + 1, role: "agent",
+      text: match?.text || `I've analyzed your request: "${q}". Based on current wallet state and market conditions, I'd recommend reviewing your active positions. Would you like me to run a detailed analysis?`,
+      intent: match?.intent || "explain_reasoning",
+      confidence: match?.confidence || 72,
+      actions: match?.actions || ["Run analysis", "View dashboard"],
+    };
+    setMessages((m) => [...m, agentMsg]);
+    setLoading(false);
   };
-
-  const caps = capabilities ?? demoCapabilities;
-  const providerLabel = caps.llmAvailable
-    ? caps.currentProvider
-    : `${caps.currentProvider} (no LLM key)`;
-
-  if (pageLoading) {
-    return (
-      <div className="p-6 space-y-6">
-        <ShimmerSkeleton className="h-8 w-48" />
-        <ShimmerSkeleton className="h-4 w-72" />
-        <div className="grid lg:grid-cols-[1fr_280px] gap-4">
-          <ShimmerSkeleton className="h-[560px]" />
-          <div className="space-y-4">
-            <ShimmerSkeleton className="h-32" />
-            <ShimmerSkeleton className="h-48" />
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold tracking-tight">Talk to the Agent</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Natural language interface to AeroFyta's 97+ MCP tools.
-          {capsDemo && <Badge variant="outline" className="ml-2 text-[9px] bg-amber-500/15 text-amber-400 border-amber-500/30">Capabilities: Demo</Badge>}
-        </p>
+        <p className="text-sm text-muted-foreground mt-1">Natural language interface to AeroFyta's 97+ MCP tools.</p>
       </div>
 
       <div className="grid lg:grid-cols-[1fr_280px] gap-4">
@@ -193,11 +81,18 @@ export default function Chat() {
                       {m.role === "agent" ? <Bot className="h-3.5 w-3.5" strokeWidth={1.5} style={{ color: "#C6B6B1" }} /> : <User className="h-3.5 w-3.5" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />}
                       <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{m.role === "user" ? "You" : "AeroFyta"}</span>
                     </div>
-                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{m.text}</p>
+                    <p className="text-sm leading-relaxed">{m.text}</p>
                     {m.intent && (
                       <div className="flex items-center gap-2 mt-2 flex-wrap">
                         <Badge variant="outline" className="text-[9px]">{m.intent}</Badge>
-                        {m.confidence != null && <span className="text-[10px] text-muted-foreground tabular-nums">{m.confidence}% confidence</span>}
+                        <span className="text-[10px] text-muted-foreground tabular-nums">{m.confidence}% confidence</span>
+                      </div>
+                    )}
+                    {m.actions && (
+                      <div className="flex flex-wrap gap-1.5 mt-2">
+                        {m.actions.map((a) => (
+                          <button key={a} className="text-[10px] px-2 py-1 rounded-md border border-border/50 bg-card/50 hover:bg-accent/50 transition-colors">{a}</button>
+                        ))}
                       </div>
                     )}
                   </div>
@@ -210,7 +105,6 @@ export default function Chat() {
                   <div className="h-2 w-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: "400ms" }} />
                 </div>
               )}
-              <div ref={scrollRef} />
             </div>
           </ScrollArea>
 
@@ -237,25 +131,27 @@ export default function Chat() {
           <div className="rounded-xl border border-border/50 bg-card/50 p-4">
             <div className="flex items-center gap-2 mb-3">
               <Cpu className="h-4 w-4" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />
-              <h3 className="text-sm font-semibold">AI Engine</h3>
+              <h3 className="text-sm font-semibold">AI Provider</h3>
             </div>
             <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <div className={`h-2 w-2 rounded-full ${caps.llmAvailable ? "bg-emerald-500" : "bg-amber-500"}`} />
-                <span className="text-xs">{providerLabel}</span>
-              </div>
-              <p className="text-[10px] text-muted-foreground">v{caps.version}</p>
+              {["Groq (Llama 3)", "Gemini 2.0 Flash", "Rule-Based Fallback"].map((p, i) => (
+                <div key={p} className="flex items-center gap-2">
+                  <div className={`h-2 w-2 rounded-full ${i === 0 ? "bg-emerald-500" : "bg-muted-foreground/30"}`} />
+                  <span className="text-xs">{p}</span>
+                  {i === 0 && <Badge variant="outline" className="text-[9px] ml-auto bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Active</Badge>}
+                </div>
+              ))}
             </div>
           </div>
 
           <div className="rounded-xl border border-border/50 bg-card/50 p-4">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-4 w-4" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />
-              <h3 className="text-sm font-semibold">Supported Intents ({caps.intents.length})</h3>
+              <h3 className="text-sm font-semibold">Supported Intents</h3>
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {caps.intents.map((c) => (
-                <Badge key={c.name} variant="outline" className="text-[9px]" title={c.description}>{c.name}</Badge>
+              {capabilities.map((c) => (
+                <Badge key={c} variant="outline" className="text-[9px]">{c}</Badge>
               ))}
             </div>
           </div>

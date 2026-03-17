@@ -49,29 +49,16 @@ export default function Playground() {
     setTimeout(() => { setEscrowLoading(false); setEscrowPhase("claimed"); }, 1200);
   };
 
-  const handleChat = async () => {
+  const handleChat = () => {
     setChatLoading(true);
     setChatResponse("");
-    try {
-      const res = await fetch((import.meta.env.PROD ? "" : "http://localhost:3001") + "/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: chatInput }),
-        signal: AbortSignal.timeout(10000),
-      });
-      const json = await res.json();
-      const response = json.message?.content ?? json.response ?? "No response from agent.";
-      let i = 0;
-      const interval = setInterval(() => {
-        if (i >= response.length) { clearInterval(interval); setChatLoading(false); return; }
-        setChatResponse(response.slice(0, i + 1));
-        i++;
-      }, 12);
-    } catch {
-      const fallback = "For micro-tips under $5, I recommend Polygon or Tron. Both have sub-cent gas fees, fast finality (<3s), and full USDT support via Tether WDK.";
-      setChatResponse(fallback);
-      setChatLoading(false);
-    }
+    const response = "For micro-tips under $5, I recommend Polygon or Tron. Both have sub-cent gas fees, fast finality (<3s), and full USDT support. Polygon averages $0.002/tx while Tron is $0.001/tx. The agent currently uses Polygon for 24% of all tips due to its speed and EVM compatibility.";
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i >= response.length) { clearInterval(interval); setChatLoading(false); return; }
+      setChatResponse(response.slice(0, i + 1));
+      i++;
+    }, 12);
   };
 
   const handleReasoning = () => {

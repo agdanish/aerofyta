@@ -1,24 +1,14 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import { demoSteps } from "@/lib/demo-data";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import JsonViewer from "@/components/shared/JsonViewer";
 import {
   Play, CheckCircle2, Loader2, Wallet, LockKeyhole, Unlock,
-  Bot, CalendarClock, Heart, Award, Activity, BarChart3, Wifi, WifiOff,
+  Bot, CalendarClock, Heart, Award, Activity, BarChart3,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
-
-import { API_BASE } from "@/hooks/useFetch";
-
-interface DemoStepResult {
-  id: number;
-  name: string;
-  result: string;
-  liveData?: unknown;
-}
 
 const stepPreviews: { id: number; name: string; icon: LucideIcon }[] = [
   { id: 1, name: "Wallet Info", icon: Wallet },
@@ -35,89 +25,15 @@ const stepPreviews: { id: number; name: string; icon: LucideIcon }[] = [
 
 export default function Demo() {
   const [mode, setMode] = useState("full");
-  const [fullResults, setFullResults] = useState<DemoStepResult[]>([]);
+  const [fullResults, setFullResults] = useState<typeof demoSteps>([]);
   const [fullRunning, setFullRunning] = useState(false);
   const [fullProgress, setFullProgress] = useState(0);
-  const [stepResults, setStepResults] = useState<Record<number, { result: string; liveData?: unknown }>>({});
+  const [stepResults, setStepResults] = useState<Record<number, string>>({});
   const [stepLoading, setStepLoading] = useState<number | null>(null);
-  const [isLive, setIsLive] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
-  const readerRef = useRef<ReadableStreamDefaultReader<Uint8Array> | null>(null);
 
-  const totalSteps = demoSteps.length;
-
-  /** Run full demo via SSE POST /api/demo/run-full, fallback to demo data */
-  const runFull = useCallback(async () => {
+  const runFull = () => {
     setFullRunning(true);
-    setFullResults([]);
-    setFullProgress(0);
-
-    try {
-      const res = await fetch(`${API_BASE}/api/demo/run-full`, {
-        method: "POST",
-        headers: { Accept: "text/event-stream" },
-        signal: AbortSignal.timeout(60000),
-      });
-
-      if (!res.ok || !res.body) throw new Error("SSE not available");
-
-      setIsLive(true);
-      const reader = res.body.getReader();
-      readerRef.current = reader;
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let stepCount = 0;
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() || "";
-
-        for (const line of lines) {
-          if (!line.startsWith("data: ")) continue;
-          const jsonStr = line.slice(6).trim();
-          if (!jsonStr) continue;
-
-          try {
-            const data = JSON.parse(jsonStr);
-
-            // The SSE sends { step, total, title, result, status }
-            stepCount++;
-            const stepResult: DemoStepResult = {
-              id: data.step ?? stepCount,
-              name: data.title ?? `Step ${stepCount}`,
-              result: typeof data.result === "string" ? data.result : JSON.stringify(data.result),
-              liveData: data.result,
-            };
-
-            setFullResults((prev) => [...prev, stepResult]);
-            setFullProgress(((data.step ?? stepCount) / (data.total ?? totalSteps)) * 100);
-
-            if (data.status === "complete" || data.step === data.total) {
-              setFullRunning(false);
-              reader.cancel();
-              readerRef.current = null;
-              return;
-            }
-          } catch {
-            // Non-JSON SSE line, skip
-          }
-        }
-      }
-
-      setFullRunning(false);
-      readerRef.current = null;
-    } catch {
-      // Fallback to demo data
-      setIsLive(false);
-      fallbackFullDemo();
-    }
-  }, [totalSteps]);
-
-  const fallbackFullDemo = () => {
     setFullResults([]);
     setFullProgress(0);
     let i = 0;
@@ -127,54 +43,24 @@ export default function Demo() {
         setFullRunning(false);
         return;
       }
-      const step = demoSteps[i];
-      setFullResults((prev) => [...prev, { id: step.id, name: step.name, result: step.result }]);
+      setFullResults((prev) => [...prev, demoSteps[i]]);
       setFullProgress(((i + 1) / demoSteps.length) * 100);
       i++;
     }, 800);
   };
 
-  /** Run a single step via POST /api/demo/step */
   const runStep = async (step: typeof demoSteps[0]) => {
     setStepLoading(step.id);
-
-    try {
-      const res = await fetch(`${API_BASE}/api/demo/step`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ step: step.id }),
-        signal: AbortSignal.timeout(15000),
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-
-      // Real API returns { step, total, title, result, status }
-      const resultStr = typeof data.result === "string" ? data.result : JSON.stringify(data.result);
-      setStepResults((prev) => ({
-        ...prev,
-        [step.id]: { result: data.title ? `${data.title}: ${resultStr}` : resultStr, liveData: data.result },
-      }));
-      setIsLive(true);
-    } catch {
-      // Fallback to demo data
-      await new Promise((r) => setTimeout(r, 400));
-      setStepResults((prev) => ({ ...prev, [step.id]: { result: step.result } }));
-    } finally {
-      setStepLoading(null);
-    }
+    await new Promise((r) => setTimeout(r, 600 + Math.random() * 400));
+    setStepResults((prev) => ({ ...prev, [step.id]: step.result }));
+    setStepLoading(null);
   };
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Interactive Demo</h1>
-          <p className="text-sm text-muted-foreground mt-1">Experience every capability. No terminal required.</p>
-        </div>
-        <Badge variant="outline" className={`text-[10px] ${isLive ? "text-emerald-400 border-emerald-500/30" : "text-yellow-400 border-yellow-500/30"}`}>
-          {isLive ? <><Wifi className="h-3 w-3 mr-1" />Live</> : <><WifiOff className="h-3 w-3 mr-1" />Demo</>}
-        </Badge>
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold tracking-tight">Interactive Demo</h1>
+        <p className="text-sm text-muted-foreground mt-1">Experience every capability. No terminal required.</p>
       </div>
 
       <Tabs value={mode} onValueChange={setMode}>
@@ -209,34 +95,21 @@ export default function Demo() {
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs text-muted-foreground">Progress</span>
-                    <span className="text-xs font-mono tabular-nums">{fullResults.length}/{totalSteps}</span>
+                    <span className="text-xs font-mono tabular-nums">{fullResults.length}/{demoSteps.length}</span>
                   </div>
                   <Progress value={fullProgress} className="h-2 bg-secondary" />
                 </div>
                 <div className="space-y-2">
                   {fullResults.map((step) => (
-                    <div key={step.id} className="p-3 rounded-lg bg-accent/20 animate-fade-in">
-                      <div className="flex items-start gap-3">
-                        <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" strokeWidth={1.5} style={{ color: "#50AF95" }} />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium">{step.name}</span>
-                            <Badge variant="outline" className="text-[10px] bg-emerald-500/10 text-emerald-400 border-emerald-500/30">Done</Badge>
-                          </div>
-                          <p className="text-xs text-muted-foreground mt-0.5 break-all">{step.result}</p>
+                    <div key={step.id} className="flex items-start gap-3 p-3 rounded-lg bg-accent/20 animate-fade-in">
+                      <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" strokeWidth={1.5} style={{ color: "#50AF95" }} />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium">{step.name}</span>
+                          <Badge variant="outline" className="text-[10px] bg-emerald-500/10 text-emerald-400 border-emerald-500/30">Done</Badge>
                         </div>
+                        <p className="text-xs text-muted-foreground mt-0.5">{step.result}</p>
                       </div>
-                      {/* Show live data as expandable JSON if available */}
-                      {step.liveData && typeof step.liveData === "object" && (
-                        <div className="mt-2 ml-7">
-                          <details className="text-xs">
-                            <summary className="text-muted-foreground cursor-pointer hover:text-foreground">View raw response</summary>
-                            <div className="mt-1">
-                              <JsonViewer data={step.liveData} />
-                            </div>
-                          </details>
-                        </div>
-                      )}
                     </div>
                   ))}
                   {fullRunning && (
@@ -246,7 +119,7 @@ export default function Demo() {
                     </div>
                   )}
                 </div>
-                {!fullRunning && fullResults.length >= totalSteps && (
+                {!fullRunning && fullResults.length === demoSteps.length && (
                   <div className="mt-6 text-center">
                     <Button variant="outline" onClick={() => { setFullResults([]); setFullProgress(0); }}>Reset Demo</Button>
                   </div>
@@ -266,19 +139,8 @@ export default function Demo() {
                 </div>
                 <p className="text-xs text-muted-foreground mb-3 ml-8">{step.description}</p>
                 {stepResults[step.id] ? (
-                  <div className="ml-8">
-                    <div className="p-2.5 rounded-md bg-emerald-500/8 border border-emerald-500/20 text-xs text-emerald-400 animate-fade-in break-all">
-                      {stepResults[step.id].result}
-                    </div>
-                    {/* Show live data as expandable JSON */}
-                    {stepResults[step.id].liveData && typeof stepResults[step.id].liveData === "object" && (
-                      <details className="text-xs mt-2">
-                        <summary className="text-muted-foreground cursor-pointer hover:text-foreground">View raw response</summary>
-                        <div className="mt-1">
-                          <JsonViewer data={stepResults[step.id].liveData} />
-                        </div>
-                      </details>
-                    )}
+                  <div className="ml-8 p-2.5 rounded-md bg-emerald-500/8 border border-emerald-500/20 text-xs text-emerald-400 animate-fade-in">
+                    {stepResults[step.id]}
                   </div>
                 ) : (
                   <Button
