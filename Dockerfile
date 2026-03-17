@@ -2,7 +2,8 @@
 FROM node:22 AS dashboard-build
 WORKDIR /app/dashboard
 COPY dashboard/package.json dashboard/package-lock.json ./
-RUN npm ci
+# Cache bust: force fresh install for glibc rollup bindings
+RUN npm ci && npm ls rollup
 COPY dashboard/ ./
 RUN npm run build
 
