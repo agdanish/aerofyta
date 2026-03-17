@@ -5,7 +5,7 @@ Build a winning submission for Tether Hackathon Galactica: WDK Edition 1.
 Target: Tipping Bot track (0 competitors) + Overall prizes.
 Deadline: March 22, 2026 23:59 UTC.
 
-## Project: AeroFyta — Autonomous Multi-Chain Payment Agent powered by Tether WDK
+## Project: Zynvaro (formerly AeroFyta) — Autonomous Multi-Chain Payment Agent powered by Tether WDK
 - Node.js agent backend using WDK SDK
 - React + Vite + Tailwind web dashboard
 - Track: Tipping Bot
