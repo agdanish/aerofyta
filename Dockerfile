@@ -1,4 +1,4 @@
-# Stage 1: Build dashboard
+# Stage 1: Build dashboard (Alpine is fine - no native deps)
 FROM node:22-alpine AS dashboard-build
 WORKDIR /app/dashboard
 COPY dashboard/package.json dashboard/package-lock.json ./
@@ -6,22 +6,20 @@ RUN npm ci
 COPY dashboard/ ./
 RUN npm run build
 
-# Stage 2: Build agent (compile TS + native modules)
-FROM node:22-alpine AS agent-build
+# Stage 2: Build agent on Debian (sodium-native has prebuilts for linux-x64-glibc)
+FROM node:22 AS agent-build
 WORKDIR /app/agent
-RUN apk add --no-cache python3 make g++ linux-headers
 COPY agent/package.json agent/package-lock.json ./
-RUN npm ci --build-from-source
+RUN npm ci
 COPY agent/ ./
 RUN npx tsc
-# Prune devDependencies after compilation
 RUN npm prune --omit=dev
 
-# Stage 3: Production runtime (slim)
-FROM node:22-alpine
+# Stage 3: Production runtime (Debian slim - has glibc for sodium-native)
+FROM node:22-slim
 WORKDIR /app
 
-# Copy pre-built agent node_modules (with compiled sodium-native)
+# Copy pre-built agent node_modules (with working sodium-native)
 COPY --from=agent-build /app/agent/node_modules ./agent/node_modules
 COPY --from=agent-build /app/agent/package.json ./agent/package.json
 
