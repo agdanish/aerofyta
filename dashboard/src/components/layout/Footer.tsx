@@ -9,7 +9,7 @@ const Footer = () => (
     <code className="font-mono text-[11px] bg-muted/50 px-1.5 py-0.5 rounded">npm install @xzashr/aerofyta</code>
     <span className="opacity-40">·</span>
     <a
-      href="https://github.com/xzashr/aerofyta"
+      href="https://github.com/agdanish/aerofyta"
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
