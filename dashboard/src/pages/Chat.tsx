@@ -39,6 +39,8 @@ const actionRoutes: Record<string, string> = {
   "View creator profiles": "/creators",
   "View yield options": "/defi",
   "Transfer funds": "/wallets",
+  "Rebalance now": "/trading",
+  "Switch to Polygon": "/wallets",
 };
 
 export default function Chat() {
@@ -51,38 +53,78 @@ export default function Chat() {
     "check my balance": { text: "Your total balance is $12,847.32 across 5 chains. ETH: $8,234 | USDT: $3,597 | SOL: $645 | TRX: $215 | MATIC: $156. Liquidity ratio: 78%.", intent: "check_balance", confidence: 98, actions: ["View wallets", "Transfer funds"] },
     "analyze gas fees": { text: "Current gas: ETH 12 gwei (low), Polygon 0.003 gwei (very low), Solana 0.00025 SOL. Recommendation: use Polygon for tips under $5, Ethereum for amounts over $10. Optimal window: next 2 hours.", intent: "check_gas", confidence: 94, actions: ["Set gas alert", "Switch to Polygon"] },
     "show portfolio health": { text: "Health Score: 87/100. Diversification: 85% (good). Risk: 23/100 (low). Yield: 4.2% avg APY. Suggestion: consider rebalancing 5% from stables to ETH staking for better yield.", intent: "portfolio_report", confidence: 89, actions: ["Rebalance now", "View yield options"] },
+    "who should i tip?": { text: "Based on engagement analysis, I recommend tipping @sarah_creates (Diamond tier, 94% engagement spike in last 2h) and @dev_marcus (Platinum, new video with 12k views). Both are on Polygon for lowest fees.", intent: "analyze_creator", confidence: 91, actions: ["Tip @sarah_creates 2.5 USDT", "Tip @dev_marcus 1.0 USDT", "View creator profiles"] },
   };
+
+  const handleSuggestion = useCallback((suggestion: string) => {
+    if (loading) return;
+    const userMsg: Message = { id: Date.now(), role: "user", text: suggestion };
+    setMessages((m) => [...m, userMsg]);
+    setLoading(true);
+    const q = suggestion.toLowerCase().trim();
+    setTimeout(() => {
+      const match = agentResponses[q];
+      const agentMsg: Message = {
+        id: Date.now() + 1, role: "agent",
+        text: match?.text || `I've analyzed your request: "${suggestion}". Based on current wallet state and market conditions, I'd recommend reviewing your active positions. Would you like me to run a detailed analysis?`,
+        intent: match?.intent || "explain_reasoning",
+        confidence: match?.confidence || 72,
+        actions: match?.actions || ["Run analysis", "View dashboard"],
+      };
+      setMessages((m) => [...m, agentMsg]);
+      setLoading(false);
+    }, 800 + Math.random() * 600);
+  }, [loading]);
 
   const handleAction = useCallback((action: string) => {
     // Navigation actions
     const route = actionRoutes[action];
-    if (route) { navigate(route); return; }
-
-    // Tip actions — navigate to tips page
-    if (action.toLowerCase().startsWith("tip ")) {
-      toast.success(`Executing: ${action}`);
-      navigate("/tips");
+    if (route) {
+      toast.info(`Navigating to ${action}...`);
+      navigate(route);
       return;
     }
 
-    // Analysis / query actions — feed back into chat as a new user message
-    setInput(action);
+    // Tip actions
+    if (action.toLowerCase().startsWith("tip ")) {
+      toast.success("Tip sent successfully!", {
+        description: action,
+      });
+      return;
+    }
+
+    // Alert / config actions — show toast confirmation
+    if (action.toLowerCase().includes("alert") || action.toLowerCase().includes("set ")) {
+      toast.success(`${action} configured!`, {
+        description: "You'll be notified when conditions are met.",
+      });
+      return;
+    }
+
+    // Analysis / run actions — add agent message to chat
+    const userMsg: Message = { id: Date.now(), role: "user", text: action };
+    setMessages((m) => [...m, userMsg]);
+    setLoading(true);
     setTimeout(() => {
-      setInput("");
-      const userMsg: Message = { id: Date.now(), role: "user", text: action };
-      setMessages((m) => [...m, userMsg]);
-      setLoading(true);
-      setTimeout(() => {
-        const agentMsg: Message = {
-          id: Date.now() + 1, role: "agent",
-          text: `Analysis complete for "${action}". All systems nominal. Portfolio health: 87/100, liquidity ratio: 78%, diversification: 85%. No immediate action required.`,
-          intent: "explain_reasoning", confidence: 88,
+      const analysisResponses: Record<string, Omit<Message, "id" | "role">> = {
+        "run analysis": {
+          text: "Running full portfolio analysis... Scanning 5 chains, 12 tokens, 3 active positions. Results: Portfolio health 87/100. Top performer: ETH (+4.2% 24h). Recommendation: consider taking partial profits on ETH position.",
+          intent: "portfolio_report", confidence: 92,
           actions: ["View dashboard", "View wallets"],
-        };
-        setMessages((m) => [...m, agentMsg]);
-        setLoading(false);
-      }, 1000 + Math.random() * 500);
-    }, 100);
+        },
+      };
+      const key = action.toLowerCase();
+      const matched = analysisResponses[key];
+      const agentMsg: Message = {
+        id: Date.now() + 1, role: "agent",
+        text: matched?.text || `Analysis complete for "${action}". All systems nominal. Portfolio health: 87/100, liquidity ratio: 78%, diversification: 85%. No immediate action required.`,
+        intent: matched?.intent || "explain_reasoning",
+        confidence: matched?.confidence || 88,
+        actions: matched?.actions || ["View dashboard", "View wallets"],
+      };
+      setMessages((m) => [...m, agentMsg]);
+      setLoading(false);
+    }, 1000 + Math.random() * 500);
   }, [navigate]);
 
   const send = async () => {
@@ -154,7 +196,7 @@ export default function Chat() {
           {/* Suggestions */}
           <div className="px-4 py-2 border-t border-border/30 flex flex-wrap gap-1.5">
             {suggestions.map((s) => (
-              <button key={s} onClick={() => { setInput(s); }} className="text-[10px] px-2.5 py-1 rounded-full border border-border/40 bg-card/30 hover:bg-accent/40 transition-colors text-muted-foreground">
+              <button key={s} onClick={() => handleSuggestion(s)} disabled={loading} className="text-[10px] px-2.5 py-1 rounded-full border border-border/40 bg-card/30 hover:bg-accent/40 transition-colors text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed">
                 {s}
               </button>
             ))}

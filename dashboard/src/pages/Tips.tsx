@@ -50,27 +50,28 @@ export default function Tips() {
   const sendTip = () => {
     const now = new Date();
     const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    const chain = tipForm.chain;
     const newTip = {
       id: Date.now(),
       date,
       recipient: tipForm.address.startsWith("@") || tipForm.address.startsWith("0x") ? tipForm.address : `@${tipForm.address}`,
       amount: tipForm.amount,
-      chain: tipForm.chain,
+      chain,
       status: "pending" as const,
       txHash: `0x${randomHex(64)}`,
     };
     setLocalTips((prev) => [newTip, ...prev]);
-    toast.success(`Tip of ${tipForm.amount} USDT sent to ${newTip.recipient} on ${tipForm.chain}`);
+    toast.success(`Tip of ${tipForm.amount} USDT sent to ${newTip.recipient} on ${chain}`);
     setOpen(false);
     setTipForm({ address: "", amount: "", chain: "Ethereum" });
 
-    // Simulate confirmation after 3 seconds
+    // Simulate confirmation after 2 seconds
     setTimeout(() => {
       setLocalTips((prev) =>
-        prev.map((t) => (t.id === newTip.id ? { ...t, status: "confirmed" } : t))
+        prev.map((t) => (t.id === newTip.id ? { ...t, status: "confirmed" as const } : t))
       );
-      toast.success(`Tip to ${newTip.recipient} confirmed on ${tipForm.chain}`);
-    }, 3000);
+      toast.success(`Tip to ${newTip.recipient} confirmed on ${chain}`);
+    }, 2000);
   };
 
   return (
