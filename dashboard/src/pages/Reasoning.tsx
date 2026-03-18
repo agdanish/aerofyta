@@ -58,12 +58,13 @@ export default function Reasoning() {
     let i = 0;
 
     intervalRef.current = setInterval(() => {
-      if (i >= demoReasoningSteps.length) {
+      const safeSteps = Array.isArray(demoReasoningSteps) ? demoReasoningSteps : [];
+      if (i >= safeSteps.length) {
         clearInterval(intervalRef.current);
         setIsStreaming(false);
         return;
       }
-      const step = demoReasoningSteps[i];
+      const step = safeSteps[i];
       setCards((prev) => [...prev, step]);
       setConfidence(step.confidence);
       i++;
@@ -154,7 +155,7 @@ export default function Reasoning() {
           </div>
           <div className="rounded-xl border border-border/50 bg-card/50 p-4 w-full text-center">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Steps</p>
-            <p className="text-lg font-bold tabular-nums">{cards.length}<span className="text-muted-foreground text-sm font-normal">/{hasRun ? demoReasoningSteps.length : prefilledTrace.length}</span></p>
+            <p className="text-lg font-bold tabular-nums">{cards.length}<span className="text-muted-foreground text-sm font-normal">/{hasRun ? (Array.isArray(demoReasoningSteps) ? demoReasoningSteps.length : 0) : prefilledTrace.length}</span></p>
           </div>
         </div>
       </div>

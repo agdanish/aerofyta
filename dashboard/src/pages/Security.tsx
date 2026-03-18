@@ -10,7 +10,7 @@ export default function Security() {
   const [testsRun, setTestsRun] = useState(false);
   const [visibleTests, setVisibleTests] = useState<number[]>([]);
   const [allPassed, setAllPassed] = useState(false);
-  const [policies, setPolicies] = useState(demoPolicies);
+  const [policies, setPolicies] = useState(Array.isArray(demoPolicies) ? demoPolicies : []);
   const [creditAddr, setCreditAddr] = useState("0x742d35Cc6634C0532925a3b844Bc9e7595f2bD28");
   const [creditScore, setCreditScore] = useState<number | null>(null);
 
@@ -18,10 +18,11 @@ export default function Security() {
     setTestsRun(true);
     setVisibleTests([]);
     setAllPassed(false);
-    demoAdversarialTests.forEach((_, i) => {
+    const tests = Array.isArray(demoAdversarialTests) ? demoAdversarialTests : [];
+    tests.forEach((_, i) => {
       setTimeout(() => {
         setVisibleTests((prev) => [...prev, i]);
-        if (i === demoAdversarialTests.length - 1) setAllPassed(true);
+        if (i === tests.length - 1) setAllPassed(true);
       }, (i + 1) * 300);
     });
   };
@@ -73,7 +74,7 @@ export default function Security() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {demoAdversarialTests.map((test, i) => (
+          {(Array.isArray(demoAdversarialTests) ? demoAdversarialTests : []).map((test, i) => (
             <div
               key={test.name}
               className={`rounded-xl border border-border/50 bg-card/50 p-4 transition-all duration-500 ${

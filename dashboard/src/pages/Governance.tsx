@@ -91,7 +91,7 @@ export default function Governance() {
                   <p className="text-xs text-muted-foreground mb-2">{p.description}</p>
                   <div className="flex items-center gap-3">
                     <div className="flex-1">
-                      <Progress value={(p.votesFor / (p.votesFor + p.votesAgainst)) * 100} className="h-1.5 bg-secondary" />
+                      <Progress value={(p.votesFor + p.votesAgainst) > 0 ? (p.votesFor / (p.votesFor + p.votesAgainst)) * 100 : 0} className="h-1.5 bg-secondary" />
                     </div>
                     <span className="text-[10px] tabular-nums text-muted-foreground">{p.votesFor}/{p.votesFor + p.votesAgainst}</span>
                     {p.status === "voting" && !voted[p.id] && (

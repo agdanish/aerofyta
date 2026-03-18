@@ -102,7 +102,7 @@ export default function Tips() {
                 <Select value={tipForm.chain} onValueChange={(v) => setTipForm({ ...tipForm, chain: v })}>
                   <SelectTrigger className="mt-1 bg-background"><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    {demoWallets.map((w) => <SelectItem key={w.chain} value={w.chain}>{w.chain}</SelectItem>)}
+                    {(Array.isArray(demoWallets) ? demoWallets : []).map((w) => <SelectItem key={w.chain} value={w.chain}>{w.chain}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>

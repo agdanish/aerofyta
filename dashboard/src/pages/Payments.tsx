@@ -32,7 +32,7 @@ export default function Payments() {
 
         <TabsContent value="dca">
           <div className="space-y-3">
-            {demoDCA.map((d) => (
+            {(Array.isArray(demoDCA) ? demoDCA : []).map((d) => (
               <div key={d.id} className="rounded-xl border border-border/50 bg-card/50 p-4 flex items-center justify-between gap-4 flex-wrap sm:flex-nowrap">
                 <div>
                   <span className="text-sm font-medium">{d.amount} → {d.asset}</span>
@@ -52,7 +52,7 @@ export default function Payments() {
 
         <TabsContent value="subscriptions">
           <div className="space-y-3">
-            {demoSubscriptions.map((s) => (
+            {(Array.isArray(demoSubscriptions) ? demoSubscriptions : []).map((s) => (
               <div key={s.id} className="rounded-xl border border-border/50 bg-card/50 p-4 flex items-center justify-between gap-4 flex-wrap sm:flex-nowrap">
                 <div className="min-w-0">
                   <span className="text-sm font-medium truncate block">{s.name}</span>
@@ -73,7 +73,7 @@ export default function Payments() {
 
         <TabsContent value="streaming">
           <div className="space-y-3">
-            {demoStreaming.map((s) => (
+            {(Array.isArray(demoStreaming) ? demoStreaming : []).map((s) => (
               <div key={s.id} className="rounded-xl border border-border/50 bg-card/50 p-4 flex items-center justify-between gap-4 flex-wrap sm:flex-nowrap">
                 <div>
                   <span className="text-sm font-medium">→ {s.recipient}</span>
@@ -92,7 +92,7 @@ export default function Payments() {
 
         <TabsContent value="splits">
           <div className="space-y-3">
-            {demoSplits.map((s) => (
+            {(Array.isArray(demoSplits) ? demoSplits : []).map((s) => (
               <div key={s.id} className="rounded-xl border border-border/50 bg-card/50 p-4 flex items-center justify-between gap-4 flex-wrap sm:flex-nowrap">
                 <div>
                   <span className="text-sm font-medium">{s.name}</span>
@@ -106,7 +106,7 @@ export default function Payments() {
 
         <TabsContent value="x402">
           <div className="space-y-3">
-            {demoX402.map((x) => (
+            {(Array.isArray(demoX402) ? demoX402 : []).map((x) => (
               <div key={x.id} className="rounded-xl border border-border/50 bg-card/50 p-4 flex items-center justify-between gap-4 flex-wrap sm:flex-nowrap">
                 <div className="min-w-0">
                   <code className="text-sm font-mono text-primary break-all">{x.endpoint}</code>

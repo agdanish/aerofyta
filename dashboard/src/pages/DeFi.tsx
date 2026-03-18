@@ -48,7 +48,7 @@ export default function DeFi() {
           <div className="border-t border-border/30 pt-3">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Yield Projections</p>
             <div className="grid grid-cols-4 gap-2">
-              {Object.entries(lending.projections ?? {}).map(([period, value]) => (
+              {Object.entries((lending as any)?.projections ?? {}).map(([period, value]) => (
                 <div key={period} className="text-center bg-secondary/30 rounded-md py-2">
                   <p className="text-xs font-medium">{value}</p>
                   <p className="text-[10px] text-muted-foreground">{period}</p>
@@ -110,7 +110,7 @@ export default function DeFi() {
             <h3 className="text-sm font-semibold">Contracts</h3>
           </div>
           <div className="divide-y divide-border/30">
-            {demoContracts.map((c) => (
+            {(Array.isArray(demoContracts) ? demoContracts : []).map((c) => (
               <div key={c.name} className="px-5 py-3 flex items-center justify-between">
                 <div>
                   <span className="text-sm">{c.name}</span>

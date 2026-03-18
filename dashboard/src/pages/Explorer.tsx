@@ -75,7 +75,7 @@ function EndpointList({ search, setSearch, grouped, selected, selectEndpoint }: 
         </div>
       </ScrollArea>
       <div className="border-t border-border/40 px-3 py-2 text-[10px] text-muted-foreground/60">
-        {demoApiSpec.endpoints.length} endpoints
+        {Array.isArray(demoApiSpec?.endpoints) ? demoApiSpec.endpoints.length : 0} endpoints
       </div>
     </div>
   );
@@ -91,8 +91,10 @@ export default function Explorer() {
   const [loading, setLoading] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const safeEndpoints = Array.isArray(demoApiSpec?.endpoints) ? demoApiSpec.endpoints : [];
+
   const grouped = useMemo(() => {
-    const filtered = demoApiSpec.endpoints.filter(
+    const filtered = safeEndpoints.filter(
       (e) =>
         e.path.toLowerCase().includes(search.toLowerCase()) ||
         e.summary.toLowerCase().includes(search.toLowerCase())
@@ -102,7 +104,7 @@ export default function Explorer() {
       (groups[ep.tag] = groups[ep.tag] || []).push(ep);
     }
     return groups;
-  }, [search]);
+  }, [search, safeEndpoints]);
 
   const selectEndpoint = (ep: Endpoint) => {
     setSelected(ep);

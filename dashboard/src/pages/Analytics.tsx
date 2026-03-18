@@ -73,7 +73,7 @@ export default function Analytics() {
           />
           <h3 className="text-sm font-semibold mb-4 relative z-10">Tips per Day</h3>
           <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={demoTipsPerDay}>
+            <BarChart data={Array.isArray(demoTipsPerDay) ? demoTipsPerDay : []}>
               <defs>
                 <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
                   <stop offset="0%" stopColor="#FF4E00" />
@@ -99,8 +99,8 @@ export default function Analytics() {
           <h3 className="text-sm font-semibold mb-4 relative z-10">Chain Distribution</h3>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
-              <Pie data={demoChainDistribution} cx="50%" cy="50%" innerRadius={50} outerRadius={75} dataKey="value" stroke="none">
-                {demoChainDistribution.map((entry) => (
+              <Pie data={Array.isArray(demoChainDistribution) ? demoChainDistribution : []} cx="50%" cy="50%" innerRadius={50} outerRadius={75} dataKey="value" stroke="none">
+                {(Array.isArray(demoChainDistribution) ? demoChainDistribution : []).map((entry) => (
                   <Cell key={entry.chain} fill={entry.color} />
                 ))}
               </Pie>
@@ -111,7 +111,7 @@ export default function Analytics() {
             </PieChart>
           </ResponsiveContainer>
           <div className="flex flex-wrap gap-3 mt-2 justify-center relative z-10">
-            {demoChainDistribution.map((c) => (
+            {(Array.isArray(demoChainDistribution) ? demoChainDistribution : []).map((c) => (
               <div key={c.chain} className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
                 <div className="h-2 w-2 rounded-full" style={{ backgroundColor: c.color }} />
                 {c.chain} ({c.value}%)
@@ -128,7 +128,7 @@ export default function Analytics() {
             <h3 className="text-sm font-semibold">Creator Leaderboard</h3>
           </div>
           <div className="divide-y divide-border">
-            {demoCreators.slice(0, 5).map((c, i) => (
+            {topCreators.map((c, i) => (
               <div key={c.id} className="px-5 py-2.5 flex items-center gap-3">
                 {i < 3 ? (
                   <Medal className="h-4 w-4 shrink-0" strokeWidth={1.5} style={{ color: medalColors[i] }} />
@@ -156,7 +156,7 @@ export default function Analytics() {
             <h3 className="text-sm font-semibold">Decision Log</h3>
           </div>
           <div className="divide-y divide-border">
-            {demoDecisionLog.map((d) => (
+            {(Array.isArray(demoDecisionLog) ? demoDecisionLog : []).map((d) => (
               <div key={d.id} className="px-5 py-2.5 flex items-center gap-3">
                 <span className="text-[11px] text-muted-foreground font-mono tabular-nums w-10 shrink-0">{d.time}</span>
                 <span className="text-sm flex-1 truncate min-w-0">{d.decision}</span>
