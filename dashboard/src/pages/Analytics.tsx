@@ -30,7 +30,8 @@ export default function Analytics() {
     { label: "Security Events", value: 6 },
   ];
 
-  const maxTips = Math.max(...demoCreators.slice(0, 5).map((c) => c.tips));
+  const topCreators = Array.isArray(demoCreators) ? demoCreators.slice(0, 5) : [];
+  const maxTips = topCreators.length > 0 ? Math.max(...topCreators.map((c) => c.tips)) : 1;
 
   return (
     <div>

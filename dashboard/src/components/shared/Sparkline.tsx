@@ -7,7 +7,8 @@ interface SparklineProps {
 }
 
 export default function Sparkline({ data, color = "hsl(18, 100%, 50%)", height = 32 }: SparklineProps) {
-  const chartData = data.map((v, i) => ({ v, i }));
+  const safeData = Array.isArray(data) ? data : [];
+  const chartData = safeData.map((v, i) => ({ v, i }));
 
   return (
     <ResponsiveContainer width="100%" height={height}>

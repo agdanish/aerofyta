@@ -32,9 +32,10 @@ function validateShape<T>(json: unknown, demoData: T): T | null {
 }
 
 export function useFetch<T>(path: string, demoData: T) {
-  const [data, setData] = useState<T | null>(null);
+  // Initialize with demoData instead of null to prevent any flash of undefined state
+  const [data, setData] = useState<T>(demoData);
   const [loading, setLoading] = useState(true);
-  const [isDemo, setIsDemo] = useState(false);
+  const [isDemo, setIsDemo] = useState(true);
   const [tick, setTick] = useState(0);
 
   const refetch = useCallback(() => setTick((t) => t + 1), []);
@@ -42,7 +43,8 @@ export function useFetch<T>(path: string, demoData: T) {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    setData(null);
+    // Keep previous data during refetch instead of resetting to null
+    // This prevents "e.map is not a function" crashes during re-renders
 
     async function fetchData() {
       try {
@@ -76,5 +78,11 @@ export function useFetch<T>(path: string, demoData: T) {
     return () => { cancelled = true; };
   }, [path, tick]);
 
-  return { data: (data ?? demoData) as T, loading, isDemo, refetch };
+  // Belt-and-suspenders: always guarantee data is never null/undefined
+  const safeData = data ?? demoData;
+  // Extra safety: if demoData is an array, ensure we always return an array
+  if (Array.isArray(demoData) && !Array.isArray(safeData)) {
+    return { data: demoData, loading, isDemo: true, refetch };
+  }
+  return { data: safeData, loading, isDemo, refetch };
 }

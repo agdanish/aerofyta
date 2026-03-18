@@ -33,27 +33,31 @@ export default function Demo() {
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
 
   const runFull = () => {
+    if (!demoSteps?.length) return;
     setFullRunning(true);
     setFullResults([]);
     setFullProgress(0);
     let i = 0;
     intervalRef.current = setInterval(() => {
-      if (i >= demoSteps.length) {
+      if (!demoSteps?.length || i >= demoSteps.length) {
         clearInterval(intervalRef.current);
         setFullRunning(false);
         return;
       }
       const idx = i; // capture by value — closure over mutable `i` would race with `i++`
       i++;
-      setFullResults((prev) => [...prev, demoSteps[idx]]);
+      const step = demoSteps[idx];
+      if (!step) return; // guard against undefined entries
+      setFullResults((prev) => [...prev, step]);
       setFullProgress((idx + 1) / demoSteps.length * 100);
     }, 800);
   };
 
   const runStep = async (step: typeof demoSteps[0]) => {
+    if (!step) return;
     setStepLoading(step.id);
     await new Promise((r) => setTimeout(r, 600 + Math.random() * 400));
-    setStepResults((prev) => ({ ...prev, [step.id]: step.result }));
+    setStepResults((prev) => ({ ...prev, [step.id]: step.result ?? "Done" }));
     setStepLoading(null);
   };
 
@@ -81,7 +85,7 @@ export default function Demo() {
 
                 {/* Step preview cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 max-w-2xl mx-auto">
-                  {stepPreviews.map((s) => (
+                  {(stepPreviews ?? []).filter(Boolean).map((s) => (
                     <div key={s.id} className="rounded-lg border border-border/40 bg-card/30 px-3 py-2.5 text-center">
                       <s.icon className="h-5 w-5 mx-auto mb-1" strokeWidth={1.5} style={{ color: "#C6B6B1" }} />
                       <div className="text-[10px] font-mono text-muted-foreground/60 mb-0.5">{s.id}</div>
@@ -101,15 +105,15 @@ export default function Demo() {
                   <Progress value={fullProgress} className="h-2 bg-secondary" />
                 </div>
                 <div className="space-y-2">
-                  {fullResults.filter(Boolean).map((step) => (
+                  {fullResults.filter((s): s is NonNullable<typeof s> => s != null && typeof s === 'object' && 'id' in s).map((step) => (
                     <div key={step.id} className="flex items-start gap-3 p-3 rounded-lg bg-accent/20 animate-fade-in">
                       <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" strokeWidth={1.5} style={{ color: "#50AF95" }} />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">{step.name}</span>
+                          <span className="text-sm font-medium">{step?.name ?? "Unknown Step"}</span>
                           <Badge variant="outline" className="text-[10px] bg-emerald-500/10 text-emerald-400 border-emerald-500/30">Done</Badge>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-0.5">{step.result}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{step?.result ?? ""}</p>
                       </div>
                     </div>
                   ))}
@@ -132,13 +136,13 @@ export default function Demo() {
 
         <TabsContent value="step">
           <div className="grid sm:grid-cols-2 gap-3">
-            {demoSteps.map((step) => (
+            {(demoSteps ?? []).filter(Boolean).map((step) => (
               <div key={step.id} className="rounded-xl border border-border/50 bg-card/50 p-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xs font-mono text-muted-foreground w-5">{String(step.id).padStart(2, "0")}</span>
-                  <span className="text-sm font-medium">{step.name}</span>
+                  <span className="text-xs font-mono text-muted-foreground w-5">{String(step?.id ?? 0).padStart(2, "0")}</span>
+                  <span className="text-sm font-medium">{step?.name ?? "Unknown"}</span>
                 </div>
-                <p className="text-xs text-muted-foreground mb-3 ml-8">{step.description}</p>
+                <p className="text-xs text-muted-foreground mb-3 ml-8">{step?.description ?? ""}</p>
                 {stepResults[step.id] ? (
                   <div className="ml-8 p-2.5 rounded-md bg-emerald-500/8 border border-emerald-500/20 text-xs text-emerald-400 animate-fade-in">
                     {stepResults[step.id]}

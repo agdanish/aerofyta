@@ -7,7 +7,8 @@ import { ExternalLink, Download } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Wallets() {
-  const { data: wallets } = useFetch("/api/wallet/addresses", demoWallets);
+  const { data: rawWallets } = useFetch("/api/wallet/addresses", demoWallets);
+  const wallets = Array.isArray(rawWallets) ? rawWallets : demoWallets;
 
   const truncate = (addr: string) =>
     addr.length > 16 ? `${addr.slice(0, 8)}...${addr.slice(-6)}` : addr;
@@ -20,7 +21,7 @@ export default function Wallets() {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {(Array.isArray(wallets) ? wallets : demoWallets).map((w) => (
+        {wallets.map((w) => (
           <div
             key={w.chain}
             className="rounded-xl border border-border/50 bg-card/50 overflow-hidden hover:border-border transition-all group"
