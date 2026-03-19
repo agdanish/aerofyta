@@ -34,7 +34,7 @@ export function registerDocsRoutes(router: Router): void {
       .swagger-ui .scheme-container { background-color: #111827; }
     `,
     customSiteTitle: 'AeroFyta API Docs',
-    customfavIcon: 'https://raw.githubusercontent.com/xzashr/aerofyta/main/dashboard/public/favicon.ico',
+    customfavIcon: 'https://raw.githubusercontent.com/agdanish/aerofyta/main/dashboard/public/favicon.ico',
     swaggerOptions: {
       persistAuthorization: true,
       displayRequestDuration: true,

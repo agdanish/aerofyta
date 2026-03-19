@@ -22,21 +22,21 @@ export class DemoService {
     // Sepolia testnet addresses — deterministically derived for demo creators.
     // These are NOT mainnet contract addresses; they are demo-only recipient wallets.
     return [
-      { name: 'TechReviewer', channelUrl: 'https://rumble.com/c/TechReviewer', walletAddress: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', categories: ['tech', 'reviews'] },
-      { name: 'CryptoDaily', channelUrl: 'https://rumble.com/c/CryptoDaily', walletAddress: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', categories: ['crypto', 'finance'] },
+      { name: 'TechReviewer', channelUrl: 'https://rumble.com/c/TechReviewer', walletAddress: '0x2a4e7c3b9d1f8a5c6e0b7d4f2a9c1e3b5d7f0a2c', categories: ['tech', 'reviews'] },
+      { name: 'CryptoDaily', channelUrl: 'https://rumble.com/c/CryptoDaily', walletAddress: '0x5c8d2e4f1b7a3d6e9f0c4b2a8d1e5f3c7a9b0d4e', categories: ['crypto', 'finance'] },
       { name: 'GameStreamPro', channelUrl: 'https://rumble.com/c/GameStreamPro', walletAddress: 'UQBanAkpRVoVeUHJVSLbaCjregNDAejcBdKl1VA3ujWMWpOv', categories: ['gaming', 'entertainment'] },
-      { name: 'NewsAnalyst', channelUrl: 'https://rumble.com/c/NewsAnalyst', walletAddress: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', categories: ['news', 'politics'] },
-      { name: 'FitnessGuru', channelUrl: 'https://rumble.com/c/FitnessGuru', walletAddress: '0x90F79bf6EB2c4f870365E785982E1f101E93b906', categories: ['fitness', 'health'] },
-      { name: 'CodingMaster', channelUrl: 'https://rumble.com/c/CodingMaster', walletAddress: '0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65', categories: ['tech', 'education'] },
-      { name: 'MusicMaven', channelUrl: 'https://rumble.com/c/MusicMaven', walletAddress: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc', categories: ['music', 'entertainment'] },
-      { name: 'TravelVlogger', channelUrl: 'https://rumble.com/c/TravelVlogger', walletAddress: '0x976EA74026E726554dB657fA54763abd0C3a0aa9', categories: ['travel', 'lifestyle'] },
-      { name: 'ChefSpecial', channelUrl: 'https://rumble.com/c/ChefSpecial', walletAddress: '0x14dC79964da2C08dfa6B3085B7c31967F4e6d266', categories: ['cooking', 'food'] },
-      { name: 'ScienceExplained', channelUrl: 'https://rumble.com/c/ScienceExplained', walletAddress: '0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f', categories: ['science', 'education'] },
-      { name: 'IndieFilmmaker', channelUrl: 'https://rumble.com/c/IndieFilmmaker', walletAddress: '0xa0Ee7A142d267C1f36714E4a8F75612F20a79720', categories: ['film', 'art'] },
-      { name: 'DebateKing', channelUrl: 'https://rumble.com/c/DebateKing', walletAddress: '0xBcd4042DE499D14e55001CcbB24a551F3b954096', categories: ['politics', 'debate'] },
-      { name: 'PetLovers', channelUrl: 'https://rumble.com/c/PetLovers', walletAddress: '0x71bE63f3384f5fb98995898A86B02Fb2426c5788', categories: ['animals', 'lifestyle'] },
-      { name: 'BlockchainDev', channelUrl: 'https://rumble.com/c/BlockchainDev', walletAddress: '0xFABB0ac9d68B0B445fB7357272Ff202C5651694a', categories: ['crypto', 'tech', 'education'] },
-      { name: 'ComedyClub', channelUrl: 'https://rumble.com/c/ComedyClub', walletAddress: '0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec', categories: ['comedy', 'entertainment'] },
+      { name: 'NewsAnalyst', channelUrl: 'https://rumble.com/c/NewsAnalyst', walletAddress: '0x7d3a1e9b4c2f8d5a6e0c3b7f4a2d9e1c5b8f0a3d', categories: ['news', 'politics'] },
+      { name: 'FitnessGuru', channelUrl: 'https://rumble.com/c/FitnessGuru', walletAddress: '0x9e4b2c7d1a3f8e5d6c0a4b9f2e7d1c3a5b8f0d2e', categories: ['fitness', 'health'] },
+      { name: 'CodingMaster', channelUrl: 'https://rumble.com/c/CodingMaster', walletAddress: '0x1f5c3a8d2e4b7f9c6d0e3a1b5c8f2d4e7a9b0c3f', categories: ['tech', 'education'] },
+      { name: 'MusicMaven', channelUrl: 'https://rumble.com/c/MusicMaven', walletAddress: '0x3a7d4e1c9b2f5a8d6e0c7b3f1a4d9e2c5b8f0a1d', categories: ['music', 'entertainment'] },
+      { name: 'TravelVlogger', channelUrl: 'https://rumble.com/c/TravelVlogger', walletAddress: '0x8b2e5c1d4a7f3e9c6d0a1b8f5c2d4e7a3b9f0c1d', categories: ['travel', 'lifestyle'] },
+      { name: 'ChefSpecial', channelUrl: 'https://rumble.com/c/ChefSpecial', walletAddress: '0x4c9d2e7b1a5f3d8c6e0b4a2f9c1d5e8a3b7f0c2d', categories: ['cooking', 'food'] },
+      { name: 'ScienceExplained', channelUrl: 'https://rumble.com/c/ScienceExplained', walletAddress: '0x6e1a3c8d2b4f7e9a5d0c6b3f1a8d2e4c7b9f0a5d', categories: ['science', 'education'] },
+      { name: 'IndieFilmmaker', channelUrl: 'https://rumble.com/c/IndieFilmmaker', walletAddress: '0xa2c4e7d1b9f3a5d8c6e0b2f4a1d9c3e5b7f0a8d2', categories: ['film', 'art'] },
+      { name: 'DebateKing', channelUrl: 'https://rumble.com/c/DebateKing', walletAddress: '0xd5b1e3c7a2f4d9c8e6a0b5f3c1d7e2a4b9f0c6d8', categories: ['politics', 'debate'] },
+      { name: 'PetLovers', channelUrl: 'https://rumble.com/c/PetLovers', walletAddress: '0xe8c2d4a1b7f3e5d9c6a0b8f2c4d1e7a3b5f9c0d6', categories: ['animals', 'lifestyle'] },
+      { name: 'BlockchainDev', channelUrl: 'https://rumble.com/c/BlockchainDev', walletAddress: '0xf1a3c5d7e2b4f9c8d6a0e3b1c7d2f4a8b5e9c0d1', categories: ['crypto', 'tech', 'education'] },
+      { name: 'ComedyClub', channelUrl: 'https://rumble.com/c/ComedyClub', walletAddress: '0xc4d8e1a2b6f3d5c9e7a0b4f2c8d1e3a5b7f9c0d2', categories: ['comedy', 'entertainment'] },
     ];
   }
 
@@ -76,7 +76,7 @@ export class DemoService {
 
     const tips: TipHistoryEntry[] = [];
     for (let i = 0; i < 50; i++) {
-      const hoursAgo = Math.floor(Math.random() * 720); // up to 30 days
+      const hoursAgo = (i * 14327 + 5003) % 720; // deterministic, up to 30 days
       const chain = chains[i % chains.length];
       const creator = creators[i % creators.length];
       // No fake tx hashes — demo entries are clearly marked with no on-chain reference
@@ -147,12 +147,12 @@ export class DemoService {
         enabled: true,
         rules: {
           allowedRecipients: [
-            '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
-            '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+            '0x2a4e7c3b9d1f8a5c6e0b7d4f2a9c1e3b5d7f0a2c',
+            '0x5c8d2e4f1b7a3d6e9f0c4b2a8d1e5f3c7a9b0d4e',
             'UQBanAkpRVoVeUHJVSLbaCjregNDAejcBdKl1VA3ujWMWpOv',
-            '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC',
-            '0x90F79bf6EB2c4f870365E785982E1f101E93b906',
-            '0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65',
+            '0x7d3a1e9b4c2f8d5a6e0c3b7f4a2d9e1c5b8f0a3d',
+            '0x9e4b2c7d1a3f8e5d6c0a4b9f2e7d1c3a5b8f0d2e',
+            '0x1f5c3a8d2e4b7f9c6d0e3a1b5c8f2d4e7a9b0c3f',
           ],
         },
       },

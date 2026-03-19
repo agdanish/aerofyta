@@ -11,7 +11,7 @@
 <br/>
 
 [![CI](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml/badge.svg)](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-1%2C198_passing-brightgreen?style=flat-square)](https://github.com/agdanish/aerofyta)
+[![Tests](https://img.shields.io/badge/tests-1%2C052_passing-brightgreen?style=flat-square)](https://github.com/agdanish/aerofyta)
 [![Coverage](https://img.shields.io/badge/coverage-297_suites-blue?style=flat-square)](https://github.com/agdanish/aerofyta)
 [![npm](https://img.shields.io/badge/npm-@xzashr/aerofyta-CB3837?style=flat-square&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta)
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](./LICENSE)
@@ -30,7 +30,7 @@
 <tr>
 <td align="center"><strong>12</strong><br/><sub>WDK Packages</sub></td>
 <td align="center"><strong>9</strong><br/><sub>Blockchains</sub></td>
-<td align="center"><strong>1,198</strong><br/><sub>Tests Passing</sub></td>
+<td align="center"><strong>1,052</strong><br/><sub>Tests Passing</sub></td>
 <td align="center"><strong>97+</strong><br/><sub>MCP Tools</sub></td>
 <td align="center"><strong>107</strong><br/><sub>CLI Commands</sub></td>
 <td align="center"><strong>650+</strong><br/><sub>API Endpoints</sub></td>
@@ -67,7 +67,7 @@ Five capabilities that no other competitor in this hackathon has — all in one 
 | 2 | **3-Agent Debate System** | TipExecutor, Guardian, and TreasuryOptimizer argue before every payment. 2/3 majority required. Guardian holds veto power. | No competitor has 3-way debates |
 | 3 | **6 Event-Triggered Tipping** | `watch_time`, `chat_hype`, `viewer_spike`, `follower_milestone`, `subscriber`, `manual` — real-time NLP hype detection fires tips autonomously | No competitor matches all 6 triggers |
 | 4 | **Community Tip Pools** | Crowdfunded pools where fans collectively fund creator tips with configurable thresholds and automatic disbursement | No competitor has collective tipping |
-| 5 | **1,198 Tests** | 1,158 agent tests + 40 Hardhat contract tests. More automated tests than all other 205 competitors combined. | No competitor comes close |
+| 5 | **1,052 Tests** | 1,012 agent tests + 40 Hardhat contract tests. More automated tests than all other 205 competitors combined. | No competitor comes close |
 
 ---
 
@@ -563,7 +563,7 @@ AeroFyta blocks **12 attack vectors** through a layered defense system:
 | Metric | Value |
 |:-------|------:|
 | Lines of code | 145,000+ |
-| Tests passing | **1,198** (1,158 agent + 40 contract) |
+| Tests passing | **1,052** (1,012 agent + 40 contract) |
 | Test suites | 297+ |
 | WDK packages | 12 |
 | Blockchains | 9 |
@@ -740,7 +740,7 @@ Browser extension for tipping creators directly on Rumble and YouTube. Detects c
 | Risk engine | 8-dimension scoring + **credit scoring (300-850)** | None |
 | Gasless transactions | ERC-4337 + TON gasless | No |
 | Wallet-driven behavior | Mood adapts to financial state | Static logic |
-| Tests | **1,198** (1,158 agent + 40 contract) | 0-50 |
+| Tests | **1,052** (1,012 agent + 40 contract) | 0-50 |
 | Published SDK | `npm install @xzashr/aerofyta` | Not published |
 | MCP tools | **97+** | 0 |
 | CLI | **107 commands** | None |
@@ -816,7 +816,7 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 | **API** | [Express 5](https://expressjs.com) with OpenAPI documentation |
 | **Bot** | [Grammy](https://grammy.dev) (Telegram Bot API) |
 | **Real-Time** | [Socket.IO](https://socket.io) — WebSocket live updates to dashboard |
-| **Testing** | [Vitest](https://vitest.dev) — 1,158 agent tests + [Hardhat](https://hardhat.org) — 40 contract tests |
+| **Testing** | [Vitest](https://vitest.dev) — 1,012 agent tests + [Hardhat](https://hardhat.org) — 40 contract tests |
 | **Contracts** | Solidity (Agent Registry + HTLC Escrow + Tip Splitter) — 40 Hardhat tests |
 | **Package** | [npm](https://www.npmjs.com/package/@xzashr/aerofyta) — 107 CLI commands |
 | **Deployment** | [Render](https://render.com) + Docker |
@@ -860,12 +860,12 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 
 ```bash
 cd agent && npm test
-# 1,158 tests · 297 suites · 0 failures
+# 1,012 tests · 297 suites · 0 failures
 
 cd contracts && npx hardhat test
 # 40 tests · 3 contracts · 0 failures
 
-# Total: 1,198 tests passing
+# Total: 1,052 tests passing
 ```
 
 Generate a coverage badge for CI:

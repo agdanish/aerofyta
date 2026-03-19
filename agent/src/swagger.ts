@@ -33,12 +33,12 @@ const swaggerDefinition: swaggerJsdoc.OAS3Definition = {
     },
     contact: {
       name: 'AeroFyta',
-      url: 'https://github.com/xzashr/aerofyta',
+      url: 'https://github.com/agdanish/aerofyta',
     },
   },
   servers: [
     { url: 'http://localhost:3001/api', description: 'Local development' },
-    { url: 'https://aerofyta.xzashr.com/api', description: 'Production' },
+    { url: 'https://aerofyta.agdanish.com/api', description: 'Production' },
   ],
   tags: [
     { name: 'System', description: 'Health checks, network status, and system info' },

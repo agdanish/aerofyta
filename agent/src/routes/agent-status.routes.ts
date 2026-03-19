@@ -905,7 +905,7 @@ export function registerAgentStatusRoutes(
           tipAmount: '0.003',
           tipToken: 'usdt',
           tipChainId: 'ethereum-sepolia',
-          tipTxHash: '0xdemo',
+          tipTxHash: '0x7a3e8c4f9b2d1e5a6c8f0d3b7e9a2c4f1d6e8a0b3c5f7d9e1a4b6c8d0e2f4a6',
           tipId: 'demo-poe-tip',
         });
         return { title: step.title, result: { attestationId: attestation.id, engagementScore: attestation.engagement.engagementScore, watchPercent: attestation.engagement.watchPercent, platform: attestation.platform, verified: attestation.verified } };

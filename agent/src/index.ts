@@ -327,8 +327,8 @@ async function main(): Promise<void> {
     }
 
     // Seed DCA plans
-    sr.dca.createPlan({ recipient: '0x8ba1f109551bD432803012645Ac136ddd64DBA72', totalAmount: 0.05, installments: 10, intervalHours: 24, token: 'usdt', chainId: 'ethereum-sepolia' });
-    sr.dca.createPlan({ recipient: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B', totalAmount: 0.02, installments: 5, intervalHours: 12, token: 'native', chainId: 'ethereum-sepolia' });
+    sr.dca.createPlan({ recipient: '0x4a1e7c3b9d2f8a5c6e0b7d4f2a9c1e3b5d7f0a2c', totalAmount: 0.05, installments: 10, intervalHours: 24, token: 'usdt', chainId: 'ethereum-sepolia' });
+    sr.dca.createPlan({ recipient: '0x6b2d9e4f1c8a3d7e5f0b6c2a8d4e1f3b9c5a7d0e', totalAmount: 0.02, installments: 5, intervalHours: 12, token: 'native', chainId: 'ethereum-sepolia' });
     sr.dca.createPlan({ recipient: 'UQBanAkpRVoVeUHJVSLbaCjregNDAejcBdKl1VA3ujWMWpOv', totalAmount: 0.03, installments: 7, intervalHours: 48, token: 'usdt', chainId: 'ton-testnet' });
 
     // Seed reputation data from ALL demo tips
@@ -408,11 +408,11 @@ async function main(): Promise<void> {
       const c = rumbleCreatorList[i];
       // Score each creator with realistic engagement data
       sr.economics.scoreCreator(c.id, {
-        viewCount: 5000 + Math.floor(Math.random() * 95000),
-        likeRatio: 0.4 + Math.random() * 0.55,
-        commentCount: 50 + Math.floor(Math.random() * 450),
-        watchTimeMinutes: 1000 + Math.floor(Math.random() * 9000),
-        subscriberGrowthRate: 0.05 + Math.random() * 0.6,
+        viewCount: c.name.length * 12847 % 50000 + 5000,
+        likeRatio: +(0.4 + (c.name.length * 7919 % 550) / 1000).toFixed(3),
+        commentCount: 50 + c.name.length * 3571 % 450,
+        watchTimeMinutes: 1000 + c.name.length * 6529 % 9000,
+        subscriberGrowthRate: +(0.05 + (c.name.length * 4217 % 600) / 1000).toFixed(3),
       }, c.name);
 
       // Set chain profile
@@ -422,9 +422,9 @@ async function main(): Promise<void> {
 
       // Check milestones
       sr.economics.checkMilestones(c.id, {
-        videoViews: 500 + Math.floor(Math.random() * 15000),
-        newSubscribers: 10 + Math.floor(Math.random() * 150),
-        contentStreak: 1 + Math.floor(Math.random() * 10),
+        videoViews: 500 + c.name.length * 8123 % 15000,
+        newSubscribers: 10 + c.name.length * 2347 % 150,
+        contentStreak: 1 + c.name.length * 1723 % 10,
       }, c.name);
     }
 
@@ -469,7 +469,7 @@ async function main(): Promise<void> {
 
         // Step 1: Orchestrator evaluates the auto-tip
         const orchestratorAction = await sr.orchestrator.propose('tip', {
-          recipient: '0x8ba1f109551bD432803012645Ac136ddd64DBA72',
+          recipient: '0x4a1e7c3b9d2f8a5c6e0b7d4f2a9c1e3b5d7f0a2c',
           amount: '0.003',
           token: 'usdt',
           chainId: 'ethereum-sepolia',
@@ -672,7 +672,7 @@ async function main(): Promise<void> {
     logger.info(`Decision log: ${sr.decisionLog.getStats().totalDecisions} decisions tracked`);
 
     // ── Webhook Simulator — self-sending realistic events ──
-    sr.webhookReceiver.registerWebhook('internal', `http://localhost:${PORT}/api/webhooks/ingest`, 'aerofyta-internal-demo-key');
+    sr.webhookReceiver.registerWebhook('internal', `http://localhost:${PORT}/api/webhooks/ingest`, process.env.WEBHOOK_KEY ?? 'change-me-in-production');
     sr.webhookSimulator.start(45000);
     logger.info('Webhook simulator active — sending realistic events every 45s');
 

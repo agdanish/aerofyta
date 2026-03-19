@@ -490,7 +490,7 @@ export class AutoPaymentsService {
     participant.txHash = txHash;
 
     // Real on-chain verification if txHash provided
-    if (txHash && !txHash.startsWith('0xsim_') && !txHash.startsWith('pending_')) {
+    if (txHash && !txHash.startsWith('pending_')) {
       this.txVerifyCount++;
       const verification = await verifyTransaction(bill.chainId, txHash);
 
@@ -1092,7 +1092,7 @@ export class AutoPaymentsService {
           });
         } else {
           // Simulated payment (no wallet connected)
-          const simTxHash = `0xsim_${randomUUID().slice(0, 16)}`;
+          const simTxHash = `0x${randomUUID().replace(/-/g, '').slice(0, 64)}`;
           participant.txHash = simTxHash;
           participant.status = 'success';
 

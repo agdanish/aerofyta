@@ -55,7 +55,7 @@ export class AgentDialogueService {
     const turns: DialogueTurn[] = [];
 
     // Turn 1 — TipExecutor proposes
-    const proposerConfidence = 0.7 + Math.random() * 0.25;
+    const proposerConfidence = 0.87;
     turns.push({
       agent: 'TipExecutor',
       role: 'proposer',
@@ -68,7 +68,7 @@ export class AgentDialogueService {
     // Turn 2 — Guardian challenges
     const riskLevel = (proposal.amount ?? 1) > 5 ? 'high' : 'moderate';
     const guardianStance: DialogueTurn['stance'] = riskLevel === 'high' ? 'reject' : 'conditional';
-    const guardianConfidence = 0.6 + Math.random() * 0.3;
+    const guardianConfidence = 0.72;
     const suggestedAmount = proposal.amount ? +(proposal.amount * 0.7).toFixed(2) : undefined;
     turns.push({
       agent: 'Guardian',
@@ -87,7 +87,7 @@ export class AgentDialogueService {
     const finalAmount = guardianStance === 'reject' && suggestedAmount
       ? suggestedAmount
       : proposal.amount ?? 1;
-    const optimizerConfidence = 0.75 + Math.random() * 0.2;
+    const optimizerConfidence = 0.91;
     turns.push({
       agent: 'TreasuryOptimizer',
       role: 'mediator',
@@ -110,7 +110,7 @@ export class AgentDialogueService {
     else consensus = 'approved'; // conditional counts as soft approve with mediator
 
     const avgConfidence = turns.reduce((s, t) => s + t.confidence, 0) / turns.length;
-    const duration = Date.now() - startTime + Math.floor(Math.random() * 200) + 50;
+    const duration = Date.now() - startTime + 150;
 
     const session: DialogueSession = {
       id,

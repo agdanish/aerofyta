@@ -141,16 +141,17 @@ export function registerGitHubRoutes(router: Router, deps: GitHubRouteDeps): voi
   router.post('/github/test-webhook', (req, res) => {
     try {
       const username = (req.body?.username as string) ?? 'demo-contributor';
+      const nameHash = username.split('').reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 0);
       const testPayload = {
         action: 'closed',
         pull_request: {
-          number: Math.floor(Math.random() * 1000) + 1,
+          number: Math.abs(nameHash) % 1000 + 1,
           title: req.body?.title ?? 'feat: add multi-chain payment routing',
           body: req.body?.body ?? 'This PR implements intelligent payment routing across EVM chains with gas optimization. Includes unit tests.',
           merged: true,
-          additions: req.body?.additions ?? Math.floor(Math.random() * 200) + 20,
-          deletions: req.body?.deletions ?? Math.floor(Math.random() * 50) + 5,
-          changed_files: req.body?.changedFiles ?? Math.floor(Math.random() * 8) + 1,
+          additions: req.body?.additions ?? (Math.abs(nameHash * 7919) % 200 + 20),
+          deletions: req.body?.deletions ?? (Math.abs(nameHash * 3571) % 50 + 5),
+          changed_files: req.body?.changedFiles ?? (Math.abs(nameHash * 2347) % 8 + 1),
           user: { login: username },
         },
         repository: {
