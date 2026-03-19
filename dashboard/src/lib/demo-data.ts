@@ -47,18 +47,203 @@ export const demoWallets = [
   { chain: "Celo", symbol: "CELO", address: "0x90F79bf6EB2c4f870365E785982E1f101E93b906", usdt: "220.00", native: "450", nativeSymbol: "CELO", color: "#35D07F", status: "syncing" },
 ];
 
-// ---- Creators ----
-export const demoCreators = [
-  { id: 1, name: "Sarah Mitchell", platform: "Rumble", engagement: 94, tips: 47, tier: "Diamond", avatar: "SM" },
-  { id: 2, name: "Marcus Rivera", platform: "Rumble", engagement: 87, tips: 35, tier: "Platinum", avatar: "MR" },
-  { id: 3, name: "Maya Chen", platform: "YouTube", engagement: 82, tips: 28, tier: "Gold", avatar: "MC" },
-  { id: 4, name: "Jake Holloway", platform: "Rumble", engagement: 76, tips: 22, tier: "Gold", avatar: "JH" },
-  { id: 5, name: "Priya Sharma", platform: "Twitch", engagement: 71, tips: 19, tier: "Silver", avatar: "PS" },
-  { id: 6, name: "Tom Okafor", platform: "Rumble", engagement: 68, tips: 15, tier: "Silver", avatar: "TO" },
-  { id: 7, name: "Claire Dubois", platform: "YouTube", engagement: 63, tips: 12, tier: "Bronze", avatar: "CD" },
-  { id: 8, name: "Amir Hassan", platform: "Rumble", engagement: 59, tips: 10, tier: "Bronze", avatar: "AH" },
-  { id: 9, name: "Lena Kowalski", platform: "Twitch", engagement: 54, tips: 8, tier: "Bronze", avatar: "LK" },
-  { id: 10, name: "Ravi Patel", platform: "Rumble", engagement: 48, tips: 6, tier: "Bronze", avatar: "RP" },
+// ---- Creators (Real Rumble Profiles) ----
+export interface RumbleCreator {
+  id: number;
+  name: string;
+  handle: string;
+  platform: string;
+  subscribers: string;
+  videoCount: number;
+  totalViews: string;
+  tier: "Diamond" | "Platinum" | "Gold" | "Silver" | "Bronze";
+  engagement: number;
+  engagementScore: number;
+  tips: number;
+  avatar: string;
+  avatarUrl: string;
+  recentVideoTitles: string[];
+  joinedYear: number;
+  verified: boolean;
+}
+
+export const demoCreators: RumbleCreator[] = [
+  {
+    id: 1,
+    name: "Dan Bongino",
+    handle: "Bongino",
+    platform: "Rumble",
+    subscribers: "4.1M",
+    videoCount: 2840,
+    totalViews: "1.8B",
+    tier: "Diamond",
+    engagement: 96,
+    engagementScore: 96,
+    tips: 124,
+    avatar: "DB",
+    avatarUrl: "https://sp.rmbl.ws/z0/Bongino-uhqag.jpeg",
+    recentVideoTitles: [
+      "The Dan Bongino Show - LIVE",
+      "They Just Got Caught Red-Handed",
+      "This Changes Everything We Know",
+    ],
+    joinedYear: 2020,
+    verified: true,
+  },
+  {
+    id: 2,
+    name: "Tucker Carlson",
+    handle: "TuckerCarlson",
+    platform: "Rumble",
+    subscribers: "3.2M",
+    videoCount: 620,
+    totalViews: "1.2B",
+    tier: "Diamond",
+    engagement: 94,
+    engagementScore: 94,
+    tips: 98,
+    avatar: "TC",
+    avatarUrl: "https://sp.rmbl.ws/z0/TuckerCarlson-uhqag.jpeg",
+    recentVideoTitles: [
+      "Tucker Carlson: The Interview They Tried to Stop",
+      "What They Are Not Telling You About the Economy",
+      "The Real Story Behind the Headlines",
+    ],
+    joinedYear: 2023,
+    verified: true,
+  },
+  {
+    id: 3,
+    name: "Steven Crowder",
+    handle: "StevenCrowder",
+    platform: "Rumble",
+    subscribers: "2.1M",
+    videoCount: 3150,
+    totalViews: "920M",
+    tier: "Diamond",
+    engagement: 91,
+    engagementScore: 91,
+    tips: 76,
+    avatar: "SC",
+    avatarUrl: "https://sp.rmbl.ws/z0/StevenCrowder-uhqag.jpeg",
+    recentVideoTitles: [
+      "Louder with Crowder LIVE!",
+      "Change My Mind: Free Speech Edition",
+      "Mug Club Exclusive - Undercover Investigation",
+    ],
+    joinedYear: 2021,
+    verified: true,
+  },
+  {
+    id: 4,
+    name: "Russell Brand",
+    handle: "RussellBrand",
+    platform: "Rumble",
+    subscribers: "2.0M",
+    videoCount: 1480,
+    totalViews: "680M",
+    tier: "Platinum",
+    engagement: 88,
+    engagementScore: 88,
+    tips: 62,
+    avatar: "RB",
+    avatarUrl: "https://sp.rmbl.ws/z0/RussellBrand-uhqag.jpeg",
+    recentVideoTitles: [
+      "Stay Free with Russell Brand",
+      "They Want You Distracted - Here Is Why",
+      "The Spiritual Revolution Is Happening Now",
+    ],
+    joinedYear: 2022,
+    verified: true,
+  },
+  {
+    id: 5,
+    name: "Tim Pool",
+    handle: "TimPool",
+    platform: "Rumble",
+    subscribers: "1.5M",
+    videoCount: 4200,
+    totalViews: "750M",
+    tier: "Platinum",
+    engagement: 85,
+    engagementScore: 85,
+    tips: 54,
+    avatar: "TP",
+    avatarUrl: "https://sp.rmbl.ws/z0/TimPool-uhqag.jpeg",
+    recentVideoTitles: [
+      "Timcast IRL - LIVE Panel Discussion",
+      "Media Blackout on the Biggest Story of the Year",
+      "The Culture War Is Heating Up",
+    ],
+    joinedYear: 2021,
+    verified: true,
+  },
+  {
+    id: 6,
+    name: "Redacted (Clayton Morris)",
+    handle: "Redacted",
+    platform: "Rumble",
+    subscribers: "1.0M",
+    videoCount: 1920,
+    totalViews: "410M",
+    tier: "Gold",
+    engagement: 82,
+    engagementScore: 82,
+    tips: 41,
+    avatar: "RD",
+    avatarUrl: "https://sp.rmbl.ws/z0/Redacted-uhqag.jpeg",
+    recentVideoTitles: [
+      "Redacted LIVE - Breaking News They Do Not Want You to See",
+      "Whistleblower Drops Bombshell Report",
+      "This Is Bigger Than We Thought",
+    ],
+    joinedYear: 2022,
+    verified: true,
+  },
+  {
+    id: 7,
+    name: "Glenn Beck",
+    handle: "GlennBeck",
+    platform: "Rumble",
+    subscribers: "820K",
+    videoCount: 2600,
+    totalViews: "340M",
+    tier: "Gold",
+    engagement: 78,
+    engagementScore: 78,
+    tips: 33,
+    avatar: "GB",
+    avatarUrl: "https://sp.rmbl.ws/z0/GlennBeck-uhqag.jpeg",
+    recentVideoTitles: [
+      "The Glenn Beck Program - Full Episode",
+      "A History Lesson They Erased from the Books",
+      "Warning: The Next Crisis Is Already Here",
+    ],
+    joinedYear: 2021,
+    verified: true,
+  },
+  {
+    id: 8,
+    name: "Dinesh D'Souza",
+    handle: "DineshDSouza",
+    platform: "Rumble",
+    subscribers: "610K",
+    videoCount: 980,
+    totalViews: "190M",
+    tier: "Silver",
+    engagement: 72,
+    engagementScore: 72,
+    tips: 22,
+    avatar: "DD",
+    avatarUrl: "https://sp.rmbl.ws/z0/DineshDSouza-uhqag.jpeg",
+    recentVideoTitles: [
+      "The Dinesh D'Souza Podcast",
+      "Why They Fear This Film",
+      "The Debate No One Expected",
+    ],
+    joinedYear: 2021,
+    verified: true,
+  },
 ];
 
 // ---- Tips ----

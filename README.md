@@ -12,6 +12,7 @@
 
 [![Build](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)](https://github.com/agdanish/aerofyta)
 [![Tests](https://img.shields.io/badge/tests-1%2C052_passing-brightgreen?style=flat-square)](https://github.com/agdanish/aerofyta)
+[![Coverage](https://img.shields.io/badge/coverage-297_suites-blue?style=flat-square)](https://github.com/agdanish/aerofyta)
 [![npm](https://img.shields.io/badge/npm-@xzashr/aerofyta-CB3837?style=flat-square&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta)
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](./LICENSE)
 [![Chains](https://img.shields.io/badge/chains-9-50AF95?style=flat-square&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta)
@@ -57,6 +58,28 @@ AeroFyta is that agent. It watches. It thinks. It pays. Across 9 chains. With 3 
 ---
 
 ## Architecture
+
+> Full architecture documentation with detailed component diagrams: [docs/architecture.md](./docs/architecture.md)
+
+```
+User Layer:   Dashboard (React)  |  Telegram Bot  |  Chrome Extension  |  CLI (107 cmds)
+                   |                     |                  |                  |
+                   v                     v                  v                  v
+API Layer:    Express 5 Server — 603 endpoints — Swagger UI — WebSocket — Rate Limiting
+                                         |
+                                         v
+Agent Layer:  ReAct Engine  -->  Multi-Agent Consensus (3 vote)  -->  Guardian Veto
+              LLM Cascade        TipExecutor | Guardian | Treasury    Kill Switch
+              (Groq->Gemini->    2/3 majority required                Safety override
+               Rule-based)       Wallet-as-Brain feedback loop
+                                         |
+                                         v
+WDK Layer:    12 packages  |  HD Wallets  |  ERC-4337 Gasless  |  TON Gasless
+              Aave V3      |  USDT0 Bridge  |  Velora Swap  |  3 Smart Contracts
+                                         |
+                                         v
+Chain Layer:  Ethereum | Polygon | Arbitrum | Avalanche | Celo | TON | Tron | Bitcoin | Solana
+```
 
 ```mermaid
 flowchart TD
@@ -285,6 +308,48 @@ All wallets are **non-custodial**. HD seed, private keys never leave the device.
 
 ---
 
+## Gasless Transactions
+
+AeroFyta supports zero-fee transactions on 6 chains through two WDK gasless packages.
+
+### ERC-4337 Account Abstraction (5 EVM Chains)
+
+Uses `@tetherto/wdk-wallet-evm-erc-4337` for gasless transactions on Ethereum, Polygon, Arbitrum, Avalanche, and Celo. The user signs a **UserOperation** instead of a standard transaction. A bundler submits it on-chain and sponsors the gas.
+
+```
+User Intent --> WDK builds UserOperation --> User signs --> Bundler pays gas --> TX confirmed
+                                                            (user pays $0)
+```
+
+| Step | What Happens |
+|:-----|:-------------|
+| 1 | Agent builds a UserOperation from the tip/payment intent |
+| 2 | WDK ERC-4337 wallet signs the operation with the HD-derived key |
+| 3 | Operation is sent to a bundler (ERC-4337 infrastructure) |
+| 4 | Bundler submits the transaction and pays gas on behalf of the user |
+| 5 | Transaction is confirmed on-chain — user paid zero gas |
+
+### TON Gasless (TON Network)
+
+Uses `@tetherto/wdk-wallet-ton-gasless` for zero-fee tipping on the TON network. A relayer submits the transaction and covers fees.
+
+```
+User Intent --> WDK builds TON message --> User signs --> Relayer pays fee --> TX confirmed
+                                                          (user pays $0)
+```
+
+### Why Gasless Matters for Tipping
+
+Gas fees destroy the economics of small tips. A $0.50 tip on Ethereum mainnet can cost $2+ in gas. With gasless transactions:
+
+- **Micro-tips become viable** — send $0.10 without losing it to gas
+- **New users onboard without ETH** — no need to buy gas tokens first
+- **Cross-chain fee optimization** — the agent picks the cheapest gasless route automatically
+
+The agent's fee optimizer compares gas costs across all 9 chains and selects the gasless route when it saves the user money.
+
+---
+
 ## 6 Payment Flows
 
 <table>
@@ -485,6 +550,30 @@ npx @xzashr/aerofyta reason   # LLM reasoning demo
 </details>
 
 <details>
+<summary><strong>CLI Demo — Try It Now</strong></summary>
+
+```bash
+# Install globally
+npm install -g @xzashr/aerofyta
+
+# Or run directly with npx (no install needed)
+npx @xzashr/aerofyta help                                    # Show all 107 commands
+npx @xzashr/aerofyta status                                  # Agent status + health score
+npx @xzashr/aerofyta tip @sarah_creates 2.5 --chain ethereum # Tip a creator
+npx @xzashr/aerofyta wallets                                 # List all 9 chain wallets
+npx @xzashr/aerofyta escrow create --amount 50 --timelock 2h # Create HTLC escrow
+npx @xzashr/aerofyta mood                                    # Wallet mood (generous/strategic/cautious)
+npx @xzashr/aerofyta pulse                                   # Financial health pulse 0-100
+npx @xzashr/aerofyta reason                                  # Watch 3 AI agents deliberate
+npx @xzashr/aerofyta gas                                     # Gas prices across 9 chains
+npx @xzashr/aerofyta balance                                 # Balances across all chains
+```
+
+Every command talks to the same agent backend. The CLI is a first-class interface, not a wrapper.
+
+</details>
+
+<details>
 <summary><strong>Deploy to Cloud (Free Tier)</strong></summary>
 
 **Render:** Connect GitHub repo, auto-detects `render.yaml`, set `WDK_SEED` env var.
@@ -632,6 +721,13 @@ cd agent && npm test
 # 1,052 tests · 297 suites · 0 failures
 ```
 
+Generate a coverage badge for CI:
+
+```bash
+bash agent/scripts/coverage-badge.sh
+# Outputs shields.io badge URLs for tests and suites
+```
+
 <details>
 <summary><strong>Testnet Protocol Status</strong></summary>
 
@@ -656,9 +752,14 @@ cd agent && npm test
 
 | Document | Contents |
 |:---------|:---------|
+| [docs/architecture.md](./docs/architecture.md) | System architecture diagrams (ASCII art), component layout, data flows |
 | [docs/FEATURES.md](./docs/FEATURES.md) | Full feature descriptions, WDK integration details |
 | [docs/API.md](./docs/API.md) | 603 API endpoints, environment variables |
 | [docs/DESIGN_DECISIONS.md](./docs/DESIGN_DECISIONS.md) | 16 architectural decisions with justifications |
+| [docs/ECONOMIC_MODEL.md](./docs/ECONOMIC_MODEL.md) | Fee structure, yield strategy, unit economics |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Contributor guide, code standards, PR process |
+| [SECURITY.md](./SECURITY.md) | Security policy, 12 attack vectors, responsible disclosure |
+| [CHANGELOG.md](./CHANGELOG.md) | Version history and development progression |
 | [SKILL.md](./SKILL.md) | OpenClaw agent skills definition |
 
 ---
