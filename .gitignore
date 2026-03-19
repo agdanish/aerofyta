@@ -15,3 +15,26 @@ Thumbs.db
 .audit.json
 .treasury.json
 agent/data/audit-trail.jsonl
+
+# Internal files - not for public repo
+LOVABLE_PROMPT*.md
+CLAUDE.md
+SKILL.md
+DEMO_SCRIPT.md
+DEMO_RECORDING_STEPS.md
+DEMO_VOICEOVER_SECTIONS.md
+ELEVENLABS_VOICE_SCRIPTS.md
+VOICEOVER_SINGLE_SCRIPT.txt
+CSS_BUNDLE.txt
+SOURCE_CODE_BUNDLE.txt
+generate_ia_pdf.py
+INFORMATION_ARCHITECTURE.pdf
+dashboard-old-backup/
+model-council/
+research/
+competitor-screenshots/
+docs/FINAL_STRICT_EVALUATION.md
+docs/WINNER_PREDICTION.md
+docs/COMPETITOR_ANALYSIS_V2.md
+docs/ALL_191_BUIDLS.md
+agent/coverage/

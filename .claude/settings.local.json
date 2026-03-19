@@ -43,7 +43,12 @@
       "Bash(wc -l src/services/*.ts)",
       "Bash(ls -la src/__tests__/*.ts)",
       "Bash(node --import tsx --test src/__tests__/agent.test.ts src/__tests__/services.test.ts src/__tests__/integration.test.ts)",
-      "Bash(timeout 90 node --import tsx --test src/__tests__/integration.test.ts)"
+      "Bash(timeout 90 node --import tsx --test src/__tests__/integration.test.ts)",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:blockchain.news)",
+      "WebFetch(domain:www.eventbrite.com)",
+      "Bash(start \"\" \"D:\\\\Tether-WDK-Hackathon\\\\.claude\\\\worktrees\\\\funny-kepler\\\\ELEVENLABS_VOICE_SCRIPTS.md\")",
+      "Bash(start \"\" \"D:\\\\Tether-WDK-Hackathon\\\\.claude\\\\worktrees\\\\funny-kepler\\\\VOICEOVER_SINGLE_SCRIPT.txt\")"
     ]
   },
   "disabledMcpjsonServers": [
