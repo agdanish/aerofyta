@@ -21,7 +21,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-aerofyta.xzashr.com-FF4E00?style=for-the-badge)](https://aerofyta.xzashr.com)
 [![npm](https://img.shields.io/badge/npm_install-@xzashr/aerofyta-CB3837?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta)
-[![YouTube Demo](https://img.shields.io/badge/Demo_Video-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/DEMO_VIDEO_PENDING)
+[![YouTube Demo](https://img.shields.io/badge/Demo_Video-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/Zwzs5sMP5u8)
 
 <br/>
 
@@ -523,7 +523,7 @@ Browser extension for tipping creators directly on Rumble and YouTube. Detects c
 
 ## Demo Video
 
-**[Watch on YouTube](https://youtu.be/DEMO_VIDEO_PENDING)** (5 minutes)
+**[Watch on YouTube](https://youtu.be/Zwzs5sMP5u8)** (5 minutes)
 
 | Timestamp | What You'll See |
 |:---------:|:----------------|
@@ -616,7 +616,7 @@ cd agent && npm test
 
 ## Team
 
-**Danish A** — Solo developer · [@agdanish](https://github.com/agdanish)
+**Danish A G** — Solo developer · [@agdanish](https://github.com/agdanish)
 
 ## Prior Work Disclosure
 
@@ -624,7 +624,7 @@ This project was built entirely during the Tether Hackathon Galactica: WDK Editi
 
 ## License
 
-[Apache 2.0](./LICENSE) — Copyright 2026 Danish A
+[Apache 2.0](./LICENSE) — Copyright 2026 Danish A G
 
 ---
 
