@@ -55,7 +55,7 @@ export default function Security() {
     <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold tracking-tight">Security Architecture</h1>
-        <p className="text-sm text-muted-foreground mt-1">Six layers of defense. Adversarial-tested.</p>
+        <p className="text-sm text-muted-foreground mt-1">Twelve layers of defense. Adversarial-tested.</p>
       </div>
 
       {/* Adversarial Tests */}

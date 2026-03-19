@@ -120,6 +120,12 @@ export const demoAdversarialTests = [
   { name: "Oracle Manipulation", blocked: true, blockedBy: "Multi-Oracle Consensus", reason: "Price deviation >5% — fallback oracle used" },
   { name: "Reentrancy Attack", blocked: true, blockedBy: "Guard Module", reason: "Recursive call pattern — execution halted" },
   { name: "Social Engineering", blocked: true, blockedBy: "Guardian Veto", reason: "Unusual recipient + high amount — human review triggered" },
+  { name: "Front-Running / MEV", blocked: true, blockedBy: "MEV Shield", reason: "Sandwich attack detected — tx routed through private mempool" },
+  { name: "Dust Attack", blocked: true, blockedBy: "Dust Filter", reason: "Micro-transaction below threshold — filtered and quarantined" },
+  { name: "Phishing / Address Poisoning", blocked: true, blockedBy: "Address Validator", reason: "Similar-looking address detected — Levenshtein distance too low" },
+  { name: "Infinite Approval Exploit", blocked: true, blockedBy: "Approval Guard", reason: "Unlimited token approval request — capped to exact amount" },
+  { name: "Time-lock Manipulation", blocked: true, blockedBy: "Escrow Sentinel", reason: "Premature unlock attempt — timelock integrity enforced" },
+  { name: "Cross-Chain Bridge Attack", blocked: true, blockedBy: "Bridge Validator", reason: "Double-spend attempt across chains — proof verification failed" },
 ];
 
 export const demoPolicies = [

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+  <title>AeroFyta</title>
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <img src="../icons/icon48.png" alt="AeroFyta" class="header-icon">
+        <div>
+          <h1 class="header-title">AeroFyta</h1>
+          <span class="header-subtitle">Autonomous Creator Tipping</span>
+        </div>
+      </div>
+      <div class="status-badge" id="statusBadge">
+        <span class="status-dot"></span>
+        <span class="status-text">Disconnected</span>
+      </div>
+    </header>
+
+    <!-- Wallet Card -->
+    <section class="card wallet-card">
+      <div class="card-header">
+        <span class="card-label">Wallet Balance</span>
+        <span class="chain-badge" id="chainBadge">EVM</span>
+      </div>
+      <div class="balance-row">
+        <span class="balance-amount" id="balanceAmount">--</span>
+        <span class="balance-currency">USDT</span>
+      </div>
+      <div class="wallet-address" id="walletAddress" title="Click to copy">
+        Not connected
+      </div>
+    </section>
+
+    <!-- Current Creator -->
+    <section class="card creator-card" id="creatorCard" style="display:none;">
+      <div class="card-header">
+        <span class="card-label">Detected Creator</span>
+      </div>
+      <div class="creator-info">
+        <div class="creator-avatar" id="creatorAvatar">?</div>
+        <div class="creator-details">
+          <span class="creator-name" id="creatorName">--</span>
+          <span class="creator-channel" id="creatorChannel">--</span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-tip" id="tipButton">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10.2 5.5L15 6.2L11.5 9.6L12.4 14.4L8 12.1L3.6 14.4L4.5 9.6L1 6.2L5.8 5.5L8 1Z" fill="currentColor"/></svg>
+        Tip Creator
+      </button>
+    </section>
+
+    <!-- Quick Tip -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-label">Quick Tip</span>
+      </div>
+      <div class="tip-amounts">
+        <button class="btn btn-chip" data-amount="0.50">$0.50</button>
+        <button class="btn btn-chip" data-amount="1.00">$1.00</button>
+        <button class="btn btn-chip" data-amount="2.00">$2.00</button>
+        <button class="btn btn-chip active" data-amount="5.00">$5.00</button>
+      </div>
+      <div class="tip-custom">
+        <input type="number" id="customAmount" class="input" placeholder="Custom amount" min="0.01" step="0.01">
+        <span class="input-suffix">USDT</span>
+      </div>
+    </section>
+
+    <!-- Recent Tips -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-label">Recent Tips</span>
+        <span class="card-count" id="tipCount">0</span>
+      </div>
+      <div class="tip-list" id="tipList">
+        <div class="tip-empty">No tips yet. Start tipping creators!</div>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <details class="settings-panel">
+      <summary class="settings-toggle">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 9a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.2"/><path d="M11.4 8.6l.9.5a.5.5 0 01.2.7l-1 1.7a.5.5 0 01-.6.2l-.9-.4a4.5 4.5 0 01-1 .6l-.1 1a.5.5 0 01-.5.4H6.6a.5.5 0 01-.5-.4l-.1-1a4.5 4.5 0 01-1-.6l-.9.4a.5.5 0 01-.6-.2l-1-1.7a.5.5 0 01.2-.7l.9-.5a4.5 4.5 0 010-1.2l-.9-.5a.5.5 0 01-.2-.7l1-1.7a.5.5 0 01.6-.2l.9.4a4.5 4.5 0 011-.6l.1-1A.5.5 0 016.6.7h1.8a.5.5 0 01.5.4l.1 1a4.5 4.5 0 011 .6l.9-.4a.5.5 0 01.6.2l1 1.7a.5.5 0 01-.2.7l-.9.5a4.5 4.5 0 010 1.2z" stroke="currentColor" stroke-width="1.2"/></svg>
+        Settings
+      </summary>
+      <div class="settings-content">
+        <div class="setting-row">
+          <label class="setting-label" for="apiUrl">Agent API URL</label>
+          <input type="url" id="apiUrl" class="input" value="http://localhost:3001" placeholder="http://localhost:3001">
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="defaultTip">Default Tip (USDT)</label>
+          <input type="number" id="defaultTip" class="input" value="5.00" min="0.01" step="0.01">
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="autoDetect">Auto-detect creators</label>
+          <label class="toggle">
+            <input type="checkbox" id="autoDetect" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <button class="btn btn-secondary btn-save" id="saveSettings">Save Settings</button>
+      </div>
+    </details>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>AeroFyta v0.1.0</span>
+      <span class="footer-sep">&middot;</span>
+      <span>Powered by Tether WDK</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -20,6 +20,7 @@ import { logger } from './utils/logger.js';
 import { checkSeedSecurity } from './utils/sanitize.js';
 import { encryptSeed, decryptSeed, isEncrypted } from './utils/seed-encryption.js';
 import { validateRequiredSecrets, listSecrets } from './utils/secret-manager.js';
+import { TelegramGrammyBot } from './telegram/index.js';
 
 // ── Top-level crash protection — demo NEVER crashes for judges ──
 process.on('uncaughtException', (err) => {
@@ -260,9 +261,26 @@ async function main(): Promise<void> {
   });
 
   // Start Telegram bot (optional — only if TELEGRAM_BOT_TOKEN is set)
-  agent.startTelegramBot().catch((err) => {
-    logger.warn('Telegram bot startup failed (non-fatal)', { error: String(err) });
-  });
+  // Grammy-based bot takes priority; falls back to native fetch polling bot
+  const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+  if (telegramToken) {
+    const grammyBot = new TelegramGrammyBot({
+      token: telegramToken,
+      agent,
+      wallet: walletService,
+      feeArbitrage: sr.feeArbitrage,
+      autonomousLoop: sr.autonomousLoop,
+    });
+    grammyBot.start().catch((err) => {
+      logger.warn('Grammy Telegram bot startup failed — falling back to native bot', { error: String(err) });
+      // Fallback to native fetch-based bot
+      agent.startTelegramBot().catch((fallbackErr) => {
+        logger.warn('Native Telegram bot also failed (non-fatal)', { error: String(fallbackErr) });
+      });
+    });
+  } else {
+    logger.info('TELEGRAM_BOT_TOKEN not set — Telegram bot disabled');
+  }
 
   // Demo mode — seed sample data for judges
   const demoService = new DemoService();
