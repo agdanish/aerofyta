@@ -35,6 +35,12 @@ import { registerSplitRoutes } from './split.routes.js';
 import { registerOpenApiRoutes } from './openapi.routes.js';
 import { registerProofRoutes } from './proof.routes.js';
 import { registerContractRoutes } from './contracts.routes.js';
+import { registerA2ARoutes } from './a2a.routes.js';
+import { A2AProtocolService } from '../services/a2a-protocol.service.js';
+import { seedA2ARegistry } from '../services/a2a-registry.js';
+import { registerAuditRoutes } from './audit.routes.js';
+import { AuditTrailService } from '../services/audit-trail.service.js';
+import { AutonomousProofService } from '../services/autonomous-proof.service.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -479,6 +485,18 @@ export function createApiRouter(
 
   // ── Deployed Contracts & Proof Tx ────────────────────────
   registerContractRoutes(router);
+
+  // ── Agent-to-Agent (A2A) Payment Protocol ──────────────────
+  const a2aProtocol = new A2AProtocolService();
+  seedA2ARegistry(a2aProtocol);
+  registerA2ARoutes(router, a2aProtocol);
+  logger.info('A2A payment protocol routes mounted at /api/a2a/*');
+
+  // ── Decision Audit Trail & Autonomous Proof ──────────────────
+  const auditTrailService = new AuditTrailService();
+  const autonomousProofService = new AutonomousProofService(auditTrailService);
+  registerAuditRoutes(router, { auditTrail: auditTrailService, autonomousProof: autonomousProofService });
+  logger.info('Audit trail routes mounted at /api/audit/*');
 
   return router;
 }

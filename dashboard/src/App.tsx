@@ -50,6 +50,7 @@ import TransactionsPage from "@/pages/Transactions";
 import Engagement from "@/pages/Engagement";
 import Status from "@/pages/Status";
 import Changelog from "@/pages/Changelog";
+import AuditTrail from "@/pages/AuditTrail";
 
 const queryClient = new QueryClient();
 
@@ -115,6 +116,7 @@ const App = () => {
                   <Route path="/status" element={<Status />} />
                   <Route path="/changelog" element={<Changelog />} />
                   <Route path="/explorer" element={<Explorer />} />
+                  <Route path="/audit-trail" element={<AuditTrail />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>

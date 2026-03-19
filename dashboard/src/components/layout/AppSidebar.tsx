@@ -8,6 +8,7 @@ import {
   MessageSquare, Vote, Database, Award, CandlestickChart,
   Bell, Target, BookUser, Calculator, Store, KeyRound, Settings,
   Leaf, QrCode, ArrowLeftRight, Sparkles, Activity, FileText,
+  ClipboardCheck,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import {
@@ -92,6 +93,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "Privacy", url: "/privacy", icon: ShieldCheck },
       { title: "Monitoring", url: "/monitoring", icon: MonitorCheck },
       { title: "Compliance", url: "/compliance", icon: FileCheck },
+      { title: "Audit Trail", url: "/audit-trail", icon: ClipboardCheck },
       { title: "Sustainability", url: "/sustainability", icon: Leaf },
     ],
   },

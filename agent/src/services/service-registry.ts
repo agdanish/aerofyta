@@ -82,6 +82,8 @@ import { CreditScoringService } from './credit-scoring.service.js';
 import { BitfinexPricingService } from './bitfinex-pricing.service.js';
 import { ZKProofService } from './zk-proof.service.js';
 import { TipSplitterService } from './tip-splitter.service.js';
+import { RumbleScraperService } from './rumble-scraper.service.js';
+import { EngagementScorerService } from './engagement-scorer.service.js';
 
 /**
  * Singleton registry that holds every service instance in the application.
@@ -176,6 +178,8 @@ export class ServiceRegistry {
     this._creditScoring = new CreditScoringService();
     this._bitfinexPricing = new BitfinexPricingService();
     this._tipSplitter = new TipSplitterService();
+    this._rumbleScraper = new RumbleScraperService();
+    this._engagementScorer = new EngagementScorerService();
   }
 
   // ── Initialization flag ────────────────────────────────────────
@@ -256,6 +260,8 @@ export class ServiceRegistry {
   private readonly _creditScoring: CreditScoringService;
   private readonly _bitfinexPricing: BitfinexPricingService;
   private readonly _tipSplitter: TipSplitterService;
+  private readonly _rumbleScraper: RumbleScraperService;
+  private readonly _engagementScorer: EngagementScorerService;
   private _adversarialDemo: AdversarialDemoService | null = null;
 
   // Wallet-dependent services (created during initialize)
@@ -337,6 +343,8 @@ export class ServiceRegistry {
   get creditScoring(): CreditScoringService { return this._creditScoring; }
   get bitfinexPricing(): BitfinexPricingService { return this._bitfinexPricing; }
   get tipSplitter(): TipSplitterService { return this._tipSplitter; }
+  get rumbleScraper(): RumbleScraperService { return this._rumbleScraper; }
+  get engagementScorer(): EngagementScorerService { return this._engagementScorer; }
   get adversarialDemo(): AdversarialDemoService | null { return this._adversarialDemo; }
 
   // Wallet-dependent (available after initialize)

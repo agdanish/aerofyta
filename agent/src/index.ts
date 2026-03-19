@@ -120,6 +120,22 @@ async function main(): Promise<void> {
   // Close early server — main server takes over
   earlyServer.close();
 
+  // Initialize Rumble scraper — fetches REAL creator data from Rumble.com
+  sr.rumbleScraper.initialize().then(() => {
+    const stats = sr.rumbleScraper.getStats();
+    logger.info(`Rumble scraper ready: ${stats.cached} profiles cached from ${stats.defaults} default creators`);
+
+    // Score all fetched creators for engagement
+    const profiles = sr.rumbleScraper.getStartupProfiles();
+    for (const [_slug, profile] of profiles) {
+      sr.engagementScorer.scoreCreator(profile);
+    }
+    const scorerStats = sr.engagementScorer.getStats();
+    logger.info(`Engagement scorer: ${scorerStats.totalScored} creators scored`, { tiers: scorerStats.tiers });
+  }).catch((err) => {
+    logger.warn('Rumble scraper initialization failed (non-fatal)', { error: String(err) });
+  });
+
   // Convenience aliases
   const walletService = sr.wallet;
   const aiService = sr.ai;
