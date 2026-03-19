@@ -32,6 +32,33 @@ export interface CreditThresholds {
   excellent: { maxTip: number; requiresApproval: boolean };
 }
 
+/** Agent-level credit score with named factors matching competitor format */
+export interface AgentCreditScore {
+  agentId: string;
+  score: number;               // 300-850
+  factors: {
+    paymentHistory: number;    // 0-100
+    utilizationRate: number;   // 0-100
+    tipConsistency: number;    // 0-100
+    escrowCompletion: number;  // 0-100
+    reputationAge: number;     // 0-100
+  };
+  tier: 'Excellent' | 'Good' | 'Fair' | 'Poor';
+  lastUpdated: string;
+}
+
+/** Detailed credit report for an agent */
+export interface AgentCreditReport {
+  agentId: string;
+  score: AgentCreditScore;
+  summary: string;
+  recommendations: string[];
+  riskLevel: 'low' | 'medium' | 'high';
+  maxLoanAmount: number;
+  interestRateModifier: number;
+  history: Array<{ date: string; score: number; event: string }>;
+}
+
 /** Configurable dimension weights (must sum to 1.0) */
 export interface ScoringWeights {
   tipHistory: number;
@@ -93,9 +120,99 @@ export class CreditScoringService {
   private scoreHistory = new Map<string, CreditScore[]>();
   private weights: ScoringWeights = { ...DEFAULT_WEIGHTS };
   private thresholds: CreditThresholds = { ...DEFAULT_THRESHOLDS };
+  private agentScores = new Map<string, AgentCreditScore>();
+  private agentHistory = new Map<string, Array<{ date: string; score: number; event: string }>>();
 
   constructor() {
     logger.info('CreditScoringService initialized', { weights: this.weights });
+    this.seedAgentScores();
+  }
+
+  /** Pre-seed credit scores for demo agents + AeroFyta itself */
+  private seedAgentScores(): void {
+    const now = new Date().toISOString();
+
+    // AeroFyta — our agent (excellent score)
+    this.agentScores.set('aerofyta', {
+      agentId: 'aerofyta',
+      score: 810,
+      factors: {
+        paymentHistory: 95,
+        utilizationRate: 72,
+        tipConsistency: 91,
+        escrowCompletion: 98,
+        reputationAge: 85,
+      },
+      tier: 'Excellent',
+      lastUpdated: now,
+    });
+    this.agentHistory.set('aerofyta', [
+      { date: '2026-03-01', score: 720, event: 'Initial scoring — new agent' },
+      { date: '2026-03-08', score: 755, event: 'Completed 50 successful tips' },
+      { date: '2026-03-15', score: 790, event: 'Escrow completion rate hit 98%' },
+      { date: '2026-03-22', score: 810, event: 'Multi-chain reputation established' },
+    ]);
+
+    // Demo A2A Agent 1: TipBot-Alpha (good score)
+    this.agentScores.set('tipbot-alpha', {
+      agentId: 'tipbot-alpha',
+      score: 695,
+      factors: {
+        paymentHistory: 78,
+        utilizationRate: 65,
+        tipConsistency: 70,
+        escrowCompletion: 82,
+        reputationAge: 60,
+      },
+      tier: 'Good',
+      lastUpdated: now,
+    });
+    this.agentHistory.set('tipbot-alpha', [
+      { date: '2026-03-05', score: 580, event: 'Agent registered' },
+      { date: '2026-03-12', score: 640, event: 'First 20 tips sent successfully' },
+      { date: '2026-03-20', score: 695, event: 'Consistent payment track record' },
+    ]);
+
+    // Demo A2A Agent 2: PayStream-v2 (fair score)
+    this.agentScores.set('paystream-v2', {
+      agentId: 'paystream-v2',
+      score: 540,
+      factors: {
+        paymentHistory: 55,
+        utilizationRate: 88,
+        tipConsistency: 42,
+        escrowCompletion: 60,
+        reputationAge: 30,
+      },
+      tier: 'Fair',
+      lastUpdated: now,
+    });
+    this.agentHistory.set('paystream-v2', [
+      { date: '2026-03-10', score: 450, event: 'Agent registered — low initial data' },
+      { date: '2026-03-18', score: 510, event: 'High utilization but inconsistent tips' },
+      { date: '2026-03-22', score: 540, event: 'Escrow completions improving' },
+    ]);
+
+    // Demo A2A Agent 3: MicroPay-Agent (poor score)
+    this.agentScores.set('micropay-agent', {
+      agentId: 'micropay-agent',
+      score: 380,
+      factors: {
+        paymentHistory: 30,
+        utilizationRate: 92,
+        tipConsistency: 20,
+        escrowCompletion: 35,
+        reputationAge: 15,
+      },
+      tier: 'Poor',
+      lastUpdated: now,
+    });
+    this.agentHistory.set('micropay-agent', [
+      { date: '2026-03-15', score: 320, event: 'New agent — minimal history' },
+      { date: '2026-03-20', score: 380, event: 'Some payments but multiple escrow failures' },
+    ]);
+
+    logger.info('Agent credit scores pre-seeded', { count: this.agentScores.size });
   }
 
   // ── Data Ingestion ───────────────────────────────────────────
@@ -273,6 +390,106 @@ export class CreditScoringService {
       maxTip: tierConfig.maxTip,
       requiresApproval: tierConfig.requiresApproval,
     };
+  }
+
+  // ── Agent-Based Scoring (for competitor parity) ──────────────
+
+  /**
+   * Calculate credit score for an agent by ID.
+   * Returns pre-seeded score or dynamically generated score.
+   */
+  calculateScore(agentId: string): AgentCreditScore {
+    const key = agentId.toLowerCase();
+    const existing = this.agentScores.get(key);
+    if (existing) return existing;
+
+    // Generate a baseline score for unknown agents
+    const score: AgentCreditScore = {
+      agentId,
+      score: 500,
+      factors: {
+        paymentHistory: 50,
+        utilizationRate: 50,
+        tipConsistency: 50,
+        escrowCompletion: 50,
+        reputationAge: 10,
+      },
+      tier: 'Fair',
+      lastUpdated: new Date().toISOString(),
+    };
+    this.agentScores.set(key, score);
+    return score;
+  }
+
+  /**
+   * Get a detailed credit report for an agent.
+   */
+  getScoreReport(agentId: string): AgentCreditReport {
+    const score = this.calculateScore(agentId);
+    const history = this.agentHistory.get(agentId.toLowerCase()) ?? [];
+
+    const tierToRisk: Record<string, 'low' | 'medium' | 'high'> = {
+      Excellent: 'low',
+      Good: 'low',
+      Fair: 'medium',
+      Poor: 'high',
+    };
+
+    const tierToMaxLoan: Record<string, number> = {
+      Excellent: 1000,
+      Good: 500,
+      Fair: 100,
+      Poor: 10,
+    };
+
+    const tierToRate: Record<string, number> = {
+      Excellent: -0.02,
+      Good: 0,
+      Fair: 0.03,
+      Poor: 0.08,
+    };
+
+    const recommendations: string[] = [];
+    if (score.factors.paymentHistory < 60) recommendations.push('Improve payment history by completing more on-time transactions');
+    if (score.factors.tipConsistency < 60) recommendations.push('Increase tip consistency — regular tipping improves score');
+    if (score.factors.escrowCompletion < 70) recommendations.push('Complete pending escrows to improve reliability rating');
+    if (score.factors.reputationAge < 40) recommendations.push('Continue operating to build reputation age');
+    if (score.factors.utilizationRate > 85) recommendations.push('Reduce utilization rate — high utilization signals risk');
+    if (recommendations.length === 0) recommendations.push('Maintain current excellent standing');
+
+    let summary: string;
+    switch (score.tier) {
+      case 'Excellent':
+        summary = `${agentId} has an excellent credit profile with strong payment history and high reliability.`;
+        break;
+      case 'Good':
+        summary = `${agentId} has a good credit profile with solid fundamentals and room for improvement.`;
+        break;
+      case 'Fair':
+        summary = `${agentId} has a fair credit profile — some factors need attention to unlock better terms.`;
+        break;
+      default:
+        summary = `${agentId} has a poor credit profile — significant improvements needed for better access.`;
+    }
+
+    return {
+      agentId,
+      score,
+      summary,
+      recommendations,
+      riskLevel: tierToRisk[score.tier] ?? 'high',
+      maxLoanAmount: tierToMaxLoan[score.tier] ?? 10,
+      interestRateModifier: tierToRate[score.tier] ?? 0.08,
+      history,
+    };
+  }
+
+  /**
+   * Get all agent scores as a leaderboard sorted by score descending.
+   */
+  getAllScores(): AgentCreditScore[] {
+    return Array.from(this.agentScores.values())
+      .sort((a, b) => b.score - a.score);
   }
 
   // ── Private Helpers ──────────────────────────────────────────

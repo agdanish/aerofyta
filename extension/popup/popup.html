@@ -23,6 +23,17 @@
       </div>
     </header>
 
+    <!-- Not on Rumble Banner -->
+    <section class="card not-rumble-card" id="notRumbleCard" style="display:none;">
+      <div class="not-rumble-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#555570" stroke-width="1.5"/><path d="M15 9l-6 6M9 9l6 6" stroke="#555570" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="not-rumble-text">
+        <strong>Not on Rumble</strong>
+        <span>Visit a Rumble channel or video page to detect creators and send tips.</span>
+      </div>
+    </section>
+
     <!-- Wallet Card -->
     <section class="card wallet-card">
       <div class="card-header">
@@ -42,45 +53,42 @@
     <section class="card creator-card" id="creatorCard" style="display:none;">
       <div class="card-header">
         <span class="card-label">Detected Creator</span>
+        <span class="page-type-badge" id="pageTypeBadge"></span>
       </div>
       <div class="creator-info">
         <div class="creator-avatar" id="creatorAvatar">?</div>
         <div class="creator-details">
           <span class="creator-name" id="creatorName">--</span>
           <span class="creator-channel" id="creatorChannel">--</span>
+          <span class="creator-subs" id="creatorSubs" style="display:none;"></span>
         </div>
       </div>
-      <button class="btn btn-primary btn-tip" id="tipButton">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10.2 5.5L15 6.2L11.5 9.6L12.4 14.4L8 12.1L3.6 14.4L4.5 9.6L1 6.2L5.8 5.5L8 1Z" fill="currentColor"/></svg>
-        Tip Creator
-      </button>
-    </section>
 
-    <!-- Quick Tip -->
-    <section class="card">
-      <div class="card-header">
-        <span class="card-label">Quick Tip</span>
-      </div>
+      <!-- Quick Tip Amounts -->
       <div class="tip-amounts">
         <button class="btn btn-chip" data-amount="0.50">$0.50</button>
-        <button class="btn btn-chip" data-amount="1.00">$1.00</button>
-        <button class="btn btn-chip" data-amount="2.00">$2.00</button>
-        <button class="btn btn-chip active" data-amount="5.00">$5.00</button>
+        <button class="btn btn-chip" data-amount="1.00">$1</button>
+        <button class="btn btn-chip aerofyta-chip-active" data-amount="2.00">$2</button>
+        <button class="btn btn-chip" data-amount="5.00">$5</button>
       </div>
       <div class="tip-custom">
         <input type="number" id="customAmount" class="input" placeholder="Custom amount" min="0.01" step="0.01">
         <span class="input-suffix">USDT</span>
       </div>
+      <button class="btn btn-primary btn-tip" id="tipButton">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.4 8.6L21.5 9.3L16.1 14L17.6 21L12 17.5L6.4 21L7.9 14L2.5 9.3L9.6 8.6L12 2Z" fill="currentColor"/></svg>
+        Send $2.00 Tip
+      </button>
     </section>
 
     <!-- Recent Tips -->
     <section class="card">
       <div class="card-header">
-        <span class="card-label">Recent Tips</span>
+        <span class="card-label">Tip History</span>
         <span class="card-count" id="tipCount">0</span>
       </div>
       <div class="tip-list" id="tipList">
-        <div class="tip-empty">No tips yet. Start tipping creators!</div>
+        <div class="tip-empty">No tips yet. Visit a Rumble creator to get started!</div>
       </div>
     </section>
 
@@ -97,7 +105,7 @@
         </div>
         <div class="setting-row">
           <label class="setting-label" for="defaultTip">Default Tip (USDT)</label>
-          <input type="number" id="defaultTip" class="input" value="5.00" min="0.01" step="0.01">
+          <input type="number" id="defaultTip" class="input" value="2.00" min="0.01" step="0.01">
         </div>
         <div class="setting-row">
           <label class="setting-label" for="autoDetect">Auto-detect creators</label>

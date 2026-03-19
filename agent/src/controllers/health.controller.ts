@@ -4,18 +4,42 @@
 import type { Request, Response } from 'express';
 import { Controller, Get, ApiTag, ApiDescription } from '../decorators/index.js';
 import { ServiceRegistry } from '../services/service-registry.js';
+import { getRateLimiterStats } from '../middleware/rate-limiter.js';
+import { getCircuitBreaker } from '../middleware/circuit-breaker.js';
 
 @Controller('/health')
 @ApiTag('System')
 export class HealthController {
   @Get('/')
-  @ApiDescription('Health check endpoint')
+  @ApiDescription('Production health check — uptime, memory, chains, circuit breakers, rate limiter')
   async getHealth(_req: Request, res: Response) {
+    const sr = ServiceRegistry.getInstance();
+    const mem = process.memoryUsage();
+    const loopStatus = sr.autonomousLoop?.getStatus?.() ?? null;
+
     res.json({
       status: 'ok',
       uptime: process.uptime(),
       timestamp: new Date().toISOString(),
-      version: process.env.npm_package_version ?? '1.0.0',
+      version: process.env.npm_package_version ?? '1.1.0',
+      memory: {
+        rssMB: Math.round(mem.rss / 1024 / 1024),
+        heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
+        heapTotalMB: Math.round(mem.heapTotal / 1024 / 1024),
+        externalMB: Math.round(mem.external / 1024 / 1024),
+      },
+      connectedChains: sr.wallet?.getRegisteredChains?.()?.length ?? 0,
+      websocketEnabled: true,
+      telegramBot: !!process.env.TELEGRAM_BOT_TOKEN,
+      lastAutonomousDecision: loopStatus?.lastCycleAt ?? null,
+      autonomousLoop: loopStatus ? {
+        running: loopStatus.running,
+        paused: loopStatus.paused,
+        totalCycles: loopStatus.totalCycles,
+        tipsExecuted: loopStatus.tipsExecuted,
+      } : null,
+      rateLimiter: getRateLimiterStats(),
+      circuitBreakers: getCircuitBreaker().getStates(),
     });
   }
 
@@ -23,6 +47,7 @@ export class HealthController {
   @ApiDescription('Deep health check — verifies all services')
   async getDeepHealth(_req: Request, res: Response) {
     const sr = ServiceRegistry.getInstance();
+    const mem = process.memoryUsage();
     const checks = {
       wallet: !!sr.wallet,
       ai: !!sr.ai,
@@ -30,9 +55,11 @@ export class HealthController {
       tests: 1001,
       uptime: process.uptime(),
       memory: {
-        rss: Math.round(process.memoryUsage().rss / 1024 / 1024),
-        heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+        rssMB: Math.round(mem.rss / 1024 / 1024),
+        heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
       },
+      rateLimiter: getRateLimiterStats(),
+      circuitBreakers: getCircuitBreaker().getStates(),
     };
     res.json({ status: 'ok', checks });
   }

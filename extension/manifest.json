@@ -3,7 +3,7 @@
   "name": "AeroFyta — Autonomous Creator Tipping",
   "description": "AI-powered autonomous tipping for Rumble creators using Tether WDK",
   "version": "0.1.0",
-  "permissions": ["activeTab", "storage", "alarms"],
+  "permissions": ["activeTab", "storage", "alarms", "notifications"],
   "host_permissions": ["https://rumble.com/*"],
   "action": {
     "default_popup": "popup/popup.html",

@@ -160,7 +160,7 @@ function showNotification(title, message) {
   if (chrome.notifications) {
     chrome.notifications.create({
       type: 'basic',
-      iconUrl: '../icons/icon128.png',
+      iconUrl: 'icons/icon128.png',
       title,
       message
     });

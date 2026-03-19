@@ -53,6 +53,8 @@ import Changelog from "@/pages/Changelog";
 import AuditTrail from "@/pages/AuditTrail";
 import GitHubTipping from "@/pages/GitHubTipping";
 import WalletBrain from "@/pages/WalletBrain";
+import PortfolioAnalytics from "@/pages/PortfolioAnalytics";
+import FeeComparison from "@/pages/FeeComparison";
 
 const queryClient = new QueryClient();
 
@@ -121,6 +123,8 @@ const App = () => {
                   <Route path="/audit-trail" element={<AuditTrail />} />
                   <Route path="/github-tipping" element={<GitHubTipping />} />
                   <Route path="/wallet-brain" element={<WalletBrain />} />
+                  <Route path="/portfolio-analytics" element={<PortfolioAnalytics />} />
+                  <Route path="/fee-comparison" element={<FeeComparison />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>

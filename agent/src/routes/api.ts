@@ -5,6 +5,8 @@ import type { AIService } from '../services/ai.service.js';
 import { logger } from '../utils/logger.js';
 import { auditLog } from '../middleware/validate.js';
 import { ServiceRegistry } from '../services/service-registry.js';
+import { rateLimiterMiddleware } from '../middleware/rate-limiter.js';
+import { requestLoggerMiddleware } from '../middleware/request-logger.js';
 
 import { createAdvancedRouter } from './advanced.js';
 import { registerController } from '../decorators/index.js';
@@ -47,6 +49,9 @@ import { registerGitHubRoutes } from './github.routes.js';
 import { GitHubWebhookService } from '../services/github-webhook.service.js';
 import { registerBrainRoutes } from './brain.routes.js';
 import { WalletBrainService } from '../services/wallet-brain.service.js';
+import { registerX402ProtocolRoutes } from './x402.routes.js';
+import { X402ProtocolService } from '../services/x402-protocol.service.js';
+import { registerCreditRoutes } from './credit.routes.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -147,6 +152,11 @@ export function createApiRouter(
   // Wire receipt and reputation services to agent (skip if not yet initialized)
   if (receiptService) agent.setReceiptService(receiptService);
   agent.setReputationService(reputationService);
+
+  // ── Production hardening middleware (applied early) ──────────
+  router.use(requestLoggerMiddleware());
+  router.use(rateLimiterMiddleware());
+  logger.info('Production middleware registered: request-logger, rate-limiter');
 
   // Apply audit logging to all API routes
   router.use(auditLog());
@@ -517,6 +527,16 @@ export function createApiRouter(
   const walletBrainService = new WalletBrainService();
   walletBrainService.start();
   registerBrainRoutes(router, walletBrainService);
+
+  // ── x402 Payment Protocol (unified service with payForAccess) ──
+  const x402ProtocolService = new X402ProtocolService();
+  x402ProtocolService.createPaywall('/api/x402/protocol/demo', '0.01', 'ethereum-sepolia', { description: 'Premium Agent Intelligence Report' });
+  registerX402ProtocolRoutes(router, x402ProtocolService);
+  logger.info('x402 protocol routes mounted at /api/x402/protocol/*');
+
+  // ── Credit Scoring (agent-level leaderboard + reports) ──────
+  registerCreditRoutes(router, services.creditScoring);
+  logger.info('Credit scoring routes mounted at /api/credit/*');
 
   return router;
 }

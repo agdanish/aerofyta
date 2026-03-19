@@ -8,7 +8,7 @@ import {
   MessageSquare, Vote, Database, Award, CandlestickChart,
   Bell, Target, BookUser, Calculator, Store, KeyRound, Settings,
   Leaf, QrCode, ArrowLeftRight, Sparkles, Activity, FileText,
-  ClipboardCheck, GitMerge,
+  ClipboardCheck, GitMerge, PieChart, Fuel,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import {
@@ -55,12 +55,14 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "QR Codes", url: "/qr", icon: QrCode },
       { title: "Treasury", url: "/treasury", icon: Landmark },
       { title: "Economics", url: "/economics", icon: Calculator },
+      { title: "Portfolio Analytics", url: "/portfolio-analytics", icon: PieChart },
     ],
   },
   {
     label: "DeFi & Trading",
     items: [
       { title: "DeFi", url: "/defi", icon: TrendingUp },
+      { title: "Fee Comparison", url: "/fee-comparison", icon: Fuel },
       { title: "Trading", url: "/trading", icon: CandlestickChart },
       { title: "MultiSig", url: "/multisig", icon: KeyRound },
     ],

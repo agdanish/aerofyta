@@ -290,7 +290,8 @@ body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 }
 
 .btn-chip:hover,
-.btn-chip.active {
+.btn-chip.active,
+.btn-chip.aerofyta-chip-active {
   background: rgba(255, 95, 31, 0.12);
   border-color: var(--orange-500);
   color: var(--orange-400);
@@ -541,4 +542,103 @@ body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 .toast.error {
   border-color: var(--red-500);
   background: rgba(239, 68, 68, 0.1);
+}
+
+/* ─── Not on Rumble Card ─────────────────────────────────────── */
+
+.not-rumble-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px !important;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+}
+
+.not-rumble-icon {
+  flex-shrink: 0;
+}
+
+.not-rumble-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.not-rumble-text strong {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.not-rumble-text span {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ─── Page Type Badge ────────────────────────────────────────── */
+
+.page-type-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.page-type-live {
+  background: rgba(220, 38, 38, 0.15);
+  color: #ef4444;
+  animation: badge-pulse 1.5s ease-in-out infinite;
+}
+
+.page-type-channel {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+}
+
+.page-type-video {
+  background: rgba(168, 85, 247, 0.12);
+  color: #a78bfa;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ─── Subscriber Count ───────────────────────────────────────── */
+
+.creator-subs {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--bg-hover);
+  padding: 1px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+/* ─── Tip Item TX Link ───────────────────────────────────────── */
+
+.tip-item-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tip-item-tx {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--orange-400);
+  background: rgba(255, 95, 31, 0.1);
+  padding: 2px 5px;
+  border-radius: 3px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+
+.tip-item-tx:hover {
+  background: rgba(255, 95, 31, 0.2);
 }
