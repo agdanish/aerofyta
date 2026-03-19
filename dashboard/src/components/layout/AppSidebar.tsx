@@ -8,7 +8,7 @@ import {
   MessageSquare, Vote, Database, Award, CandlestickChart,
   Bell, Target, BookUser, Calculator, Store, KeyRound, Settings,
   Leaf, QrCode, ArrowLeftRight, Sparkles, Activity, FileText,
-  ClipboardCheck, GitMerge, PieChart, Fuel,
+  ClipboardCheck, GitMerge, PieChart, Fuel, MessagesSquare, UsersRound,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import {
@@ -56,6 +56,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "Treasury", url: "/treasury", icon: Landmark },
       { title: "Economics", url: "/economics", icon: Calculator },
       { title: "Portfolio Analytics", url: "/portfolio-analytics", icon: PieChart },
+      { title: "Tip Pools", url: "/tip-pools", icon: UsersRound },
     ],
   },
   {
@@ -82,6 +83,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     label: "AI & Agent",
     items: [
       { title: "Wallet Brain", url: "/wallet-brain", icon: BrainCircuit },
+      { title: "Agent Dialogue", url: "/agent-dialogue", icon: MessagesSquare },
       { title: "Reasoning", url: "/reasoning", icon: Brain },
       { title: "Memory", url: "/memory", icon: BrainCircuit },
       { title: "Chat", url: "/chat", icon: MessageSquare },

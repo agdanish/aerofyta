@@ -52,6 +52,14 @@ import { WalletBrainService } from '../services/wallet-brain.service.js';
 import { registerX402ProtocolRoutes } from './x402.routes.js';
 import { X402ProtocolService } from '../services/x402-protocol.service.js';
 import { registerCreditRoutes } from './credit.routes.js';
+import { registerDialogueRoutes } from './dialogue.routes.js';
+import { AgentDialogueService } from '../services/agent-dialogue.service.js';
+import { registerPoolRoutes } from './pool.routes.js';
+import { TipPoolService } from '../services/tip-pool.service.js';
+import { registerCacheRoutes } from './cache.routes.js';
+import { registerAutoTipRoutes } from './auto-tip.routes.js';
+import { DecisionCacheService } from '../services/decision-cache.service.js';
+import { AutoTipService } from '../services/auto-tip.service.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -537,6 +545,25 @@ export function createApiRouter(
   // ── Credit Scoring (agent-level leaderboard + reports) ──────
   registerCreditRoutes(router, services.creditScoring);
   logger.info('Credit scoring routes mounted at /api/credit/*');
+
+  // ── Agent Dialogue ("Board Meeting") Debate System ──────────
+  const agentDialogueService = new AgentDialogueService();
+  registerDialogueRoutes(router, agentDialogueService);
+
+  // ── Community Tip Pools (crowdfunded bounty pools) ────────────
+  const tipPoolService = new TipPoolService();
+  registerPoolRoutes(router, tipPoolService);
+  logger.info('Tip pool routes mounted at /api/pools/*');
+
+  // ── LLM Decision Cache (context-hashing cost saver) ──────────
+  const decisionCacheService = new DecisionCacheService();
+  registerCacheRoutes(router, decisionCacheService);
+  logger.info('Decision cache routes mounted at /api/cache/*');
+
+  // ── Auto-Tip Standing Orders (persistent auto-tip rules) ────
+  const autoTipService = new AutoTipService();
+  registerAutoTipRoutes(router, autoTipService);
+  logger.info('Auto-tip standing order routes mounted at /api/auto-tip/*');
 
   return router;
 }

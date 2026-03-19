@@ -14,6 +14,316 @@
   let fabInjected = false;
   let dialogOpen = false;
 
+  // ─── Wallet Address Cache ──────────────────────────────────────────
+
+  const walletCache = {}; // keyed by channel slug
+
+  // ─── HTMX Wallet Extraction ────────────────────────────────────────
+
+  /**
+   * Attempts to extract the creator's wallet address by finding Rumble's
+   * tip/support button, reading its hx-get URL, fetching the tip modal HTML,
+   * and parsing hx-vals JSON for EVM/BTC addresses.
+   *
+   * Returns { evmAddress, btcAddress, status } where status is
+   * 'detected' | 'manual' | 'none'.
+   */
+  async function extractWalletViaHTMX() {
+    const result = { evmAddress: null, btcAddress: null, status: 'none' };
+
+    try {
+      // Step 1: Find the tip/support button on the page
+      const tipButtonSelectors = [
+        'button[hx-get*="tip"]',
+        'a[hx-get*="tip"]',
+        '[hx-get*="tip_modal"]',
+        '[hx-get*="/user/tip"]',
+        '.rumbles-vote-pill[hx-get]',
+        'button[hx-get*="support"]',
+        '[data-action="tip"]',
+        '.tip-button[hx-get]',
+        // Broader: any HTMX element near "Tip" or "Support" text
+        '.rumbles-vote-pill',
+        '.rant-button',
+        '[class*="tip"][hx-get]',
+        '[class*="support"][hx-get]'
+      ];
+
+      let tipButton = null;
+      let hxGetUrl = null;
+
+      for (const sel of tipButtonSelectors) {
+        const el = document.querySelector(sel);
+        if (el) {
+          const hxGet = el.getAttribute('hx-get');
+          if (hxGet) {
+            tipButton = el;
+            hxGetUrl = hxGet;
+            break;
+          }
+          // If element found but no hx-get, check parent and siblings
+          const parent = el.closest('[hx-get]');
+          if (parent) {
+            tipButton = parent;
+            hxGetUrl = parent.getAttribute('hx-get');
+            break;
+          }
+        }
+      }
+
+      // Fallback: scan all elements with hx-get containing tip-related paths
+      if (!hxGetUrl) {
+        const allHtmx = document.querySelectorAll('[hx-get]');
+        for (const el of allHtmx) {
+          const url = el.getAttribute('hx-get') || '';
+          if (/tip|support|rant|donate/i.test(url)) {
+            tipButton = el;
+            hxGetUrl = url;
+            break;
+          }
+        }
+      }
+
+      if (!hxGetUrl) {
+        console.log('[AeroFyta] No HTMX tip button found on page');
+        result.status = 'manual';
+        return result;
+      }
+
+      console.log('[AeroFyta] Found HTMX tip button:', hxGetUrl);
+
+      // Step 2: Also check for hx-vals on the button itself
+      const immediateVals = tipButton.getAttribute('hx-vals');
+      if (immediateVals) {
+        const parsed = parseHxVals(immediateVals);
+        if (parsed) {
+          Object.assign(result, parsed);
+          if (result.evmAddress) {
+            result.status = 'detected';
+            console.log('[AeroFyta] Wallet found in button hx-vals:', result.evmAddress);
+            return result;
+          }
+        }
+      }
+
+      // Step 3: Fetch the tip modal HTML
+      const fullUrl = hxGetUrl.startsWith('http')
+        ? hxGetUrl
+        : window.location.origin + hxGetUrl;
+
+      const response = await fetch(fullUrl, {
+        method: 'GET',
+        credentials: 'include', // send cookies for authenticated endpoints
+        headers: {
+          'HX-Request': 'true',
+          'HX-Current-URL': window.location.href,
+          'Accept': 'text/html, */*'
+        }
+      });
+
+      if (!response.ok) {
+        console.log('[AeroFyta] Tip modal fetch failed:', response.status);
+        result.status = 'manual';
+        return result;
+      }
+
+      const modalHtml = await response.text();
+      console.log('[AeroFyta] Tip modal HTML fetched, length:', modalHtml.length);
+
+      // Step 4: Parse the modal HTML for wallet addresses
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(modalHtml, 'text/html');
+
+      // Look for hx-vals attributes containing wallet addresses
+      const hxValsElements = doc.querySelectorAll('[hx-vals]');
+      for (const el of hxValsElements) {
+        const vals = el.getAttribute('hx-vals');
+        const parsed = parseHxVals(vals);
+        if (parsed && (parsed.evmAddress || parsed.btcAddress)) {
+          Object.assign(result, parsed);
+          result.status = 'detected';
+          console.log('[AeroFyta] Wallet found in modal hx-vals:', result.evmAddress || result.btcAddress);
+          break;
+        }
+      }
+
+      // Also look for wallet addresses in data attributes
+      if (!result.evmAddress) {
+        const dataWalletEls = doc.querySelectorAll(
+          '[data-wallet], [data-address], [data-evm-address], [data-eth-address], [data-recipient]'
+        );
+        for (const el of dataWalletEls) {
+          const addr = el.getAttribute('data-wallet')
+            || el.getAttribute('data-address')
+            || el.getAttribute('data-evm-address')
+            || el.getAttribute('data-eth-address')
+            || el.getAttribute('data-recipient');
+          if (addr && /^0x[a-fA-F0-9]{40}$/.test(addr)) {
+            result.evmAddress = addr;
+            result.status = 'detected';
+            break;
+          }
+        }
+      }
+
+      // Look for EVM addresses in the raw HTML via regex
+      if (!result.evmAddress) {
+        const evmMatch = modalHtml.match(/0x[a-fA-F0-9]{40}/);
+        if (evmMatch) {
+          result.evmAddress = evmMatch[0];
+          result.status = 'detected';
+          console.log('[AeroFyta] EVM address found via regex in modal:', result.evmAddress);
+        }
+      }
+
+      // Look for BTC addresses in the raw HTML via regex
+      if (!result.btcAddress) {
+        // Match legacy (1...), segwit (3...), and bech32 (bc1...) addresses
+        const btcMatch = modalHtml.match(/\b(bc1[a-zA-HJ-NP-Z0-9]{25,62}|[13][a-km-zA-HJ-NP-Z1-9]{25,34})\b/);
+        if (btcMatch) {
+          result.btcAddress = btcMatch[0];
+          if (!result.evmAddress) result.status = 'detected';
+          console.log('[AeroFyta] BTC address found via regex in modal:', result.btcAddress);
+        }
+      }
+
+      // Look for "Send to another wallet" type options with embedded addresses
+      if (!result.evmAddress) {
+        const inputs = doc.querySelectorAll('input[type="hidden"], input[name*="wallet"], input[name*="address"]');
+        for (const input of inputs) {
+          const val = input.value || '';
+          if (/^0x[a-fA-F0-9]{40}$/.test(val)) {
+            result.evmAddress = val;
+            result.status = 'detected';
+            console.log('[AeroFyta] EVM address found in hidden input:', result.evmAddress);
+            break;
+          }
+        }
+      }
+
+      if (result.status !== 'detected') {
+        result.status = 'manual';
+        console.log('[AeroFyta] No wallet address found in tip modal, falling back to manual');
+      }
+
+    } catch (err) {
+      console.error('[AeroFyta] HTMX wallet extraction error:', err);
+      result.status = 'manual';
+    }
+
+    return result;
+  }
+
+  /**
+   * Parse an hx-vals JSON string to extract wallet addresses.
+   * hx-vals can be JSON like: {"wallet": "0x...", "btc_address": "bc1..."}
+   */
+  function parseHxVals(hxValsStr) {
+    if (!hxValsStr) return null;
+    try {
+      // hx-vals can be a JSON string or js: expression
+      const cleaned = hxValsStr.replace(/^js:/, '').trim();
+      const obj = JSON.parse(cleaned);
+      const result = { evmAddress: null, btcAddress: null };
+
+      // Search all values for wallet-like keys and addresses
+      const evmKeys = ['wallet', 'address', 'evm_address', 'eth_address', 'recipient', 'to_address', 'wallet_address', 'crypto_address'];
+      const btcKeys = ['btc_address', 'btc_wallet', 'bitcoin_address', 'btc'];
+
+      for (const [key, value] of Object.entries(obj)) {
+        if (typeof value !== 'string') continue;
+        const lk = key.toLowerCase();
+
+        // Check for EVM address
+        if (evmKeys.some(k => lk.includes(k)) && /^0x[a-fA-F0-9]{40}$/.test(value)) {
+          result.evmAddress = value;
+        }
+        // Check for BTC address
+        if (btcKeys.some(k => lk.includes(k)) || /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,62}$/.test(value)) {
+          result.btcAddress = value;
+        }
+        // Fallback: any value that looks like an EVM address
+        if (!result.evmAddress && /^0x[a-fA-F0-9]{40}$/.test(value)) {
+          result.evmAddress = value;
+        }
+      }
+
+      return (result.evmAddress || result.btcAddress) ? result : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /**
+   * Run wallet extraction for the current creator and cache the result.
+   * Updates currentCreator with wallet info.
+   */
+  async function detectAndCacheWallet(creator) {
+    if (!creator || !creator.channel) return;
+
+    const cacheKey = creator.channel || creator.name;
+
+    // Check memory cache first
+    if (walletCache[cacheKey]) {
+      Object.assign(creator, walletCache[cacheKey]);
+      return;
+    }
+
+    // Check chrome.storage.local cache
+    try {
+      const stored = await new Promise((resolve) => {
+        chrome.storage.local.get(['walletCache'], (data) => {
+          resolve(data.walletCache || {});
+        });
+      });
+      if (stored[cacheKey] && stored[cacheKey].evmAddress) {
+        creator.evmAddress = stored[cacheKey].evmAddress;
+        creator.btcAddress = stored[cacheKey].btcAddress;
+        creator.walletDetectionStatus = stored[cacheKey].walletDetectionStatus || 'detected';
+        walletCache[cacheKey] = {
+          evmAddress: creator.evmAddress,
+          btcAddress: creator.btcAddress,
+          walletDetectionStatus: creator.walletDetectionStatus
+        };
+        console.log('[AeroFyta] Wallet loaded from storage cache:', creator.evmAddress);
+        return;
+      }
+    } catch (_) { /* storage access may fail */ }
+
+    // Perform HTMX extraction
+    const walletInfo = await extractWalletViaHTMX();
+    creator.evmAddress = walletInfo.evmAddress;
+    creator.btcAddress = walletInfo.btcAddress;
+    creator.walletDetectionStatus = walletInfo.status;
+
+    // Cache in memory
+    walletCache[cacheKey] = {
+      evmAddress: walletInfo.evmAddress,
+      btcAddress: walletInfo.btcAddress,
+      walletDetectionStatus: walletInfo.status
+    };
+
+    // Persist to chrome.storage.local
+    if (walletInfo.evmAddress) {
+      try {
+        chrome.storage.local.get(['walletCache'], (data) => {
+          const cache = data.walletCache || {};
+          cache[cacheKey] = walletCache[cacheKey];
+          chrome.storage.local.set({ walletCache: cache });
+        });
+      } catch (_) { /* ignore storage errors */ }
+    }
+  }
+
+  /**
+   * Format a wallet address for display: 0x1234...5678
+   */
+  function truncateAddress(addr) {
+    if (!addr) return '';
+    if (addr.length <= 12) return addr;
+    return addr.slice(0, 6) + '...' + addr.slice(-4);
+  }
+
   // ─── Creator Detection ────────────────────────────────────────────
 
   function detectCreator() {
@@ -24,7 +334,10 @@
       avatar: null,
       subscribers: null,
       isLive: false,
-      pageType: 'unknown' // 'channel' | 'video' | 'live' | 'unknown'
+      pageType: 'unknown', // 'channel' | 'video' | 'live' | 'unknown'
+      evmAddress: null,
+      btcAddress: null,
+      walletDetectionStatus: 'none' // 'detected' | 'manual' | 'none'
     };
 
     const path = window.location.pathname;
@@ -209,6 +522,25 @@
       ? `<img src="${escapeHtml(creator.avatar)}" alt="" class="aerofyta-dialog-avatar-img">`
       : `<span class="aerofyta-dialog-avatar-letter">${avatarLetter}</span>`;
 
+    // Wallet status indicator
+    const walletStatus = creator.walletDetectionStatus || 'none';
+    const hasWallet = walletStatus === 'detected' && creator.evmAddress;
+    const walletStatusIcon = hasWallet
+      ? '<span class="aerofyta-wallet-status aerofyta-wallet-status--detected" title="Wallet detected">&#10003;</span>'
+      : '<span class="aerofyta-wallet-status aerofyta-wallet-status--manual" title="Manual wallet entry needed">&#9888;</span>';
+    const walletDisplay = hasWallet
+      ? `<span class="aerofyta-wallet-address" title="${escapeHtml(creator.evmAddress)}">${truncateAddress(creator.evmAddress)}</span>`
+      : '';
+
+    // Manual address input (shown when wallet not auto-detected)
+    const manualWalletSection = hasWallet ? '' : `
+        <div class="aerofyta-dialog-wallet-manual">
+          <label class="aerofyta-dialog-wallet-label">Recipient wallet address</label>
+          <input type="text" class="aerofyta-dialog-input aerofyta-dialog-wallet-input" id="aerofyta-manual-wallet"
+            placeholder="0x... (EVM address)" spellcheck="false" autocomplete="off">
+          <span class="aerofyta-dialog-wallet-hint">Paste the creator's EVM wallet address</span>
+        </div>`;
+
     const dialog = document.createElement('div');
     dialog.id = DIALOG_ID;
     dialog.className = 'aerofyta-dialog';
@@ -222,10 +554,11 @@
         <div class="aerofyta-dialog-creator">
           <div class="aerofyta-dialog-avatar">${avatarContent}</div>
           <div class="aerofyta-dialog-creator-info">
-            <span class="aerofyta-dialog-name">${escapeHtml(creator.name)}${liveTag}</span>
-            <span class="aerofyta-dialog-channel">${escapeHtml(creator.channel || 'Rumble Creator')}${subsTag}</span>
+            <span class="aerofyta-dialog-name">${escapeHtml(creator.name)}${liveTag}${walletStatusIcon}</span>
+            <span class="aerofyta-dialog-channel">${escapeHtml(creator.channel || 'Rumble Creator')}${subsTag}${walletDisplay}</span>
           </div>
         </div>
+        ${manualWalletSection}
         <div class="aerofyta-dialog-amounts">
           <button class="aerofyta-dialog-chip" data-amount="0.50">$0.50</button>
           <button class="aerofyta-dialog-chip" data-amount="1">$1</button>
@@ -307,6 +640,26 @@
     const creator = currentCreator;
     if (!creator) return;
 
+    // Determine recipient wallet: auto-detected or manually entered
+    let recipientWallet = creator.evmAddress || null;
+    const manualInput = document.querySelector('#aerofyta-manual-wallet');
+    if (manualInput && manualInput.value.trim()) {
+      const manualAddr = manualInput.value.trim();
+      if (/^0x[a-fA-F0-9]{40}$/.test(manualAddr)) {
+        recipientWallet = manualAddr;
+      } else {
+        showOverlay('Invalid EVM address. Must be 0x followed by 40 hex characters.');
+        return;
+      }
+    }
+
+    if (!recipientWallet) {
+      showOverlay('No wallet address available. Please paste the creator\'s wallet address.');
+      const walletInput = document.querySelector('#aerofyta-manual-wallet');
+      if (walletInput) walletInput.focus();
+      return;
+    }
+
     const sendBtn = document.querySelector('#aerofyta-send-tip');
     if (sendBtn) {
       sendBtn.disabled = true;
@@ -320,7 +673,10 @@
         channel: creator.channel,
         amount: amount,
         url: creator.url,
-        platform: 'rumble'
+        platform: 'rumble',
+        recipientWallet: recipientWallet,
+        walletDetectionStatus: creator.walletDetectionStatus || 'manual',
+        btcAddress: creator.btcAddress || null
       }
     }, (response) => {
       if (chrome.runtime.lastError) {
@@ -366,9 +722,386 @@
     }, 3500);
   }
 
-  // ─── Livestream Chat Engagement Detection ────────────────────────
+  // ─── Event-Triggered Tip System ─────────────────────────────
+  // 6 event types: watch_time, chat_hype, viewer_spike, follower_milestone, subscriber, manual
 
+  const EVENT_DEFAULTS = {
+    watch_time: { enabled: true, minutes: 5 },
+    chat_hype: { enabled: true, threshold: 70 },
+    viewer_spike: { enabled: true, spikePercent: 20 },
+    follower_milestone: { enabled: true },
+    subscriber: { enabled: true },
+    manual: { enabled: true }
+  };
+
+  let eventConfig = { ...EVENT_DEFAULTS };
+  let hypeScore = 0;
+  let chatMessageBatch = [];
+  let chatAnalysisInterval = null;
+  let watchTimeStart = null;
+  let watchTimeTipSent = false;
+  let lastViewerCount = null;
+  let viewerSpikeTipSent = false;
+  let lastFollowerCount = null;
+  let followerMilestoneLast = 0;
+  let subscribeTipSent = false;
+  let eventHistory = [];
   let chatObserverActive = false;
+
+  // Load event config from storage
+  function loadEventConfig() {
+    chrome.storage.local.get(['eventConfig'], (result) => {
+      if (result.eventConfig) {
+        eventConfig = { ...EVENT_DEFAULTS, ...result.eventConfig };
+      }
+    });
+  }
+  loadEventConfig();
+
+  // Listen for config updates from popup
+  chrome.storage.onChanged.addListener((changes) => {
+    if (changes.eventConfig) {
+      eventConfig = { ...EVENT_DEFAULTS, ...changes.eventConfig.newValue };
+    }
+  });
+
+  // ─── Hype Score NLP Analysis ──────────────────────────────────
+
+  const HYPE_KEYWORDS = [
+    'amazing', 'based', 'fire', 'goat', 'insane', 'epic', 'w ', ' w',
+    'lets go', "let's go", 'hype', 'pog', 'poggers', 'clutch', 'god',
+    'legendary', 'incredible', 'crazy', 'wild', 'banger', 'massive',
+    'huge', 'king', 'queen', 'lit', 'gg', 'dub', 'peak', 'cracked'
+  ];
+
+  const EMOJI_REGEX = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{200D}\u{20E3}]/gu;
+
+  function analyzeHypeBatch(messages) {
+    if (messages.length === 0) return 0;
+
+    const now = Date.now();
+    const recentMessages = messages.filter((m) => now - m.time < 60000);
+
+    // Signal 1: Chat velocity (messages per minute) — weight 0.35
+    const velocity = recentMessages.length;
+    const velocityScore = Math.min(100, (velocity / 40) * 100);
+
+    // Signal 2: Keyword hits — weight 0.25
+    let keywordHits = 0;
+    for (const msg of recentMessages) {
+      const lower = msg.text.toLowerCase();
+      for (const kw of HYPE_KEYWORDS) {
+        if (lower.includes(kw)) { keywordHits++; break; }
+      }
+    }
+    const keywordRatio = recentMessages.length > 0 ? keywordHits / recentMessages.length : 0;
+    const keywordScore = Math.min(100, keywordRatio * 150);
+
+    // Signal 3: Emoji density — weight 0.20
+    let totalChars = 0;
+    let emojiChars = 0;
+    for (const msg of recentMessages) {
+      totalChars += msg.text.length;
+      const emojiMatches = msg.text.match(EMOJI_REGEX);
+      if (emojiMatches) emojiChars += emojiMatches.length;
+    }
+    const emojiRatio = totalChars > 0 ? emojiChars / totalChars : 0;
+    const emojiScore = Math.min(100, emojiRatio * 500);
+
+    // Signal 4: Caps ratio — weight 0.20
+    let capsWords = 0;
+    let totalWords = 0;
+    for (const msg of recentMessages) {
+      const words = msg.text.split(/\s+/).filter((w) => w.length > 1);
+      totalWords += words.length;
+      capsWords += words.filter((w) => w === w.toUpperCase() && /[A-Z]/.test(w)).length;
+    }
+    const capsRatio = totalWords > 0 ? capsWords / totalWords : 0;
+    const capsScore = Math.min(100, capsRatio * 200);
+
+    // Weighted sum
+    const score = Math.round(
+      velocityScore * 0.35 +
+      keywordScore * 0.25 +
+      emojiScore * 0.20 +
+      capsScore * 0.20
+    );
+
+    return Math.min(100, Math.max(0, score));
+  }
+
+  // ─── Hype Indicator Bar (injected into page) ─────────────────
+
+  const HYPE_BAR_ID = 'aerofyta-hype-bar';
+
+  function injectHypeBar() {
+    if (document.getElementById(HYPE_BAR_ID)) return;
+    const bar = document.createElement('div');
+    bar.id = HYPE_BAR_ID;
+    bar.className = 'aerofyta-hype-bar';
+    bar.innerHTML = `
+      <div class="aerofyta-hype-bar-label">HYPE</div>
+      <div class="aerofyta-hype-bar-track">
+        <div class="aerofyta-hype-bar-fill" style="width: 0%"></div>
+      </div>
+      <div class="aerofyta-hype-bar-score">0</div>
+    `;
+    document.body.appendChild(bar);
+  }
+
+  function updateHypeBar(score) {
+    const bar = document.getElementById(HYPE_BAR_ID);
+    if (!bar) return;
+    const fill = bar.querySelector('.aerofyta-hype-bar-fill');
+    const scoreEl = bar.querySelector('.aerofyta-hype-bar-score');
+    if (fill) {
+      fill.style.width = score + '%';
+      if (score < 40) {
+        fill.style.background = '#22c55e';
+      } else if (score < 70) {
+        fill.style.background = 'linear-gradient(90deg, #22c55e, #eab308)';
+      } else {
+        fill.style.background = 'linear-gradient(90deg, #eab308, #ef4444)';
+      }
+    }
+    if (scoreEl) scoreEl.textContent = score;
+    bar.style.display = chatObserverActive ? 'flex' : 'none';
+  }
+
+  function removeHypeBar() {
+    const bar = document.getElementById(HYPE_BAR_ID);
+    if (bar) bar.remove();
+  }
+
+  // ─── Event Toast Notifications ────────────────────────────────
+
+  let toastQueue = [];
+  let toastShowing = false;
+
+  function showEventToast(eventType, message, multiplier) {
+    toastQueue.push({ eventType, message, multiplier });
+    if (!toastShowing) processToastQueue();
+  }
+
+  function processToastQueue() {
+    if (toastQueue.length === 0) { toastShowing = false; return; }
+    toastShowing = true;
+    const { eventType, message, multiplier } = toastQueue.shift();
+
+    const ICONS = {
+      watch_time: '\u23F1',
+      chat_hype: '\uD83D\uDD25',
+      viewer_spike: '\uD83D\uDCC8',
+      follower_milestone: '\uD83C\uDFC6',
+      subscriber: '\u2B50',
+      manual: '\uD83D\uDCB0'
+    };
+
+    let toast = document.getElementById('aerofyta-event-toast');
+    if (toast) toast.remove();
+
+    toast = document.createElement('div');
+    toast.id = 'aerofyta-event-toast';
+    toast.className = 'aerofyta-event-toast';
+    toast.innerHTML = `
+      <div class="aerofyta-event-toast-icon">${ICONS[eventType] || '\u26A1'}</div>
+      <div class="aerofyta-event-toast-body">
+        <div class="aerofyta-event-toast-title">${escapeHtml(eventType.replace(/_/g, ' ').toUpperCase())}</div>
+        <div class="aerofyta-event-toast-msg">${escapeHtml(message)}</div>
+        ${multiplier ? `<div class="aerofyta-event-toast-mult">${multiplier}x Tip Multiplier</div>` : ''}
+      </div>
+      <button class="aerofyta-event-toast-tip" data-event="${eventType}" data-mult="${multiplier || 1}">Tip Now</button>
+      <button class="aerofyta-event-toast-dismiss">&times;</button>
+    `;
+
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('aerofyta-event-toast--show'));
+
+    toast.querySelector('.aerofyta-event-toast-tip').addEventListener('click', (e) => {
+      const mult = parseFloat(e.target.dataset.mult) || 1;
+      // Record manual event trigger, then open dialog
+      recordEvent('manual', 'Tip triggered from ' + eventType + ' event toast');
+      openTipDialog();
+      dismissEventToast(toast);
+    });
+
+    toast.querySelector('.aerofyta-event-toast-dismiss').addEventListener('click', () => {
+      dismissEventToast(toast);
+    });
+
+    setTimeout(() => dismissEventToast(toast), 8000);
+  }
+
+  function dismissEventToast(toast) {
+    if (!toast || !toast.parentNode) { toastShowing = false; processToastQueue(); return; }
+    toast.classList.remove('aerofyta-event-toast--show');
+    setTimeout(() => {
+      if (toast.parentNode) toast.remove();
+      processToastQueue();
+    }, 350);
+  }
+
+  // Record event
+  function recordEvent(eventType, detail) {
+    const entry = { type: eventType, detail, timestamp: Date.now() };
+    eventHistory.push(entry);
+    if (eventHistory.length > 50) eventHistory.shift();
+    chrome.runtime.sendMessage({
+      type: 'EVENT_TRIGGERED',
+      payload: entry
+    }).catch(() => {});
+    chrome.storage.local.set({ eventHistory: eventHistory.slice(-20) });
+  }
+
+  // ─── Event Type 1: Watch Time Tips ────────────────────────────
+
+  function startWatchTimeTracker() {
+    if (watchTimeStart) return;
+    watchTimeStart = Date.now();
+    watchTimeTipSent = false;
+    setInterval(() => {
+      if (!eventConfig.watch_time.enabled || watchTimeTipSent || !currentCreator) return;
+      const elapsed = (Date.now() - watchTimeStart) / 60000;
+      const threshold = eventConfig.watch_time.minutes || 5;
+      if (elapsed >= threshold) {
+        watchTimeTipSent = true;
+        recordEvent('watch_time', 'Watched for ' + Math.round(elapsed) + ' minutes');
+        showEventToast('watch_time',
+          'You have been watching ' + (currentCreator.name || 'this creator') + ' for ' + Math.round(elapsed) + ' min. Show your appreciation!',
+          null);
+      }
+    }, 15000);
+  }
+
+  // ─── Event Type 2: Chat Hype Tips ─────────────────────────────
+
+  function startHypeAnalysis() {
+    if (chatAnalysisInterval) return;
+    chatAnalysisInterval = setInterval(() => {
+      const newScore = analyzeHypeBatch(chatMessageBatch);
+      const prevScore = hypeScore;
+      hypeScore = newScore;
+      updateHypeBar(hypeScore);
+
+      chrome.runtime.sendMessage({
+        type: 'HYPE_SCORE_UPDATE',
+        payload: { score: hypeScore }
+      }).catch(() => {});
+
+      if (eventConfig.chat_hype.enabled && currentCreator) {
+        const threshold = eventConfig.chat_hype.threshold || 70;
+        if (newScore >= threshold && prevScore < threshold) {
+          const multiplier = newScore >= 90 ? 2.5 : newScore >= 80 ? 2.0 : 1.5;
+          recordEvent('chat_hype', 'Hype score hit ' + newScore + ' (' + multiplier + 'x multiplier)');
+          showEventToast('chat_hype',
+            'Chat is going crazy for ' + (currentCreator.name || 'the creator') + '! Hype score: ' + newScore + '/100',
+            multiplier);
+        }
+      }
+    }, 4000);
+  }
+
+  // ─── Event Type 3: Viewer Spike Tips ──────────────────────────
+
+  function pollViewerCount() {
+    setInterval(() => {
+      if (!eventConfig.viewer_spike.enabled || !currentCreator) return;
+      const viewerEl = document.querySelector(
+        '.watching-now, .media-heading-watching, [class*="watching"] span, [class*="viewer-count"]'
+      );
+      if (!viewerEl) return;
+      const text = viewerEl.textContent.replace(/[^\d]/g, '');
+      const count = parseInt(text, 10);
+      if (isNaN(count) || count <= 0) return;
+
+      if (lastViewerCount !== null && !viewerSpikeTipSent) {
+        const spikePercent = eventConfig.viewer_spike.spikePercent || 20;
+        const increase = ((count - lastViewerCount) / lastViewerCount) * 100;
+        if (increase >= spikePercent) {
+          viewerSpikeTipSent = true;
+          recordEvent('viewer_spike', 'Viewers jumped from ' + lastViewerCount + ' to ' + count + ' (+' + Math.round(increase) + '%)');
+          showEventToast('viewer_spike',
+            'Viewer spike detected! ' + lastViewerCount + ' -> ' + count + ' viewers (+' + Math.round(increase) + '%)',
+            1.5);
+          setTimeout(() => { viewerSpikeTipSent = false; }, 120000);
+        }
+      }
+      lastViewerCount = count;
+    }, 10000);
+  }
+
+  // ─── Event Type 4: Follower Milestone Tips ────────────────────
+
+  const MILESTONES = [100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000];
+
+  function pollFollowerCount() {
+    setInterval(() => {
+      if (!eventConfig.follower_milestone.enabled || !currentCreator) return;
+      const subEl = document.querySelector(
+        '.channel-header--subscribers, .listing-header--subscribers, .media-by-channel-subscribers, .media-heading-num-followers, [class*="subscriber"] span'
+      );
+      if (!subEl) return;
+      const rawText = subEl.textContent.replace(/[^\d.KkMm]/g, '');
+      let count = 0;
+      if (/[Kk]/.test(rawText)) {
+        count = parseFloat(rawText) * 1000;
+      } else if (/[Mm]/.test(rawText)) {
+        count = parseFloat(rawText) * 1000000;
+      } else {
+        count = parseInt(rawText.replace(/\D/g, ''), 10);
+      }
+      if (isNaN(count) || count <= 0) return;
+
+      if (lastFollowerCount !== null) {
+        for (const milestone of MILESTONES) {
+          if (count >= milestone && lastFollowerCount < milestone && milestone > followerMilestoneLast) {
+            followerMilestoneLast = milestone;
+            const label = milestone >= 1000000 ? (milestone / 1000000) + 'M' :
+                          milestone >= 1000 ? (milestone / 1000) + 'K' : milestone;
+            recordEvent('follower_milestone', currentCreator.name + ' hit ' + label + ' followers!');
+            showEventToast('follower_milestone',
+              (currentCreator.name || 'This creator') + ' just hit ' + label + ' followers! Celebrate with a tip!',
+              2.0);
+            break;
+          }
+        }
+      }
+      lastFollowerCount = count;
+    }, 15000);
+  }
+
+  // ─── Event Type 5: Subscriber Events ──────────────────────────
+
+  function watchSubscribeButton() {
+    const followBtnSelectors = [
+      '.subscribe-button', '.follow-button', '.channel-follow',
+      'button[class*="follow"]', 'button[class*="subscribe"]',
+      '.media-by-channel-subscribe', '.rumbles-vote-pill'
+    ];
+
+    let followBtn = null;
+    for (const sel of followBtnSelectors) {
+      followBtn = document.querySelector(sel);
+      if (followBtn) break;
+    }
+    if (!followBtn) return;
+
+    const subObserver = new MutationObserver(() => {
+      if (!eventConfig.subscriber.enabled || subscribeTipSent || !currentCreator) return;
+      const text = followBtn.textContent.toLowerCase();
+      if (text.includes('following') || text.includes('subscribed') || text.includes('unfollow')) {
+        subscribeTipSent = true;
+        recordEvent('subscriber', 'You subscribed to ' + currentCreator.name);
+        showEventToast('subscriber',
+          'You just followed ' + (currentCreator.name || 'this creator') + '! Send a tip to say hello!',
+          1.5);
+      }
+    });
+
+    subObserver.observe(followBtn, { childList: true, subtree: true, characterData: true, attributes: true });
+  }
+
+  // ─── Chat Observer (enhanced with hype batch collection) ──────
 
   function observeChat() {
     if (chatObserverActive) return;
@@ -388,12 +1121,22 @@
     if (!chatContainer) return;
 
     chatObserverActive = true;
+    injectHypeBar();
+    startHypeAnalysis();
 
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
           if (node.nodeType !== Node.ELEMENT_NODE) continue;
           const text = node.textContent || '';
+          if (!text.trim()) continue;
+
+          // Add to hype analysis batch
+          chatMessageBatch.push({ text, time: Date.now() });
+          const cutoff = Date.now() - 60000;
+          chatMessageBatch = chatMessageBatch.filter((m) => m.time >= cutoff);
+
+          // Legacy engagement detection
           const signals = ['tip', 'donate', 'support', 'love this', 'great content', 'amazing'];
           const hasSignal = signals.some((s) => text.toLowerCase().includes(s));
           if (hasSignal) {
@@ -422,6 +1165,24 @@
       sendResponse({ creator });
       return true;
     }
+    if (msg.type === 'GET_CREATOR_WITH_WALLET') {
+      (async () => {
+        const creator = detectCreator();
+        if (creator) {
+          await detectAndCacheWallet(creator);
+        }
+        sendResponse({ creator });
+      })();
+      return true;
+    }
+    if (msg.type === 'GET_HYPE_SCORE') {
+      sendResponse({ score: hypeScore, chatActive: chatObserverActive });
+      return true;
+    }
+    if (msg.type === 'GET_EVENT_HISTORY') {
+      sendResponse({ events: eventHistory.slice(-20) });
+      return true;
+    }
     if (msg.type === 'PING') {
       sendResponse({ pong: true, creator: currentCreator });
       return true;
@@ -444,15 +1205,29 @@
 
     if (currentCreator) {
       injectFAB();
+      detectAndCacheWallet(currentCreator).then(() => {
+        console.log('[AeroFyta] Initial wallet detection complete:',
+          currentCreator.walletDetectionStatus, currentCreator.evmAddress || 'none');
+      });
     }
+
+    // Start all event monitors
+    startWatchTimeTracker();
+    pollViewerCount();
+    pollFollowerCount();
+    watchSubscribeButton();
 
     // Poll for dynamic page loads (Rumble uses some client-side nav)
     setInterval(() => {
+      const prevCreator = currentCreator ? currentCreator.name : null;
       detectCreator();
       if (currentCreator && !fabInjected) {
         injectFAB();
       } else if (!currentCreator && fabInjected) {
         removeFAB();
+      }
+      if (currentCreator && currentCreator.name !== prevCreator && !currentCreator.evmAddress) {
+        detectAndCacheWallet(currentCreator);
       }
       observeChat();
     }, POLL_INTERVAL);
@@ -465,18 +1240,30 @@
         fabInjected = false;
         currentCreator = null;
         chatObserverActive = false;
+        watchTimeTipSent = false;
+        watchTimeStart = Date.now();
+        viewerSpikeTipSent = false;
+        lastViewerCount = null;
+        subscribeTipSent = false;
+        if (chatAnalysisInterval) { clearInterval(chatAnalysisInterval); chatAnalysisInterval = null; }
+        chatMessageBatch = [];
+        hypeScore = 0;
+        removeHypeBar();
         const oldFab = document.getElementById(FAB_ID);
         if (oldFab) oldFab.remove();
         const oldDialog = document.getElementById(DIALOG_ID);
         if (oldDialog) oldDialog.remove();
         dialogOpen = false;
 
-        // Re-detect after a short delay (let new page content load)
-        setTimeout(() => {
+        setTimeout(async () => {
           detectCreator();
           if (currentCreator) {
             injectFAB();
+            await detectAndCacheWallet(currentCreator);
+            console.log('[AeroFyta] SPA nav wallet detection:',
+              currentCreator.walletDetectionStatus, currentCreator.evmAddress || 'none');
           }
+          watchSubscribeButton();
         }, 800);
       }
     }).observe(document.body, { childList: true, subtree: true });

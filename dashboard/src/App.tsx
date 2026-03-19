@@ -55,6 +55,8 @@ import GitHubTipping from "@/pages/GitHubTipping";
 import WalletBrain from "@/pages/WalletBrain";
 import PortfolioAnalytics from "@/pages/PortfolioAnalytics";
 import FeeComparison from "@/pages/FeeComparison";
+import AgentDialogue from "@/pages/AgentDialogue";
+import TipPools from "@/pages/TipPools";
 
 const queryClient = new QueryClient();
 
@@ -125,6 +127,8 @@ const App = () => {
                   <Route path="/wallet-brain" element={<WalletBrain />} />
                   <Route path="/portfolio-analytics" element={<PortfolioAnalytics />} />
                   <Route path="/fee-comparison" element={<FeeComparison />} />
+                  <Route path="/agent-dialogue" element={<AgentDialogue />} />
+                  <Route path="/tip-pools" element={<TipPools />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>
