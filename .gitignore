@@ -14,3 +14,4 @@ Thumbs.db
 .limits.json
 .audit.json
 .treasury.json
+agent/data/audit-trail.jsonl

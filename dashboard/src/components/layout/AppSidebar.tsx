@@ -79,6 +79,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   {
     label: "AI & Agent",
     items: [
+      { title: "Wallet Brain", url: "/wallet-brain", icon: BrainCircuit },
       { title: "Reasoning", url: "/reasoning", icon: Brain },
       { title: "Memory", url: "/memory", icon: BrainCircuit },
       { title: "Chat", url: "/chat", icon: MessageSquare },

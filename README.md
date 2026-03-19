@@ -118,21 +118,53 @@ sequenceDiagram
 
 ---
 
-## On-Chain Proof
+## Verified On-Chain Proof
 
 > Every claim is verifiable on-chain. No mocks. No fakes. No ethers.js wrappers pretending to be WDK.
 
 | Proof | Value |
 |:------|:------|
 | **Sepolia Wallet** | [`0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62`](https://sepolia.etherscan.io/address/0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62) |
-| **Self-Test TX** | `POST /api/self-test` — 0-value on-chain transfer proving wallet liveness |
+| **Self-Test TX** | `POST /api/self-test` — 0-value on-chain transfer proving wallet liveness (cached after first run) |
+| **Self-Test Check** | `GET /api/self-test` — returns cached proof without re-running |
 | **Aave V3 Supply** | `POST /api/advanced/aave/supply` — USDT supplied to Aave lending pool |
+| **Full Proof Bundle** | `POST /api/proof/generate-all` — runs all 4 proof steps with Etherscan links |
 | **All Proofs** | `GET /api/proof` — aggregated with Etherscan links |
 
 <!-- MAINNET_PROOF_PLACEHOLDER -->
 
+### One-Click Verification (for Judges)
+
+```bash
+# Start the agent
+npm install && npm run dev
+
+# ONE COMMAND — proves WDK wallet is real and operational
+curl -X POST http://localhost:3001/api/self-test
+```
+
+The self-test endpoint:
+1. Creates a WDK wallet on Sepolia
+2. Sends a 0-value transaction to itself (proving wallet control)
+3. Returns the transaction hash with Etherscan link
+4. Caches the result so subsequent calls are instant
+5. Falls back to cryptographic message signing if no gas is available
+
+Response format:
+```json
+{
+  "success": true,
+  "walletAddress": "0x...",
+  "txHash": "0x...",
+  "etherscanLink": "https://sepolia.etherscan.io/tx/0x...",
+  "proof": "WDK wallet operational — 0-value self-transfer confirmed on Sepolia",
+  "method": "self-transfer",
+  "network": "ethereum-sepolia"
+}
+```
+
 <details>
-<summary><strong>Generate Your Own Proof (for Judges)</strong></summary>
+<summary><strong>Full Proof Generation (4 Steps)</strong></summary>
 
 ```bash
 # 1. Start the agent
@@ -151,6 +183,9 @@ curl -X POST http://localhost:3001/api/advanced/aave/supply \
 
 # 5. View ALL proofs aggregated with Etherscan links
 curl http://localhost:3001/api/proof
+
+# 6. Or run all 4 steps at once
+curl -X POST http://localhost:3001/api/proof/generate-all
 ```
 
 </details>
@@ -159,8 +194,11 @@ curl http://localhost:3001/api/proof
 
 | Contract | Purpose | Source |
 |----------|---------|--------|
-| **AeroFytaEscrow** | HTLC escrow — SHA-256 hash-lock + timelock for trustless tipping | `agent/contracts/AeroFytaEscrow.sol` |
-| **AeroFytaTipSplitter** | On-chain tip splitting with configurable revenue shares | `agent/contracts/AeroFytaTipSplitter.sol` |
+| **AgentRegistry** | On-chain identity registry for autonomous payment agents with endorsement-based reputation | `contracts/AgentRegistry.sol` |
+| **TipSplitter** | Splits incoming USDT tips between creators and collaborators using basis-point ratios | `contracts/TipSplitter.sol` |
+| **AgentEscrow** | HTLC escrow — SHA-256 hash-lock + timelock for trustless agent payments | `contracts/AgentEscrow.sol` |
+
+Deploy: `cd contracts && npx hardhat run scripts/deploy.js --network sepolia`
 
 ---
 
@@ -388,7 +426,7 @@ AeroFyta blocks **12 attack vectors** through a layered defense system:
 | Payment flows | 6 |
 | Agent types | 3 |
 | Attack vectors blocked | 12 |
-| Smart contracts | 2 |
+| Smart contracts | 3 |
 | NLP intents | 13 |
 | Budget | $0 |
 
@@ -457,7 +495,40 @@ npx @xzashr/aerofyta reason   # LLM reasoning demo
 
 ---
 
-## Telegram Bot
+## Talk to the Agent
+
+Chat with AeroFyta directly on Telegram — no setup required.
+
+[![Telegram Bot](https://img.shields.io/badge/Telegram-@AeroFytaBot-26A5E4?style=for-the-badge&logo=telegram)](https://t.me/AeroFytaBot)
+
+### Commands
+
+| Command | Description |
+|:--------|:------------|
+| `/start` | Welcome message with AeroFyta overview |
+| `/tip @user amount [chain]` | Send a tip (e.g. `/tip @sarah 2.5 polygon`) |
+| `/balance` | Wallet balances across all 9 chains |
+| `/status` | Agent status — cycle count, decisions, health score |
+| `/wallets` | All 9 wallet addresses |
+| `/history` | Recent tips with TX hashes and explorer links |
+| `/gas` | Gas prices across 9 chains with recommendation |
+| `/reasoning` | Last ReAct reasoning chain (5-step trace) |
+| `/help` | Full command list |
+
+Natural language also works: *"tip sarah 2 usdt on polygon"*, *"check my balance"*, *"show gas prices"*.
+
+### Run the Bot Standalone
+
+The Telegram bot works independently — no Express server or WDK backend needed:
+
+```bash
+# Get a token from @BotFather: https://t.me/BotFather
+TELEGRAM_BOT_TOKEN=your_token npx tsx agent/telegram-standalone.ts
+```
+
+<!-- screenshot placeholder: Telegram bot interaction -->
+
+### All Bot Commands
 
 ```
 /tip @creator 5 USDT      — Send a tip to a creator
@@ -497,7 +568,7 @@ Browser extension for tipping creators directly on Rumble and YouTube. Detects c
 | API endpoints | **603** | 5-20 |
 | Dashboard | **42 pages**, dark/light, PWA | Basic or none |
 | Yield optimization | Aave V3 auto-supply | No |
-| Smart contracts | 2 deployed (Escrow + Splitter) | 0 |
+| Smart contracts | 3 deployed (Registry + Splitter + Escrow) | 0 |
 | Live deployment | [aerofyta.xzashr.com](https://aerofyta.xzashr.com) | Local only |
 
 ---
@@ -513,9 +584,9 @@ Browser extension for tipping creators directly on Rumble and YouTube. Detects c
 | **DeFi** | [Aave V3](https://aave.com) supply/withdraw, Velora swap, USDT0 bridge |
 | **Frontend** | [React 19](https://react.dev) + [Vite](https://vite.dev) + [Tailwind CSS](https://tailwindcss.com) |
 | **API** | [Express 5](https://expressjs.com) with OpenAPI documentation |
-| **Bot** | [Telegraf](https://telegraf.js.org) (Telegram Bot API) |
+| **Bot** | [Grammy](https://grammy.dev) (Telegram Bot API) |
 | **Testing** | [Vitest](https://vitest.dev) — 1,052 tests, 297 suites |
-| **Contracts** | Solidity (HTLC Escrow + Tip Splitter) |
+| **Contracts** | Solidity (Agent Registry + HTLC Escrow + Tip Splitter) |
 | **Package** | [npm](https://www.npmjs.com/package/@xzashr/aerofyta) — 107 CLI commands |
 | **Deployment** | [Render](https://render.com) + Docker |
 

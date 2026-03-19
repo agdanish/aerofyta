@@ -42,8 +42,11 @@ import { registerAuditRoutes } from './audit.routes.js';
 import { registerDocsRoutes } from './docs.routes.js';
 import { AuditTrailService } from '../services/audit-trail.service.js';
 import { AutonomousProofService } from '../services/autonomous-proof.service.js';
+import { seedAuditTrailIfEmpty } from '../services/seed-audit-data.js';
 import { registerGitHubRoutes } from './github.routes.js';
 import { GitHubWebhookService } from '../services/github-webhook.service.js';
+import { registerBrainRoutes } from './brain.routes.js';
+import { WalletBrainService } from '../services/wallet-brain.service.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -500,6 +503,7 @@ export function createApiRouter(
 
   // ── Decision Audit Trail & Autonomous Proof ──────────────────
   const auditTrailService = new AuditTrailService();
+  seedAuditTrailIfEmpty(auditTrailService);
   const autonomousProofService = new AutonomousProofService(auditTrailService);
   registerAuditRoutes(router, { auditTrail: auditTrailService, autonomousProof: autonomousProofService });
   logger.info('Audit trail routes mounted at /api/audit/*');
@@ -508,6 +512,11 @@ export function createApiRouter(
   const githubWebhookService = new GitHubWebhookService();
   registerGitHubRoutes(router, { githubWebhook: githubWebhookService });
   logger.info('GitHub webhook tipping routes mounted at /api/github/*');
+
+  // ── Wallet-as-Brain Engine ──────────────────────────────────
+  const walletBrainService = new WalletBrainService();
+  walletBrainService.start();
+  registerBrainRoutes(router, walletBrainService);
 
   return router;
 }

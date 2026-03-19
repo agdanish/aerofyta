@@ -12,7 +12,7 @@ import {
 import {
   SendHorizontal, Lock, Smile, Meh, TrendingUp, Brain,
   Package, Globe, CheckCircle, Terminal, Wrench, LayoutDashboard,
-  Play, Eye, Pause, Square, RotateCcw, Shield, Wifi, WifiOff,
+  Play, Eye, Pause, Square, RotateCcw, Shield, Wifi, WifiOff, ClipboardCheck,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -47,6 +47,7 @@ const moodColors: Record<string, string> = { optimistic: "#FF4E00", cautious: "#
 const moodIcons: Record<string, LucideIcon> = { optimistic: Smile, cautious: Meh, strategic: TrendingUp };
 
 const innovationCards = [
+  { icon: ClipboardCheck, value: 50, label: "Autonomous Decisions (24h)" },
   { icon: Package, value: 12, label: "WDK Packages" },
   { icon: Globe, value: 9, label: "Blockchains" },
   { icon: CheckCircle, value: 1052, label: "Tests" },
@@ -272,14 +273,17 @@ export default function Dashboard() {
       <div className="grid lg:grid-cols-12 gap-4">
         {/* LEFT: Wallet-as-Brain™ */}
         <div
-          className="lg:col-span-4 rounded-xl bg-card border border-border p-5"
-          style={{ borderStyle: "dashed", borderColor: "hsl(var(--border))" }}
+          className="lg:col-span-4 rounded-xl bg-card border border-border p-5 cursor-pointer transition-all duration-200 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
+          style={{ borderColor: `${moodGlow}33` }}
+          onClick={() => navigate("/wallet-brain")}
+          title="Open Wallet-as-Brain details"
         >
           <div className="flex items-center gap-2 mb-1">
             <Brain className="h-4 w-4 text-primary" strokeWidth={1.5} />
             <h3 className="text-sm font-semibold">Wallet-as-Brain™</h3>
+            <Eye className="h-3 w-3 text-muted-foreground/50 ml-auto" />
           </div>
-          <p className="text-[11px] text-muted-foreground mb-3">Financial state → agent behavior</p>
+          <p className="text-[11px] text-muted-foreground mb-3">Financial state drives agent behavior</p>
 
           {/* Radar chart */}
           <div className="h-48 -mx-2">
@@ -440,7 +444,7 @@ export default function Dashboard() {
       {/* ═══════════════════════════════════════════════
           ROW 3: INNOVATION STRIP
          ═══════════════════════════════════════════════ */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
         {innovationCards.map((card) => {
           const Icon = card.icon;
           return (

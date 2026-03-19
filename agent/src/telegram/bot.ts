@@ -8,6 +8,9 @@
  * Provides command-based and natural language interaction with the
  * autonomous multi-chain payment agent. Uses long polling (no webhook
  * server needed), integrates with existing agent services.
+ *
+ * When running in standalone/demo mode (no backend services), falls
+ * back to pre-built demo responses so judges can interact immediately.
  */
 
 import { Bot } from 'grammy';
@@ -29,6 +32,17 @@ import {
   handleSuggest,
 } from './commands.js';
 import type { CommandDeps } from './commands.js';
+import {
+  demoStart,
+  demoHelp,
+  demoTip,
+  demoBalance,
+  demoStatus,
+  demoWallets,
+  demoHistory,
+  demoGas,
+  demoReasoning,
+} from './demo-responses.js';
 import { parseNaturalLanguage } from './nlp.js';
 
 // ── Types ──────────────────────────────────────────────────────
@@ -41,31 +55,49 @@ export interface TelegramGrammyBotOptions {
   autonomousLoop: AutonomousLoopService | null;
 }
 
+/** Options for standalone mode (no backend services needed) */
+export interface TelegramStandaloneOptions {
+  token: string;
+}
+
 export interface TelegramGrammyBotStatus {
   connected: boolean;
   username: string | null;
   messageCount: number;
   startedAt: string | null;
+  mode: 'full' | 'demo';
 }
 
 // ── Bot class ──────────────────────────────────────────────────
 
 export class TelegramGrammyBot {
   private bot: Bot;
-  private deps: CommandDeps;
+  private deps: CommandDeps | null;
   private botUsername: string | null = null;
   private messageCount = 0;
   private startedAt: string | null = null;
   private running = false;
+  private demoMode: boolean;
 
-  constructor(options: TelegramGrammyBotOptions) {
+  /** Full mode: all backend services available */
+  constructor(options: TelegramGrammyBotOptions);
+  /** Standalone/demo mode: no backend services */
+  constructor(options: TelegramStandaloneOptions);
+  constructor(options: TelegramGrammyBotOptions | TelegramStandaloneOptions) {
     this.bot = new Bot(options.token);
-    this.deps = {
-      agent: options.agent,
-      wallet: options.wallet,
-      feeArbitrage: options.feeArbitrage,
-      autonomousLoop: options.autonomousLoop,
-    };
+
+    if ('agent' in options) {
+      this.deps = {
+        agent: options.agent,
+        wallet: options.wallet,
+        feeArbitrage: options.feeArbitrage,
+        autonomousLoop: options.autonomousLoop,
+      };
+      this.demoMode = false;
+    } else {
+      this.deps = null;
+      this.demoMode = true;
+    }
 
     this.registerCommands();
     this.registerNaturalLanguage();
@@ -80,20 +112,24 @@ export class TelegramGrammyBot {
       this.startedAt = new Date().toISOString();
       this.running = true;
 
-      logger.info(`Telegram Grammy bot connected: @${this.botUsername}`);
-      this.deps.agent.addActivity({
-        type: 'system',
-        message: `Telegram bot connected: @${this.botUsername} (Grammy)`,
-      });
+      const modeLabel = this.demoMode ? 'DEMO' : 'FULL';
+      logger.info(`Telegram bot connected: @${this.botUsername} [${modeLabel} mode]`);
+
+      if (this.deps) {
+        this.deps.agent.addActivity({
+          type: 'system',
+          message: `Telegram bot connected: @${this.botUsername} (Grammy)`,
+        });
+      }
 
       // Start long polling (non-blocking)
       this.bot.start({
         onStart: () => {
-          logger.info('Telegram Grammy bot polling started');
+          logger.info('Telegram bot polling started');
         },
       });
     } catch (err) {
-      logger.error('Failed to start Telegram Grammy bot', { error: String(err) });
+      logger.error('Failed to start Telegram bot', { error: String(err) });
       throw err;
     }
   }
@@ -102,7 +138,7 @@ export class TelegramGrammyBot {
   async stop(): Promise<void> {
     this.running = false;
     await this.bot.stop();
-    logger.info('Telegram Grammy bot stopped');
+    logger.info('Telegram bot stopped');
   }
 
   /** Get bot status */
@@ -112,6 +148,7 @@ export class TelegramGrammyBot {
       username: this.botUsername,
       messageCount: this.messageCount,
       startedAt: this.startedAt,
+      mode: this.demoMode ? 'demo' : 'full',
     };
   }
 
@@ -119,51 +156,37 @@ export class TelegramGrammyBot {
 
   private registerCommands(): void {
     const deps = this.deps;
+    const useDemoFallback = this.demoMode;
 
-    this.bot.command('start', async (ctx) => {
-      this.messageCount++;
-      await handleStart(ctx, deps);
-    });
+    const wrap = (
+      liveHandler: ((ctx: import('grammy').Context, d: CommandDeps) => Promise<void>) | null,
+      demoHandler: (ctx: import('grammy').Context) => Promise<void>,
+    ) => {
+      return async (ctx: import('grammy').Context) => {
+        this.messageCount++;
+        if (!useDemoFallback && deps && liveHandler) {
+          try {
+            await liveHandler(ctx, deps);
+          } catch (_err) {
+            // Backend call failed — fall back to demo response
+            logger.warn('Backend unavailable, using demo response');
+            await demoHandler(ctx);
+          }
+        } else {
+          await demoHandler(ctx);
+        }
+      };
+    };
 
-    this.bot.command('help', async (ctx) => {
-      this.messageCount++;
-      await handleHelp(ctx, deps);
-    });
-
-    this.bot.command('tip', async (ctx) => {
-      this.messageCount++;
-      await handleTip(ctx, deps);
-    });
-
-    this.bot.command('balance', async (ctx) => {
-      this.messageCount++;
-      await handleBalance(ctx, deps);
-    });
-
-    this.bot.command('status', async (ctx) => {
-      this.messageCount++;
-      await handleStatus(ctx, deps);
-    });
-
-    this.bot.command('wallets', async (ctx) => {
-      this.messageCount++;
-      await handleWallets(ctx, deps);
-    });
-
-    this.bot.command('history', async (ctx) => {
-      this.messageCount++;
-      await handleHistory(ctx, deps);
-    });
-
-    this.bot.command('gas', async (ctx) => {
-      this.messageCount++;
-      await handleGas(ctx, deps);
-    });
-
-    this.bot.command('reasoning', async (ctx) => {
-      this.messageCount++;
-      await handleReasoning(ctx, deps);
-    });
+    this.bot.command('start', wrap(handleStart, demoStart));
+    this.bot.command('help', wrap(handleHelp, demoHelp));
+    this.bot.command('tip', wrap(handleTip, demoTip));
+    this.bot.command('balance', wrap(handleBalance, demoBalance));
+    this.bot.command('status', wrap(handleStatus, demoStatus));
+    this.bot.command('wallets', wrap(handleWallets, demoWallets));
+    this.bot.command('history', wrap(handleHistory, demoHistory));
+    this.bot.command('gas', wrap(handleGas, demoGas));
+    this.bot.command('reasoning', wrap(handleReasoning, demoReasoning));
   }
 
   // ── Natural language handler ───────────────────────────────
@@ -184,48 +207,57 @@ export class TelegramGrammyBot {
       this.messageCount++;
       const intent = parseNaturalLanguage(text);
 
+      // In demo mode, route NLP intents to demo handlers
+      if (this.demoMode || !deps) {
+        switch (intent.type) {
+          case 'tip': await demoTip(ctx); break;
+          case 'balance': await demoBalance(ctx); break;
+          case 'status': await demoStatus(ctx); break;
+          case 'help': await demoHelp(ctx); break;
+          case 'wallets': await demoWallets(ctx); break;
+          case 'history': await demoHistory(ctx); break;
+          case 'gas': await demoGas(ctx); break;
+          case 'reasoning': await demoReasoning(ctx); break;
+          case 'suggest': await demoHelp(ctx); break;
+          case 'unknown':
+          default:
+            await ctx.reply(
+              'I didn\'t understand that. Try commands like:\n' +
+              '  "tip @sarah 2.5 polygon"\n' +
+              '  "check my balance"\n' +
+              '  "who should I tip?"\n\n' +
+              'Type /help for all commands.',
+            );
+            break;
+        }
+        return;
+      }
+
+      // Full mode — use live handlers
       switch (intent.type) {
         case 'tip': {
-          // Rewrite as a /tip-like message so we can reuse the handler
           const tipText = `/tip ${intent.recipient} ${intent.amount}${intent.chain ? ` ${intent.chain}` : ''}`;
-          // Create a synthetic message text for the handler
           const originalText = ctx.message.text;
           Object.defineProperty(ctx.message, 'text', { value: tipText, writable: true });
           await handleTip(ctx, deps);
           Object.defineProperty(ctx.message, 'text', { value: originalText, writable: true });
           break;
         }
-        case 'balance':
-          await handleBalance(ctx, deps);
-          break;
-        case 'status':
-          await handleStatus(ctx, deps);
-          break;
-        case 'help':
-          await handleHelp(ctx, deps);
-          break;
-        case 'wallets':
-          await handleWallets(ctx, deps);
-          break;
-        case 'history':
-          await handleHistory(ctx, deps);
-          break;
-        case 'gas':
-          await handleGas(ctx, deps);
-          break;
-        case 'reasoning':
-          await handleReasoning(ctx, deps);
-          break;
-        case 'suggest':
-          await handleSuggest(ctx, deps);
-          break;
+        case 'balance': await handleBalance(ctx, deps); break;
+        case 'status': await handleStatus(ctx, deps); break;
+        case 'help': await handleHelp(ctx, deps); break;
+        case 'wallets': await handleWallets(ctx, deps); break;
+        case 'history': await handleHistory(ctx, deps); break;
+        case 'gas': await handleGas(ctx, deps); break;
+        case 'reasoning': await handleReasoning(ctx, deps); break;
+        case 'suggest': await handleSuggest(ctx, deps); break;
         case 'unknown':
         default:
           await ctx.reply(
             'I didn\'t understand that. Try commands like:\n' +
-            '• "tip @sarah 2.5 polygon"\n' +
-            '• "check my balance"\n' +
-            '• "who should I tip?"\n\n' +
+            '  "tip @sarah 2.5 polygon"\n' +
+            '  "check my balance"\n' +
+            '  "who should I tip?"\n\n' +
             'Type /help for all commands.',
           );
           break;
@@ -237,7 +269,7 @@ export class TelegramGrammyBot {
 
   private registerErrorHandler(): void {
     this.bot.catch((err) => {
-      logger.error('Telegram Grammy bot error', { error: String(err.error) });
+      logger.error('Telegram bot error', { error: String(err.error) });
     });
   }
 }

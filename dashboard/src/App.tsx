@@ -52,6 +52,7 @@ import Status from "@/pages/Status";
 import Changelog from "@/pages/Changelog";
 import AuditTrail from "@/pages/AuditTrail";
 import GitHubTipping from "@/pages/GitHubTipping";
+import WalletBrain from "@/pages/WalletBrain";
 
 const queryClient = new QueryClient();
 
@@ -119,6 +120,7 @@ const App = () => {
                   <Route path="/explorer" element={<Explorer />} />
                   <Route path="/audit-trail" element={<AuditTrail />} />
                   <Route path="/github-tipping" element={<GitHubTipping />} />
+                  <Route path="/wallet-brain" element={<WalletBrain />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>

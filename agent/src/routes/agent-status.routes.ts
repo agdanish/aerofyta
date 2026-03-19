@@ -13,6 +13,7 @@ import { logger } from '../utils/logger.js';
 import { transactionLimiter } from '../middleware/rateLimit.js';
 import { getOpenApiSpec } from './openapi.js';
 import { ServiceRegistry } from '../services/service-registry.js';
+import { SelfTestService } from '../services/self-test.service.js';
 
 export interface AgentStatusDeps {
   agent: TipFlowAgent;
@@ -72,23 +73,37 @@ export function registerAgentStatusRoutes(
     });
   });
 
-  /** POST /api/self-test — Send 0-value self-transfer on Sepolia to prove WDK works */
+  /** POST /api/self-test — Prove WDK wallet liveness on Sepolia (cached after first run) */
+  const selfTestService = new SelfTestService(wallet);
+
   router.post('/self-test', async (_req, res) => {
     try {
-      const address = await wallet.getAddress('ethereum-sepolia');
-      const result = await wallet.sendTransaction('ethereum-sepolia', address, '0');
-      const txHash = result.hash;
+      const result = await selfTestService.runSelfTest();
       res.json({
         success: true,
-        txHash,
-        from: address,
-        to: address,
-        chain: 'ethereum-sepolia',
-        explorer: `https://sepolia.etherscan.io/tx/${txHash}`,
-        timestamp: new Date().toISOString(),
+        ...result,
       });
     } catch (err) {
-      res.status(500).json({ success: false, error: String(err), chain: 'ethereum-sepolia' });
+      res.status(500).json({
+        success: false,
+        error: String(err),
+        chain: 'ethereum-sepolia',
+        hint: 'Ensure the wallet has Sepolia ETH. Use https://sepoliafaucet.com to fund it.',
+      });
+    }
+  });
+
+  /** GET /api/self-test — Check cached self-test result without re-running */
+  router.get('/self-test', (_req, res) => {
+    const cached = selfTestService.getCachedResult();
+    if (cached) {
+      res.json({ success: true, ...cached });
+    } else {
+      res.json({
+        success: false,
+        message: 'No self-test result cached. Run POST /api/self-test first.',
+        hint: 'curl -X POST http://localhost:3001/api/self-test',
+      });
     }
   });
 
