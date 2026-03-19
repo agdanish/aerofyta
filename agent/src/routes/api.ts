@@ -61,6 +61,13 @@ import { registerAutoTipRoutes } from './auto-tip.routes.js';
 import { DecisionCacheService } from '../services/decision-cache.service.js';
 import { AutoTipService } from '../services/auto-tip.service.js';
 import { registerOpenClawRoutes } from './openclaw.routes.js';
+import { registerLLMRoutes } from './llm.routes.js';
+import { LLMCostTrackerService } from '../services/llm-cost-tracker.service.js';
+import { PaidFetchService } from '../services/paid-fetch.service.js';
+import { registerYieldRouterRoutes } from './yield-router.routes.js';
+import { YieldRouterService } from '../services/yield-router.service.js';
+import { registerT402Routes } from './t402.routes.js';
+import { T402ProtocolService } from '../services/t402-protocol.service.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -569,6 +576,64 @@ export function createApiRouter(
   // ── OpenClaw Runtime (SOUL.md + skill files) ──────────────────
   registerOpenClawRoutes(router, services.openClawRuntime);
   logger.info('OpenClaw Runtime routes mounted at /api/openclaw/*');
+
+  // ── LLM Cost Tracking ────────────────────────────────────────
+  const llmCostTracker = new LLMCostTrackerService();
+  registerLLMRoutes(router, llmCostTracker);
+
+  // ── Paid Fetch (agent-as-API-consumer) ────────────────────────
+  const paidFetchService = new PaidFetchService();
+  paidFetchService.setWallet(wallet);
+
+  // GET /api/paid-fetch/stats — paid API usage stats
+  router.get('/paid-fetch/stats', (_req, res) => {
+    res.json({ ok: true, ...paidFetchService.getPaidFetchStats() });
+  });
+
+  // GET /api/paid-fetch/history — recent payment history
+  router.get('/paid-fetch/history', (req, res) => {
+    const limit = Math.min(parseInt(String(req.query.limit ?? '20'), 10) || 20, 100);
+    res.json({ ok: true, payments: paidFetchService.getPaymentHistory(limit) });
+  });
+
+  // POST /api/paid-fetch — execute a paid fetch request
+  router.post('/paid-fetch', async (req, res) => {
+    try {
+      const { url, method, headers: reqHeaders, body: reqBody, maxPayment, preferredChain } = req.body ?? {};
+      if (!url || typeof url !== 'string') {
+        res.status(400).json({ error: 'Missing required field: url' });
+        return;
+      }
+      const response = await paidFetchService.paidFetch(url, {
+        method: method ?? 'GET',
+        headers: reqHeaders,
+        body: reqBody ? JSON.stringify(reqBody) : undefined,
+        maxPayment,
+        preferredChain,
+      });
+      const text = await response.text();
+      let data: unknown;
+      try { data = JSON.parse(text); } catch { data = text; }
+      res.json({
+        ok: true,
+        status: response.status,
+        data,
+        stats: paidFetchService.getPaidFetchStats(),
+      });
+    } catch (err) {
+      logger.error('Paid fetch error', { error: err instanceof Error ? err.message : String(err) });
+      res.status(500).json({ error: 'Paid fetch failed', detail: err instanceof Error ? err.message : String(err) });
+    }
+  });
+  logger.info('Paid fetch routes mounted at /api/paid-fetch/*');
+
+  // ── Multi-Protocol Yield Router (Aave + Compound + Morpho) ────
+  const yieldRouterService = new YieldRouterService();
+  registerYieldRouterRoutes(router, yieldRouterService);
+
+  // ── t402 Payment Protocol Wrapper ──────────────────────────────
+  const t402ProtocolService = new T402ProtocolService();
+  registerT402Routes(router, t402ProtocolService);
 
   return router;
 }

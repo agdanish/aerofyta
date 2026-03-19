@@ -1,5 +1,5 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// AeroFyta — Wallet-as-Brain™ API routes
+// AeroFyta — Wallet-as-Brain™ 6-State Survival Machine API routes
 
 import { Router } from 'express';
 import type { WalletBrainService } from '../services/wallet-brain.service.js';
@@ -12,7 +12,12 @@ export function registerBrainRoutes(router: Router, brain: WalletBrainService): 
   router.get('/brain/state', (_req, res) => {
     try {
       const state = brain.getState();
-      res.json({ ok: true, ...state });
+      res.json({
+        ok: true,
+        ...state,
+        stateModel: '6-state-survival-machine',
+        allStates: brain.getStates(),
+      });
     } catch (err) {
       logger.error('Brain state error', { error: err instanceof Error ? err.message : String(err) });
       res.status(500).json({ error: 'Failed to read brain state' });
@@ -32,6 +37,7 @@ export function registerBrainRoutes(router: Router, brain: WalletBrainService): 
         maxTipUsdt: state.maxTipUsdt,
         policy: state.policy,
         canTip: brain.canTip(),
+        stateModel: '6-state-survival-machine',
       });
     } catch (err) {
       logger.error('Brain mood error', { error: err instanceof Error ? err.message : String(err) });
@@ -58,12 +64,37 @@ export function registerBrainRoutes(router: Router, brain: WalletBrainService): 
   router.post('/brain/recalculate', async (_req, res) => {
     try {
       const state = await brain.recalculate();
-      res.json({ ok: true, ...state });
+      res.json({
+        ok: true,
+        ...state,
+        stateModel: '6-state-survival-machine',
+        allStates: brain.getStates(),
+      });
     } catch (err) {
       logger.error('Brain recalculate error', { error: err instanceof Error ? err.message : String(err) });
       res.status(500).json({ error: 'Failed to recalculate brain state' });
     }
   });
 
-  logger.info('Wallet-as-Brain routes mounted at /api/brain/*');
+  /**
+   * GET /api/brain/states — Get all 6 state definitions and which is current
+   */
+  router.get('/brain/states', (_req, res) => {
+    try {
+      res.json({
+        ok: true,
+        stateModel: '6-state-survival-machine',
+        currentMood: brain.getMood(),
+        currentHealth: brain.getState().health,
+        states: brain.getStates(),
+        config: brain.getStateConfig(),
+        transitionRules: 'Cannot jump more than 2 states at a time (e.g., CRITICAL cannot go directly to THRIVING)',
+      });
+    } catch (err) {
+      logger.error('Brain states error', { error: err instanceof Error ? err.message : String(err) });
+      res.status(500).json({ error: 'Failed to read brain states' });
+    }
+  });
+
+  logger.info('Wallet-as-Brain 6-State Survival Machine routes mounted at /api/brain/*');
 }

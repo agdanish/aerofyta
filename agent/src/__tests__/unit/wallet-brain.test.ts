@@ -1,8 +1,8 @@
 /**
- * Unit Tests: Wallet-as-Brain Service
+ * Unit Tests: Wallet-as-Brain Service (6-State Survival Machine)
  *
  * Tests mood transitions, max tip limits per mood, health calculation,
- * risk appetite, and brain state management.
+ * risk appetite, state transition constraints, and brain state management.
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -10,9 +10,12 @@ import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { WalletBrainService } from '../../services/wallet-brain.service.js';
 
+// All 6 valid moods
+const VALID_MOODS = ['thriving', 'stable', 'cautious', 'struggling', 'desperate', 'critical'] as const;
+
 // ── Suite ──────────────────────────────────────────────────────
 
-describe('WalletBrainService — Mood Transitions', () => {
+describe('WalletBrainService — 6-State Survival Machine', () => {
   let brain: WalletBrainService;
 
   before(() => {
@@ -23,47 +26,44 @@ describe('WalletBrainService — Mood Transitions', () => {
     brain.stop();
   });
 
-  it('initializes with strategic mood (default health = 50)', () => {
+  it('initializes with cautious mood (default health = 50)', () => {
     const state = brain.getState();
-    assert.equal(state.mood, 'strategic');
+    assert.equal(state.mood, 'cautious');
     assert.equal(state.health, 50);
   });
 
-  it('getMood() returns the current mood string', () => {
+  it('getMood() returns a valid 6-state BrainMood', () => {
     const mood = brain.getMood();
     assert.ok(
-      ['generous', 'strategic', 'cautious', 'survival'].includes(mood),
-      `Mood should be a valid BrainMood, got: ${mood}`,
+      VALID_MOODS.includes(mood as typeof VALID_MOODS[number]),
+      `Mood should be a valid 6-state BrainMood, got: ${mood}`,
     );
   });
 
-  it('generous mood has maxTip = 5 USDT', () => {
-    // Verify from state after a recalculate that would produce generous mood
-    // Default constructor sets strategic, so we test the config indirectly
+  it('thriving mood has maxTip = 10 USDT', () => {
     const state = brain.getState();
-    if (state.mood === 'generous') {
-      assert.equal(state.maxTipUsdt, 5);
+    if (state.mood === 'thriving') {
+      assert.equal(state.maxTipUsdt, 10);
     } else {
-      // Test the mood config mapping
-      assert.ok(state.maxTipUsdt <= 5);
+      assert.ok(state.maxTipUsdt <= 10);
     }
   });
 
-  it('strategic mood has maxTip = 2 USDT', () => {
+  it('cautious mood has maxTip = 2 USDT', () => {
     const state = brain.getState();
-    assert.equal(state.mood, 'strategic');
+    assert.equal(state.mood, 'cautious');
     assert.equal(state.maxTipUsdt, 2);
   });
 
   it('getMaxTip() returns the correct value for current mood', () => {
     const maxTip = brain.getMaxTip();
     assert.equal(typeof maxTip, 'number');
-    assert.ok(maxTip >= 0 && maxTip <= 5, `maxTip should be 0-5, got: ${maxTip}`);
+    assert.ok(maxTip >= 0 && maxTip <= 10, `maxTip should be 0-10, got: ${maxTip}`);
   });
 
-  it('canTip() returns true when mood is not survival', () => {
+  it('canTip() returns true when mood is not desperate or critical', () => {
     const state = brain.getState();
-    if (state.mood === 'survival') {
+    if (state.mood === 'desperate' || state.mood === 'critical') {
       assert.equal(brain.canTip(), false);
     } else {
       assert.equal(brain.canTip(), true);
@@ -87,7 +87,6 @@ describe('WalletBrainService — Mood Transitions', () => {
     brain.recordTransaction();
 
     const state = await brain.recalculate();
-    // With 3 recent transactions, velocity should be > 0
     assert.ok(state.velocity > 0, `Velocity should increase with transactions, got: ${state.velocity}`);
   });
 });
@@ -96,8 +95,6 @@ describe('WalletBrainService — Health Calculation', () => {
   it('health is a weighted composite of liquidity, diversification, and velocity', async () => {
     const brain = new WalletBrainService();
     const state = await brain.recalculate();
-
-    // Health should be bounded [0, 100]
     assert.ok(state.health >= 0);
     assert.ok(state.health <= 100);
     brain.stop();
@@ -106,9 +103,6 @@ describe('WalletBrainService — Health Calculation', () => {
   it('without any wallet data, health is computed from defaults', async () => {
     const brain = new WalletBrainService();
     const state = await brain.recalculate();
-
-    // Without wallet service, totalUsdt=0, activeChainsCount=0
-    // Liquidity=50 (default), diversification=0, velocity depends on recent TXs
     assert.ok(typeof state.health === 'number');
     brain.stop();
   });
@@ -123,14 +117,38 @@ describe('WalletBrainService — Risk Appetite', () => {
     brain.stop();
   });
 
-  it('generous mood has higher risk base than cautious', () => {
-    // From the MOOD_CONFIG: generous=85, strategic=55, cautious=25, survival=5
-    // We verify the relationship holds via state
+  it('thriving mood has higher risk base than cautious', () => {
+    // From the MOOD_CONFIG: thriving=95, stable=70, cautious=45, struggling=20, desperate=8, critical=0
     const brain = new WalletBrainService();
     const state = brain.getState();
-    // Default is strategic with riskBase=55
-    assert.equal(state.mood, 'strategic');
-    assert.ok(state.riskAppetite >= 50, 'Strategic risk appetite should be >= 50');
+    assert.equal(state.mood, 'cautious');
+    assert.ok(state.riskAppetite >= 40, 'Cautious risk appetite should be >= 40');
+    brain.stop();
+  });
+});
+
+describe('WalletBrainService — 6-State Configuration', () => {
+  it('getStates() returns all 6 states in order', () => {
+    const brain = new WalletBrainService();
+    const states = brain.getStates();
+    assert.equal(states.length, 6);
+    assert.equal(states[0].name, 'thriving');
+    assert.equal(states[5].name, 'critical');
+    // Exactly one should be current
+    const currentStates = states.filter(s => s.isCurrent);
+    assert.equal(currentStates.length, 1);
+    brain.stop();
+  });
+
+  it('getStateConfig() returns config for all 6 states', () => {
+    const brain = new WalletBrainService();
+    const config = brain.getStateConfig();
+    for (const mood of VALID_MOODS) {
+      assert.ok(config[mood], `Config should have ${mood}`);
+      assert.ok(typeof config[mood].maxTip === 'number');
+      assert.ok(typeof config[mood].policy === 'string');
+      assert.ok(typeof config[mood].healthRange === 'string');
+    }
     brain.stop();
   });
 });
@@ -156,11 +174,9 @@ describe('WalletBrainService — History & Snapshots', () => {
 
   it('mood transition is logged when health changes mood bucket', async () => {
     const brain = new WalletBrainService();
-    // Force multiple recalculations; without real wallet data, mood should stay consistent
     await brain.recalculate();
     await brain.recalculate();
 
-    // Even if no transition occurs, history structure should be valid
     const history = brain.getHistory();
     for (const t of history.transitions) {
       assert.ok(t.from, 'Transition should have a from mood');
@@ -174,10 +190,8 @@ describe('WalletBrainService — History & Snapshots', () => {
   it('start and stop heartbeat without error', () => {
     const brain = new WalletBrainService();
     brain.start();
-    // Should not throw on double start
     brain.start();
     brain.stop();
-    // Should not throw on double stop
     brain.stop();
   });
 });

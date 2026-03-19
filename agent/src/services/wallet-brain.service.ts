@@ -1,18 +1,30 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
-// AeroFyta — Wallet-as-Brain™ Engine
+// AeroFyta — Wallet-as-Brain™ Engine (6-State Survival Machine)
 // The wallet IS the brain. Financial state drives agent cognition.
+//
+// 6 states: THRIVING > STABLE > CAUTIOUS > STRUGGLING > DESPERATE > CRITICAL
+// State transitions are constrained — no jumping from CRITICAL to THRIVING directly.
 
 import { logger } from '../utils/logger.js';
 import { ServiceRegistry } from './service-registry.js';
 
 // ── Types ─────────────────────────────────────────────────────
 
-export type BrainMood = 'generous' | 'strategic' | 'cautious' | 'survival';
+export type BrainMood =
+  | 'thriving'    // health > 90
+  | 'stable'      // health 70-90
+  | 'cautious'    // health 50-70
+  | 'struggling'  // health 30-50
+  | 'desperate'   // health 10-30
+  | 'critical';   // health < 10
+
+// Keep backward-compat alias for old 4-mood references
+export type BrainMoodLegacy = 'generous' | 'strategic' | 'cautious' | 'survival';
 
 export interface WalletBrainState {
   /** Overall brain health 0-100, computed from wallet metrics */
   health: number;
-  /** Current mood — drives behavioral policy */
+  /** Current mood — drives behavioral policy (6 states) */
   mood: BrainMood;
   /** 0-100: ratio of liquid funds vs committed (escrow, lending) */
   liquidity: number;
@@ -43,36 +55,82 @@ export interface BrainHistory {
   stateSnapshots: WalletBrainState[];
 }
 
-// ── Mood policies ─────────────────────────────────────────────
+// ── 6-State Mood Configuration ──────────────────────────────────
 
 const MOOD_CONFIG: Record<BrainMood, { maxTip: number; policy: string; riskBase: number }> = {
-  generous: {
-    maxTip: 5,
-    policy: 'Tip aggressively, explore new creators, maximize community impact',
-    riskBase: 85,
+  thriving: {
+    maxTip: 10,
+    policy: 'Aggressive tipping, explore new protocols, maximize community impact, experiment with yield strategies',
+    riskBase: 95,
   },
-  strategic: {
-    maxTip: 2,
-    policy: 'Selective tipping, fee optimization, favor proven creators',
-    riskBase: 55,
+  stable: {
+    maxTip: 5,
+    policy: 'Normal operation, tip proven creators, maintain diversification, monitor yield positions',
+    riskBase: 70,
   },
   cautious: {
-    maxTip: 0.5,
-    policy: 'Conservation mode, essential tips only, minimize gas spend',
-    riskBase: 25,
+    maxTip: 2,
+    policy: 'Selective tipping, fee optimization, favor proven creators, reduce exposure',
+    riskBase: 45,
   },
-  survival: {
+  struggling: {
+    maxTip: 0.5,
+    policy: 'Conservation mode, essential tips only, minimize gas spend, consider rebalancing',
+    riskBase: 20,
+  },
+  desperate: {
     maxTip: 0,
-    policy: 'EMERGENCY — no tips, consolidate funds across chains, alert user',
-    riskBase: 5,
+    policy: 'EMERGENCY — no tips, consolidate funds across chains, alert user, withdraw yield positions',
+    riskBase: 8,
+  },
+  critical: {
+    maxTip: 0,
+    policy: 'SHUTDOWN — no operations, preserve remaining capital, broadcast distress signal, await manual intervention',
+    riskBase: 0,
   },
 };
 
+// ── State ordering for transition validation ──────────────────
+
+const STATE_ORDER: BrainMood[] = ['critical', 'desperate', 'struggling', 'cautious', 'stable', 'thriving'];
+const STATE_INDEX: Record<BrainMood, number> = {
+  critical: 0,
+  desperate: 1,
+  struggling: 2,
+  cautious: 3,
+  stable: 4,
+  thriving: 5,
+};
+
+/** Map health score (0-100) to one of 6 brain moods */
 function healthToMood(health: number): BrainMood {
-  if (health > 80) return 'generous';
-  if (health > 50) return 'strategic';
-  if (health > 25) return 'cautious';
-  return 'survival';
+  if (health > 90) return 'thriving';
+  if (health > 70) return 'stable';
+  if (health > 50) return 'cautious';
+  if (health > 30) return 'struggling';
+  if (health > 10) return 'desperate';
+  return 'critical';
+}
+
+/**
+ * Enforce state transition rules — cannot jump more than 2 steps at a time.
+ * E.g., CRITICAL cannot jump directly to THRIVING; must go through intermediate states.
+ */
+function constrainTransition(current: BrainMood, target: BrainMood): BrainMood {
+  const currentIdx = STATE_INDEX[current];
+  const targetIdx = STATE_INDEX[target];
+  const maxJump = 2; // max steps per transition
+
+  if (Math.abs(targetIdx - currentIdx) <= maxJump) {
+    return target;
+  }
+
+  // Clamp to max jump distance
+  if (targetIdx > currentIdx) {
+    return STATE_ORDER[currentIdx + maxJump];
+  } else {
+    return STATE_ORDER[currentIdx - maxJump];
+  }
 }
 
 // ── Service ───────────────────────────────────────────────────
@@ -87,13 +145,13 @@ export class WalletBrainService {
     // Initialize with a neutral state; first heartbeat will overwrite
     this.currentState = {
       health: 50,
-      mood: 'strategic',
+      mood: 'cautious',
       liquidity: 50,
       diversification: 0,
       velocity: 30,
-      riskAppetite: 55,
+      riskAppetite: 45,
       maxTipUsdt: 2,
-      policy: MOOD_CONFIG.strategic.policy,
+      policy: MOOD_CONFIG.cautious.policy,
       timestamp: new Date().toISOString(),
     };
   }
@@ -101,7 +159,7 @@ export class WalletBrainService {
   /** Start the 60-second heartbeat */
   start(): void {
     if (this.heartbeatTimer) return;
-    logger.info('[WalletBrain] Heartbeat started — recalculating every 60s');
+    logger.info('[WalletBrain] 6-State Survival Machine heartbeat started — recalculating every 60s');
     // Immediate first beat
     this.recalculate().catch((err) =>
       logger.warn('[WalletBrain] Initial recalculate failed', { error: String(err) }),
@@ -183,8 +241,9 @@ export class WalletBrainService {
       liquidity * 0.4 + diversification * 0.3 + velocity * 0.15 + (totalUsdt > 0 ? 15 : 0),
     );
 
-    // ── Determine mood ──
-    const newMood = healthToMood(health);
+    // ── Determine mood (6-state with transition constraints) ──
+    const rawMood = healthToMood(health);
+    const newMood = constrainTransition(this.currentState.mood, rawMood);
     const moodCfg = MOOD_CONFIG[newMood];
 
     // ── Risk appetite ──
@@ -205,14 +264,18 @@ export class WalletBrainService {
       timestamp: now,
     };
 
-    // ── Log mood transition ──
+    // ── Log mood transition with reasoning ──
     if (prevMood !== newMood) {
+      const rawDiff = rawMood !== newMood
+        ? ` (raw target was ${rawMood}, constrained to ${newMood})`
+        : '';
       const transition: BrainTransition = {
         from: prevMood,
         to: newMood,
         health,
-        reason: `Health ${health}/100 → mood shifted from ${prevMood} to ${newMood}. ` +
-          `Liquidity: ${liquidity}, Diversification: ${diversification}, Velocity: ${velocity}`,
+        reason: `Health ${health}/100 → state shifted from ${prevMood.toUpperCase()} to ${newMood.toUpperCase()}${rawDiff}. ` +
+          `Liquidity: ${liquidity}, Diversification: ${diversification}, Velocity: ${velocity}. ` +
+          `Max tip: ${moodCfg.maxTip} USDT, Risk appetite: ${Math.min(100, riskAppetite)}/100`,
         timestamp: now,
       };
       this.history.transitions.push(transition);
@@ -220,7 +283,7 @@ export class WalletBrainService {
       if (this.history.transitions.length > 50) {
         this.history.transitions = this.history.transitions.slice(-50);
       }
-      logger.info(`[WalletBrain] Mood transition: ${prevMood} → ${newMood}`, {
+      logger.info(`[WalletBrain] State transition: ${prevMood.toUpperCase()} → ${newMood.toUpperCase()}`, {
         health,
         reason: transition.reason,
       });
@@ -261,6 +324,29 @@ export class WalletBrainService {
 
   /** Check if tipping is allowed at all */
   canTip(): boolean {
-    return this.currentState.mood !== 'survival';
+    return this.currentState.mood !== 'desperate' && this.currentState.mood !== 'critical';
+  }
+
+  /** Get the full 6-state configuration (for dashboard display) */
+  getStateConfig(): Record<BrainMood, { maxTip: number; policy: string; riskBase: number; healthRange: string }> {
+    return {
+      thriving:   { ...MOOD_CONFIG.thriving,   healthRange: '91-100' },
+      stable:     { ...MOOD_CONFIG.stable,     healthRange: '71-90'  },
+      cautious:   { ...MOOD_CONFIG.cautious,   healthRange: '51-70'  },
+      struggling: { ...MOOD_CONFIG.struggling,  healthRange: '31-50'  },
+      desperate:  { ...MOOD_CONFIG.desperate,   healthRange: '11-30'  },
+      critical:   { ...MOOD_CONFIG.critical,    healthRange: '0-10'   },
+    };
+  }
+
+  /** Get ordered state list for dashboard visualization */
+  getStates(): Array<{ name: BrainMood; healthRange: string; maxTip: number; isCurrent: boolean }> {
+    const current = this.currentState.mood;
+    return STATE_ORDER.slice().reverse().map(name => ({
+      name,
+      healthRange: this.getStateConfig()[name].healthRange,
+      maxTip: MOOD_CONFIG[name].maxTip,
+      isCurrent: name === current,
+    }));
   }
 }

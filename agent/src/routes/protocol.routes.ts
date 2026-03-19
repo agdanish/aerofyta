@@ -169,6 +169,58 @@ export function registerProtocolRoutes(
     }
   });
 
+  // ── ERC-8004 Agent Identity (DID-based) ─────────────────────
+  // These routes complement the existing /api/agent/* routes above
+  // with ERC-8004 DID identity, proof signing, and verification.
+
+  /** GET /api/identity — ERC-8004 agent identity with DID */
+  router.get('/identity', (_req, res) => {
+    const identity = agentIdentity.getIdentity();
+    if (!identity) return res.status(503).json({ error: 'Agent identity not initialized' });
+    res.json({
+      ok: true,
+      standard: 'ERC-8004',
+      did: identity.did,
+      name: identity.name,
+      version: identity.version,
+      walletAddress: identity.walletAddress,
+      capabilities: identity.capabilities,
+      nonce: identity.nonce,
+      registeredAt: identity.registeredAt,
+      lastActiveAt: identity.lastActiveAt,
+    });
+  });
+
+  /** POST /api/identity/prove — Sign an identity proof (ERC-8004 challenge-response) */
+  router.post('/identity/prove', async (req, res) => {
+    try {
+      const { challenge } = req.body ?? {};
+      if (!challenge || typeof challenge !== 'string') {
+        res.status(400).json({ error: 'Missing required field: challenge (string)' });
+        return;
+      }
+      const proof = await agentIdentity.signIdentityProof(challenge);
+      res.json({ ok: true, standard: 'ERC-8004', proof });
+    } catch (err) {
+      res.status(500).json({ error: 'Identity proof failed', detail: String(err) });
+    }
+  });
+
+  /** POST /api/identity/verify — Verify another agent's ERC-8004 identity proof */
+  router.post('/identity/verify', (req, res) => {
+    try {
+      const { did, challenge, signature } = req.body ?? {};
+      if (!did || !challenge || !signature) {
+        res.status(400).json({ error: 'Missing required fields: did, challenge, signature' });
+        return;
+      }
+      const result = agentIdentity.verifyIdentityProof(did, challenge, signature);
+      res.json({ ok: true, standard: 'ERC-8004', ...result });
+    } catch (err) {
+      res.status(500).json({ error: 'Identity verification failed', detail: String(err) });
+    }
+  });
+
   // ══════════════════════════════════════════════
   //  TIP QUEUE — Async Event-Driven Processing
   // ══════════════════════════════════════════════

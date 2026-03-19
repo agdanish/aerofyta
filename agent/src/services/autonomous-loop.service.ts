@@ -79,6 +79,7 @@ export interface LoopStatus {
   };
   dataSource: 'live' | 'simulated' | 'none';
   moodModifiers: MoodModifiers;
+  adaptiveDelay: { delayMs: number; urgency: 'high' | 'medium' | 'low'; reason: string } | null;
 }
 
 // ── Service ────────────────────────────────────────────────────
@@ -122,6 +123,7 @@ export class AutonomousLoopService {
   private explorationRate = parseFloat(process.env.EXPLORATION_RATE ?? '0.1');
   private explorationStats = { exploreTips: 0, exploitTips: 0, exploreSuccesses: 0, exploitSuccesses: 0 };
   private currentCycleExplored = false;
+  private lastAdaptiveDelay: { delayMs: number; urgency: 'high' | 'medium' | 'low'; reason: string } | null = null;
 
   constructor(ai: AIService, eventSimulator: EventSimulatorService, decisionLog: DecisionLogService, memory: MemoryService, orchestrator: OrchestratorService, intervalMs?: number) {
     this.ai = ai;
@@ -192,6 +194,7 @@ export class AutonomousLoopService {
         exploitSuccessRate: this.explorationStats.exploitTips > 0 ? this.explorationStats.exploitSuccesses / this.explorationStats.exploitTips : 0,
       },
       dataSource: this.lastDataSource, moodModifiers: this.getMoodModifiers(),
+      adaptiveDelay: this.lastAdaptiveDelay,
     };
   }
 
@@ -232,14 +235,103 @@ export class AutonomousLoopService {
     }, interval);
   }
 
+  /**
+   * Urgency-based adaptive loop timing.
+   *
+   * HIGH urgency   → 2 min  (risk detected, large price move, pending escrow expiring)
+   * MEDIUM urgency → 5 min  (normal operation, tips pending)
+   * LOW urgency    → 15 min (all quiet, good portfolio health)
+   */
   private computeAdaptiveInterval(): number {
-    const base = this.intervalMs;
-    if (this.totalCycles < 3) return base;
-    const rate = this.tipsExecuted / Math.max(this.totalCycles, 1);
-    if (rate > 0.2) return Math.max(base * 0.75, 15000);
-    if (rate < 0.05 && this.totalCycles > 10) return Math.min(base * 1.5, 180000);
-    if (this.errors > 0 && this.errors / Math.max(this.totalCycles, 1) > 0.3) return Math.min(base * 2, 120000);
-    return base;
+    // During initial warmup, use the configured interval
+    if (this.totalCycles < 3) {
+      this.lastAdaptiveDelay = { delayMs: this.intervalMs, urgency: 'medium', reason: 'Warmup phase — using default interval' };
+      return this.intervalMs;
+    }
+
+    const result = this.calculateNextCycleDelay();
+    this.lastAdaptiveDelay = result;
+
+    logger.info('Adaptive loop timing', {
+      urgency: result.urgency,
+      delayMs: result.delayMs,
+      delaySec: Math.round(result.delayMs / 1000),
+      reason: result.reason,
+    });
+
+    return result.delayMs;
+  }
+
+  /**
+   * Evaluate current agent state to determine urgency and next cycle delay.
+   */
+  calculateNextCycleDelay(): { delayMs: number; urgency: 'high' | 'medium' | 'low'; reason: string } {
+    const HIGH_MS = 2 * 60 * 1000;    // 2 minutes
+    const MEDIUM_MS = 5 * 60 * 1000;  // 5 minutes
+    const LOW_MS = 15 * 60 * 1000;    // 15 minutes
+
+    const pulse = this.lastFinancialPulse;
+    const mood = this.lastWalletMood;
+    const errorRate = this.totalCycles > 0 ? this.errors / this.totalCycles : 0;
+    const tipRate = this.totalCycles > 0 ? this.tipsExecuted / this.totalCycles : 0;
+    const recentErrors = this.cycleDurations.length > 0 && errorRate > 0.3;
+
+    // ── HIGH urgency checks ────────────────────────────────────
+    // Risk detected: health score critically low
+    if (pulse && pulse.healthScore < 30) {
+      return { delayMs: HIGH_MS, urgency: 'high', reason: `Critical health score (${pulse.healthScore}) — monitoring closely` };
+    }
+
+    // Wallet mood is cautious with low liquidity
+    if (mood?.mood === 'cautious' && pulse && pulse.liquidityScore < 25) {
+      return { delayMs: HIGH_MS, urgency: 'high', reason: 'Cautious mood + low liquidity — high vigilance' };
+    }
+
+    // High error rate (potential RPC issues or chain problems)
+    if (recentErrors) {
+      return { delayMs: HIGH_MS, urgency: 'high', reason: `High error rate (${(errorRate * 100).toFixed(0)}%) — frequent retries needed` };
+    }
+
+    // Many recent transactions (burst activity)
+    const recentTxCount = this.recentTxTimestamps.filter(t => Date.now() - t < 5 * 60 * 1000).length;
+    if (recentTxCount >= 3) {
+      return { delayMs: HIGH_MS, urgency: 'high', reason: `${recentTxCount} transactions in last 5 min — high activity burst` };
+    }
+
+    // ── MEDIUM urgency checks ──────────────────────────────────
+    // Tips being executed at a normal rate
+    if (tipRate > 0.05) {
+      return { delayMs: MEDIUM_MS, urgency: 'medium', reason: 'Active tipping rate — normal operation' };
+    }
+
+    // Moderate health, some activity happening
+    if (pulse && pulse.healthScore < 60) {
+      return { delayMs: MEDIUM_MS, urgency: 'medium', reason: `Moderate health score (${pulse.healthScore}) — keeping watch` };
+    }
+
+    // Wallet mood is strategic (normal operation)
+    if (mood?.mood === 'strategic') {
+      return { delayMs: MEDIUM_MS, urgency: 'medium', reason: 'Strategic mood — standard monitoring interval' };
+    }
+
+    // Some events processed recently
+    if (this.lastDataSource !== 'none') {
+      return { delayMs: MEDIUM_MS, urgency: 'medium', reason: `Data source active (${this.lastDataSource}) — staying responsive` };
+    }
+
+    // ── LOW urgency (all quiet) ────────────────────────────────
+    // Good health, generous mood, no errors
+    if (pulse && pulse.healthScore >= 80 && mood?.mood === 'generous') {
+      return { delayMs: LOW_MS, urgency: 'low', reason: 'Excellent health + generous mood — relaxed monitoring' };
+    }
+
+    // No events, no errors, low tip rate
+    if (this.lastDataSource === 'none' && errorRate === 0 && tipRate < 0.02) {
+      return { delayMs: LOW_MS, urgency: 'low', reason: 'All quiet — no events, no errors, minimal activity' };
+    }
+
+    // Default: medium
+    return { delayMs: MEDIUM_MS, urgency: 'medium', reason: 'Default medium urgency' };
   }
 
   private buildCycleDeps(): CycleDeps {
