@@ -24,7 +24,84 @@ export interface AuditRouteDeps {
 export function registerAuditRoutes(router: Router, deps: AuditRouteDeps): void {
   const { auditTrail, autonomousProof } = deps;
 
-  // GET /api/audit/decisions — paginated decision list with filters
+  /**
+   * @openapi
+   * /audit/decisions:
+   *   get:
+   *     tags: [Audit]
+   *     summary: List audit decisions
+   *     description: |
+   *       Returns a paginated list of all autonomous agent decisions with full reasoning chains.
+   *       Supports filtering by decision type, outcome, chain, and date range.
+   *     parameters:
+   *       - name: page
+   *         in: query
+   *         schema:
+   *           type: integer
+   *           default: 1
+   *       - name: limit
+   *         in: query
+   *         schema:
+   *           type: integer
+   *           default: 50
+   *           maximum: 200
+   *       - name: type
+   *         in: query
+   *         schema:
+   *           type: string
+   *           enum: [tip, escrow, swap, bridge, lending, safety, autonomy]
+   *       - name: outcome
+   *         in: query
+   *         schema:
+   *           type: string
+   *           enum: [success, failure, blocked, pending]
+   *       - name: chain
+   *         in: query
+   *         schema:
+   *           type: string
+   *       - name: startDate
+   *         in: query
+   *         schema:
+   *           type: string
+   *           format: date-time
+   *       - name: endDate
+   *         in: query
+   *         schema:
+   *           type: string
+   *           format: date-time
+   *     responses:
+   *       200:
+   *         description: Paginated decision list
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 ok:
+   *                   type: boolean
+   *                 decisions:
+   *                   type: array
+   *                   items:
+   *                     type: object
+   *                     properties:
+   *                       id:
+   *                         type: string
+   *                       type:
+   *                         type: string
+   *                       outcome:
+   *                         type: string
+   *                       reasoning:
+   *                         type: string
+   *                       timestamp:
+   *                         type: string
+   *                         format: date-time
+   *                 page:
+   *                   type: integer
+   *                 totalPages:
+   *                   type: integer
+   *                 total:
+   *                   type: integer
+   */
   router.get('/audit/decisions', (req, res) => {
     try {
       const page = parseInt(String(req.query.page ?? '1'), 10) || 1;
@@ -81,7 +158,49 @@ export function registerAuditRoutes(router: Router, deps: AuditRouteDeps): void 
     }
   });
 
-  // GET /api/audit/proof — full proof bundle (JSON)
+  /**
+   * @openapi
+   * /audit/proof:
+   *   get:
+   *     tags: [Audit]
+   *     summary: Cryptographic proof bundle
+   *     description: |
+   *       Generates a full cryptographic proof bundle containing all autonomous decisions,
+   *       their SHA-256 hashes, Merkle root, and aggregate statistics. Used to prove
+   *       the agent made verifiable, auditable decisions.
+   *     responses:
+   *       200:
+   *         description: Proof bundle with Merkle root and decision hashes
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 ok:
+   *                   type: boolean
+   *                 merkleRoot:
+   *                   type: string
+   *                   description: SHA-256 Merkle root of all decision hashes
+   *                 totalDecisions:
+   *                   type: integer
+   *                 decisions:
+   *                   type: array
+   *                   items:
+   *                     type: object
+   *                     properties:
+   *                       id:
+   *                         type: string
+   *                       hash:
+   *                         type: string
+   *                       type:
+   *                         type: string
+   *                       timestamp:
+   *                         type: string
+   *                         format: date-time
+   *                 generatedAt:
+   *                   type: string
+   *                   format: date-time
+   */
   router.get('/audit/proof', (_req, res) => {
     try {
       const bundle = auditTrail.generateProofBundle();

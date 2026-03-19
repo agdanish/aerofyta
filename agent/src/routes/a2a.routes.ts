@@ -24,12 +24,81 @@ export function registerA2ARoutes(
   router: Router,
   protocol: A2AProtocolService,
 ): void {
-  // ── GET /api/a2a/agents ───────────────────────────────────────
+  /**
+   * @openapi
+   * /a2a/agents:
+   *   get:
+   *     tags: [A2A]
+   *     summary: List registered agents
+   *     description: Returns all agents registered in the Agent-to-Agent payment protocol with their capabilities and reputation scores.
+   *     responses:
+   *       200:
+   *         description: List of registered agents
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 agents:
+   *                   type: array
+   *                   items:
+   *                     type: object
+   *                     properties:
+   *                       id:
+   *                         type: string
+   *                       name:
+   *                         type: string
+   *                       walletAddress:
+   *                         type: string
+   *                       capabilities:
+   *                         type: array
+   *                         items:
+   *                           type: string
+   *                       reputationScore:
+   *                         type: number
+   */
   router.get('/a2a/agents', (_req, res) => {
     res.json({ agents: protocol.listAgents() });
   });
 
-  // ── GET /api/a2a/services ─────────────────────────────────────
+  /**
+   * @openapi
+   * /a2a/services:
+   *   get:
+   *     tags: [A2A]
+   *     summary: Discover available services
+   *     description: Returns all services offered by registered agents. Optionally filter by keyword.
+   *     parameters:
+   *       - name: q
+   *         in: query
+   *         required: false
+   *         schema:
+   *           type: string
+   *         description: Search keyword to filter services
+   *     responses:
+   *       200:
+   *         description: List of available services
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 services:
+   *                   type: array
+   *                   items:
+   *                     type: object
+   *                     properties:
+   *                       agentId:
+   *                         type: string
+   *                       serviceName:
+   *                         type: string
+   *                       price:
+   *                         type: number
+   *                       currency:
+   *                         type: string
+   *                       description:
+   *                         type: string
+   */
   router.get('/a2a/services', (req, res) => {
     const query = typeof req.query.q === 'string' ? req.query.q : undefined;
     res.json({ services: protocol.discoverServices(query) });

@@ -1,32 +1,61 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  test:
+  test-agent:
+    name: Agent Tests
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [22]
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: agent/package-lock.json
+      - run: cd agent && npm ci
+      - run: cd agent && npm test
+      - run: cd agent && npx tsc --noEmit
 
+  test-dashboard:
+    name: Dashboard Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+      - run: cd dashboard && npm ci
+      - run: cd dashboard && npx tsc --noEmit
+      - run: cd dashboard && npm run build
 
-      - name: Install agent deps
-        run: cd agent && npm ci
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: cd agent && npm ci && npx tsc --noEmit
+      - run: cd dashboard && npm ci && npx tsc --noEmit
 
-      - name: Install dashboard deps
-        run: cd dashboard && npm ci
-
-      - name: TypeScript check (agent)
-        run: cd agent && npx tsc --noEmit
-
-      - name: TypeScript check (dashboard)
-        run: cd dashboard && npx tsc --noEmit
-
-      - name: Unit tests
-        run: cd agent && npm test
-
-      - name: Build dashboard
-        run: cd dashboard && npm run build
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: cd agent && npm audit --audit-level=high || true
+      - run: cd dashboard && npm audit --audit-level=high || true

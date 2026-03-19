@@ -1,17 +1,18 @@
 import { useUptime } from "@/hooks/useUptime";
 import { useFetch } from "@/hooks/useFetch";
+import { useWebSocket } from "@/hooks/useWebSocket";
 import { demoAgentStatus, demoWallets } from "@/lib/demo-data";
 import CountUp from "@/components/shared/CountUp";
 import CopyButton from "@/components/shared/CopyButton";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer,
 } from "recharts";
 import {
   SendHorizontal, Lock, Smile, Meh, TrendingUp, Brain,
   Package, Globe, CheckCircle, Terminal, Wrench, LayoutDashboard,
-  Play, Eye, Pause, Square, RotateCcw, Shield,
+  Play, Eye, Pause, Square, RotateCcw, Shield, Wifi, WifiOff,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -64,10 +65,59 @@ function BlinkingCursor() {
   return <span className={visible ? "opacity-100" : "opacity-0"}>█</span>;
 }
 
+interface DecisionEntry {
+  time: string;
+  icon: string;
+  text: string;
+  color: string;
+}
+
+interface TipNotification {
+  id: string;
+  message: string;
+  timestamp: string;
+}
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const uptime = useUptime();
   const { data: agent, isDemo } = useFetch("/api/agent/status", demoAgentStatus);
+  const { isConnected, subscribe } = useWebSocket();
+
+  // Real-time decision feed — starts with static data, appends live events
+  const [liveDecisions, setLiveDecisions] = useState<DecisionEntry[]>(decisionFeed);
+  // Real-time tip notifications
+  const [tipNotifications, setTipNotifications] = useState<TipNotification[]>([]);
+
+  // Subscribe to agent:decision events
+  useEffect(() => {
+    return subscribe("agent:decision", (data: unknown) => {
+      const d = data as { text?: string; icon?: string; color?: string };
+      const now = new Date();
+      const time = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+      setLiveDecisions((prev) => [
+        { time, icon: d.icon || "⚡", text: d.text || "Decision received", color: d.color || "#50AF95" },
+        ...prev.slice(0, 19),
+      ]);
+    });
+  }, [subscribe]);
+
+  // Subscribe to tip:sent events
+  useEffect(() => {
+    return subscribe("tip:sent", (data: unknown) => {
+      const d = data as { recipient?: string; amount?: string; chain?: string };
+      const id = `tip-${Date.now()}`;
+      const message = `Tip ${d.amount || "?"} sent to ${(d.recipient || "?").slice(0, 12)}... on ${d.chain || "?"}`;
+      setTipNotifications((prev) => [
+        { id, message, timestamp: new Date().toISOString() },
+        ...prev.slice(0, 4),
+      ]);
+      // Auto-dismiss after 8 seconds
+      setTimeout(() => {
+        setTipNotifications((prev) => prev.filter((n) => n.id !== id));
+      }, 8000);
+    });
+  }, [subscribe]);
 
   const moodType = agent?.mood?.moodType || agent?.loop?.walletMood?.mood || "optimistic";
   const MoodIcon = moodIcons[moodType] || Smile;
@@ -100,11 +150,25 @@ export default function Dashboard() {
           <h1 className="text-2xl font-bold tracking-tight">Command Center</h1>
           <p className="text-sm text-muted-foreground mt-0.5">Monitor, control, and interact with your autonomous agent</p>
         </div>
-        {isDemo && (
-          <Badge variant="outline" className="text-[10px] border-yellow-500/40 text-yellow-500 uppercase tracking-wider">
-            Demo Mode
+        <div className="flex items-center gap-2">
+          {/* WebSocket connection indicator */}
+          <Badge
+            variant="outline"
+            className={`text-[10px] uppercase tracking-wider gap-1 ${
+              isConnected
+                ? "border-emerald-500/40 text-emerald-400"
+                : "border-red-500/40 text-red-400"
+            }`}
+          >
+            {isConnected ? <Wifi className="h-3 w-3" /> : <WifiOff className="h-3 w-3" />}
+            {isConnected ? "Live" : "Offline"}
           </Badge>
-        )}
+          {isDemo && (
+            <Badge variant="outline" className="text-[10px] border-yellow-500/40 text-yellow-500 uppercase tracking-wider">
+              Demo Mode
+            </Badge>
+          )}
+        </div>
       </div>
 
       {/* ═══════════════════════════════════════════════
@@ -279,7 +343,7 @@ export default function Dashboard() {
             className="p-4 font-mono text-xs space-y-2 overflow-y-auto"
             style={{ background: "#0d0d0d", height: 280 }}
           >
-            {decisionFeed.map((d, i) => (
+            {liveDecisions.map((d, i) => (
               <div key={i} className="flex gap-2 leading-relaxed">
                 <span className="text-muted-foreground/50 shrink-0 tabular-nums">{d.time}</span>
                 <span className="shrink-0">{d.icon}</span>
@@ -393,6 +457,23 @@ export default function Dashboard() {
           );
         })}
       </div>
+
+      {/* ── Real-time tip notifications (bottom-right toast area) ── */}
+      {tipNotifications.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-sm">
+          {tipNotifications.map((n) => (
+            <div
+              key={n.id}
+              className="rounded-lg border border-emerald-500/30 bg-card/95 backdrop-blur-sm px-4 py-3 text-xs shadow-lg animate-in slide-in-from-right-5 fade-in duration-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span className="text-emerald-400 font-medium">{n.message}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

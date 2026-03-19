@@ -17,8 +17,100 @@ export function registerEscrowRoutes(
 
   // === TIP ESCROW PROTOCOL (HTLC) ========================================
 
-  /** POST /api/escrow — Create a new hash-time-locked escrowed tip.
-   *  Returns the escrow record AND the secret preimage (share only with depositor). */
+  /**
+   * @openapi
+   * /escrow:
+   *   post:
+   *     tags: [Escrow]
+   *     summary: Create HTLC escrow
+   *     description: |
+   *       Create a new hash-time-locked escrowed tip. Returns the escrow record
+   *       and the secret preimage. The recipient must present the preimage to claim
+   *       funds before the timelock expires.
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             required: [sender, recipient, amount]
+   *             properties:
+   *               sender:
+   *                 type: string
+   *                 description: Sender wallet address
+   *               recipient:
+   *                 type: string
+   *                 description: Recipient wallet address
+   *               amount:
+   *                 type: string
+   *                 description: Amount to escrow
+   *               token:
+   *                 type: string
+   *                 enum: [native, usdt]
+   *                 default: native
+   *               timeoutMinutes:
+   *                 type: number
+   *                 default: 60
+   *                 description: Minutes until timelock expiry (refund becomes possible)
+   *     responses:
+   *       201:
+   *         description: Escrow created with secret preimage
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 escrow:
+   *                   type: object
+   *                   properties:
+   *                     id:
+   *                       type: string
+   *                     status:
+   *                       type: string
+   *                       enum: [held, claimed, released, refunded, disputed]
+   *                     hashLock:
+   *                       type: string
+   *                     expiresAt:
+   *                       type: string
+   *                       format: date-time
+   *                 secret:
+   *                   type: string
+   *                   description: Secret preimage (share with recipient to allow claiming)
+   *                 warning:
+   *                   type: string
+   *   get:
+   *     tags: [Escrow]
+   *     summary: List all escrows
+   *     description: Returns all escrows with their current status (held, claimed, released, refunded, disputed).
+   *     responses:
+   *       200:
+   *         description: Array of escrow objects
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 escrows:
+   *                   type: array
+   *                   items:
+   *                     type: object
+   *                     properties:
+   *                       id:
+   *                         type: string
+   *                       status:
+   *                         type: string
+   *                       amount:
+   *                         type: string
+   *                       sender:
+   *                         type: string
+   *                       recipient:
+   *                         type: string
+   *                       hashLock:
+   *                         type: string
+   *                       expiresAt:
+   *                         type: string
+   *                         format: date-time
+   */
   router.post('/escrow', async (req, res) => {
     const { escrow, secret } = await escrowService.createEscrow(req.body);
     res.status(201).json({

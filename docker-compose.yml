@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   agent:
     build:
@@ -19,17 +20,19 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 30s
 
   dashboard:
     build:
       context: ./dashboard
       dockerfile: Dockerfile
+      args:
+        VITE_API_URL: /api
     ports:
       - "5173:80"
     depends_on:
-      - agent
-    environment:
-      - VITE_API_URL=http://localhost:3001/api
+      agent:
+        condition: service_healthy
     restart: unless-stopped
 
 volumes:

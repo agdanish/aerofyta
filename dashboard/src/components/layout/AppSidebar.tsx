@@ -8,7 +8,7 @@ import {
   MessageSquare, Vote, Database, Award, CandlestickChart,
   Bell, Target, BookUser, Calculator, Store, KeyRound, Settings,
   Leaf, QrCode, ArrowLeftRight, Sparkles, Activity, FileText,
-  ClipboardCheck,
+  ClipboardCheck, GitMerge,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import {
@@ -72,6 +72,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "Engagement", url: "/engagement", icon: Sparkles },
       { title: "Reputation", url: "/reputation", icon: Award },
       { title: "Contacts", url: "/contacts", icon: BookUser },
+      { title: "GitHub Tipping", url: "/github-tipping", icon: GitMerge },
       { title: "Data Sources", url: "/data-sources", icon: Database },
     ],
   },

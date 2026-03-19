@@ -16,7 +16,31 @@ export function registerWalletRoutes(
   wallet: WalletService,
 ): void {
 
-  /** GET /api/wallet/addresses — Get all wallet addresses */
+  /**
+   * @openapi
+   * /wallet/addresses:
+   *   get:
+   *     tags: [Wallet]
+   *     summary: Get all wallet addresses
+   *     description: Returns wallet addresses for every registered blockchain (Ethereum Sepolia, TON Testnet, Tron Nile, Solana Devnet, BTC Testnet).
+   *     responses:
+   *       200:
+   *         description: Addresses keyed by chain ID
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 addresses:
+   *                   type: object
+   *                   additionalProperties:
+   *                     type: string
+   *                   example:
+   *                     ethereum-sepolia: "0x1234...abcd"
+   *                     ton-testnet: "EQ..."
+   *       500:
+   *         description: Failed to fetch wallet addresses
+   */
   router.get('/wallet/addresses', async (_req, res) => {
     try {
       const addresses = await wallet.getAllAddresses();

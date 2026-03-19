@@ -39,8 +39,11 @@ import { registerA2ARoutes } from './a2a.routes.js';
 import { A2AProtocolService } from '../services/a2a-protocol.service.js';
 import { seedA2ARegistry } from '../services/a2a-registry.js';
 import { registerAuditRoutes } from './audit.routes.js';
+import { registerDocsRoutes } from './docs.routes.js';
 import { AuditTrailService } from '../services/audit-trail.service.js';
 import { AutonomousProofService } from '../services/autonomous-proof.service.js';
+import { registerGitHubRoutes } from './github.routes.js';
+import { GitHubWebhookService } from '../services/github-webhook.service.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -152,6 +155,9 @@ export function createApiRouter(
 
   // ── OpenAPI docs (must be before agent-status to override basic /docs) ──
   registerOpenApiRoutes(router);
+
+  // ── Swagger UI docs at /api/docs with full interactive explorer ──
+  registerDocsRoutes(router);
 
   // ── Agent Status, Health, Activity, Demo ─────────────────────
   registerAgentStatusRoutes(router, { agent, wallet, ai });
@@ -497,6 +503,11 @@ export function createApiRouter(
   const autonomousProofService = new AutonomousProofService(auditTrailService);
   registerAuditRoutes(router, { auditTrail: auditTrailService, autonomousProof: autonomousProofService });
   logger.info('Audit trail routes mounted at /api/audit/*');
+
+  // ── GitHub Webhook Tipping ────────────────────────────────────
+  const githubWebhookService = new GitHubWebhookService();
+  registerGitHubRoutes(router, { githubWebhook: githubWebhookService });
+  logger.info('GitHub webhook tipping routes mounted at /api/github/*');
 
   return router;
 }

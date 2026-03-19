@@ -6,9 +6,11 @@ import 'dotenv/config';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createServer } from 'node:http';
 import express from 'express';
 import cors from 'cors';
 import WDK from '@tetherto/wdk';
+import { WebSocketService } from './services/websocket.service.js';
 import { TipFlowAgent } from './core/agent.js';
 import { ServiceRegistry } from './services/service-registry.js';
 import { createApiRouter, initMultiStrategy } from './routes/api.js';
@@ -645,9 +647,22 @@ async function main(): Promise<void> {
   // Global error handler — AFTER all routes
   app.use(errorHandler);
 
-  // Start server
-  app.listen(PORT, () => {
+  // ── WebSocket real-time updates ──────────────────────────────
+  const wsService = new WebSocketService();
+
+  // Wire agent state changes to WebSocket broadcasts
+  agent.onStateChange((state) => {
+    wsService.broadcast('agent:status', state);
+    wsService.setAgentStatus(state as unknown as Record<string, unknown>);
+  });
+
+  // Start server with HTTP + WebSocket
+  const httpServer = createServer(app);
+  wsService.attach(httpServer);
+
+  httpServer.listen(PORT, () => {
     logger.info(`AeroFyta Agent running on http://localhost:${PORT}`);
+    logger.info(`WebSocket server attached (ws://localhost:${PORT})`);
     logger.info(`AI mode: ${aiService.isAvailable() ? `LLM (${aiService.getProvider()})` : 'Rule-based'}`);
     logger.info(`Autonomy engine: ${sr.autonomy.getPolicies('default').length} policies loaded`);
     logger.info(`Autonomous loop: ${autonomousMode ? 'AUTO-START in 5s' : 'MANUAL (AUTONOMOUS_MODE=false)'}`);
@@ -665,6 +680,7 @@ async function main(): Promise<void> {
   // Graceful shutdown
   const shutdown = (): void => {
     logger.info('Shutting down...');
+    wsService.dispose();
     loopService.stop();
     walletService.dispose();
     process.exit(0);

@@ -29,7 +29,39 @@ export function registerAgentStatusRoutes(
 ): void {
   const services = ServiceRegistry.getInstance();
 
-  /** GET /api/health — Service health check */
+  /**
+   * @openapi
+   * /health:
+   *   get:
+   *     tags: [System]
+   *     summary: Service health check
+   *     description: Returns current service status, AI provider, registered chains, and timestamp.
+   *     responses:
+   *       200:
+   *         description: Health status
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 status:
+   *                   type: string
+   *                   example: ok
+   *                 agent:
+   *                   type: string
+   *                   example: idle
+   *                 ai:
+   *                   type: string
+   *                   example: ollama
+   *                 chains:
+   *                   type: array
+   *                   items:
+   *                     type: string
+   *                   example: [ethereum-sepolia, ton-testnet]
+   *                 timestamp:
+   *                   type: string
+   *                   format: date-time
+   */
   router.get('/health', (_req, res) => {
     res.json({
       status: 'ok',
@@ -291,7 +323,48 @@ export function registerAgentStatusRoutes(
     res.json(policy);
   });
 
-  /** GET /api/agent/status — Unified status (state + loop + health + protocol availability) */
+  /**
+   * @openapi
+   * /agent/status:
+   *   get:
+   *     tags: [Agent]
+   *     summary: Full agent status
+   *     description: Returns unified agent status including state, autonomous loop, protocol availability, LLM provider, and uptime.
+   *     responses:
+   *       200:
+   *         description: Agent status object
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 status:
+   *                   type: string
+   *                   enum: [idle, analyzing, reasoning, executing, confirming]
+   *                 state:
+   *                   type: object
+   *                 loop:
+   *                   type: object
+   *                   nullable: true
+   *                 protocolStatus:
+   *                   type: object
+   *                   properties:
+   *                     lending:
+   *                       type: object
+   *                     bridge:
+   *                       type: object
+   *                     swap:
+   *                       type: object
+   *                     llm:
+   *                       type: object
+   *                     escrow:
+   *                       type: object
+   *                 uptime:
+   *                   type: number
+   *                 timestamp:
+   *                   type: string
+   *                   format: date-time
+   */
   router.get('/agent/status', (_req, res) => {
     const state = agent.getState();
     const loopStatus = services.autonomousLoop?.getStatus?.() ?? null;
@@ -383,7 +456,74 @@ export function registerAgentStatusRoutes(
     });
   });
 
-  /** GET /api/agent/history — Get tip history with optional filtering */
+  /**
+   * @openapi
+   * /agent/history:
+   *   get:
+   *     tags: [Agent]
+   *     summary: Tip transaction history
+   *     description: Returns full tip history with transaction details. Supports filtering by search term, chain, status, and date range.
+   *     parameters:
+   *       - name: search
+   *         in: query
+   *         schema:
+   *           type: string
+   *         description: Filter by recipient address or tx hash
+   *       - name: chain
+   *         in: query
+   *         schema:
+   *           type: string
+   *         description: Filter by chain ID
+   *       - name: status
+   *         in: query
+   *         schema:
+   *           type: string
+   *           enum: [confirmed, failed, pending]
+   *       - name: dateFrom
+   *         in: query
+   *         schema:
+   *           type: string
+   *           format: date-time
+   *       - name: dateTo
+   *         in: query
+   *         schema:
+   *           type: string
+   *           format: date-time
+   *     responses:
+   *       200:
+   *         description: Tip history entries
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 history:
+   *                   type: array
+   *                   items:
+   *                     type: object
+   *                     properties:
+   *                       tipId:
+   *                         type: string
+   *                       recipient:
+   *                         type: string
+   *                       amount:
+   *                         type: string
+   *                       token:
+   *                         type: string
+   *                       chainId:
+   *                         type: string
+   *                       txHash:
+   *                         type: string
+   *                       status:
+   *                         type: string
+   *                       fee:
+   *                         type: string
+   *                       createdAt:
+   *                         type: string
+   *                         format: date-time
+   *                 total:
+   *                   type: integer
+   */
   router.get('/agent/history', (req, res) => {
     let history = agent.getHistory();
 

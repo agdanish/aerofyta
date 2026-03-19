@@ -29,7 +29,72 @@ export function registerTipRoutes(
   riskEngineService: RiskEngineService,
 ): void {
 
-  /** POST /api/tip — Execute a tip (with Zod validation + safety checks) */
+  /**
+   * @openapi
+   * /tip:
+   *   post:
+   *     tags: [Tips]
+   *     summary: Send a tip
+   *     description: |
+   *       Execute a single tip to a recipient. The agent uses ReAct reasoning to select
+   *       the optimal chain based on fees, balances, and gas prices. Includes Zod validation,
+   *       safety policy checks, tiered approval, and automatic recovery queue on failure.
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             required: [recipient, amount]
+   *             properties:
+   *               recipient:
+   *                 type: string
+   *                 description: Recipient wallet address
+   *               amount:
+   *                 type: string
+   *                 description: Amount to send
+   *               token:
+   *                 type: string
+   *                 enum: [native, usdt]
+   *                 default: native
+   *               preferredChain:
+   *                 type: string
+   *                 description: Preferred chain ID (agent may override for lower fees)
+   *               message:
+   *                 type: string
+   *                 description: Optional tip message
+   *     responses:
+   *       200:
+   *         description: Tip executed successfully
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 result:
+   *                   type: object
+   *                   properties:
+   *                     status:
+   *                       type: string
+   *                       enum: [confirmed, failed, pending]
+   *                     txHash:
+   *                       type: string
+   *                     chainId:
+   *                       type: string
+   *                     fee:
+   *                       type: string
+   *                     explorerUrl:
+   *                       type: string
+   *                 tier:
+   *                   type: string
+   *                   enum: [auto, flagged, manual_required]
+   *       400:
+   *         description: Validation error
+   *       403:
+   *         description: Blocked by safety policy
+   *       202:
+   *         description: Queued for manual approval (high-value tip)
+   */
   router.post('/tip', transactionLimiter, validateTipInput(), async (req, res) => {
     try {
       // Zod validation (Feature 67)
