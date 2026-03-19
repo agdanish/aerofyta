@@ -13,6 +13,7 @@ import type { MultiStrategyService, StrategyDecision } from './multi-strategy.se
 import type { OpenClawService, ReActTrace } from './openclaw.service.js';
 import type { WalletService } from './wallet.service.js';
 import type { SafetyService } from './safety.service.js';
+import type { RealDataProviderService } from './real-data-provider.service.js';
 import { YouTubeRSSService } from './youtube-rss.service.js';
 import {
   calculateFinancialPulse,
@@ -110,6 +111,7 @@ export class AutonomousLoopService {
   private lastOpenClawTrace: ReActTrace | null = null;
   private walletService: WalletService | null = null;
   private safetyService: SafetyService | null = null;
+  private realDataProvider: RealDataProviderService | null = null;
   private youtubeRSS = new YouTubeRSSService();
   private dedup = new DeduplicationService();
   private lastStrategyDecisions: StrategyDecision[] = [];
@@ -153,13 +155,20 @@ export class AutonomousLoopService {
   setOpenClawService(oc: OpenClawService): void { this.openClaw = oc; }
   setWalletService(ws: WalletService): void { this.walletService = ws; }
   setSafetyService(ss: SafetyService): void { this.safetyService = ss; }
+  setRealDataProvider(rdp: RealDataProviderService): void { this.realDataProvider = rdp; }
   getLastOpenClawTrace(): ReActTrace | null { return this.lastOpenClawTrace; }
   getLastStrategyDecisions(): StrategyDecision[] { return this.lastStrategyDecisions; }
 
   start(): void {
     if (this.running) { logger.warn('Autonomous loop already running'); return; }
     this.running = true; this.paused = false; this.startedAt = new Date().toISOString();
-    this.eventSimulator.start();
+    // Event simulator only runs in demo mode — real data is preferred
+    if (process.env.DEMO_MODE === 'true') {
+      this.eventSimulator.start();
+      logger.info('[DEMO] Event simulator started for offline demonstration');
+    } else {
+      logger.info('Event simulator disabled — autonomous loop uses real data sources');
+    }
     logger.info('=== AUTONOMOUS LOOP STARTED ===', { intervalMs: this.intervalMs });
     this.runCycle().catch(err => { logger.error('Initial cycle failed', { error: String(err) }); });
     this.scheduleNext();
@@ -417,14 +426,57 @@ export class AutonomousLoopService {
 
   private async observePhase() {
     let allNewEvents: SimulatedEvent[] = [];
-    let eventSource = 'simulator';
+    let eventSource = 'none';
+
+    // Priority 1: Real YouTube RSS data
     try {
       const ytEvents = await this.youtubeRSS.getNewEvents(this.lastEventTimestamp);
       if (ytEvents.length > 0) { allNewEvents = ytEvents; eventSource = 'youtube_rss'; }
-    } catch { /* fall back to simulator */ }
-    if (allNewEvents.length === 0) allNewEvents = this.eventSimulator.getNewEvents(this.lastEventTimestamp);
-    for (const evt of allNewEvents) (evt as SimulatedEvent & { source?: string }).source = eventSource === 'youtube_rss' ? 'youtube_rss' : 'simulator';
-    if (allNewEvents.length > 0) { this.lastEventTimestamp = allNewEvents[allNewEvents.length - 1].timestamp; this.lastDataSource = eventSource === 'youtube_rss' ? 'live' : 'simulated'; } else { this.lastDataSource = 'none'; }
+    } catch { /* fall back to next source */ }
+
+    // Priority 2: Real Rumble data via RealDataProvider
+    if (allNewEvents.length === 0 && this.realDataProvider) {
+      try {
+        const rumbleData = await this.realDataProvider.getRealRumbleData();
+        if (rumbleData.source === 'live' && rumbleData.profiles.length > 0) {
+          // Convert real Rumble profiles to SimulatedEvent format for the pipeline
+          for (const profile of rumbleData.profiles) {
+            for (const video of profile.recentVideos.slice(0, 2)) {
+              if (new Date(video.publishedAt) > new Date(this.lastEventTimestamp)) {
+                allNewEvents.push({
+                  id: `rumble_real_${profile.channelSlug}_${Date.now()}`,
+                  type: 'creator.content_uploaded',
+                  timestamp: video.publishedAt,
+                  creatorId: `rumble_${profile.channelSlug}`,
+                  creatorName: profile.channelName,
+                  data: { title: video.title, url: video.url, subscribers: profile.subscriberCount, views: profile.totalViews, source: 'rumble_live' },
+                  engagementQuality: Math.min(1.0, profile.subscriberCount / 1_000_000),
+                  isMilestone: false,
+                  suggestedTipAmount: 0.003,
+                });
+              }
+            }
+          }
+          if (allNewEvents.length > 0) eventSource = 'rumble_live';
+        }
+      } catch { /* fall back to next source */ }
+    }
+
+    // Priority 3: Only use demo simulator if DEMO_MODE is enabled
+    if (allNewEvents.length === 0 && process.env.DEMO_MODE === 'true') {
+      allNewEvents = this.eventSimulator.getNewEvents(this.lastEventTimestamp);
+      if (allNewEvents.length > 0) eventSource = 'simulator';
+    }
+
+    for (const evt of allNewEvents) (evt as SimulatedEvent & { source?: string }).source = eventSource;
+    if (allNewEvents.length > 0) {
+      this.lastEventTimestamp = allNewEvents[allNewEvents.length - 1].timestamp;
+      this.lastDataSource = eventSource === 'simulator' ? 'simulated' : eventSource !== 'none' ? 'live' : 'none';
+      logger.info(`Using ${eventSource === 'simulator' ? 'demo' : 'real'} data — ${allNewEvents.length} events from ${eventSource}`);
+    } else {
+      this.lastDataSource = 'none';
+      logger.debug('No new events from any data source');
+    }
     const batchSize = this.getMoodBatchSize();
     const newEvents = allNewEvents.length > batchSize ? allNewEvents.sort((a, b) => b.engagementQuality - a.engagementQuality).slice(0, batchSize) : allNewEvents;
     const creators = this.rumble?.listCreators() ?? [];

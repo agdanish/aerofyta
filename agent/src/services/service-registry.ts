@@ -85,6 +85,7 @@ import { TipSplitterService } from './tip-splitter.service.js';
 import { RumbleScraperService } from './rumble-scraper.service.js';
 import { EngagementScorerService } from './engagement-scorer.service.js';
 import { OpenClawRuntimeService } from './openclaw-runtime.service.js';
+import { RealDataProviderService } from './real-data-provider.service.js';
 
 /**
  * Singleton registry that holds every service instance in the application.
@@ -182,6 +183,7 @@ export class ServiceRegistry {
     this._rumbleScraper = new RumbleScraperService();
     this._engagementScorer = new EngagementScorerService();
     this._openClawRuntime = new OpenClawRuntimeService();
+    this._realDataProvider = new RealDataProviderService();
   }
 
   // ── Initialization flag ────────────────────────────────────────
@@ -265,6 +267,7 @@ export class ServiceRegistry {
   private readonly _rumbleScraper: RumbleScraperService;
   private readonly _engagementScorer: EngagementScorerService;
   private readonly _openClawRuntime: OpenClawRuntimeService;
+  private readonly _realDataProvider: RealDataProviderService;
   private _adversarialDemo: AdversarialDemoService | null = null;
 
   // Wallet-dependent services (created during initialize)
@@ -349,6 +352,7 @@ export class ServiceRegistry {
   get rumbleScraper(): RumbleScraperService { return this._rumbleScraper; }
   get engagementScorer(): EngagementScorerService { return this._engagementScorer; }
   get openClawRuntime(): OpenClawRuntimeService { return this._openClawRuntime; }
+  get realDataProvider(): RealDataProviderService { return this._realDataProvider; }
   get adversarialDemo(): AdversarialDemoService | null { return this._adversarialDemo; }
 
   // Wallet-dependent (available after initialize)
@@ -423,6 +427,10 @@ export class ServiceRegistry {
     this._openClawRuntime.setOpenClawService(this._openClaw);
     this._openClawRuntime.initialize();
 
+    // Wire real data provider — replaces fake events with real blockchain + platform data
+    this._realDataProvider.setRumbleScraper(this._rumbleScraper);
+    this._realDataProvider.setWalletService(this._wallet);
+
     // 3b. Create adversarial demo service (depends on safety, risk, orchestrator)
     this._adversarialDemo = new AdversarialDemoService(
       this._safety,
@@ -445,6 +453,7 @@ export class ServiceRegistry {
     this._autonomousLoop.setSafetyService(this._safety);
     this._autonomousLoop.setWebhookReceiver(this._webhookReceiver);
     this._autonomousLoop.setRSSAggregator(this._rssAggregator);
+    this._autonomousLoop.setRealDataProvider(this._realDataProvider);
 
     // 5. Initialize agent identity
     const agentId = await this._agentIdentity.initialize();

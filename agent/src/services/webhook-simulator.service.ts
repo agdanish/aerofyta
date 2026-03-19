@@ -1,7 +1,8 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
 // AeroFyta — Webhook Simulator Service
-// Self-sending webhook simulator that runs on startup, feeding realistic
-// platform events to the agent's own /api/webhooks/ingest endpoint.
+// Simulator only runs in demo mode for offline demonstrations.
+// In production mode (DEMO_MODE unset or not 'true'), the simulator
+// does NOT start — the agent runs on real data only.
 
 import { createHmac, randomUUID } from 'node:crypto';
 import { logger } from '../utils/logger.js';
@@ -71,9 +72,16 @@ export class WebhookSimulatorService {
 
   /**
    * Start the simulator — sends a realistic event every `intervalMs` milliseconds.
-   * First event fires after 10 seconds to allow the server to fully boot.
+   * Only runs when DEMO_MODE=true is explicitly set.
+   * In production mode the agent runs on real data only.
    */
   start(intervalMs: number = 45000): void {
+    // Simulator only runs in demo mode for offline demonstrations
+    if (process.env.DEMO_MODE !== 'true') {
+      logger.info('Webhook simulator disabled (production mode)');
+      return;
+    }
+
     if (this.interval) return; // already running
 
     this.interval = setInterval(() => {
@@ -85,7 +93,7 @@ export class WebhookSimulatorService {
       this.sendEvent().catch(() => { /* agent not ready yet */ });
     }, 10_000);
 
-    logger.info('Webhook simulator active — sending realistic events every ' +
+    logger.info('[DEMO] Webhook simulator active — sending realistic events every ' +
       (intervalMs / 1000) + 's to http://localhost:' + this.port + '/api/webhooks/ingest');
   }
 

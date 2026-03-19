@@ -183,8 +183,8 @@ export class DemoService {
     ];
   }
 
-  /** Check if demo mode is enabled */
+  /** Check if demo mode is enabled — OFF by default, set DEMO_MODE=true to enable */
   isEnabled(): boolean {
-    return process.env.DEMO_MODE !== 'false'; // Default: true for hackathon
+    return process.env.DEMO_MODE === 'true';
   }
 }

@@ -314,6 +314,27 @@ AeroFyta supports **three Tether assets** across all chains, addressing the judg
 
 All three tokens use the same WDK `transfer()` flow — the contract address is the only difference. The dashboard, CLI, Telegram bot, and Chrome extension all support selecting which token to tip with.
 
+### WDK Integration Depth — Per-Package Method Usage
+
+Every package is exercised with **real method calls**, not just imports. Run `GET /api/wdk/integration-check` to generate a live report, or run the 27 integration tests in `agent/src/__tests__/integration/wdk-packages.test.ts`.
+
+| # | Package | Methods Called | Where Used |
+|:-:|---------|---------------|------------|
+| 1 | `@tetherto/wdk` | `new WDK(seed)`, `getRandomSeedPhrase()`, `getAccount()`, `registerWallet()` | `wallet.service.ts`, `wdk-deep-integration.service.ts`, `mcp-server.ts` |
+| 2 | `@tetherto/wdk-wallet-evm` | `registerWallet("ethereum")`, `getAccount()`, `getAddress()`, `getBalance()`, `getTokenBalance()` | `wallet.service.ts`, `mcp-server.ts` |
+| 3 | `@tetherto/wdk-wallet-evm-erc-4337` | `registerWallet("ethereum-erc4337")`, `getAccount()`, `getAddress()` with bundler/paymaster config | `wallet.service.ts` |
+| 4 | `@tetherto/wdk-wallet-btc` | `registerWallet("bitcoin")`, `getAccount()`, `getAddress()` BIP-84 native segwit | `wallet.service.ts` |
+| 5 | `@tetherto/wdk-wallet-solana` | `registerWallet("solana")`, `getAccount()`, `getAddress()` Ed25519 keypair | `wallet.service.ts` |
+| 6 | `@tetherto/wdk-wallet-ton` | `registerWallet("ton")`, `getAccount()`, `getAddress()` | `wallet.service.ts`, `mcp-server.ts` |
+| 7 | `@tetherto/wdk-wallet-ton-gasless` | `registerWallet("ton-gasless")` with `tonApiClient` + `paymasterToken` | `wallet.service.ts` |
+| 8 | `@tetherto/wdk-wallet-tron` | `registerWallet("tron")`, `getAccount()`, `getAddress()` with `transferMaxFee` | `wallet.service.ts`, `mcp-server.ts` |
+| 9 | `@tetherto/wdk-protocol-lending-aave-evm` | `registerProtocol("aave")`, `getLendingProtocol()`, `getAccountData()`, `supply()`, `withdraw()` | `lending.service.ts`, `mcp-server.ts` |
+| 10 | `@tetherto/wdk-protocol-swap-velora-evm` | `registerProtocol("velora")`, `getSwapProtocol()`, `quoteSwap()` | `swap.service.ts`, `economics.service.ts`, `mcp-server.ts` |
+| 11 | `@tetherto/wdk-protocol-bridge-usdt0-evm` | `registerProtocol("usdt0")`, `getBridgeProtocol()`, `quoteBridge()` | `bridge.service.ts`, `mcp-server.ts` |
+| 12 | `@tetherto/wdk-mcp-toolkit` | `WdkMcpServer`, `registerTools()`, `WALLET_TOOLS`, `PRICING_TOOLS`, `INDEXER_TOOLS`, `BRIDGE_TOOLS`, `SWAP_TOOLS`, `LENDING_TOOLS` | `mcp-server.ts` |
+
+**Verification**: `npm test -- --test-name-pattern="wdk"` runs 27 integration tests that import, instantiate, and register every package.
+
 ---
 
 ## 9 Blockchains

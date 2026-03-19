@@ -4,6 +4,7 @@
 import { Router } from 'express';
 import { JsonRpcProvider, formatUnits } from 'ethers';
 import { WalletService } from '../services/wallet.service.js';
+import { WdkDeepIntegrationService } from '../services/wdk-deep-integration.service.js';
 import type { ChainId } from '../types/index.js';
 import { logger } from '../utils/logger.js';
 
@@ -553,6 +554,51 @@ export function registerWalletRoutes(
     } catch (err) {
       logger.error('Gasless test failed', { error: String(err) });
       res.status(500).json({ error: 'Gasless test failed', detail: String(err) });
+    }
+  });
+
+  // ── WDK Deep Integration Check ─────────────────────────────────
+  /**
+   * @openapi
+   * /wdk/integration-check:
+   *   get:
+   *     tags: [WDK]
+   *     summary: Run deep integration check across all 12 WDK packages
+   *     description: |
+   *       Exercises every WDK package we depend on — calling real constructors,
+   *       wallet registration, account derivation, protocol registration, and
+   *       MCP tool enumeration. Returns a detailed report proving per-package usage.
+   *     responses:
+   *       200:
+   *         description: Integration report with per-package results
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 timestamp: { type: string }
+   *                 total_packages: { type: number }
+   *                 passed: { type: number }
+   *                 failed: { type: number }
+   *                 results:
+   *                   type: array
+   *                   items:
+   *                     type: object
+   *                     properties:
+   *                       package: { type: string }
+   *                       methods_tested: { type: array, items: { type: string } }
+   *                       success: { type: boolean }
+   *                       error: { type: string }
+   */
+  router.get('/wdk/integration-check', async (_req, res) => {
+    try {
+      logger.info('Running WDK deep integration check');
+      const integrationService = new WdkDeepIntegrationService();
+      const report = await integrationService.runAllIntegrationChecks();
+      res.json(report);
+    } catch (err) {
+      logger.error('WDK integration check failed', { error: String(err) });
+      res.status(500).json({ error: 'Integration check failed', detail: String(err) });
     }
   });
 }

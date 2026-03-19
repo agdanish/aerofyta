@@ -671,10 +671,14 @@ async function main(): Promise<void> {
     logger.info(`Event simulator: ready (${sr.eventSimulator.getStats().totalEvents} events)`);
     logger.info(`Decision log: ${sr.decisionLog.getStats().totalDecisions} decisions tracked`);
 
-    // ── Webhook Simulator — self-sending realistic events ──
+    // ── Webhook Simulator — only in demo mode ──
     sr.webhookReceiver.registerWebhook('internal', `http://localhost:${PORT}/api/webhooks/ingest`, process.env.WEBHOOK_KEY ?? 'change-me-in-production');
-    sr.webhookSimulator.start(45000);
-    logger.info('Webhook simulator active — sending realistic events every 45s');
+    if (process.env.DEMO_MODE === 'true') {
+      sr.webhookSimulator.start(45000);
+      logger.info('[DEMO] Webhook simulator active — sending demo events every 45s');
+    } else {
+      logger.info('Demo simulators disabled — agent runs on real data only');
+    }
 
     logger.info('Ready to process tips');
   });
