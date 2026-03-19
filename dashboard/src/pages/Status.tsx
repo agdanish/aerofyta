@@ -28,10 +28,26 @@ interface TelegramBotStatus {
   mode: string;
 }
 
+interface OpenClawRuntimeStatus {
+  active: boolean;
+  soulLoaded: boolean;
+  agentName: string;
+  protocol: string;
+  skillCount: number;
+  skills: string[];
+  chains: string[];
+  uptime: number;
+  executionCount: number;
+  lastExecution: string | null;
+  openClawFrameworkVersion: string;
+}
+
 export default function Status() {
   const [statuses, setStatuses] = useState(generateStatuses);
   const [telegramStatus, setTelegramStatus] = useState<TelegramBotStatus | null>(null);
   const [telegramLoading, setTelegramLoading] = useState(true);
+  const [openclawStatus, setOpenclawStatus] = useState<OpenClawRuntimeStatus | null>(null);
+  const [openclawLoading, setOpenclawLoading] = useState(true);
 
   useEffect(() => {
     const iv = setInterval(() => setStatuses(generateStatuses()), 30000);
@@ -55,6 +71,26 @@ export default function Status() {
     }
     fetchTelegramStatus();
     const iv = setInterval(fetchTelegramStatus, 15000);
+    return () => { cancelled = true; clearInterval(iv); };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchOpenClawStatus() {
+      try {
+        const res = await fetch(`${API}/api/openclaw/status`, { signal: AbortSignal.timeout(3000) });
+        if (!cancelled && res.ok) {
+          const data = await res.json();
+          setOpenclawStatus(data);
+        }
+      } catch {
+        if (!cancelled) setOpenclawStatus(null);
+      } finally {
+        if (!cancelled) setOpenclawLoading(false);
+      }
+    }
+    fetchOpenClawStatus();
+    const iv = setInterval(fetchOpenClawStatus, 15000);
     return () => { cancelled = true; clearInterval(iv); };
   }, []);
 
@@ -126,6 +162,73 @@ export default function Status() {
             </span>
           </div>
         </div>
+      </div>
+
+      {/* OpenClaw Runtime Status Card */}
+      <div className="rounded-xl border border-border/50 bg-card/50 p-5 mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 text-purple-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold">OpenClaw Runtime</h3>
+              {openclawLoading ? (
+                <p className="text-xs text-muted-foreground">Checking runtime...</p>
+              ) : openclawStatus?.active ? (
+                <p className="text-xs text-muted-foreground">
+                  {openclawStatus.agentName} &middot; {openclawStatus.protocol} &middot; {openclawStatus.skillCount} skills &middot; {openclawStatus.chains.length} chains
+                </p>
+              ) : (
+                <p className="text-xs text-muted-foreground">
+                  Runtime not initialized &middot; SOUL.md not loaded
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span
+              className="h-2.5 w-2.5 rounded-full"
+              style={{
+                background: openclawLoading
+                  ? "hsl(var(--muted-foreground))"
+                  : openclawStatus?.active
+                    ? "hsl(270, 76%, 50%)"
+                    : "hsl(var(--destructive))",
+                animation: openclawStatus?.active ? "status-pulse 2s ease-in-out infinite" : undefined,
+              }}
+            />
+            <span className={`text-xs font-medium ${
+              openclawLoading
+                ? "text-muted-foreground"
+                : openclawStatus?.active
+                  ? "text-purple-500"
+                  : "text-red-500"
+            }`}>
+              {openclawLoading ? "Checking" : openclawStatus?.active ? "Active" : "Inactive"}
+            </span>
+          </div>
+        </div>
+        {openclawStatus?.active && (
+          <div className="mt-3 grid grid-cols-3 gap-3 text-xs">
+            <div className="rounded-md bg-muted/40 p-2">
+              <span className="text-muted-foreground">Skills</span>
+              <div className="font-mono font-medium mt-0.5">{openclawStatus.skills.join(', ')}</div>
+            </div>
+            <div className="rounded-md bg-muted/40 p-2">
+              <span className="text-muted-foreground">Executions</span>
+              <div className="font-mono font-medium mt-0.5">{openclawStatus.executionCount}</div>
+            </div>
+            <div className="rounded-md bg-muted/40 p-2">
+              <span className="text-muted-foreground">Uptime</span>
+              <div className="font-mono font-medium mt-0.5">{Math.floor(openclawStatus.uptime / 60)}m {openclawStatus.uptime % 60}s</div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden">

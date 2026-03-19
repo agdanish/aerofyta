@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { demoTipHistory, demoWallets } from "@/lib/demo-data";
+import { demoTipHistory, demoWallets, SUPPORTED_TOKENS } from "@/lib/demo-data";
 import { useFetch } from "@/hooks/useFetch";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -36,7 +36,7 @@ export default function Tips() {
   const [chainFilter, setChainFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [open, setOpen] = useState(false);
-  const [tipForm, setTipForm] = useState({ address: "", amount: "", chain: "Ethereum" });
+  const [tipForm, setTipForm] = useState({ address: "", amount: "", chain: "Ethereum", token: "USD₮" });
 
   const safeTips = Array.isArray(tips) ? tips : demoTipHistory;
   const allTips = [...localTips, ...safeTips];
@@ -51,26 +51,28 @@ export default function Tips() {
     const now = new Date();
     const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
     const chain = tipForm.chain;
+    const token = tipForm.token;
     const newTip = {
       id: Date.now(),
       date,
       recipient: tipForm.address.startsWith("@") || tipForm.address.startsWith("0x") ? tipForm.address : `@${tipForm.address}`,
       amount: tipForm.amount,
+      token,
       chain,
       status: "pending" as const,
       txHash: `0x${randomHex(64)}`,
     };
     setLocalTips((prev) => [newTip, ...prev]);
-    toast.success(`Tip of ${tipForm.amount} USDT sent to ${newTip.recipient} on ${chain}`);
+    toast.success(`Tip of ${tipForm.amount} ${token} sent to ${newTip.recipient} on ${chain}`);
     setOpen(false);
-    setTipForm({ address: "", amount: "", chain: "Ethereum" });
+    setTipForm({ address: "", amount: "", chain: "Ethereum", token: "USD₮" });
 
     // Simulate confirmation after 2 seconds
     setTimeout(() => {
       setLocalTips((prev) =>
         prev.map((t) => (t.id === newTip.id ? { ...t, status: "confirmed" as const } : t))
       );
-      toast.success(`Tip to ${newTip.recipient} confirmed on ${chain}`);
+      toast.success(`Tip of ${newTip.amount} ${token} to ${newTip.recipient} confirmed on ${chain}`);
     }, 2000);
   };
 
@@ -95,8 +97,17 @@ export default function Tips() {
                 <Input placeholder="0x... or creator handle" value={tipForm.address} onChange={(e) => setTipForm({ ...tipForm, address: e.target.value })} className="mt-1 bg-background" />
               </div>
               <div>
-                <Label className="text-xs">Amount (USDT)</Label>
-                <Input type="number" placeholder="2.50" value={tipForm.amount} onChange={(e) => setTipForm({ ...tipForm, amount: e.target.value })} className="mt-1 bg-background" />
+                <Label className="text-xs">Token</Label>
+                <Select value={tipForm.token} onValueChange={(v) => setTipForm({ ...tipForm, token: v })}>
+                  <SelectTrigger className="mt-1 bg-background"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {SUPPORTED_TOKENS.map((t) => <SelectItem key={t.id} value={t.label}>{t.label} — {t.name}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label className="text-xs">Amount ({tipForm.token})</Label>
+                <Input type="number" placeholder={tipForm.token === "XAU₮" ? "0.005" : "2.50"} value={tipForm.amount} onChange={(e) => setTipForm({ ...tipForm, amount: e.target.value })} className="mt-1 bg-background" />
               </div>
               <div>
                 <Label className="text-xs">Chain</Label>
@@ -142,16 +153,17 @@ export default function Tips() {
       {/* Table */}
       <div className="rounded-xl border border-border/50 overflow-hidden">
         <div className="overflow-x-auto">
-          <div className="min-w-[700px]">
-            <div className="grid grid-cols-[140px_1fr_80px_90px_80px_1fr] gap-3 px-5 py-3 border-b border-border/40 text-[11px] text-muted-foreground uppercase tracking-wider font-medium">
-              <span>Date</span><span>Recipient</span><span className="text-right">Amount</span><span>Chain</span><span>Status</span><span>TX Hash</span>
+          <div className="min-w-[780px]">
+            <div className="grid grid-cols-[130px_1fr_60px_70px_90px_70px_1fr] gap-3 px-5 py-3 border-b border-border/40 text-[11px] text-muted-foreground uppercase tracking-wider font-medium">
+              <span>Date</span><span>Recipient</span><span className="text-right">Amount</span><span>Token</span><span>Chain</span><span>Status</span><span>TX Hash</span>
             </div>
             <div className="divide-y divide-border/30">
               {filtered.map((tip) => (
-                <div key={tip.id} className="grid grid-cols-[140px_1fr_80px_90px_80px_1fr] gap-3 px-5 py-3 text-sm items-center hover:bg-accent/30 transition-colors">
+                <div key={tip.id} className="grid grid-cols-[130px_1fr_60px_70px_90px_70px_1fr] gap-3 px-5 py-3 text-sm items-center hover:bg-accent/30 transition-colors">
                   <span className="text-xs text-muted-foreground tabular-nums">{tip.date}</span>
                   <span className="font-medium truncate">{tip.recipient}</span>
                   <span className="text-right tabular-nums font-medium">{tip.amount}</span>
+                  <span className={`text-xs font-medium ${(tip as Record<string, unknown>).token === "XAU₮" ? "text-[#D4A843]" : (tip as Record<string, unknown>).token === "USA₮" ? "text-[#1A3C6E]" : "text-[#26A17B]"}`}>{(tip as Record<string, unknown>).token ?? "USD₮"}</span>
                   <Badge variant="outline" className={`text-[10px] w-fit ${chainColors[tip.chain] || ""}`}>{tip.chain}</Badge>
                   <Badge variant="outline" className={`text-[10px] w-fit ${statusColors[tip.status] || ""}`}>{tip.status}</Badge>
                   <a

@@ -302,6 +302,18 @@ AeroFyta uses **12 Tether WDK packages** — the deepest WDK integration in the 
 | 11 | `@tetherto/wdk-velora-swap` | Velora Swap — DEX aggregation and token swaps |
 | 12 | `@tetherto/wdk-utils` | Shared utilities — formatting, validation, constants |
 
+### Multi-Asset Support — USD₮, XAU₮, USA₮
+
+AeroFyta supports **three Tether assets** across all chains, addressing the judging criteria for sensible use of multiple assets:
+
+| Asset | Name | Contract (Ethereum) | Decimals | Use Case |
+|:------|:-----|:-------------------|:--------:|:---------|
+| **USD₮** | Tether USD | `0x7169D38820dfd117C3FA1f22a697dBA58d90BA06` | 6 | Primary tipping and payments |
+| **XAU₮** | Tether Gold | `0x68749665FF8D2d112Fa859AA293F07A622782F38` | 6 | Gold-backed tips (1 token = 1 troy oz) |
+| **USA₮** | Alloy Dollar | `0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0` | 6 | US dollar-pegged alternative tips |
+
+All three tokens use the same WDK `transfer()` flow — the contract address is the only difference. The dashboard, CLI, Telegram bot, and Chrome extension all support selecting which token to tip with.
+
 ---
 
 ## 9 Blockchains
@@ -464,8 +476,8 @@ The Chrome extension supports configurable per-creator limits:
 <tr>
 <td width="50%">
 
-### OpenClaw ReAct Engine
-5-iteration reasoning loop on every decision:
+### OpenClaw-Native Agent Runtime
+[SOUL.md](./agent/SOUL.md)-driven identity with 6 registered [skills](./agent/skills/). 5-iteration reasoning loop on every decision:
 
 1. **Thought** — What should I do and why?
 2. **Action** — Query wallet state, check fees, scan creators
@@ -796,7 +808,7 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 | Layer | Technology |
 |:------|:-----------|
 | **Runtime** | [Node.js 22+](https://nodejs.org) with native TypeScript |
-| **Agent Core** | Custom OpenClaw ReAct engine |
+| **Agent Core** | OpenClaw-native runtime (SOUL.md + .skill.md) with ReAct engine |
 | **LLM** | [Groq](https://groq.com) (llama-3.3-70b) + [Gemini](https://ai.google.dev) (2.0 Flash) |
 | **Wallets** | [Tether WDK](https://wdk.tether.io) (12 packages) |
 | **DeFi** | [Aave V3](https://aave.com) supply/withdraw, Velora swap, USDT0 bridge |
@@ -838,7 +850,7 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 | Track | How AeroFyta Competes |
 |:-----:|:----------------------|
 | **Tipping Bot** | Autonomous agent tips Rumble/YouTube creators based on engagement, with multi-chain fee optimization and 3-agent consensus |
-| **Agent Wallets** | OpenClaw ReAct + 9-chain WDK wallets with ERC-4337 gasless + TON gasless |
+| **Agent Wallets** | OpenClaw-native runtime (SOUL.md + 6 skills) + 9-chain WDK wallets with ERC-4337 gasless + TON gasless |
 | **Lending Bot** | On-chain credit scoring + autonomous Aave V3 supply with yield projections |
 | **Autonomous DeFi** | Cross-chain swaps, USDT0 bridge, yield farming with risk-adjusted rebalancing |
 

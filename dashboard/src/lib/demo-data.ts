@@ -17,34 +17,42 @@ export const demoAgentStatus = {
 };
 
 export const demoActivity = [
-  { id: 1, type: "tip", message: "Tipped @sarah_creates 2.5 USDT", chain: "Ethereum", time: "2m ago" },
-  { id: 2, type: "escrow", message: "Escrow #E-0047 created — 50 USDT", chain: "Polygon", time: "5m ago" },
-  { id: 3, type: "reasoning", message: "Consensus: approve tip cycle #1834", chain: "", time: "8m ago" },
-  { id: 4, type: "swap", message: "Swapped 100 USDT → 0.054 ETH", chain: "Ethereum", time: "12m ago" },
-  { id: 5, type: "security", message: "Blocked suspicious tx — anomaly 0.92", chain: "", time: "15m ago" },
-  { id: 6, type: "tip", message: "Tipped @dev_marcus 5 USDT", chain: "Polygon", time: "18m ago" },
-  { id: 7, type: "escrow", message: "Escrow #E-0044 claimed by recipient", chain: "Arbitrum", time: "22m ago" },
-  { id: 8, type: "lending", message: "Supplied 500 USDT to Aave — 4.2% APY", chain: "Ethereum", time: "28m ago" },
-  { id: 9, type: "tip", message: "Tipped @music_maya 1.5 USDT", chain: "TON", time: "35m ago" },
-  { id: 10, type: "reasoning", message: "Guardian veto: high-risk tx blocked", chain: "", time: "41m ago" },
-  { id: 11, type: "swap", message: "Swapped 50 USDT → 85 TRX", chain: "Tron", time: "48m ago" },
-  { id: 12, type: "tip", message: "Tipped @crypto_claire 3 USDT", chain: "Solana", time: "55m ago" },
-  { id: 13, type: "escrow", message: "Escrow #E-0041 refunded — timeout", chain: "Ethereum", time: "1h ago" },
-  { id: 14, type: "security", message: "Policy: max single tx raised to 100 USDT", chain: "", time: "1h ago" },
-  { id: 15, type: "dca", message: "DCA executed: 25 USDT → ETH", chain: "Ethereum", time: "2h ago" },
+  { id: 1, type: "tip", message: "Tipped @sarah_creates 2.5 USD₮", chain: "Ethereum", time: "2m ago" },
+  { id: 2, type: "tip", message: "Tipped @music_maya 0.005 XAU₮ (Tether Gold)", chain: "Ethereum", time: "4m ago" },
+  { id: 3, type: "escrow", message: "Escrow #E-0047 created — 50 USD₮", chain: "Polygon", time: "5m ago" },
+  { id: 4, type: "reasoning", message: "Consensus: approve tip cycle #1834", chain: "", time: "8m ago" },
+  { id: 5, type: "swap", message: "Swapped 100 USD₮ → 0.054 ETH", chain: "Ethereum", time: "12m ago" },
+  { id: 6, type: "security", message: "Blocked suspicious tx — anomaly 0.92", chain: "", time: "15m ago" },
+  { id: 7, type: "tip", message: "Tipped @jake_tech 15 USA₮ (Alloy Dollar)", chain: "Ethereum", time: "17m ago" },
+  { id: 8, type: "escrow", message: "Escrow #E-0044 claimed by recipient", chain: "Arbitrum", time: "22m ago" },
+  { id: 9, type: "lending", message: "Supplied 500 USD₮ to Aave — 4.2% APY", chain: "Ethereum", time: "28m ago" },
+  { id: 10, type: "tip", message: "Tipped @music_maya 1.5 USD₮", chain: "TON", time: "35m ago" },
+  { id: 11, type: "reasoning", message: "Guardian veto: high-risk tx blocked", chain: "", time: "41m ago" },
+  { id: 12, type: "swap", message: "Swapped 50 USD₮ → 85 TRX", chain: "Tron", time: "48m ago" },
+  { id: 13, type: "tip", message: "Tipped @crypto_claire 3 USD₮", chain: "Solana", time: "55m ago" },
+  { id: 14, type: "escrow", message: "Escrow #E-0041 refunded — timeout", chain: "Ethereum", time: "1h ago" },
+  { id: 15, type: "security", message: "Policy: max single tx raised to 100 USD₮", chain: "", time: "1h ago" },
+  { id: 16, type: "dca", message: "DCA executed: 25 USD₮ → ETH", chain: "Ethereum", time: "2h ago" },
 ];
+
+// ---- Supported Tether Assets ----
+export const SUPPORTED_TOKENS = [
+  { id: "usdt", label: "USD₮", name: "Tether USD", decimals: 6, color: "#26A17B" },
+  { id: "xaut", label: "XAU₮", name: "Tether Gold", decimals: 6, color: "#D4A843" },
+  { id: "usat", label: "USA₮", name: "Alloy Dollar", decimals: 6, color: "#1A3C6E" },
+] as const;
 
 // ---- Wallets ----
 export const demoWallets = [
-  { chain: "Ethereum", symbol: "ETH", address: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD28", usdt: "3,241.50", native: "1.847", nativeSymbol: "ETH", color: "#627EEA", status: "active" },
-  { chain: "TON", symbol: "TON", address: "EQDrjaLahLkMB-hMCmkzOyBuHJ139ZDYwomPcYPz8y8-Arx4", usdt: "1,892.00", native: "342.5", nativeSymbol: "TON", color: "#0098EA", status: "active" },
-  { chain: "Tron", symbol: "TRX", address: "TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW", usdt: "2,156.75", native: "18,420", nativeSymbol: "TRX", color: "#FF0013", status: "active" },
-  { chain: "Bitcoin", symbol: "BTC", address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq", usdt: "1,500.00", native: "0.0234", nativeSymbol: "BTC", color: "#F7931A", status: "active" },
-  { chain: "Solana", symbol: "SOL", address: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU", usdt: "987.25", native: "6.82", nativeSymbol: "SOL", color: "#9945FF", status: "active" },
-  { chain: "Polygon", symbol: "MATIC", address: "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", usdt: "1,423.00", native: "2,140", nativeSymbol: "POL", color: "#8247E5", status: "active" },
-  { chain: "Arbitrum", symbol: "ARB", address: "0xdD2FD4581271e230360230F9337D5c0430Bf44C0", usdt: "892.50", native: "0.421", nativeSymbol: "ETH", color: "#28A0F0", status: "active" },
-  { chain: "Avalanche", symbol: "AVAX", address: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", usdt: "534.82", native: "15.3", nativeSymbol: "AVAX", color: "#E84142", status: "active" },
-  { chain: "Celo", symbol: "CELO", address: "0x90F79bf6EB2c4f870365E785982E1f101E93b906", usdt: "220.00", native: "450", nativeSymbol: "CELO", color: "#35D07F", status: "syncing" },
+  { chain: "Ethereum", symbol: "ETH", address: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD28", usdt: "3,241.50", xaut: "0.015", usat: "420.00", native: "1.847", nativeSymbol: "ETH", color: "#627EEA", status: "active" },
+  { chain: "TON", symbol: "TON", address: "EQDrjaLahLkMB-hMCmkzOyBuHJ139ZDYwomPcYPz8y8-Arx4", usdt: "1,892.00", xaut: "0.008", usat: "250.00", native: "342.5", nativeSymbol: "TON", color: "#0098EA", status: "active" },
+  { chain: "Tron", symbol: "TRX", address: "TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW", usdt: "2,156.75", xaut: "0.012", usat: "310.50", native: "18,420", nativeSymbol: "TRX", color: "#FF0013", status: "active" },
+  { chain: "Bitcoin", symbol: "BTC", address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq", usdt: "1,500.00", xaut: "0.000", usat: "0.00", native: "0.0234", nativeSymbol: "BTC", color: "#F7931A", status: "active" },
+  { chain: "Solana", symbol: "SOL", address: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU", usdt: "987.25", xaut: "0.005", usat: "180.00", native: "6.82", nativeSymbol: "SOL", color: "#9945FF", status: "active" },
+  { chain: "Polygon", symbol: "MATIC", address: "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", usdt: "1,423.00", xaut: "0.010", usat: "275.00", native: "2,140", nativeSymbol: "POL", color: "#8247E5", status: "active" },
+  { chain: "Arbitrum", symbol: "ARB", address: "0xdD2FD4581271e230360230F9337D5c0430Bf44C0", usdt: "892.50", xaut: "0.003", usat: "150.00", native: "0.421", nativeSymbol: "ETH", color: "#28A0F0", status: "active" },
+  { chain: "Avalanche", symbol: "AVAX", address: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", usdt: "534.82", xaut: "0.002", usat: "85.00", native: "15.3", nativeSymbol: "AVAX", color: "#E84142", status: "active" },
+  { chain: "Celo", symbol: "CELO", address: "0x90F79bf6EB2c4f870365E785982E1f101E93b906", usdt: "220.00", xaut: "0.001", usat: "45.00", native: "450", nativeSymbol: "CELO", color: "#35D07F", status: "syncing" },
 ];
 
 // ---- Creators (Real Rumble Profiles) ----
@@ -248,16 +256,16 @@ export const demoCreators: RumbleCreator[] = [
 
 // ---- Tips ----
 export const demoTipHistory = [
-  { id: 1, date: "2025-03-22 14:32", recipient: "@sarah_creates", amount: "2.50", chain: "Ethereum", status: "confirmed", txHash: "0xabc123def456789012345678901234567890abcd" },
-  { id: 2, date: "2025-03-22 13:18", recipient: "@dev_marcus", amount: "5.00", chain: "Polygon", status: "confirmed", txHash: "0xdef456789012345678901234567890abcdef1234" },
-  { id: 3, date: "2025-03-22 12:05", recipient: "@music_maya", amount: "1.50", chain: "TON", status: "confirmed", txHash: "EQB7k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7" },
-  { id: 4, date: "2025-03-22 10:47", recipient: "@crypto_claire", amount: "3.00", chain: "Solana", status: "confirmed", txHash: "5KtP8n9V2mX3rW4qY6sZ7uT8aB9cD0eF1gH2iJ3kL4mN5o" },
-  { id: 5, date: "2025-03-22 09:22", recipient: "@jake_tech", amount: "4.00", chain: "Arbitrum", status: "confirmed", txHash: "0x789012345678901234567890abcdef1234567890" },
-  { id: 6, date: "2025-03-21 22:15", recipient: "@priya_art", amount: "2.00", chain: "Ethereum", status: "confirmed", txHash: "0x567890abcdef123456789012345678901234abcd" },
-  { id: 7, date: "2025-03-21 18:30", recipient: "@tom_creates", amount: "1.00", chain: "Tron", status: "pending", txHash: "abc123def456789012345678901234567890abcdef12" },
-  { id: 8, date: "2025-03-21 15:42", recipient: "@amir_writes", amount: "3.50", chain: "Polygon", status: "confirmed", txHash: "0x345678901234567890abcdef12345678901234ab" },
-  { id: 9, date: "2025-03-21 12:10", recipient: "@lena_games", amount: "2.00", chain: "Ethereum", status: "failed", txHash: "0x901234567890abcdef123456789012345678abcd" },
-  { id: 10, date: "2025-03-21 09:55", recipient: "@ravi_codes", amount: "1.50", chain: "Solana", status: "confirmed", txHash: "8LuQ9nR0sT1uV2wX3yZ4aB5cD6eF7gH8iJ9kL0mN1oP2q" },
+  { id: 1, date: "2025-03-22 14:32", recipient: "@sarah_creates", amount: "2.50", token: "USD₮", chain: "Ethereum", status: "confirmed", txHash: "0xabc123def456789012345678901234567890abcd" },
+  { id: 2, date: "2025-03-22 13:18", recipient: "@dev_marcus", amount: "5.00", token: "USD₮", chain: "Polygon", status: "confirmed", txHash: "0xdef456789012345678901234567890abcdef1234" },
+  { id: 3, date: "2025-03-22 12:05", recipient: "@music_maya", amount: "0.005", token: "XAU₮", chain: "Ethereum", status: "confirmed", txHash: "0x1a2b3c4d5e6f7890abcdef1234567890abcdef12" },
+  { id: 4, date: "2025-03-22 10:47", recipient: "@crypto_claire", amount: "3.00", token: "USD₮", chain: "Solana", status: "confirmed", txHash: "5KtP8n9V2mX3rW4qY6sZ7uT8aB9cD0eF1gH2iJ3kL4mN5o" },
+  { id: 5, date: "2025-03-22 09:22", recipient: "@jake_tech", amount: "15.00", token: "USA₮", chain: "Ethereum", status: "confirmed", txHash: "0x789012345678901234567890abcdef1234567890" },
+  { id: 6, date: "2025-03-21 22:15", recipient: "@priya_art", amount: "2.00", token: "USD₮", chain: "Ethereum", status: "confirmed", txHash: "0x567890abcdef123456789012345678901234abcd" },
+  { id: 7, date: "2025-03-21 18:30", recipient: "@tom_creates", amount: "0.003", token: "XAU₮", chain: "Polygon", status: "pending", txHash: "0xabcdef123456789012345678901234567890abcd" },
+  { id: 8, date: "2025-03-21 15:42", recipient: "@amir_writes", amount: "25.00", token: "USA₮", chain: "Arbitrum", status: "confirmed", txHash: "0x345678901234567890abcdef12345678901234ab" },
+  { id: 9, date: "2025-03-21 12:10", recipient: "@lena_games", amount: "2.00", token: "USD₮", chain: "Ethereum", status: "failed", txHash: "0x901234567890abcdef123456789012345678abcd" },
+  { id: 10, date: "2025-03-21 09:55", recipient: "@ravi_codes", amount: "1.50", token: "USD₮", chain: "Solana", status: "confirmed", txHash: "8LuQ9nR0sT1uV2wX3yZ4aB5cD6eF7gH8iJ9kL0mN1oP2q" },
 ];
 
 // ---- Escrow ----

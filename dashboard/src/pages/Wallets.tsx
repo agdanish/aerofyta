@@ -59,13 +59,25 @@ export default function Wallets() {
               {/* Balances */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">USDT</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">USD₮</p>
                   <p className="text-sm font-semibold tabular-nums">${w.usdt}</p>
                 </div>
                 <div>
                   <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">{w.nativeSymbol}</p>
                   <p className="text-sm font-semibold tabular-nums">{w.native}</p>
                 </div>
+                {w.xaut && parseFloat(w.xaut) > 0 && (
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider mb-0.5" style={{ color: "#D4A843" }}>XAU₮</p>
+                    <p className="text-sm font-semibold tabular-nums">{w.xaut} <span className="text-[10px] text-muted-foreground">oz</span></p>
+                  </div>
+                )}
+                {w.usat && parseFloat(w.usat) > 0 && (
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider mb-0.5" style={{ color: "#1A3C6E" }}>USA₮</p>
+                    <p className="text-sm font-semibold tabular-nums">${w.usat}</p>
+                  </div>
+                )}
               </div>
             </div>
 

@@ -84,6 +84,7 @@ import { ZKProofService } from './zk-proof.service.js';
 import { TipSplitterService } from './tip-splitter.service.js';
 import { RumbleScraperService } from './rumble-scraper.service.js';
 import { EngagementScorerService } from './engagement-scorer.service.js';
+import { OpenClawRuntimeService } from './openclaw-runtime.service.js';
 
 /**
  * Singleton registry that holds every service instance in the application.
@@ -180,6 +181,7 @@ export class ServiceRegistry {
     this._tipSplitter = new TipSplitterService();
     this._rumbleScraper = new RumbleScraperService();
     this._engagementScorer = new EngagementScorerService();
+    this._openClawRuntime = new OpenClawRuntimeService();
   }
 
   // ── Initialization flag ────────────────────────────────────────
@@ -262,6 +264,7 @@ export class ServiceRegistry {
   private readonly _tipSplitter: TipSplitterService;
   private readonly _rumbleScraper: RumbleScraperService;
   private readonly _engagementScorer: EngagementScorerService;
+  private readonly _openClawRuntime: OpenClawRuntimeService;
   private _adversarialDemo: AdversarialDemoService | null = null;
 
   // Wallet-dependent services (created during initialize)
@@ -345,6 +348,7 @@ export class ServiceRegistry {
   get tipSplitter(): TipSplitterService { return this._tipSplitter; }
   get rumbleScraper(): RumbleScraperService { return this._rumbleScraper; }
   get engagementScorer(): EngagementScorerService { return this._engagementScorer; }
+  get openClawRuntime(): OpenClawRuntimeService { return this._openClawRuntime; }
   get adversarialDemo(): AdversarialDemoService | null { return this._adversarialDemo; }
 
   // Wallet-dependent (available after initialize)
@@ -414,6 +418,10 @@ export class ServiceRegistry {
     this._safety.setAnomalyDetection(this._anomalyDetection);
     this._openClaw.setWalletService(this._wallet);
     this._openClaw.setAIService(this._ai);
+
+    // Initialize OpenClaw Runtime — load SOUL.md and skill files
+    this._openClawRuntime.setOpenClawService(this._openClaw);
+    this._openClawRuntime.initialize();
 
     // 3b. Create adversarial demo service (depends on safety, risk, orchestrator)
     this._adversarialDemo = new AdversarialDemoService(

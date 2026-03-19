@@ -14,6 +14,7 @@ export interface PreflightResult {
   canProceed: boolean;
   reason: string;
   chain: ChainId;
+  token?: SupportedToken;
   usdtBalance: string;
   nativeBalance: string;
   reserveMinimum: string;
@@ -132,7 +133,26 @@ const EXPLORER_TX_URLS: Record<string, (hash: string) => string> = {
 };
 
 /** Approximate USD prices for fee calculation — same source as WalletService */
-const APPROX_PRICES: Record<string, number> = { ETH: 2500, TON: 2.5, TRX: 0.25, BTC: 65000, SOL: 150 };
+const APPROX_PRICES: Record<string, number> = { ETH: 2500, TON: 2.5, TRX: 0.25, BTC: 65000, SOL: 150, XAUT: 3000 };
+
+/** Supported token types across the platform */
+export type SupportedToken = 'native' | 'usdt' | 'usat' | 'xaut';
+
+/** Human-readable token labels */
+export const TOKEN_LABELS: Record<SupportedToken, string> = {
+  native: 'Native',
+  usdt: 'USD₮',
+  usat: 'USA₮',
+  xaut: 'XAU₮',
+};
+
+/** Token decimals */
+export const TOKEN_DECIMALS: Record<SupportedToken, number> = {
+  native: 18,
+  usdt: 6,
+  usat: 6,
+  xaut: 6,
+};
 
 /** Reserve minimum in USDT (below this, tip is refused) */
 const RESERVE_MINIMUM_USDT = 10;
@@ -269,7 +289,7 @@ export class WalletOpsService {
   async sendTRON(
     recipient: string,
     amount: string,
-    token: 'native' | 'usdt' = 'native',
+    token: SupportedToken = 'native',
   ): Promise<GaslessSendResult> {
     const ws = this.ensureWallet();
     logger.info('TRON: sending transaction', { recipient, amount, token });
@@ -278,6 +298,10 @@ export class WalletOpsService {
       let result: { hash: string; fee: string };
       if (token === 'usdt') {
         result = await ws.sendUsdtTransfer('tron-nile', recipient, amount);
+      } else if (token === 'usat') {
+        result = await ws.sendUsatTransfer('tron-nile', recipient, amount);
+      } else if (token === 'xaut') {
+        result = await ws.sendXautTransfer('tron-nile', recipient, amount);
       } else {
         result = await ws.sendTransaction('tron-nile', recipient, amount);
       }
@@ -335,7 +359,7 @@ export class WalletOpsService {
   async sendGaslessEVM(
     recipient: string,
     amount: string,
-    token: 'native' | 'usdt' = 'native',
+    token: SupportedToken = 'native',
   ): Promise<GaslessSendResult> {
     const ws = this.ensureWallet();
     logger.info('ERC-4337: attempting gasless EVM transfer', { recipient, amount, token });
@@ -365,6 +389,10 @@ export class WalletOpsService {
       let result: { hash: string; fee: string };
       if (token === 'usdt') {
         result = await ws.sendUsdtTransfer('ethereum-sepolia', recipient, amount);
+      } else if (token === 'usat') {
+        result = await ws.sendUsatTransfer('ethereum-sepolia', recipient, amount);
+      } else if (token === 'xaut') {
+        result = await ws.sendXautTransfer('ethereum-sepolia', recipient, amount);
       } else {
         result = await ws.sendTransaction('ethereum-sepolia', recipient, amount);
       }

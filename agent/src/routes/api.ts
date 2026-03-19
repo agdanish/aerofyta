@@ -60,6 +60,7 @@ import { registerCacheRoutes } from './cache.routes.js';
 import { registerAutoTipRoutes } from './auto-tip.routes.js';
 import { DecisionCacheService } from '../services/decision-cache.service.js';
 import { AutoTipService } from '../services/auto-tip.service.js';
+import { registerOpenClawRoutes } from './openclaw.routes.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -564,6 +565,10 @@ export function createApiRouter(
   const autoTipService = new AutoTipService();
   registerAutoTipRoutes(router, autoTipService);
   logger.info('Auto-tip standing order routes mounted at /api/auto-tip/*');
+
+  // ── OpenClaw Runtime (SOUL.md + skill files) ──────────────────
+  registerOpenClawRoutes(router, services.openClawRuntime);
+  logger.info('OpenClaw Runtime routes mounted at /api/openclaw/*');
 
   return router;
 }
