@@ -8,6 +8,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'node:http';
 import express from 'express';
+import helmet from 'helmet';
 import cors from 'cors';
 import WDK from '@tetherto/wdk';
 import { WebSocketService } from './services/websocket.service.js';
@@ -556,8 +557,9 @@ async function main(): Promise<void> {
 
   // Create Express app
   const app = express();
+  app.use(helmet());
   app.use(cors({
-    origin: process.env.CORS_ORIGIN ?? '*',
+    origin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
   }));

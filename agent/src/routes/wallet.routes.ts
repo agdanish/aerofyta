@@ -92,13 +92,9 @@ export function registerWalletRoutes(
     }
   });
 
-  /** GET /api/wallet/seed — Masked seed phrase (never expose full seed over HTTP) */
+  /** GET /api/wallet/seed — Disabled for security */
   router.get('/wallet/seed', (_req, res) => {
-    const seed = wallet.getSeedPhrase();
-    const words = seed.split(' ');
-    // Show first and last word only, mask the rest
-    const masked = words.map((w, i) => (i === 0 || i === words.length - 1) ? w : '****').join(' ');
-    res.json({ seed: masked, note: 'Full seed hidden for security. Check your .env file.' });
+    res.status(403).json({ error: 'Seed phrase access disabled for security.' });
   });
 
   /** GET /api/wallets — List multiple derived wallets for a chain */

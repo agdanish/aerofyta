@@ -3,7 +3,7 @@
 // Self-sending webhook simulator that runs on startup, feeding realistic
 // platform events to the agent's own /api/webhooks/ingest endpoint.
 
-import { createHmac } from 'node:crypto';
+import { createHmac, randomUUID } from 'node:crypto';
 import { logger } from '../utils/logger.js';
 
 // ── Types ─────────────────────────────────────────────────────────
@@ -66,7 +66,7 @@ export class WebhookSimulatorService {
 
   constructor(port: number = 3001) {
     this.port = port;
-    this.secret = 'aerofyta-internal-demo-key';
+    this.secret = process.env.WEBHOOK_SECRET ?? randomUUID();
   }
 
   /**

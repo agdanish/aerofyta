@@ -265,7 +265,7 @@ export function registerAgentStatusRoutes(
         creatorAnalytics: true,
         multiLanguage: ['en', 'es', 'fr', 'ar', 'zh'],
       },
-      demoMode: process.env.DEMO_MODE !== 'false',
+      demoMode: process.env.DEMO_MODE === 'true',
     };
     res.json(health);
   });
@@ -827,8 +827,8 @@ export function registerAgentStatusRoutes(
       case 'escrow': {
         const escrow = sr.escrow;
         const { escrow: created, secret: escrowSecret } = await escrow.createEscrow({
-          sender: '0xDemoSender',
-          recipient: '0xDemoRecipient',
+          sender: '0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18',
+          recipient: '0x53d284357EC70cE289D6D64134DfAc8E511c8a3D',
           amount: '0.005',
           token: 'usdt',
           chainId: 'ethereum-sepolia',

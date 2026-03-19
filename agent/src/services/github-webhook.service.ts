@@ -2,7 +2,7 @@
 // AeroFyta — GitHub Webhook Integration Service
 // Automatic PR/issue tipping for code contributors via GitHub webhooks.
 
-import { createHmac } from 'node:crypto';
+import { createHmac, randomUUID } from 'node:crypto';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -152,7 +152,7 @@ export class GitHubWebhookService extends EventEmitter {
 
   constructor() {
     super();
-    this.webhookSecret = process.env.GITHUB_WEBHOOK_SECRET ?? 'aerofyta-github-secret';
+    this.webhookSecret = process.env.GITHUB_WEBHOOK_SECRET ?? randomUUID();
     this.loadState();
     logger.info('GitHubWebhookService initialized', {
       contributors: this.contributors.size,
