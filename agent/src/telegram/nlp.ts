@@ -34,6 +34,8 @@ export type IntentType =
   | 'logs'
   | 'mood'
   | 'agent'
+  | 'greeting'
+  | 'thanks'
   | 'unknown';
 
 export interface ParsedTipIntent {
@@ -111,6 +113,8 @@ const INTENT_KEYWORDS: Array<{ pattern: RegExp; type: IntentType }> = [
   { pattern: /\b(logs|log|recent logs)\b/i, type: 'logs' },
   { pattern: /\b(mood|generous|cautious|strategic)\b/i, type: 'mood' },
   { pattern: /\b(agents|multi.?agent|consensus)\b/i, type: 'agent' },
+  { pattern: /\b(hi|hello|hey|yo|sup|greetings|good morning|good evening|good afternoon|hola|howdy)\b/i, type: 'greeting' },
+  { pattern: /\b(thanks|thank you|thx|ty|appreciate|cheers)\b/i, type: 'thanks' },
 ];
 
 // ── Parser ─────────────────────────────────────────────────────

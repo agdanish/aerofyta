@@ -371,14 +371,33 @@ export class TelegramGrammyBot {
           case 'logs': await demoLogs(ctx); break;
           case 'mood': await demoMood(ctx); break;
           case 'agent': await demoAgent(ctx); break;
+          case 'greeting':
+            await ctx.reply(
+              `Hey ${ctx.from?.first_name ?? 'there'}! I'm AeroFyta, your autonomous tipping agent.\n\n` +
+              'I can tip creators across 9 blockchains, track wallets, run DeFi operations, and more.\n\n' +
+              'Try:\n' +
+              '  "check my balance"\n' +
+              '  "tip @sarah 2 usdt on polygon"\n' +
+              '  "show gas prices"\n\n' +
+              'Type /help for all 60 commands.',
+            );
+            break;
+          case 'thanks':
+            await ctx.reply(
+              'You\'re welcome! Let me know if you need anything else.\n\n' +
+              'Type /help for all 60 commands.',
+            );
+            break;
           case 'unknown':
           default:
             await ctx.reply(
-              'I didn\'t understand that. Try commands like:\n' +
+              'I didn\'t catch that. Try:\n' +
               '  "tip @sarah 2.5 polygon"\n' +
               '  "check my balance"\n' +
-              '  "who should I tip?"\n\n' +
-              'Type /help for all commands.',
+              '  "who should I tip?"\n' +
+              '  "show gas prices"\n' +
+              '  "what\'s my mood?"\n\n' +
+              'Type /help for all 60 commands.',
             );
             break;
         }
