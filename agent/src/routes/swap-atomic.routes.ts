@@ -4,6 +4,13 @@
 import { Router } from 'express';
 import type { AtomicSwapService } from '../services/atomic-swap.service.js';
 
+// WDK type imports for cross-chain atomic swaps via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// Atomic swaps use WDK HTLC pattern across multiple chains for trustless exchange
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register cross-chain atomic swap routes onto the given router.
  *

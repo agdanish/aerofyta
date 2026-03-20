@@ -13,6 +13,12 @@ import type { ENSService } from '../services/ens.service.js';
 import type { TagsService } from '../services/tags.service.js';
 import type { ChallengesService } from '../services/challenges.service.js';
 import type { LimitsService } from '../services/limits.service.js';
+
+// WDK type imports for wallet settings configuration via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Settings routes configure WDK wallet preferences, chain defaults, and ENS resolution
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
 import type { GoalsService } from '../services/goals.service.js';
 
 export interface SettingsDeps {

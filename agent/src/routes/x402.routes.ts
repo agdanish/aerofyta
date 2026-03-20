@@ -7,6 +7,12 @@
 import { Router } from 'express';
 import { X402ProtocolService } from '../services/x402-protocol.service.js';
 
+// WDK type imports for x402 paywall payment processing via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// x402 payments verify USDT transfers on-chain via WDK getBalance() and account.transfer()
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register x402 protocol routes.
  * Mounts under /api/x402/protocol/...

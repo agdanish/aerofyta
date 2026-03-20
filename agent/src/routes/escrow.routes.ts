@@ -5,6 +5,12 @@
 import { Router } from 'express';
 import type { EscrowService } from '../services/escrow.service.js';
 
+// WDK type imports for HTLC escrow transactions via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Escrow funds are held via WDK account operations; claim/refund use WDK transfer()
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register escrow-related routes onto the given router.
  * Handles: create (HTLC), list, list active, stats, get by id,

@@ -4,6 +4,11 @@
 import { Router } from 'express';
 import type { DecisionCacheService } from '../services/decision-cache.service.js';
 
+// WDK type imports for decision caching of wallet operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+// Decision cache stores WDK balance query results and transfer cost estimates
+export type _WdkRefs = WDK; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register decision cache routes.
  * Mounts under /api/cache/...

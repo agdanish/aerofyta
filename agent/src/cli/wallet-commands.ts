@@ -3,6 +3,14 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 
+// WDK type imports for wallet CLI operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+import type WalletManagerTron from '@tetherto/wdk-wallet-tron';
+// CLI wallet commands query WDK getBalance(), getTokenBalance(), and account.getAddress()
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon | WalletManagerTron; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers ────────────────────────────────────────────────────
 const c = {
   reset: '\x1b[0m',

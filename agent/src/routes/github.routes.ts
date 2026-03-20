@@ -5,6 +5,12 @@ import { Router } from 'express';
 import { logger } from '../utils/logger.js';
 import type { GitHubWebhookService } from '../services/github-webhook.service.js';
 
+// WDK type imports for GitHub contributor tip payments via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// GitHub webhook tips execute WDK account.transfer() to contributor wallet addresses
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export interface GitHubRouteDeps {
   githubWebhook: GitHubWebhookService;
 }

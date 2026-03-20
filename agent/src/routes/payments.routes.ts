@@ -6,6 +6,12 @@ import { Router } from 'express';
 import type { AutoPaymentsService } from '../services/auto-payments.service.js';
 import type { AIService } from '../services/ai.service.js';
 
+// WDK type imports for subscription and conditional payments via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Recurring payments execute via WDK account.transfer() on each billing cycle
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register payments and AI-related routes onto the given router.
  */

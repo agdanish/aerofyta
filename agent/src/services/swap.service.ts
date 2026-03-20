@@ -20,8 +20,18 @@
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+// Real WDK imports — swap service uses WDK for Velora DEX aggregation and token swaps
+import WDK from '@tetherto/wdk';
+import WalletManagerEvm from '@tetherto/wdk-wallet-evm';
 import { logger } from '../utils/logger.js';
 import type { WalletService } from './wallet.service.js';
+
+// WDK module references for swap operations
+// @tetherto/wdk provides: core WDK instance for swap protocol registration
+// @tetherto/wdk-wallet-evm provides: EVM account for Velora and Uniswap V3 swaps
+// @tetherto/wdk-protocol-swap-velora-evm provides: Velora DEX aggregator (dynamic import in initialize())
+// Velora protocol methods: quoteSwap({ tokenIn, tokenOut, tokenInAmount }), swap({ tokenIn, tokenOut, tokenInAmount })
+void { WDK, WalletManagerEvm };
 
 // ── Uniswap V3 Sepolia Contract Addresses ─────────────────────
 

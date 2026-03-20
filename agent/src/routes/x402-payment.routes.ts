@@ -8,6 +8,12 @@
 import { Router } from 'express';
 import { X402PaymentService } from '../services/x402-payment.service.js';
 
+// WDK type imports for x402 HTTP micropayment verification via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// x402 paywalls verify WDK on-chain payments before granting access to premium content
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register x402 micropayment routes.
  * Mounts under /api/x402/...

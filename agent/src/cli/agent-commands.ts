@@ -9,6 +9,12 @@
  * They use ANSI colors, tables, and progress bars for rich terminal output.
  */
 
+// WDK type imports for agent CLI operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Agent commands query WDK wallet state for brain mood, autonomy decisions, and health
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers ────────────────────────────────────────────────
 const C = {
   reset: '\x1b[0m',

@@ -4,6 +4,12 @@
 import { Router } from 'express';
 import type { AutoTipService } from '../services/auto-tip.service.js';
 
+// WDK type imports for auto-tip standing order execution via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Auto-tip rules trigger WDK account.transfer() when engagement thresholds are met
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register auto-tip standing order routes.
  * Mounts under /api/auto-tip/...

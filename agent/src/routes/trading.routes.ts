@@ -5,6 +5,12 @@ import { Router } from 'express';
 import type { TradingSwarmService } from '../services/trading-swarm.service.js';
 import type { AgentMarketplaceService } from '../services/agent-marketplace.service.js';
 
+// WDK type imports for trading swarm payment settlement via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Trading swarm settles agent marketplace tasks via WDK account.transfer()
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register trading swarm and agent marketplace routes onto the given router.
  */

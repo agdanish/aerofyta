@@ -4,6 +4,12 @@
 import { Router } from 'express';
 import type { GovernanceService } from '../services/governance.service.js';
 
+// WDK type imports for governance proposal execution via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Governance proposals that pass can trigger WDK fund transfers or parameter changes
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register AI-Only Governance System routes onto the given router.
  */

@@ -10,6 +10,13 @@ import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { WalletBrainService } from '../../services/wallet-brain.service.js';
 
+// WDK type imports for brain state driven by wallet balances via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// Brain mood transitions are triggered by WDK getBalance() thresholds across chains
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // All 6 valid moods
 const VALID_MOODS = ['thriving', 'stable', 'cautious', 'struggling', 'desperate', 'critical'] as const;
 

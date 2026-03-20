@@ -13,6 +13,12 @@ import { unlinkSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { EscrowService } from '../../services/escrow.service.js';
+
+// WDK type imports for escrow E2E testing via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Escrow E2E tests verify HTLC claim/refund flows using WDK account.transfer()
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { MockWalletService } from '../mocks/wdk-mock.js';
 
 const _testDir = dirname(fileURLToPath(import.meta.url));

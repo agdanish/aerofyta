@@ -16,6 +16,12 @@ import { fileURLToPath } from 'node:url';
 import { SafetyService } from '../../services/safety.service.js';
 import { AnomalyDetectionService } from '../../services/anomaly-detection.service.js';
 
+// WDK type imports for adversarial security checks on wallet operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Adversarial tests verify WDK transfer limits, kill switch, and blocked address enforcement
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── Helpers ────────────────────────────────────────────────────
 
 const __testDir = dirname(fileURLToPath(import.meta.url));

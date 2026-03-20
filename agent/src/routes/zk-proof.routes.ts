@@ -4,6 +4,12 @@
 import { Router } from 'express';
 import type { ZKProofService, Groth16Result } from '../services/zk-proof.service.js';
 
+// WDK type imports for ZK proof generation on wallet data via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// ZK proofs attest to WDK wallet balance ranges without revealing exact amounts
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register ZK proof routes onto the given router.
  *

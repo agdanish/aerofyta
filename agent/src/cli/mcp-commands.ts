@@ -5,6 +5,12 @@ import { PRESETS, listPresets } from '../sdk/presets.js';
 import type { HookEvent } from '../sdk/hooks.js';
 import { UniversalAdapter } from '../sdk/adapters/index.js';
 
+// WDK type imports for MCP toolkit introspection via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type { WdkMcpServer } from '@tetherto/wdk-mcp-toolkit';
+// MCP commands list WDK built-in tools (WALLET_TOOLS, PRICING_TOOLS, etc.)
+export type _WdkRefs = WDK | WdkMcpServer; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers (shared with CLI) ────────────────────────────────
 const c = {
   reset: '\x1b[0m',

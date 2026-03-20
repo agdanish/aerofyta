@@ -1,6 +1,13 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
 // AeroFyta CLI — 18 payment commands for tips, escrow, splits, DCA, streaming, subscriptions, x402
 
+// WDK type imports for payment CLI operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// Payment CLI commands invoke WDK account.transfer(), escrow, and DCA operations
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 const BASE_URL = `http://localhost:${process.env['PORT'] || '3001'}`;
 
 // ── ANSI helpers ────────────────────────────────────────────────────

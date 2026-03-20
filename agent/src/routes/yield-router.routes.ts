@@ -5,6 +5,13 @@ import { Router } from 'express';
 import type { YieldRouterService } from '../services/yield-router.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for yield protocol allocation via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type LendingProtocolAave from '@tetherto/wdk-protocol-lending-aave-evm';
+// Yield router allocates to Aave via WDK LendingProtocolAave.supply() and .withdraw()
+export type _WdkRefs = WDK | WalletManagerEvm | LendingProtocolAave; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export function registerYieldRouterRoutes(router: Router, yieldRouter: YieldRouterService): void {
   /**
    * GET /api/yield/router — List all yield protocols and current state

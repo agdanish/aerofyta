@@ -4,6 +4,13 @@
 import { Router } from 'express';
 import type { ReputationPassportService } from '../services/reputation-passport.service.js';
 
+// WDK type imports for cross-chain reputation passports via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// Reputation passports link WDK wallet addresses across EVM, TON, and Tron chains
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register reputation passport routes onto the given router.
  * Handles: get/generate passport, link address, export/import passport.

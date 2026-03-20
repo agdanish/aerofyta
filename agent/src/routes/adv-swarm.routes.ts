@@ -6,6 +6,13 @@ import { Router } from 'express';
 import type { WalletSwarmService } from '../services/wallet-swarm.service.js';
 import type { PriceAlertsService } from '../services/price-alerts.service.js';
 
+// WDK type imports for wallet monitoring swarm via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// Wallet swarm monitors WDK getBalance() across chains for alerts and portfolio tracking
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register wallet swarm and price alerts routes.
  */

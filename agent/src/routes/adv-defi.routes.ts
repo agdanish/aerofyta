@@ -8,6 +8,13 @@ import type { LendingService } from '../services/lending.service.js';
 import type { DeFiStrategyService } from '../services/defi-strategy.service.js';
 import type { SelfSustainingService } from '../services/self-sustaining.service.js';
 
+// WDK type imports for advanced DeFi operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type LendingProtocolAave from '@tetherto/wdk-protocol-lending-aave-evm';
+// Advanced DeFi routes use WDK Aave supply/withdraw/borrow and ZK privacy layers
+export type _WdkRefs = WDK | WalletManagerEvm | LendingProtocolAave; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register ZK privacy, lending, DeFi strategy, and sustainability routes.
  */

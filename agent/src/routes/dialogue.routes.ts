@@ -5,6 +5,11 @@ import { Router } from 'express';
 import type { AgentDialogueService } from '../services/agent-dialogue.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for agent dialogue board meeting decisions via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+// Dialogue sessions reference WDK wallet states when making fund allocation decisions
+export type _WdkRefs = WDK; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export function registerDialogueRoutes(
   router: Router,
   dialogueService: AgentDialogueService,

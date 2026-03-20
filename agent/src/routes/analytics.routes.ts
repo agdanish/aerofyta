@@ -13,6 +13,12 @@ import type { EconomicsService } from '../services/economics.service.js';
 import type { CreatorAnalyticsService } from '../services/creator-analytics.service.js';
 import type { SafetyService } from '../services/safety.service.js';
 import type { RpcFailoverService } from '../services/rpc-failover.service.js';
+
+// WDK type imports for on-chain analytics via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Analytics routes query WDK getBalance() and transaction history across all chains
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
 import type { AutonomousLoopService } from '../services/autonomous-loop.service.js';
 import type { AnomalyDetectionService } from '../services/anomaly-detection.service.js';
 import type { CreditScoringService } from '../services/credit-scoring.service.js';

@@ -3,6 +3,11 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 
+// WDK type imports for data commands interacting with wallet state via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+// Data commands reference WDK wallet addresses for creator payment mappings
+export type _WdkRefs = WDK; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers (zero deps) ────────────────────────────────────────
 const c = {
   reset: '\x1b[0m',

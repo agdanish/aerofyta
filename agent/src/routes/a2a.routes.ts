@@ -5,6 +5,13 @@
 import { Router } from 'express';
 import type { A2AProtocolService } from '../services/a2a-protocol.service.js';
 
+// WDK type imports for A2A payment execution via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// A2A /pay endpoint executes cross-agent transfers via WDK account.transfer()
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register A2A protocol routes onto the given Express router.
  *

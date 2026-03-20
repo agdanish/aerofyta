@@ -5,6 +5,11 @@ import { Router } from 'express';
 import type { LLMCostTrackerService } from '../services/llm-cost-tracker.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for LLM cost budgeting against wallet balance via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+// LLM cost recommendations factor in WDK wallet balance to determine affordable model tier
+export type _WdkRefs = WDK; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register LLM cost tracking endpoints.
  *

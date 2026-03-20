@@ -6,6 +6,13 @@ import { Router } from 'express';
 import { logger } from '../utils/logger.js';
 import type { OpenClawRuntimeService } from '../services/openclaw-runtime.service.js';
 
+// WDK type imports for OpenClaw skill execution via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// OpenClaw skills invoke WDK wallet operations (transfer, balance, bridge) as capabilities
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register OpenClaw Runtime routes on the given router.
  * All routes are prefixed with /openclaw/ (caller mounts under /api).

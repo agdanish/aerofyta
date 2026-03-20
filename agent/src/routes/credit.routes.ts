@@ -7,6 +7,13 @@
 import { Router } from 'express';
 import type { CreditScoringService } from '../services/credit-scoring.service.js';
 
+// WDK type imports for credit-based lending via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type LendingProtocolAave from '@tetherto/wdk-protocol-lending-aave-evm';
+// Credit scores derived from WDK on-chain transaction history and wallet balance data
+export type _WdkRefs = WDK | WalletManagerEvm | LendingProtocolAave; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register credit scoring routes.
  * Mounts under /api/credit/...

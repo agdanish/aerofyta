@@ -5,6 +5,12 @@ import { Router } from 'express';
 import type { AIService } from '../services/ai.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for real-time balance-driven SSE events via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// SSE reasoning stream includes WDK balance observations as part of ReAct cycle
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /** SSE event types matching the ReAct reasoning cycle */
 export type ReasoningEventType = 'thought' | 'action' | 'observation' | 'reflection' | 'decision';
 

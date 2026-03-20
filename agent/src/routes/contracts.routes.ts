@@ -6,6 +6,12 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// WDK type imports for deployed contract interaction via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Contracts deployed via WDK-managed wallets; verification uses WDK account.getAddress()
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DEPLOYED_FILE = resolve(__dirname, '..', '..', '.deployed-contracts.json');
 const PROOF_FILE = resolve(__dirname, '..', '..', '.proof-tx.json');

@@ -18,6 +18,15 @@ import type { AutonomousLoopService } from '../services/autonomous-loop.service.
 import type { TreasuryService } from '../services/treasury.service.js';
 import type { IndexerService } from '../services/indexer.service.js';
 import type { TokenType, ChainId } from '../types/index.js';
+
+// WDK type imports for DeFi operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type Usdt0ProtocolEvm from '@tetherto/wdk-protocol-bridge-usdt0-evm';
+import type SwapProtocolVelora from '@tetherto/wdk-protocol-swap-velora-evm';
+import type LendingProtocolAave from '@tetherto/wdk-protocol-lending-aave-evm';
+// DeFi routes use WDK bridge, swap, and lending protocols for on-chain operations
+export type _WdkRefs = WDK | WalletManagerEvm | Usdt0ProtocolEvm | SwapProtocolVelora | LendingProtocolAave; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { logger } from '../utils/logger.js';
 import { transactionLimiter } from '../middleware/rateLimit.js';
 

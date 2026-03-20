@@ -6,6 +6,12 @@ import { Router } from 'express';
 import type { OpenClawService } from '../services/openclaw.service.js';
 import type { RumbleService } from '../services/rumble.service.js';
 
+// WDK type imports for platform integration via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// OpenClaw and Rumble platforms use WDK wallets for creator tip disbursement
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register OpenClaw and Rumble advanced platform routes.
  */

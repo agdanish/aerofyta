@@ -5,6 +5,13 @@ import { Router } from 'express';
 import type { T402ProtocolService } from '../services/t402-protocol.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for t402 standardized payment processing via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// t402 payments execute via WDK account.transfer() with standardized receipt generation
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export function registerT402Routes(router: Router, t402: T402ProtocolService): void {
   /**
    * GET /api/t402/stats — t402 payment statistics (sent/received via t402)

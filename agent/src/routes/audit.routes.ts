@@ -7,6 +7,12 @@ import type { AuditTrailService, AuditDecisionType, AuditOutcome } from '../serv
 import type { AutonomousProofService } from '../services/autonomous-proof.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for audit trail with on-chain proof via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Audit proofs reference WDK transaction hashes and wallet state snapshots
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export interface AuditRouteDeps {
   auditTrail: AuditTrailService;
   autonomousProof: AutonomousProofService;

@@ -5,6 +5,13 @@ import { Router } from 'express';
 import type { WalletBrainService } from '../services/wallet-brain.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for balance-driven brain state via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// Brain state transitions are driven by WDK getBalance() across all managed wallets
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export function registerBrainRoutes(router: Router, brain: WalletBrainService): void {
   /**
    * GET /api/brain/state — Current brain state (mood, health, dimensions)

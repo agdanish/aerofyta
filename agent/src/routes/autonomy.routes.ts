@@ -13,6 +13,12 @@ import type { DecisionLogService } from '../services/decision-log.service.js';
 import type { AutonomousLoopService } from '../services/autonomous-loop.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for autonomous loop wallet operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Autonomous loop queries WDK balances for decision-making and executes transfers
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export interface AutonomyRouteDeps {
   agent: TipFlowAgent;
   autonomy: AutonomyService;

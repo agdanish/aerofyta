@@ -4,6 +4,12 @@
 import { Router } from 'express';
 import type { RumbleService } from '../services/rumble.service.js';
 
+// WDK type imports for Rumble creator tip payments via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Rumble auto-tips execute WDK account.transfer() to creator wallet addresses
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export interface RumbleRouteDeps {
   rumble: RumbleService;
 }

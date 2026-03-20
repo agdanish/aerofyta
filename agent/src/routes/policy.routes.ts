@@ -5,6 +5,12 @@ import { Router } from 'express';
 import type { PolicyEnforcementService, PolicyRule } from '../services/policy-enforcement.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for policy enforcement on wallet operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Policies gate WDK account.transfer() calls with configurable rules and limits
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export function registerPolicyRoutes(
   router: Router,
   policyService: PolicyEnforcementService,

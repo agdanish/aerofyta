@@ -8,6 +8,14 @@ import { WdkDeepIntegrationService } from '../services/wdk-deep-integration.serv
 import type { ChainId } from '../types/index.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for wallet management via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+import type WalletManagerTron from '@tetherto/wdk-wallet-tron';
+// Wallet routes query WDK getBalance(), getTokenBalance(), and account.getAddress()
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon | WalletManagerTron; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register wallet-related routes onto the given router.
  * Handles: addresses, balances, receive info, seed (masked), HD wallets, accounts.

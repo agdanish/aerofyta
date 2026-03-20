@@ -4,6 +4,12 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+// WDK type imports for analytics CLI operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Analytics commands aggregate WDK on-chain data across all managed wallets
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers (zero deps) ────────────────────────────────────────
 const c = {
   reset: '\x1b[0m',

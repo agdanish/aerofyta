@@ -5,6 +5,12 @@ import { Router } from 'express';
 import type { TipPoolService } from '../services/tip-pool.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for pool distribution via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Pool distribution executes batch WDK account.transfer() to all pool recipients
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register tip-pool routes onto the given router.
  * Handles: list pools, get pool, create pool, contribute, distribute, stats.

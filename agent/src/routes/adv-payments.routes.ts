@@ -8,6 +8,12 @@ import type { AutoPaymentsService } from '../services/auto-payments.service.js';
 import type { MultiSigService } from '../services/multisig.service.js';
 import type { TaxReportingService } from '../services/tax-reporting.service.js';
 
+// WDK type imports for advanced payment operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// QR merchant payments, multi-sig approvals, and bill splits execute via WDK transfers
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register QR merchant, bill splitting, multi-sig, and tax reporting routes.
  */

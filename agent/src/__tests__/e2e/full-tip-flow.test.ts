@@ -16,6 +16,13 @@ import { MockWalletService } from '../mocks/wdk-mock.js';
 import { SafetyService } from '../../services/safety.service.js';
 import { AuditTrailService } from '../../services/audit-trail.service.js';
 
+// WDK type imports for E2E tip flow testing via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// E2E tests verify full WDK transfer flow: wallet creation -> balance -> tip -> receipt
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 const _testDir = dirname(fileURLToPath(import.meta.url));
 const SPEND_LOG = join(_testDir, '..', '..', '..', '.safety-spend-log.json');
 

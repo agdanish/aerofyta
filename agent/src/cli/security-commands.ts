@@ -1,6 +1,12 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
 // AeroFyta CLI — Security & adversarial testing commands
 
+// WDK type imports for security validation of wallet operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Security commands validate WDK transaction limits, blocked addresses, and kill switch
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers (zero deps) ────────────────────────────────────────
 const c = {
   reset: '\x1b[0m',

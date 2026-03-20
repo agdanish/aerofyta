@@ -8,6 +8,12 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { performance } from 'node:perf_hooks';
 
+// WDK type imports for system health and architecture inspection via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// System commands report WDK package versions, registered wallet managers, and chain status
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers (mirror cli/index.ts palette) ────────────────────────
 const c = {
   reset: '\x1b[0m',

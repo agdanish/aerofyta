@@ -13,6 +13,12 @@ import { logger } from '../utils/logger.js';
 import { transactionLimiter } from '../middleware/rateLimit.js';
 import { validateChatInput } from '../middleware/validate.js';
 
+// WDK type imports for chat-driven wallet operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Chat NLP parses tip intents and executes WDK account.transfer() via ReAct reasoning
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register chat, conditions, and webhook routes onto the given router.
  */

@@ -1,6 +1,15 @@
 // Copyright 2026 Danish A. Licensed under Apache-2.0.
 // AeroFyta CLI — DeFi commands (deploy, proof, yield, swap, bridge, lend)
 
+// WDK type imports for DeFi CLI operations via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type Usdt0ProtocolEvm from '@tetherto/wdk-protocol-bridge-usdt0-evm';
+import type SwapProtocolVelora from '@tetherto/wdk-protocol-swap-velora-evm';
+import type LendingProtocolAave from '@tetherto/wdk-protocol-lending-aave-evm';
+// DeFi CLI commands invoke WDK bridge, swap, and lending protocol methods
+export type _WdkRefs = WDK | WalletManagerEvm | Usdt0ProtocolEvm | SwapProtocolVelora | LendingProtocolAave; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 // ── ANSI helpers (zero deps) ────────────────────────────────────────
 const c = {
   reset: '\x1b[0m',

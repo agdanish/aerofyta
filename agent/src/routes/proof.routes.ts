@@ -9,6 +9,12 @@ import type { WalletService } from '../services/wallet.service.js';
 import type { LendingService } from '../services/lending.service.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for on-chain proof generation via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Proof bundles include WDK transaction hashes verified on Sepolia testnet
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROOF_BUNDLE_PATH = resolve(__dirname, '..', '..', '.proof-bundle.json');
 

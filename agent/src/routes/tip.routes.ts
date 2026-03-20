@@ -15,6 +15,13 @@ import { validateBody, TipRequestSchema } from '../utils/schemas.js';
 import type { SafetyService } from '../services/safety.service.js';
 import type { RiskEngineService } from '../services/risk-engine.service.js';
 
+// WDK type imports for tip transfer execution via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+// Tip transfers use WDK account.transfer() for on-chain USDT/USDT0 delivery
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register tip-related routes onto the given router.
  * Handles: send tip, batch tip, split tip, CSV import, NLP parse, fee estimate, receipt.

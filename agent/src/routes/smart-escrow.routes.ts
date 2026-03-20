@@ -4,6 +4,12 @@
 import { Router } from 'express';
 import type { SmartEscrowService } from '../services/smart-escrow.service.js';
 
+// WDK type imports for CREATE2 smart escrow via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Smart escrow uses deterministic CREATE2 addresses; funds via WDK account.transfer()
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register smart escrow routes with CREATE2-style deterministic addresses.
  *

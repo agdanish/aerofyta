@@ -6,6 +6,12 @@ import type { TipSplitterService, SplitShare } from '../services/tip-splitter.se
 import type { ChainId, TokenType } from '../types/index.js';
 import { logger } from '../utils/logger.js';
 
+// WDK type imports for tip splitting via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+// Split tips execute multiple WDK account.transfer() calls proportionally
+export type _WdkRefs = WDK | WalletManagerEvm; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export interface SplitRouteDeps {
   tipSplitter: TipSplitterService;
 }

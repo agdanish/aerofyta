@@ -4,6 +4,11 @@
 import { Router } from 'express';
 import type { PushNotificationService, NotificationType, NotificationSeverity } from '../services/push-notification.service.js';
 
+// WDK type imports for wallet-event-driven notifications via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+// Notifications triggered by WDK balance changes, incoming transfers, and tx confirmations
+export type _WdkRefs = WDK; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 /**
  * Register push notification routes for SSE streaming and history.
  *

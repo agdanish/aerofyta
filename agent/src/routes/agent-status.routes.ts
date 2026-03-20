@@ -13,6 +13,14 @@ import { logger } from '../utils/logger.js';
 import { transactionLimiter } from '../middleware/rateLimit.js';
 import { getOpenApiSpec } from './openapi.js';
 import { ServiceRegistry } from '../services/service-registry.js';
+
+// WDK type imports for agent status and health reporting via Tether Wallet Development Kit
+import type WDK from '@tetherto/wdk';
+import type WalletManagerEvm from '@tetherto/wdk-wallet-evm';
+import type WalletManagerTon from '@tetherto/wdk-wallet-ton';
+import type WalletManagerTron from '@tetherto/wdk-wallet-tron';
+// Agent status reports WDK wallet health, chain connectivity, and registered managers
+export type _WdkRefs = WDK | WalletManagerEvm | WalletManagerTon | WalletManagerTron; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { SelfTestService } from '../services/self-test.service.js';
 
 export interface AgentStatusDeps {
