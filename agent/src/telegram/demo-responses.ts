@@ -11,6 +11,7 @@
  */
 
 import type { Context } from 'grammy';
+import { startKeyboard, balanceKeyboard, tipConfirmKeyboard, helpCategoryKeyboard, quickActionsKeyboard } from './bot.js';
 
 // ── Demo data ──────────────────────────────────────────────────
 
@@ -80,7 +81,7 @@ export async function demoStart(ctx: Context): Promise<void> {
     '',
     '_Powered by 12 Tether WDK packages | Apache 2.0_',
   ].join('\n');
-  await ctx.reply(msg, { parse_mode: 'Markdown' });
+  await ctx.reply(msg, { parse_mode: 'Markdown', reply_markup: startKeyboard() });
 }
 
 export async function demoHelp(ctx: Context): Promise<void> {
@@ -164,7 +165,7 @@ export async function demoHelp(ctx: Context): Promise<void> {
     '  "check my balance"',
     '  "who should I tip?"',
   ].join('\n');
-  await ctx.reply(msg, { parse_mode: 'Markdown' });
+  await ctx.reply(msg, { parse_mode: 'Markdown', reply_markup: helpCategoryKeyboard() });
 }
 
 export async function demoBalance(ctx: Context): Promise<void> {
@@ -176,7 +177,7 @@ export async function demoBalance(ctx: Context): Promise<void> {
     lines.push('');
   }
   lines.push('_Total USDT across chains: ~2,480.00_');
-  await ctx.reply(lines.join('\n'), { parse_mode: 'Markdown' });
+  await ctx.reply(lines.join('\n'), { parse_mode: 'Markdown', reply_markup: balanceKeyboard() });
 }
 
 export async function demoStatus(ctx: Context): Promise<void> {
@@ -209,7 +210,7 @@ export async function demoStatus(ctx: Context): Promise<void> {
     '  Guardian: Online',
     '  TreasuryOptimizer: Online',
   ].join('\n');
-  await ctx.reply(msg, { parse_mode: 'Markdown' });
+  await ctx.reply(msg, { parse_mode: 'Markdown', reply_markup: quickActionsKeyboard() });
 }
 
 export async function demoTip(ctx: Context): Promise<void> {
@@ -258,23 +259,33 @@ export async function demoTip(ctx: Context): Promise<void> {
 
   await new Promise(resolve => setTimeout(resolve, 1000));
 
-  // Phase 3: Confirmed
+  // Phase 3: Rich receipt card
   const fakeTxHash = '0x' + Array.from({ length: 64 }, () =>
     Math.floor(Math.random() * 16).toString(16)).join('');
-
-  const lines = [
-    'Tip sent successfully!',
+  const fee = (Math.random() * 0.005 + 0.0001).toFixed(6);
+  const elapsed = (Math.random() * 2 + 0.5).toFixed(1);
+  const bar = '\u{2501}'.repeat(21);
+  const receipt = [
+    bar,
+    '  \u{2705} TIP SENT SUCCESSFULLY',
+    bar,
     '',
-    `*Amount:* ${amount} USDT`,
-    `*To:* @${recipient}`,
-    `*Chain:* ${chain}`,
-    `*Fee:* $${(Math.random() * 0.005 + 0.0001).toFixed(6)}`,
-    `*TX:* \`${fakeTxHash.slice(0, 22)}...\``,
-    `*Explorer:* https://sepolia.etherscan.io/tx/${fakeTxHash}`,
+    `  \u{1F4B8} Amount:    ${amount.toFixed(2)} USDT`,
+    `  \u{1F464} To:        @${recipient}`,
+    `  \u{26D3}\u{FE0F} Chain:     ${chain.charAt(0).toUpperCase() + chain.slice(1)}`,
+    `  \u{1F4A8} Fee:       $${fee}`,
+    `  \u{23F1}\u{FE0F} Time:      ${elapsed}s`,
     '',
-    '_Wallet health: 85/100 | Mood: Generous_',
+    `  \u{1F517} TX: ${fakeTxHash.slice(0, 14)}...${fakeTxHash.slice(-6)}`,
+    `  \u{1F310} Explorer: sepolia.etherscan.io/tx/...`,
+    '',
+    bar,
+    '  Wallet Health: 85/100 | Mood: Generous',
+    bar,
   ];
-  await ctx.reply(lines.join('\n'), { parse_mode: 'Markdown' });
+  await ctx.reply(receipt.join('\n'), {
+    reply_markup: tipConfirmKeyboard(),
+  });
 }
 
 export async function demoWallets(ctx: Context): Promise<void> {
