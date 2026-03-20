@@ -35,6 +35,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: dashboard/package-lock.json
       - run: cd dashboard && npm ci
+      - run: cd dashboard && npm install @rollup/rollup-linux-x64-gnu || true
       - run: cd dashboard && npx tsc --noEmit
       - run: cd dashboard && npm run build
 

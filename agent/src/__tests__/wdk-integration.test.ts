@@ -791,22 +791,28 @@ describe('WebhookSimulatorService', () => {
   });
 
   it('start sets running to true', () => {
-    sim.start(999999); // very long interval so it doesn't actually fire
+    process.env.DEMO_MODE = 'true';
+    sim.start(999999);
     assert.equal(sim.getStats().running, true);
     sim.stop();
+    delete process.env.DEMO_MODE;
   });
 
   it('stop sets running to false', () => {
+    process.env.DEMO_MODE = 'true';
     sim.start(999999);
     sim.stop();
     assert.equal(sim.getStats().running, false);
+    delete process.env.DEMO_MODE;
   });
 
   it('start is idempotent', () => {
+    process.env.DEMO_MODE = 'true';
     sim.start(999999);
     sim.start(999999); // should not create second interval
     assert.equal(sim.getStats().running, true);
     sim.stop();
+    delete process.env.DEMO_MODE;
   });
 
   it('stop is safe when not running', () => {
