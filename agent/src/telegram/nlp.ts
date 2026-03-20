@@ -113,8 +113,16 @@ const INTENT_KEYWORDS: Array<{ pattern: RegExp; type: IntentType }> = [
   { pattern: /\b(logs|log|recent logs)\b/i, type: 'logs' },
   { pattern: /\b(mood|generous|cautious|strategic)\b/i, type: 'mood' },
   { pattern: /\b(agents|multi.?agent|consensus)\b/i, type: 'agent' },
-  { pattern: /\b(hi|hello|hey|yo|sup|greetings|good morning|good evening|good afternoon|hola|howdy)\b/i, type: 'greeting' },
-  { pattern: /\b(thanks|thank you|thx|ty|appreciate|cheers)\b/i, type: 'thanks' },
+  { pattern: /\b(hi|hello|hey|yo|sup|greetings|good morning|good evening|good afternoon|howdy|what's up|whatsup|wassup)\b/i, type: 'greeting' },
+  // Spanish, Portuguese, French, Italian, German
+  { pattern: /\b(hola|ola|bonjour|salut|ciao|hallo|guten tag|buen dia|buenos dias|bom dia|boa tarde)\b/i, type: 'greeting' },
+  // Hindi, Tamil, Telugu, Malayalam, Kannada, Bengali, Marathi, Gujarati
+  { pattern: /\b(namaste|namaskar|vanakkam|namaskaram|namskar|epdi irukka|kaise ho|kya haal|kem cho|ki khobor|kasa ahat)\b/i, type: 'greeting' },
+  // Arabic, Turkish, Russian, Japanese, Korean, Chinese, Thai, Vietnamese, Malay, Indonesian
+  { pattern: /\b(marhaba|ahlan|salam|salaam|selam|merhaba|privet|zdravstvuyte|konnichiwa|annyeong|nihao|ni hao|sawasdee|sawadee|xin chao|selamat|halo)\b/i, type: 'greeting' },
+  // Swahili, Yoruba, Filipino, Persian, Urdu, Punjabi
+  { pattern: /\b(jambo|habari|bawo ni|kumusta|salam aleikum|assalamu alaikum|sat sri akal|adaab)\b/i, type: 'greeting' },
+  { pattern: /\b(thanks|thank you|thx|ty|appreciate|cheers|gracias|merci|danke|grazie|obrigado|dhanyavaad|nandri|shukriya|shukran|spasibo|arigato|kamsahamnida|xie xie|terima kasih)\b/i, type: 'thanks' },
 ];
 
 // ── Parser ─────────────────────────────────────────────────────
