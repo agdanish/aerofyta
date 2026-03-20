@@ -57,6 +57,15 @@ import PortfolioAnalytics from "@/pages/PortfolioAnalytics";
 import FeeComparison from "@/pages/FeeComparison";
 import AgentDialogue from "@/pages/AgentDialogue";
 import TipPools from "@/pages/TipPools";
+import LiveProof from "@/pages/LiveProof";
+import ReasoningReplay from "@/pages/ReasoningReplay";
+import EconomicSimulator from "@/pages/EconomicSimulator";
+import ChainExplorer from "@/pages/ChainExplorer";
+import AgentPerformance from "@/pages/AgentPerformance";
+import ApiPlayground from "@/pages/ApiPlayground";
+import GaslessDemo from "@/pages/GaslessDemo";
+import CreatorLeaderboard from "@/pages/CreatorLeaderboard";
+import RiskDashboard from "@/pages/RiskDashboard";
 
 const queryClient = new QueryClient();
 
@@ -129,6 +138,15 @@ const App = () => {
                   <Route path="/fee-comparison" element={<FeeComparison />} />
                   <Route path="/agent-dialogue" element={<AgentDialogue />} />
                   <Route path="/tip-pools" element={<TipPools />} />
+                  <Route path="/live-proof" element={<LiveProof />} />
+                  <Route path="/reasoning-replay" element={<ReasoningReplay />} />
+                  <Route path="/economic-simulator" element={<EconomicSimulator />} />
+                  <Route path="/chain-explorer" element={<ChainExplorer />} />
+                  <Route path="/agent-performance" element={<AgentPerformance />} />
+                  <Route path="/api-playground" element={<ApiPlayground />} />
+                  <Route path="/gasless-demo" element={<GaslessDemo />} />
+                  <Route path="/creator-leaderboard" element={<CreatorLeaderboard />} />
+                  <Route path="/risk-dashboard" element={<RiskDashboard />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -47,6 +47,10 @@
       "types": "./dist/sdk/client.d.ts",
       "import": "./dist/sdk/client.js"
     },
+    "./sdk": {
+      "types": "./dist/sdk/agent-sdk.d.ts",
+      "import": "./dist/sdk/agent-sdk.js"
+    },
     "./services/*": "./dist/services/*.js",
     "./types": {
       "types": "./dist/types/index.d.ts",

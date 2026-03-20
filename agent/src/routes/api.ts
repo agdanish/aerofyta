@@ -68,6 +68,7 @@ import { registerYieldRouterRoutes } from './yield-router.routes.js';
 import { YieldRouterService } from '../services/yield-router.service.js';
 import { registerT402Routes } from './t402.routes.js';
 import { T402ProtocolService } from '../services/t402-protocol.service.js';
+import { GaslessDemoService as GaslessDemoServiceImpl } from '../services/gasless-demo.service.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -634,6 +635,33 @@ export function createApiRouter(
   // ── t402 Payment Protocol Wrapper ──────────────────────────────
   const t402ProtocolService = new T402ProtocolService();
   registerT402Routes(router, t402ProtocolService);
+
+  // ── Gasless Transaction Demo (ERC-4337 simulation) ────────────
+  const gaslessDemoService = new GaslessDemoServiceImpl();
+
+  router.get('/gasless/simulate', (req, res) => {
+    try {
+      const chain = typeof req.query.chain === 'string' ? req.query.chain : 'ethereum';
+      const recipient = typeof req.query.recipient === 'string' ? req.query.recipient : '0x' + 'b'.repeat(40);
+      const amount = parseFloat(String(req.query.amount ?? '1'));
+      if (isNaN(amount) || amount <= 0) {
+        res.status(400).json({ error: 'Invalid amount — must be a positive number' });
+        return;
+      }
+      const simulation = gaslessDemoService.simulateGaslessTransfer(chain, recipient, amount);
+      res.json(simulation);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      logger.error('Gasless simulation error', { error: message });
+      res.status(400).json({ error: message });
+    }
+  });
+
+  router.get('/gasless/chains', (_req, res) => {
+    res.json({ chains: gaslessDemoService.getChainComparison() });
+  });
+
+  logger.info('Gasless demo routes mounted at /api/gasless/*');
 
   return router;
 }

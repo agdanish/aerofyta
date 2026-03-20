@@ -179,6 +179,34 @@ export { ServiceRegistry } from '../services/service-registry.js';
 export { TipFlowClient } from './client.js';
 export type { TipFlowConfig, SendTipParams } from './client.js';
 
+// ── High-Level SDK ───────────────────────────────────────────────
+/**
+ * AeroFytaSDK — clean, high-level SDK class wrapping all AeroFyta
+ * capabilities for third-party developers. Supports wallets, tipping,
+ * escrow, AI reasoning, A2A discovery, and gasless simulation.
+ *
+ * @example
+ * ```typescript
+ * import { AeroFytaSDK } from '@xzashr/aerofyta';
+ * const sdk = new AeroFytaSDK('http://localhost:3001', 'my-key');
+ * const balances = await sdk.getBalances();
+ * ```
+ */
+export { AeroFytaSDK, AeroFytaSDKError as SDKError } from './agent-sdk.js';
+export type {
+  ChainBalance,
+  TipResult as SDKTipResult,
+  Tip as SDKTip,
+  EscrowResult as SDKEscrowResult,
+  AgentStatus as SDKAgentStatus,
+  BrainState as SDKBrainState,
+  ReasoningResult as SDKReasoningResult,
+  Agent as SDKAgent,
+  ServiceResult as SDKServiceResult,
+  GaslessSimulation,
+  SDKConfig,
+} from './agent-sdk.js';
+
 // ── Factory ─────────────────────────────────────────────────────────
 /**
  * Create a fully-configured AeroFyta agent with one function call.

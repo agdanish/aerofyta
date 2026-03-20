@@ -9,6 +9,8 @@ import {
   Bell, Target, BookUser, Calculator, Store, KeyRound, Settings,
   Leaf, QrCode, ArrowLeftRight, Sparkles, Activity, FileText,
   ClipboardCheck, GitMerge, PieChart, Fuel, MessagesSquare, UsersRound,
+  BadgeCheck, Clapperboard, FlaskConical, Globe, Gauge,
+  Code2, Zap, Trophy, ShieldAlert,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import {
@@ -57,6 +59,8 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "Economics", url: "/economics", icon: Calculator },
       { title: "Portfolio Analytics", url: "/portfolio-analytics", icon: PieChart },
       { title: "Tip Pools", url: "/tip-pools", icon: UsersRound },
+      { title: "Economic Simulator", url: "/economic-simulator", icon: FlaskConical },
+      { title: "Chain Explorer", url: "/chain-explorer", icon: Globe },
     ],
   },
   {
@@ -66,6 +70,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "Fee Comparison", url: "/fee-comparison", icon: Fuel },
       { title: "Trading", url: "/trading", icon: CandlestickChart },
       { title: "MultiSig", url: "/multisig", icon: KeyRound },
+      { title: "Gasless Demo", url: "/gasless-demo", icon: Zap },
     ],
   },
   {
@@ -77,6 +82,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "Contacts", url: "/contacts", icon: BookUser },
       { title: "GitHub Tipping", url: "/github-tipping", icon: GitMerge },
       { title: "Data Sources", url: "/data-sources", icon: Database },
+      { title: "Leaderboard", url: "/creator-leaderboard", icon: Trophy },
     ],
   },
   {
@@ -84,6 +90,8 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     items: [
       { title: "Wallet Brain", url: "/wallet-brain", icon: BrainCircuit },
       { title: "Agent Dialogue", url: "/agent-dialogue", icon: MessagesSquare },
+      { title: "Reasoning Replay", url: "/reasoning-replay", icon: Clapperboard },
+      { title: "Agent Performance", url: "/agent-performance", icon: Gauge },
       { title: "Reasoning", url: "/reasoning", icon: Brain },
       { title: "Memory", url: "/memory", icon: BrainCircuit },
       { title: "Chat", url: "/chat", icon: MessageSquare },
@@ -100,14 +108,17 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { title: "Monitoring", url: "/monitoring", icon: MonitorCheck },
       { title: "Compliance", url: "/compliance", icon: FileCheck },
       { title: "Audit Trail", url: "/audit-trail", icon: ClipboardCheck },
+      { title: "Risk Dashboard", url: "/risk-dashboard", icon: ShieldAlert },
       { title: "Sustainability", url: "/sustainability", icon: Leaf },
     ],
   },
   {
     label: "Platform",
     items: [
+      { title: "Live Proof", url: "/live-proof", icon: BadgeCheck },
       { title: "Demo", url: "/demo", icon: Play },
       { title: "Playground", url: "/playground", icon: Gamepad2 },
+      { title: "API Playground", url: "/api-playground", icon: Code2 },
       { title: "Marketplace", url: "/marketplace", icon: Store },
       { title: "Architecture", url: "/architecture", icon: Network },
       { title: "Build", url: "/build", icon: Hammer },
