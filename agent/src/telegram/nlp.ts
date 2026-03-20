@@ -21,6 +21,19 @@ export type IntentType =
   | 'gas'
   | 'reasoning'
   | 'suggest'
+  | 'health'
+  | 'analytics'
+  | 'yield'
+  | 'bridge'
+  | 'swap'
+  | 'escrow'
+  | 'creators'
+  | 'reputation'
+  | 'version'
+  | 'config'
+  | 'logs'
+  | 'mood'
+  | 'agent'
   | 'unknown';
 
 export interface ParsedTipIntent {
@@ -85,6 +98,19 @@ const INTENT_KEYWORDS: Array<{ pattern: RegExp; type: IntentType }> = [
   { pattern: /\b(gas|fees|gas price|gas cost|chain fees)\b/i, type: 'gas' },
   { pattern: /\b(reasoning|thinking|why|explain|thought process|decision)\b/i, type: 'reasoning' },
   { pattern: /\b(suggest|recommend|who should i tip|who to tip)\b/i, type: 'suggest' },
+  { pattern: /\b(health|healthy|diagnostics|health check)\b/i, type: 'health' },
+  { pattern: /\b(analytics|stats|statistics|metrics)\b/i, type: 'analytics' },
+  { pattern: /\b(yield|aave|earnings|interest|supply)\b/i, type: 'yield' },
+  { pattern: /\b(bridge|cross.?chain|transfer between)\b/i, type: 'bridge' },
+  { pattern: /\b(swap|exchange|convert|dex)\b/i, type: 'swap' },
+  { pattern: /\b(escrow|htlc|locked|timelock)\b/i, type: 'escrow' },
+  { pattern: /\b(creators|tracked|channels|youtube|rumble)\b/i, type: 'creators' },
+  { pattern: /\b(reputation|rep score|trust score)\b/i, type: 'reputation' },
+  { pattern: /\b(version|ver|what version)\b/i, type: 'version' },
+  { pattern: /\b(config|configuration|settings)\b/i, type: 'config' },
+  { pattern: /\b(logs|log|recent logs)\b/i, type: 'logs' },
+  { pattern: /\b(mood|generous|cautious|strategic)\b/i, type: 'mood' },
+  { pattern: /\b(agents|multi.?agent|consensus)\b/i, type: 'agent' },
 ];
 
 // ── Parser ─────────────────────────────────────────────────────

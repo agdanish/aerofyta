@@ -39,9 +39,11 @@ import {
   demoBalance,
   demoStatus,
   demoWallets,
+  demoWallet,
   demoHistory,
   demoGas,
   demoReasoning,
+  demoReason,
   demoMood,
   demoPulse,
   demoEscrow,
@@ -55,6 +57,48 @@ import {
   demoPolicy,
   demoAudit,
   demoMetrics,
+  demoAgent,
+  demoAnalytics,
+  demoAnomaly,
+  demoArchitecture,
+  demoAsk,
+  demoAuth,
+  demoBenchmark,
+  demoConfig,
+  demoCredit,
+  demoDemo,
+  demoDeploy,
+  demoDocs,
+  demoDoctor,
+  demoGet,
+  demoHealth,
+  demoInfo,
+  demoInit,
+  demoLend,
+  demoList,
+  demoLogs,
+  demoMcp,
+  demoModules,
+  demoNotifications,
+  demoPersistence,
+  demoPlugin,
+  demoProof,
+  demoReputation,
+  demoReset,
+  demoRestart,
+  demoRss,
+  demoSdk,
+  demoSet,
+  demoSplit,
+  demoStream,
+  demoTest,
+  demoTooluse,
+  demoUpdate,
+  demoVersion,
+  demoWebhooks,
+  demoX402,
+  demoYoutube,
+  demoZk,
 } from './demo-responses.js';
 import { parseNaturalLanguage } from './nlp.js';
 
@@ -201,28 +245,87 @@ export class TelegramGrammyBot {
       };
     };
 
+    // Tipping (8)
     this.bot.command('start', wrap(handleStart, demoStart));
     this.bot.command('help', wrap(handleHelp, demoHelp));
     this.bot.command('tip', wrap(handleTip, demoTip));
-    this.bot.command('balance', wrap(handleBalance, demoBalance));
-    this.bot.command('status', wrap(handleStatus, demoStatus));
-    this.bot.command('wallets', wrap(handleWallets, demoWallets));
-    this.bot.command('history', wrap(handleHistory, demoHistory));
-    this.bot.command('gas', wrap(handleGas, demoGas));
-    this.bot.command('reasoning', wrap(handleReasoning, demoReasoning));
-    this.bot.command('mood', wrap(null, demoMood));
-    this.bot.command('pulse', wrap(null, demoPulse));
     this.bot.command('escrow', wrap(null, demoEscrow));
-    this.bot.command('creators', wrap(null, demoCreators));
     this.bot.command('dca', wrap(null, demoDca));
     this.bot.command('subscribe', wrap(null, demoSubscribe));
-    this.bot.command('kill', wrap(null, demoKill));
-    this.bot.command('yield', wrap(null, demoYield));
+    this.bot.command('creators', wrap(null, demoCreators));
+    this.bot.command('history', wrap(handleHistory, demoHistory));
+    this.bot.command('credit', wrap(null, demoCredit));
+    this.bot.command('split', wrap(null, demoSplit));
+
+    // Wallet (7)
+    this.bot.command('balance', wrap(handleBalance, demoBalance));
+    this.bot.command('wallet', wrap(handleWallets, demoWallet));
+    this.bot.command('wallets', wrap(handleWallets, demoWallets));
+    this.bot.command('gas', wrap(handleGas, demoGas));
+    this.bot.command('mood', wrap(null, demoMood));
+    this.bot.command('pulse', wrap(null, demoPulse));
     this.bot.command('bridge', wrap(null, demoBridge));
     this.bot.command('swap', wrap(null, demoSwap));
+
+    // DeFi (6)
+    this.bot.command('yield', wrap(null, demoYield));
+    this.bot.command('lend', wrap(null, demoLend));
+    this.bot.command('x402', wrap(null, demoX402));
+    this.bot.command('stream', wrap(null, demoStream));
+    this.bot.command('webhooks', wrap(null, demoWebhooks));
+    this.bot.command('notifications', wrap(null, demoNotifications));
+
+    // Agent (10)
+    this.bot.command('status', wrap(handleStatus, demoStatus));
+    this.bot.command('agent', wrap(null, demoAgent));
+    this.bot.command('reasoning', wrap(handleReasoning, demoReasoning));
+    this.bot.command('reason', wrap(handleReasoning, demoReason));
     this.bot.command('policy', wrap(null, demoPolicy));
     this.bot.command('audit', wrap(null, demoAudit));
     this.bot.command('metrics', wrap(null, demoMetrics));
+    this.bot.command('kill', wrap(null, demoKill));
+    this.bot.command('reputation', wrap(null, demoReputation));
+    this.bot.command('proof', wrap(null, demoProof));
+
+    // System (12)
+    this.bot.command('health', wrap(null, demoHealth));
+    this.bot.command('info', wrap(null, demoInfo));
+    this.bot.command('version', wrap(null, demoVersion));
+    this.bot.command('config', wrap(null, demoConfig));
+    this.bot.command('get', wrap(null, demoGet));
+    this.bot.command('set', wrap(null, demoSet));
+    this.bot.command('init', wrap(null, demoInit));
+    this.bot.command('reset', wrap(null, demoReset));
+    this.bot.command('restart', wrap(null, demoRestart));
+    this.bot.command('logs', wrap(null, demoLogs));
+    this.bot.command('doctor', wrap(null, demoDoctor));
+    this.bot.command('update', wrap(null, demoUpdate));
+
+    // Discovery (5)
+    this.bot.command('youtube', wrap(null, demoYoutube));
+    this.bot.command('rss', wrap(null, demoRss));
+    this.bot.command('analytics', wrap(null, demoAnalytics));
+    this.bot.command('anomaly', wrap(null, demoAnomaly));
+    this.bot.command('ask', wrap(null, demoAsk));
+
+    // Advanced (8)
+    this.bot.command('architecture', wrap(null, demoArchitecture));
+    this.bot.command('benchmark', wrap(null, demoBenchmark));
+    this.bot.command('mcp', wrap(null, demoMcp));
+    this.bot.command('modules', wrap(null, demoModules));
+    this.bot.command('plugin', wrap(null, demoPlugin));
+    this.bot.command('sdk', wrap(null, demoSdk));
+    this.bot.command('persistence', wrap(null, demoPersistence));
+    this.bot.command('zk', wrap(null, demoZk));
+
+    // Other
+    this.bot.command('demo', wrap(null, demoDemo));
+    this.bot.command('deploy', wrap(null, demoDeploy));
+    this.bot.command('docs', wrap(null, demoDocs));
+    this.bot.command('auth', wrap(null, demoAuth));
+    this.bot.command('list', wrap(null, demoList));
+    this.bot.command('test', wrap(null, demoTest));
+    this.bot.command('tooluse', wrap(null, demoTooluse));
   }
 
   // ── Natural language handler ───────────────────────────────
@@ -255,6 +358,19 @@ export class TelegramGrammyBot {
           case 'gas': await demoGas(ctx); break;
           case 'reasoning': await demoReasoning(ctx); break;
           case 'suggest': await demoHelp(ctx); break;
+          case 'health': await demoHealth(ctx); break;
+          case 'analytics': await demoAnalytics(ctx); break;
+          case 'yield': await demoYield(ctx); break;
+          case 'bridge': await demoBridge(ctx); break;
+          case 'swap': await demoSwap(ctx); break;
+          case 'escrow': await demoEscrow(ctx); break;
+          case 'creators': await demoCreators(ctx); break;
+          case 'reputation': await demoReputation(ctx); break;
+          case 'version': await demoVersion(ctx); break;
+          case 'config': await demoConfig(ctx); break;
+          case 'logs': await demoLogs(ctx); break;
+          case 'mood': await demoMood(ctx); break;
+          case 'agent': await demoAgent(ctx); break;
           case 'unknown':
           default:
             await ctx.reply(
@@ -287,6 +403,19 @@ export class TelegramGrammyBot {
         case 'gas': await handleGas(ctx, deps); break;
         case 'reasoning': await handleReasoning(ctx, deps); break;
         case 'suggest': await handleSuggest(ctx, deps); break;
+        case 'health': await demoHealth(ctx); break;
+        case 'analytics': await demoAnalytics(ctx); break;
+        case 'yield': await demoYield(ctx); break;
+        case 'bridge': await demoBridge(ctx); break;
+        case 'swap': await demoSwap(ctx); break;
+        case 'escrow': await demoEscrow(ctx); break;
+        case 'creators': await demoCreators(ctx); break;
+        case 'reputation': await demoReputation(ctx); break;
+        case 'version': await demoVersion(ctx); break;
+        case 'config': await demoConfig(ctx); break;
+        case 'logs': await demoLogs(ctx); break;
+        case 'mood': await demoMood(ctx); break;
+        case 'agent': await demoAgent(ctx); break;
         case 'unknown':
         default:
           await ctx.reply(
