@@ -35,21 +35,6 @@
 
 <br/>
 
-## Why AeroFyta Wins
-
-| | **AeroFyta** | Top Competitor | Everyone Else |
-|:--|:---:|:---:|:---:|
-| AI Agents | **4** (orchestrated) | 1 | 0 |
-| WDK File References | **454** | 191 | <30 |
-| Tests Passing | **1,183** | 88 | 0 |
-| Blockchains | **9** | 2-3 | 1 |
-| WDK Packages Used | **12** | 3-5 | 1-3 |
-| Transaction Pipeline | **8 stages** | Basic validation | Direct send |
-| Payment Flows | **6** (escrow, DCA, streaming, splits, subscriptions, x402) | Send + swap | Send only |
-| Gasless Transactions | **ERC-4337 + TON** | No | No |
-| Published SDK | **`npm install @xzashr/aerofyta`** | No | No |
-| Live Deployment | **[aerofyta.xzashr.com](https://aerofyta.xzashr.com)** | Local only | Local only |
-
 > [!IMPORTANT]
 > **Two commands to run everything:** `git clone https://github.com/agdanish/aerofyta.git && cd aerofyta && npm install && npm run dev`
 
@@ -1044,35 +1029,6 @@ Browser extension for tipping creators directly on Rumble and YouTube. Detects c
 **HTMX Wallet Extraction**: The extension silently detects and extracts creator wallet addresses from Rumble channel pages using DOM parsing — no manual entry required. Combined with per-creator tipping rules, the extension enables fully autonomous creator discovery and tipping.
 
 ---
-
-## AeroFyta vs. The Competition
-
-| Capability | **AeroFyta** | Typical Submission | Forage (Top Competitor) |
-|:-----------|:------------:|:------------------:|:-----------------------:|
-| Chains supported | **9** | 1-2 | 2-3 |
-| WDK packages | **12** | 1-3 | 3-5 |
-| Specialized agents | **4** (orchestrated) | 0-1 | 1 |
-| Architectural systems | **8** | 1-2 | 2-3 |
-| Autonomous reasoning | **4-agent consensus** + ReAct + SHA-256 votes | Manual triggers | Simple rules |
-| Transaction pipeline | **8 stages** with verification | Direct send | Basic validation |
-| Economic engine | **P&L ledger** + sustainability analysis | None | Basic tracking |
-| Event sourcing | **28 types**, tamper-proof hash chain | None | None |
-| Policy engine | **10 composable rules** | None | None |
-| Observability | **32 Prometheus metrics** | None | None |
-| Payment flows | **6** (escrow, DCA, streaming, splits, subscriptions, x402) | Send only | Send + swap |
-| Event-triggered tipping | **6 triggers** (hype, milestones, watch time) | Manual only | Manual only |
-| Community tip pools | Crowdfunded collective tipping | No | No |
-| Risk engine | 8-dimension + **credit scoring (300-850)** | None | Basic |
-| Gasless transactions | ERC-4337 + TON gasless | No | No |
-| Wallet-driven behavior | Mood adapts to financial state | Static logic | Static logic |
-| Tests | **1,183 + 62 contracts** | 0-50 | 10-100 |
-| Published SDK | `npm install @xzashr/aerofyta` | Not published | Not published |
-| MCP tools | **68** | 0 | 0 |
-| CLI | **60+ commands** | None | Basic |
-| API endpoints | **763** | 5-20 | 20-50 |
-| Dashboard | **58 pages**, dark/light, PWA, WebSocket live | Basic or none | Basic |
-| Smart contracts | 3 deployed + **40 Hardhat tests** | 0 | 0-1 |
-| Live deployment | [aerofyta.xzashr.com](https://aerofyta.xzashr.com) | Local only | Local only |
 
 ---
 
