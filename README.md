@@ -1,42 +1,50 @@
 <div align="center">
 
-<img src="./dashboard/public/logo-orange.png" alt="AeroFyta" width="120"/>
+<img src="./dashboard/public/logo-orange.png" alt="AeroFyta" width="140"/>
 
 # AeroFyta
 
-**Autonomous multi-agent tipping across 9 blockchains, powered by Tether WDK.**
+### The AI That Tips For You
 
-[![CI](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml/badge.svg)](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml) [![Tests](https://img.shields.io/badge/tests-1%2C183_passing-brightgreen?style=flat-square)](https://github.com/agdanish/aerofyta) [![npm](https://img.shields.io/badge/npm-@xzashr/aerofyta-CB3837?style=flat-square&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta) [![License](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](./LICENSE) [![Chains](https://img.shields.io/badge/chains-9-50AF95?style=flat-square&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta) [![WDK](https://img.shields.io/badge/WDK-12_packages-50AF95?style=flat-square&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta)
+**4 autonomous agents. 9 blockchains. 1 wallet that thinks.**
+
+<br/>
+
+[![Tests](https://img.shields.io/badge/tests-1%2C183_passing-brightgreen?style=for-the-badge)](https://github.com/agdanish/aerofyta) [![npm](https://img.shields.io/badge/npm-@xzashr/aerofyta-CB3837?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta) [![License](https://img.shields.io/badge/Apache_2.0-blue?style=for-the-badge)](./LICENSE) [![WDK](https://img.shields.io/badge/Tether_WDK-12_packages-50AF95?style=for-the-badge&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta)
+
+<br/>
+
+```
+npm install @xzashr/aerofyta && npx @xzashr/aerofyta demo
+```
 
 <br/>
 
 <table>
 <tr>
-<td align="center"><h3>12</h3><sub>WDK Packages</sub></td>
-<td align="center"><h3>9</h3><sub>Blockchains</sub></td>
-<td align="center"><h3>1,183</h3><sub>Tests Passing</sub></td>
-<td align="center"><h3>4</h3><sub>AI Agents</sub></td>
-<td align="center"><h3>763</h3><sub>API Endpoints</sub></td>
-<td align="center"><h3>60+</h3><sub>CLI Commands</sub></td>
-<td align="center"><h3>58</h3><sub>Dashboard Pages</sub></td>
-<td align="center"><h3>$0</h3><sub>Budget</sub></td>
+<td align="center"><h3>🔗 12</h3><sub>WDK Packages</sub></td>
+<td align="center"><h3>⛓️ 9</h3><sub>Blockchains</sub></td>
+<td align="center"><h3>✅ 1,183</h3><sub>Tests Passing</sub></td>
+<td align="center"><h3>🤖 4</h3><sub>AI Agents</sub></td>
+<td align="center"><h3>🔌 763</h3><sub>API Endpoints</sub></td>
+<td align="center"><h3>📊 58</h3><sub>Dashboard Pages</sub></td>
 </tr>
 </table>
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-aerofyta.xzashr.com-FF4E00?style=for-the-badge&logoColor=white)](https://aerofyta.xzashr.com) &nbsp;&nbsp; [![npm](https://img.shields.io/badge/npm_install-@xzashr/aerofyta-CB3837?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta) &nbsp;&nbsp; [![YouTube Demo](https://img.shields.io/badge/WATCH_DEMO-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/Zwzs5sMP5u8)
+[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-aerofyta.xzashr.com-FF4E00?style=for-the-badge&logoColor=white)](https://aerofyta.xzashr.com) &nbsp; [![YouTube Demo](https://img.shields.io/badge/WATCH_DEMO-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/Zwzs5sMP5u8)
 
 </div>
 
 <br/>
 
-> **What is AeroFyta?** &mdash; Four AI agents autonomously discover creators, debate tip-worthiness through SHA-256 signed votes, and execute payments across 9 chains via an 8-stage transaction pipeline. The wallet's financial state drives every decision &mdash; no human clicks required.
+> **AeroFyta** is an autonomous payment agent where four AI agents discover creators, debate tip-worthiness through cryptographic consensus, and execute payments across 9 chains via an 8-stage transaction pipeline. The wallet's financial state drives every decision — no human clicks required.
 
-<br/>
-
-> [!IMPORTANT]
-> **Two commands to run everything:** `git clone https://github.com/agdanish/aerofyta.git && cd aerofyta && npm install && npm run dev`
+```bash
+# Clone and run — that's it
+git clone https://github.com/agdanish/aerofyta.git && cd aerofyta && npm install && npm run dev
+```
 
 <br/>
 
