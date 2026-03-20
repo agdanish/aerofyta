@@ -76,6 +76,18 @@ import { FeeModel } from '../economics/fee-model.js';
 import { SustainabilityAnalyzer } from '../economics/sustainability-analyzer.js';
 import { GaslessDemoService as GaslessDemoServiceImpl } from '../services/gasless-demo.service.js';
 
+// ── Deep Architectural Systems ────────────────────────────────
+import { registerConsensusRoutes } from './consensus.routes.js';
+import { ConsensusProtocol } from '../consensus/consensus-protocol.js';
+import { registerEventStoreRoutes } from './event-store.routes.js';
+import { EventStore } from '../events/event-store.js';
+import { registerPolicyEngineRoutes } from './policy-engine.routes.js';
+import { PolicyEngine } from '../policies/policy-engine.js';
+import { registerChainAbstractionRoutes } from './chain-abstraction.routes.js';
+import { ChainAbstraction } from '../chains/chain-abstraction.js';
+import { registerMetricsRoutes } from './metrics.routes.js';
+import { MetricsCollector } from '../observability/metrics-collector.js';
+
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
 // import named services from './api.js' (e.g. advanced.ts, index.ts).
@@ -680,6 +692,36 @@ export function createApiRouter(
   const transactionPipeline = new TransactionPipeline(wallet, orchestratorService, pipelineAuditService);
   registerPipelineRoutes(router, transactionPipeline);
   logger.info('Transaction pipeline routes mounted at /api/pipeline/*');
+
+  // ══════════════════════════════════════════════════════════════
+  // ── Deep Architectural Systems ─────────────────────────────
+  // ══════════════════════════════════════════════════════════════
+
+  // ── 1. Consensus Protocol (cryptographic voting + quorum + guardian veto) ──
+  const consensusProtocol = new ConsensusProtocol();
+  consensusProtocol.seedDemoRound();
+  registerConsensusRoutes(router, consensusProtocol);
+
+  // ── 2. Event Sourcing (append-only hash-chain audit log) ────
+  const eventStore = new EventStore();
+  eventStore.seedDemoEvents();
+  registerEventStoreRoutes(router, eventStore);
+
+  // ── 3. Policy Engine (composable rules governing all behavior) ──
+  const policyEngine = new PolicyEngine();
+  registerPolicyEngineRoutes(router, policyEngine);
+
+  // ── 4. Chain Abstraction Layer (unified 9-chain interface) ──
+  const chainAbstraction = new ChainAbstraction();
+  chainAbstraction.seedDemoBalances();
+  registerChainAbstractionRoutes(router, chainAbstraction);
+
+  // ── 5. Observability & Metrics (Prometheus-style collection) ──
+  const metricsCollector = new MetricsCollector();
+  metricsCollector.seedDemoMetrics();
+  registerMetricsRoutes(router, metricsCollector);
+
+  logger.info('All 5 deep architectural systems registered');
 
   return router;
 }
