@@ -24,6 +24,14 @@ import { checkSeedSecurity } from './utils/sanitize.js';
 import { encryptSeed, decryptSeed, isEncrypted } from './utils/seed-encryption.js';
 import { validateRequiredSecrets, listSecrets } from './utils/secret-manager.js';
 import { TelegramGrammyBot } from './telegram/index.js';
+import {
+  TipExecutorAgent,
+  GuardianAgent,
+  TreasuryOptimizerAgent,
+  DiscoveryAgent,
+  MultiAgentOrchestrator,
+} from './agents/index.js';
+import { registerMultiAgentRoutes } from './routes/multi-agent.routes.js';
 
 // ── Top-level crash protection — demo NEVER crashes for judges ──
 process.on('uncaughtException', (err) => {
@@ -628,6 +636,44 @@ async function main(): Promise<void> {
     multiStrategy.seedDemoData();
   }
   logger.info('Multi-strategy agent initialized: Tipping + Lending + DeFi + Wallet Management');
+
+  // ── Multi-Agent Orchestrator — 4 autonomous agents with collective decision-making ──
+  const tipExecutorAgent = new TipExecutorAgent();
+  tipExecutorAgent.setServices({
+    wallet: walletService,
+    engagementScorer: sr.engagementScorer,
+    rumbleScraper: sr.rumbleScraper,
+  });
+
+  const guardianAgent = new GuardianAgent();
+
+  const treasuryOptimizerAgent = new TreasuryOptimizerAgent();
+  treasuryOptimizerAgent.setServices({
+    wallet: walletService,
+    treasury: sr.treasury,
+    lending: sr.lending,
+  });
+
+  const discoveryAgent = new DiscoveryAgent();
+  discoveryAgent.setServices({
+    rumbleScraper: sr.rumbleScraper,
+    engagementScorer: sr.engagementScorer,
+  });
+
+  const multiAgentOrchestrator = new MultiAgentOrchestrator(
+    tipExecutorAgent,
+    guardianAgent,
+    treasuryOptimizerAgent,
+    discoveryAgent,
+  );
+  multiAgentOrchestrator.setWalletService(walletService);
+
+  // Register multi-agent API routes
+  registerMultiAgentRoutes(app, multiAgentOrchestrator);
+
+  // Start orchestrator in background (non-blocking)
+  multiAgentOrchestrator.start();
+  logger.info('Multi-agent orchestrator started: TipExecutor, Guardian, TreasuryOptimizer, Discovery');
 
   // Return 404 JSON for any unmatched /api/* route
   // This prevents the SPA fallback from returning HTML for missing API endpoints
