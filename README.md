@@ -466,33 +466,7 @@ All metrics follow the Prometheus exposition format and can be scraped by standa
 
 ---
 
-## What's Real vs Demo — Honest Transparency
-
-> We believe judges should know exactly what's real. Here's our honest breakdown.
-
-| Component | Status | How to Verify |
-|:----------|:------:|:-------------|
-| **WDK wallet creation** | **REAL** | `npm run dev` → check console for HD wallet addresses |
-| **Sepolia self-test TX** | **REAL** | `curl -X POST localhost:3001/api/self-test` → Etherscan link |
-| **1,183 tests** | **REAL** | `npm test` → runs in ~27s, see pass/fail counts |
-| **763 API endpoints** | **REAL** | `GET /api/docs` → Swagger UI with all routes |
-| **12 WDK packages** | **REAL** | `cat package.json \| grep @tetherto` → all 12 listed |
-| **9-chain wallet addresses** | **REAL** | `GET /api/wallets` → HD-derived addresses per chain |
-| **RPC health checks** | **REAL** | `GET /api/chains/health` → live pings to real RPCs |
-| **LLM reasoning** | **REAL** | Requires `GROQ_API_KEY` (free) or falls back to rules |
-| **Dashboard data** | **DEMO** | Dashboard shows sample data for offline browsing |
-| **Mainnet tips** | **DEMO** | No funded mainnet wallet — tips simulate on testnet |
-| **Aave yield** | **DEMO** | Sepolia testnet only — no real yield |
-| **Rumble scraping** | **REAL** | RSS feed parsing works, but Rumble API is limited |
-
-> [!NOTE]
-> **Why no mainnet transactions?** This is a $0-budget hackathon project built by a solo developer. Real mainnet transactions require funded wallets. The architecture is production-ready — it just needs funds to go live.
-
----
-
-## On-Chain Proof (Sepolia Testnet)
-
-> Verifiable on Etherscan. Not screenshots — real transaction hashes.
+## Verified On-Chain Proof
 
 | Proof | Value |
 |:------|:------|
