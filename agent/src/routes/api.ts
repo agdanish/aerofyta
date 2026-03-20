@@ -58,6 +58,8 @@ import { registerPoolRoutes } from './pool.routes.js';
 import { TipPoolService } from '../services/tip-pool.service.js';
 import { registerCacheRoutes } from './cache.routes.js';
 import { registerAutoTipRoutes } from './auto-tip.routes.js';
+import { registerPipelineRoutes } from './pipeline.routes.js';
+import { TransactionPipeline } from '../pipeline/transaction-pipeline.js';
 import { DecisionCacheService } from '../services/decision-cache.service.js';
 import { AutoTipService } from '../services/auto-tip.service.js';
 import { registerOpenClawRoutes } from './openclaw.routes.js';
@@ -68,6 +70,10 @@ import { registerYieldRouterRoutes } from './yield-router.routes.js';
 import { YieldRouterService } from '../services/yield-router.service.js';
 import { registerT402Routes } from './t402.routes.js';
 import { T402ProtocolService } from '../services/t402-protocol.service.js';
+import { registerEconomicsRoutes } from './economics.routes.js';
+import { ProfitLossEngine } from '../economics/profit-loss-engine.js';
+import { FeeModel } from '../economics/fee-model.js';
+import { SustainabilityAnalyzer } from '../economics/sustainability-analyzer.js';
 import { GaslessDemoService as GaslessDemoServiceImpl } from '../services/gasless-demo.service.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
@@ -314,6 +320,12 @@ export function createApiRouter(
 
   // ── Tip Splitter Routes ──────────────────────────────────────
   registerSplitRoutes(router, { tipSplitter: services.tipSplitter });
+
+  // ── Economics P&L Engine ────────────────────────────────────
+  const pnlEngine = new ProfitLossEngine();
+  const feeModel = new FeeModel();
+  const sustainabilityAnalyzer = new SustainabilityAnalyzer(pnlEngine, feeModel);
+  registerEconomicsRoutes(router, { pnlEngine, feeModel, sustainabilityAnalyzer });
 
   // ── x402 HTTP 402 Micropayment Protocol ──────────────────
   const x402PaymentService = new X402PaymentService();
@@ -662,6 +674,12 @@ export function createApiRouter(
   });
 
   logger.info('Gasless demo routes mounted at /api/gasless/*');
+
+  // ── Transaction Pipeline (8-stage: validate→quote→approve→sign→broadcast→confirm→verify→record) ──
+  const pipelineAuditService = new AuditTrailService();
+  const transactionPipeline = new TransactionPipeline(wallet, orchestratorService, pipelineAuditService);
+  registerPipelineRoutes(router, transactionPipeline);
+  logger.info('Transaction pipeline routes mounted at /api/pipeline/*');
 
   return router;
 }
