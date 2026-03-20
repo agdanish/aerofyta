@@ -1,15 +1,15 @@
 {
   "name": "@xzashr/aerofyta",
-  "version": "1.1.0",
-  "description": "Autonomous multi-chain payment agent powered by Tether WDK — ReAct reasoning, multi-agent consensus, Wallet-as-Brain",
-  "author": "Danish <agdanishr@gmail.com>",
+  "version": "1.2.0",
+  "description": "Autonomous multi-chain payment agent with 4-agent orchestrator, 8-stage transaction pipeline, P&L engine — powered by 12 Tether WDK packages across 9 blockchains",
+  "author": "Danish A G <agdanishr@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xzashr/aerofyta"
+    "url": "https://github.com/agdanish/aerofyta"
   },
-  "homepage": "https://github.com/xzashr/aerofyta#readme",
+  "homepage": "https://github.com/agdanish/aerofyta#readme",
   "bugs": {
-    "url": "https://github.com/xzashr/aerofyta/issues"
+    "url": "https://github.com/agdanish/aerofyta/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -78,7 +78,17 @@
     "lint": "eslint src/ --ext .ts",
     "deploy:contracts": "npx tsx scripts/deploy-simple.ts",
     "deploy": "npx tsx scripts/deploy-simple.ts",
-    "capture-proof": "npx tsx scripts/capture-proof.ts"
+    "capture-proof": "npx tsx scripts/capture-proof.ts",
+    "agents": "npx tsx -e \"import('./src/agents/orchestrator').then(m => console.log('Orchestrator loaded'))\"",
+    "agents:status": "curl -s http://localhost:3001/api/agents | npx json",
+    "agents:cycle": "curl -s -X POST http://localhost:3001/api/agents/orchestrator/cycle | npx json",
+    "pipeline:status": "curl -s http://localhost:3001/api/pipeline/status | npx json",
+    "pipeline:simulate": "curl -s -X POST http://localhost:3001/api/pipeline/simulate -H 'Content-Type: application/json' -d '{\"type\":\"tip\",\"recipient\":\"0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18\",\"amount\":1,\"chain\":\"polygon\"}'",
+    "economics:pnl": "curl -s http://localhost:3001/api/economics/pnl | npx json",
+    "economics:runway": "curl -s http://localhost:3001/api/economics/runway | npx json",
+    "wdk:check": "curl -s http://localhost:3001/api/wdk/integration-check | npx json",
+    "telegram": "npx tsx telegram-standalone.ts",
+    "test:contracts": "cd ../contracts && npx hardhat test"
   },
   "license": "Apache-2.0",
   "engines": {

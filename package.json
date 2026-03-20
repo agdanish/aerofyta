@@ -1,7 +1,7 @@
 {
   "name": "aerofyta",
-  "version": "1.0.0",
-  "description": "AeroFyta — Autonomous Multi-Strategy Payment Agent for Tether WDK Hackathon Galactica",
+  "version": "1.2.0",
+  "description": "AeroFyta — Autonomous multi-chain payment agent with 4-agent orchestrator, 8-stage transaction pipeline, 12 Tether WDK packages, 9 blockchains",
   "private": true,
   "scripts": {
     "postinstall": "cd agent && npm install && cd ../dashboard && npm install",
@@ -10,7 +10,17 @@
     "dev:agent": "cd agent && npm run dev",
     "dev:dashboard": "cd dashboard && npm run dev",
     "build": "cd dashboard && npm run build",
-    "lint": "cd agent && npm run lint"
+    "build:all": "cd agent && npm run build && cd ../dashboard && npm run build",
+    "test": "cd agent && npm test",
+    "test:contracts": "cd contracts && npx hardhat test",
+    "test:all": "cd agent && npm test && cd ../contracts && npx hardhat test",
+    "lint": "cd agent && npm run lint",
+    "docker": "docker-compose up --build",
+    "agents:status": "cd agent && npm run agents:status",
+    "pipeline:status": "cd agent && npm run pipeline:status",
+    "economics:pnl": "cd agent && npm run economics:pnl",
+    "wdk:check": "cd agent && npm run wdk:check",
+    "telegram": "cd agent && npm run telegram"
   },
   "engines": {
     "node": ">=22.0.0"
