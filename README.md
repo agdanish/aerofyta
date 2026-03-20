@@ -364,7 +364,8 @@ Coverage includes: WDK wallet operations, multi-agent consensus, all 8 pipeline 
 
 | Item | Detail |
 |------|--------|
-| **Funded Wallet** | [`0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62`](https://sepolia.etherscan.io/address/0x74118B69ac22FB7e46081400BD5ef9d9a0AC9b62) on Sepolia |
+| **Mainnet Transaction** | [`0x9ffed87...bdb3ee`](https://polygonscan.com/tx/0x9ffed871f9d8ba3bc673582df586af8f2d3c53fa41cf55b2e85b805294bdb3ee) — real 0.10 USDT tip on Polygon mainnet |
+| **Funded Wallet** | [`0xa604841A1085E3695107bFcb46DfE7c04Fe77174`](https://polygonscan.com/address/0xa604841A1085E3695107bFcb46DfE7c04Fe77174) on Polygon mainnet |
 | **Self-Test** | `POST /api/self-test` executes a real on-chain transaction and returns the hash |
 | **Smart Contracts** | `AeroFytaEscrow.sol` (HTLC), `AeroFytaTipSplitter.sol`, `CreditProofVerifier.sol` (Circom ZK) |
 | **Proof Bundle** | `POST /api/proof/generate-all` runs all verification steps with Etherscan links |
@@ -417,7 +418,7 @@ Every architectural choice was made deliberately. Full rationale in [`docs/DESIG
 
 ## ⚠ Known Limitations
 
-1. **Testnet only.** All chains run on testnets (Sepolia, TON Testnet, Tron Nile, BTC Testnet, Solana Devnet) due to a $0 budget. The architecture is identical to mainnet — only RPC URLs and contract addresses differ. Switching requires one `.env` change, zero code changes.
+1. **Primarily testnet.** Most chains run on testnets (Sepolia, TON Testnet, Tron Nile). Polygon mainnet is live with a [verified USDT transaction](https://polygonscan.com/tx/0x9ffed871f9d8ba3bc673582df586af8f2d3c53fa41cf55b2e85b805294bdb3ee). Switching other chains to mainnet requires one `.env` change, zero code changes.
 
 2. **Rumble data via RSS.** Rumble does not expose a public API for engagement metrics. AeroFyta uses RSS feed scraping and an engagement scoring heuristic. When Rumble opens API access, the `RumbleService` can switch to direct integration without changing the tipping pipeline.
 
@@ -435,7 +436,7 @@ Every architectural choice was made deliberately. Full rationale in [`docs/DESIG
 | **Agentic Payment Design** | 6 payment flows (escrow, DCA, subscriptions, streaming, splits, x402); 10 composable policy rules; event-triggered tipping (watch_time, chat_hype, viewer_spike, milestones); community tip pools; auto-tip standing orders | [`autonomous-loop.service.ts`](./agent/src/services/autonomous-loop.service.ts) |
 | **Originality** | Wallet-as-Brain paradigm (financial state drives agent mood and behavior); cross-chain reputation passports; cryptographic multi-agent consensus; 6-layer safety where danger only escalates; Shannon entropy diversification scoring | [`financial-pulse.ts`](./agent/src/services/financial-pulse.ts) |
 | **Polish & Ship-ability** | Published on npm (`@xzashr/aerofyta`); live deployment; 60 Telegram commands with inline mode; 60 CLI commands; Docker; SDK for third-party integration; Chrome extension; OpenClaw/SOUL.md agent identity | `npx @xzashr/aerofyta demo` |
-| **Presentation & Demo** | Live Telegram bot ([@AeroFytaBot](https://t.me/AeroFytaBot)); 58-page dashboard ([aerofyta.xzashr.com](https://aerofyta.xzashr.com)); on-chain self-test endpoint; funded Sepolia wallet with Etherscan proof; YouTube demo video | [Demo video](https://youtu.be/Zwzs5sMP5u8) |
+| **Presentation & Demo** | Live Telegram bot ([@AeroFytaBot](https://t.me/AeroFytaBot)); 58-page dashboard ([aerofyta.xzashr.com](https://aerofyta.xzashr.com)); [real mainnet USDT transaction](https://polygonscan.com/tx/0x9ffed871f9d8ba3bc673582df586af8f2d3c53fa41cf55b2e85b805294bdb3ee) on Polygon; YouTube demo video | [Demo video](https://youtu.be/Zwzs5sMP5u8) |
 
 ---
 
