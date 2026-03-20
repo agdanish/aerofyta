@@ -115,4 +115,4 @@ export const CHAIN_CONFIGS: Record<ChainId, ChainConfig> = {
     explorerUrl: 'https://polygonscan.com',
     rpcUrl: process.env.POLYGON_RPC ?? 'https://polygon-bor-rpc.publicnode.com',
   },
-} as Record<string, ChainConfig>;
+};

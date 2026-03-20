@@ -13,7 +13,42 @@
 import type { Context } from 'grammy';
 import { startKeyboard, balanceKeyboard, tipConfirmKeyboard, helpCategoryKeyboard, quickActionsKeyboard } from './bot.js';
 
-// ── Demo data ──────────────────────────────────────────────────
+// ── Real on-chain balance fetcher ───────────────────────────────
+
+const WALLET_ADDRESS = '0xa604841A1085E3695107bFcb46DfE7c04Fe77174';
+const POLYGON_RPC = 'https://polygon-bor-rpc.publicnode.com';
+const USDT_POLYGON = '0xc2132D05D31c914a87C6611C10748AEb04B58e8F';
+
+async function fetchRealBalances(): Promise<{ pol: string; usdt: string } | null> {
+  try {
+    // Fetch POL balance
+    const polRes = await fetch(POLYGON_RPC, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', method: 'eth_getBalance', params: [WALLET_ADDRESS, 'latest'], id: 1 }),
+    });
+    const polData = await polRes.json() as { result: string };
+    const polWei = BigInt(polData.result || '0');
+    const pol = (Number(polWei) / 1e18).toFixed(4);
+
+    // Fetch USDT balance (balanceOf)
+    const balanceOfData = '0x70a08231000000000000000000000000' + WALLET_ADDRESS.slice(2).toLowerCase();
+    const usdtRes = await fetch(POLYGON_RPC, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', method: 'eth_call', params: [{ to: USDT_POLYGON, data: balanceOfData }, 'latest'], id: 2 }),
+    });
+    const usdtData = await usdtRes.json() as { result: string };
+    const usdtRaw = BigInt(usdtData.result || '0');
+    const usdt = (Number(usdtRaw) / 1e6).toFixed(6);
+
+    return { pol, usdt };
+  } catch {
+    return null;
+  }
+}
+
+// ── Demo data (fallback when RPC fails) ─────────────────────────
 
 const DEMO_BALANCES = [
   { chain: 'Ethereum (Sepolia)', native: '0.42 ETH', usdt: '125.00 USDT' },
@@ -169,46 +204,59 @@ export async function demoHelp(ctx: Context): Promise<void> {
 }
 
 export async function demoBalance(ctx: Context): Promise<void> {
-  const lines = ['*Wallet Balances (9 Chains)*', ''];
+  const real = await fetchRealBalances();
+  const lines = ['*Wallet Balances*', ''];
+
+  if (real) {
+    lines.push('*Polygon Mainnet* (LIVE)');
+    lines.push(`  POL: ${real.pol}`);
+    lines.push(`  USDT: ${real.usdt}`);
+    lines.push(`  Wallet: \`${WALLET_ADDRESS.slice(0, 10)}...${WALLET_ADDRESS.slice(-6)}\``);
+    lines.push(`  [View on Polygonscan](https://polygonscan.com/address/${WALLET_ADDRESS})`);
+    lines.push('');
+    lines.push('_Other chains (testnet):_');
+  } else {
+    lines.push('_Balances (demo mode):_');
+  }
+
   for (const b of DEMO_BALANCES) {
+    if (real && b.chain.includes('Polygon')) continue; // skip demo Polygon, we showed real
     lines.push(`*${b.chain}*`);
     lines.push(`  Native: ${b.native}`);
     lines.push(`  USDT: ${b.usdt}`);
     lines.push('');
   }
-  lines.push('_Total USDT across chains: ~2,480.00_');
   await ctx.reply(lines.join('\n'), { parse_mode: 'Markdown', reply_markup: balanceKeyboard() });
 }
 
 export async function demoStatus(ctx: Context): Promise<void> {
   const uptime = Math.floor(process.uptime() / 60);
+  const real = await fetchRealBalances();
   const msg = [
     '*Agent Status*',
     '',
     '*State:* Running',
     `*Uptime:* ${uptime} min`,
     '*Mode:* Autonomous',
+    `*Wallet:* \`${WALLET_ADDRESS.slice(0, 10)}...${WALLET_ADDRESS.slice(-6)}\``,
     '',
-    '*Autonomous Loop*',
-    '  Cycle: #847',
-    '  Decisions (24h): 50',
-    '  Tips sent: 23',
-    '  Tips skipped: 14',
-    '  Errors: 2',
+    '*Polygon Mainnet (LIVE)*',
+    real ? `  POL: ${real.pol} | USDT: ${real.usdt}` : '  Fetching...',
+    `  [Last TX](https://polygonscan.com/tx/0xd779998141aca67a18e57183ad01fa09bc43af8120ff37e685523f7342f1fe6d)`,
     '',
-    '*Wallet Health:* 87/100',
-    '*Mood:* Generous (x1.5 multiplier)',
-    '*Reason:* High liquidity, diversified across 7 chains',
+    '*Wallet-as-Brain*',
+    real && parseFloat(real.usdt) > 3 ? '  Health: 75/100 | Mood: Generous (1.3x)' : '  Health: 40/100 | Mood: Cautious (0.5x)',
+    '',
+    '*4-Agent Consensus*',
+    '  Discovery: Online',
+    '  TipExecutor: Online',
+    '  TreasuryOptimizer: Online',
+    '  Guardian: Online (veto power)',
     '',
     '*LLM Cascade*',
     '  Primary: Groq (llama-3.3-70b)',
     '  Fallback: Gemini (2.0 Flash)',
-    '  Status: Active',
-    '',
-    '*Consensus Engine*',
-    '  TipExecutor: Online',
-    '  Guardian: Online',
-    '  TreasuryOptimizer: Online',
+    '  Final: Rule-based (zero dependency)',
   ].join('\n');
   await ctx.reply(msg, { parse_mode: 'Markdown', reply_markup: quickActionsKeyboard() });
 }
