@@ -4,9 +4,9 @@
 
 # AeroFyta
 
-### Autonomous AI Agents for Rumble Creator Tipping
+### The Wallet That Thinks Before It Tips
 
-**4 AI agents watch what fans watch. They debate, vote cryptographically, and tip Rumble creators — so no hype moment goes unrewarded.**
+**What if your wallet had opinions? AeroFyta turns Rumble's tipping wallet into a brain — its financial health drives every autonomous tipping decision across 9 blockchains.**
 
 <br/>
 
@@ -37,11 +37,17 @@ Rumble and Tether launched the Rumble Wallet — a self-custodial crypto wallet 
 
 Gas fees destroy micro-tips. A $0.50 appreciation costs $2+ on some chains. And when bots handle money, there is no safety net — one bug, one exploit, and the wallet is drained.
 
-Tipping should be as automatic as watching. It should feel native to Rumble, not like a blockchain transaction.
+**The deeper problem:** every tipping bot treats the wallet as a dumb pipe — money in, money out. Nobody asks: *should* this wallet be tipping right now? Can it afford to? Is it being drained?
 
 ## The Solution
 
-AeroFyta extends Rumble's tipping wallet with autonomous AI agents that tip creators based on what actually happens — watch time, chat hype, viewer spikes, follower milestones, and subscriber events. Four AI agents debate the best chain, vote with cryptographic signatures, and execute through an 8-stage pipeline. The wallet's financial health — its *mood* — governs every decision: a struggling wallet holds back, a thriving wallet tips generously. Built on Rumble's USD₮, XAU₮, USA₮, and BTC flows, powered by 12 Tether WDK packages across 9 blockchains.
+AeroFyta treats the wallet as a **brain, not a pipe**. The wallet's financial health — liquidity, diversification, transaction velocity — is continuously evaluated into a *mood* that governs every autonomous decision. A thriving wallet tips generously (1.3x). A struggling wallet holds back (0.5x). A wallet under attack shuts down entirely.
+
+Four AI agents watch what fans watch on Rumble — watch time, chat hype, viewer spikes, milestones. They debate tip-worthiness, cast SHA-256 signed votes, and execute through an 8-stage pipeline. The Guardian agent has solo veto power. No single agent can unilaterally move funds.
+
+**This is not a tipping bot. It is a wallet that thinks before it tips.**
+
+Built on Rumble's USD₮, XAU₮, USA₮, and BTC flows, powered by 12 Tether WDK packages across 9 blockchains. [Verified on Polygon mainnet](https://polygonscan.com/tx/0x533a8d93a56aa97dca67f76be87088651028f6e6fcc6225c3f9ff8e59eae1498).
 
 ## How It Works
 
@@ -65,7 +71,50 @@ sequenceDiagram
 
 ---
 
-**Contents:** [WDK Integration](#-wdk-integration-12-packages) | [Wallet-as-Brain](#-wallet-as-brain) | [Architecture](#-architecture) | [Event-Triggered Tipping](#-event-triggered-tipping) | [9 Blockchains](#-9-blockchains) | [Payment Flows](#-6-payment-flows) | [Safety](#-safety-architecture) | [Platforms](#-platforms) | [Tests](#-tests--verification) | [Quick Start](#-quick-start) | [Design Decisions](#design-decisions) | [Known Limitations](#-known-limitations) | [Evaluation Alignment](#-evaluation-criteria-alignment) | [Tech Stack](#-tech-stack)
+**Contents:** [Wallet-as-Brain](#-wallet-as-brain) | [WDK Integration](#-wdk-integration-12-packages) | [Architecture](#-architecture) | [Event-Triggered Tipping](#-event-triggered-tipping) | [9 Blockchains](#-9-blockchains) | [Payment Flows](#-6-payment-flows) | [Safety](#-safety-architecture) | [Platforms](#-platforms) | [Tests](#-tests--verification) | [Quick Start](#-quick-start) | [Design Decisions](#design-decisions) | [Known Limitations](#-known-limitations) | [Evaluation Alignment](#-evaluation-criteria-alignment) | [Tech Stack](#-tech-stack)
+
+---
+
+## 🧠 Wallet-as-Brain — The Core Idea
+
+This is the central concept behind AeroFyta. Most tipping bots treat wallets as dumb pipes. AeroFyta's wallet *thinks*.
+
+The wallet's financial state is continuously evaluated into a "mood" that governs every autonomous decision. Every balance change, every tip, every gas fee shifts the wallet's behavior across 8 dimensions.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Strategic: Initial state
+    Strategic --> Generous: High liquidity + positive momentum
+    Strategic --> Cautious: Low liquidity or declining velocity
+    Generous --> Strategic: Liquidity drops
+    Cautious --> Strategic: Recovery detected
+    note right of Generous: 1.3x tip multiplier
+    note right of Strategic: 1.0x tip multiplier
+    note right of Cautious: 0.5x tip multiplier
+```
+
+| Mood | When | Tip Multiplier | Behavior |
+|------|------|---------------|----------|
+| **Generous** | High liquidity + positive momentum | 1.3x | Tip freely, explore new chains |
+| **Strategic** | Moderate health | 1.0x | Normal operation, proven creators only |
+| **Cautious** | Low liquidity or declining velocity | 0.5x | Selective tipping, fee optimization, capital preservation |
+
+State transitions are constrained — a cautious wallet cannot jump to generous in one cycle. Recovery must happen gradually.
+
+**Real mood logic** from [`financial-pulse.ts`](./agent/src/services/financial-pulse.ts):
+
+```typescript
+export interface FinancialPulse {
+  liquidityScore: number;        // 0-100: liquid vs committed funds
+  diversificationScore: number;  // 0-100: spread across chains (Shannon entropy)
+  velocityScore: number;         // 0-100: transaction frequency trend
+  healthScore: number;           // Weighted: 45% liquidity + 25% diversification + 30% velocity
+  totalAvailableUsdt: number;
+  activeChainsCount: number;
+}
+```
+
+**Why this matters:** An agent that moves money must be safer than a human. The Wallet-as-Brain ensures the agent never overextends, never drains itself, and always adapts to its financial reality. The wallet is not a tool. It is the brain.
 
 ---
 
@@ -110,47 +159,6 @@ this.wdk.registerWallet('ethereum', WalletManagerEvm, {
 ```
 
 All 12 packages are listed in [`package.json`](./agent/package.json) as real dependencies — not optional, not commented out.
-
----
-
-## 🧠 Wallet-as-Brain
-
-Most tipping bots execute commands blindly. AeroFyta's wallet *thinks*.
-
-The wallet's financial state is continuously evaluated into a "mood" that governs every autonomous decision. An agent that moves money must be safer than a human — so the wallet itself acts as the brain.
-
-```mermaid
-stateDiagram-v2
-    [*] --> Strategic: Initial state
-    Strategic --> Generous: High liquidity + positive momentum
-    Strategic --> Cautious: Low liquidity or declining velocity
-    Generous --> Strategic: Liquidity drops
-    Cautious --> Strategic: Recovery detected
-    note right of Generous: 1.3x tip multiplier
-    note right of Strategic: 1.0x tip multiplier
-    note right of Cautious: 0.5x tip multiplier
-```
-
-| Mood | When | Tip Multiplier | Behavior |
-|------|------|---------------|----------|
-| **Generous** | High liquidity + positive momentum | 1.3x | Tip freely, explore new chains |
-| **Strategic** | Moderate health | 1.0x | Normal operation, proven creators only |
-| **Cautious** | Low liquidity or declining velocity | 0.5x | Selective tipping, fee optimization, capital preservation |
-
-State transitions are constrained — a cautious wallet cannot jump to generous in one cycle. Recovery must happen gradually.
-
-**Real mood logic** from [`financial-pulse.ts`](./agent/src/services/financial-pulse.ts):
-
-```typescript
-export interface FinancialPulse {
-  liquidityScore: number;        // 0-100: liquid vs committed funds
-  diversificationScore: number;  // 0-100: spread across chains (Shannon entropy)
-  velocityScore: number;         // 0-100: transaction frequency trend
-  healthScore: number;           // Weighted: 45% liquidity + 25% diversification + 30% velocity
-  totalAvailableUsdt: number;
-  activeChainsCount: number;
-}
-```
 
 ---
 
