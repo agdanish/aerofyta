@@ -488,6 +488,95 @@ Tipping history is not siloed per chain. AeroFyta aggregates activity across all
 
 ---
 
+<details>
+<summary><strong>📋 Full Feature Index</strong></summary>
+
+### Tipping
+- Direct tips (single-chain, cross-chain)
+- Event-triggered tipping (watch_time, chat_hype, viewer_spike, follower_milestone, subscriber, manual)
+- Community tip pools (shared wallets, collective tipping)
+- Auto-tip standing orders (rules-based recurring tips)
+- Smart splits (creators, collaborators, causes)
+- HTLC escrow (time-locked, milestone-based)
+- DCA (dollar cost averaging for recurring support)
+- Subscriptions (auto-renewing creator memberships)
+- Streaming payments (per-second micropayments)
+- x402 HTTP-native micropayments
+
+### Wallet Intelligence
+- Wallet-as-Brain (financial state drives agent mood)
+- Financial Pulse (liquidity, diversification, velocity scoring)
+- Shannon entropy diversification measurement
+- Mood-driven tip multipliers (Generous 1.3x, Strategic 1.0x, Cautious 0.5x)
+- Constrained state transitions (no mood jumping)
+- Cross-chain reputation passports (0-1000 score, 5 tiers, 20+ achievements)
+
+### Agent System
+- 4 specialized agents (Discovery, TipExecutor, TreasuryOptimizer, Guardian)
+- SHA-256 cryptographic vote signing
+- 3/4 quorum with Guardian solo veto
+- 2-round deliberation with vote flipping
+- ReAct 5-step reasoning loop (Thought, Action, Observe, Reflect, Decide)
+- LLM cascade (Groq, Gemini, rule-based fallback)
+- OpenClaw SOUL.md agent identity with 7 skills
+
+### Transaction Pipeline
+- 8-stage pipeline (Validate, Quote, Approve, Sign, Broadcast, Confirm, Verify, Record)
+- GasOptimizer (cross-chain fee comparison)
+- NonceManager (collision prevention)
+- ReceiptVerifier (on-chain delta verification)
+- Event sourcing (28 event types, SHA-256 hash chain)
+- P&L engine (append-only ledger)
+
+### Safety
+- 10 composable policy rules (MaxTip, DailyLimit, MinReserve, ChainAllowlist, Cooldown, etc.)
+- 6-layer safety architecture (Policy, Wallet-as-Brain, Anomaly Detection, Risk Engine, Guardian Veto, Immutable Escalation)
+- Danger levels can only escalate, never de-escalate within a cycle
+- Hard-coded safety limits (no AI can override)
+- Anomaly detection (statistical deviation on amount + frequency)
+
+### Blockchain
+- 9 chains (Ethereum, Polygon, Arbitrum, Avalanche, Celo, TON, Tron, Bitcoin, Solana)
+- 12 Tether WDK packages
+- Gasless via ERC-4337 (5 EVM chains) + TON Gasless
+- Multi-asset (USD₮, XAU₮, USA₮, BTC)
+- USDT0 cross-chain bridging (LayerZero OFT)
+- Aave V3 lending (supply, borrow, repay)
+- Velora DEX swaps
+- Atomic swaps (HTLC-based trustless exchange)
+
+### Platforms
+- Telegram bot: 60 commands, inline mode, button menus, receipt cards, mini app, 30+ language greetings
+- CLI: 60 commands via `npx @xzashr/aerofyta`
+- Dashboard: 58 React pages with real-time updates
+- SDK: `npm install @xzashr/aerofyta` (TypeScript library)
+- MCP: 97 tools (62 custom + 35 WDK built-in)
+- Chrome extension: in-page tipping on YouTube and Rumble
+- REST API: 603 endpoints with Swagger docs
+
+### Observability
+- 32 Prometheus-compatible metrics (counters, gauges, histograms)
+- Tamper-proof event chain (SHA-256 linked)
+- Real-time WebSocket updates
+- Structured logging (Winston)
+
+### Smart Contracts
+- AgentEscrow.sol (HTLC escrow)
+- TipSplitter.sol (multi-recipient splits)
+- CreditProofVerifier.sol (Circom ZK proofs)
+- 40 Hardhat tests
+
+### Verification
+- 1,183 tests passing
+- [Autonomous mainnet tip on Polygon](https://polygonscan.com/tx/0x533a8d93a56aa97dca67f76be87088651028f6e6fcc6225c3f9ff8e59eae1498)
+- Funded wallet on [Polygon mainnet](https://polygonscan.com/address/0xa604841A1085E3695107bFcb46DfE7c04Fe77174)
+- CI green (GitHub Actions)
+- Docker one-command deployment
+
+</details>
+
+---
+
 <div align="center">
 
 **Apache 2.0** &nbsp;|&nbsp; Built by [Danish A G](mailto:agdanishr@gmail.com) &nbsp;|&nbsp; Built for [Tether Hackathon Galactica: WDK Edition 1](https://dorahacks.io/hackathon/hackathon-galactica-wdk-2026-01)
