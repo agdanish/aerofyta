@@ -3,9 +3,10 @@
 
 import type { ChainId, ChainConfig } from '../types/index.js';
 
-/** USDT contract addresses on testnets */
+/** USDT contract addresses */
 export const USDT_CONTRACTS: Record<string, string> = {
   'ethereum-sepolia': '0x7169D38820dfd117C3FA1f22a697dBA58d90BA06', // Sepolia USDT
+  'polygon-mainnet': '0xc2132D05D31c914a87C6611C10748AEb04B58e8F', // Polygon Mainnet USDT
 };
 
 /** USAT (USA₮) contract addresses.
@@ -105,4 +106,13 @@ export const CHAIN_CONFIGS: Record<ChainId, ChainConfig> = {
     explorerUrl: 'https://explorer.stable.xyz',
     rpcUrl: process.env.STABLE_RPC ?? 'https://rpc.stable.xyz',
   },
-};
+  'polygon-mainnet': {
+    id: 'polygon-mainnet',
+    name: 'Polygon Mainnet',
+    blockchain: 'ethereum',
+    isTestnet: false,
+    nativeCurrency: 'POL',
+    explorerUrl: 'https://polygonscan.com',
+    rpcUrl: process.env.POLYGON_RPC ?? 'https://polygon-bor-rpc.publicnode.com',
+  },
+} as Record<string, ChainConfig>;

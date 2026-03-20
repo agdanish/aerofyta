@@ -372,7 +372,7 @@ Coverage includes: WDK wallet operations, multi-agent consensus, all 8 pipeline 
 
 | Item | Detail |
 |------|--------|
-| **Autonomous Mainnet Tip** | [`0x533a8d9...ae1498`](https://polygonscan.com/tx/0x533a8d93a56aa97dca67f76be87088651028f6e6fcc6225c3f9ff8e59eae1498) — 4-agent consensus → 8-stage pipeline → real USDT on Polygon mainnet |
+| **Autonomous WDK Tip** | [`0xd77999...f1fe6d`](https://polygonscan.com/tx/0xd779998141aca67a18e57183ad01fa09bc43af8120ff37e685523f7342f1fe6d) — WDK `account.transfer()` on Polygon mainnet, 4-agent consensus, 8-stage pipeline |
 | **Funded Wallet** | [`0xa604841A1085E3695107bFcb46DfE7c04Fe77174`](https://polygonscan.com/address/0xa604841A1085E3695107bFcb46DfE7c04Fe77174) on Polygon mainnet |
 | **Self-Test** | `POST /api/self-test` executes a real on-chain transaction and returns the hash |
 | **Smart Contracts** | `AeroFytaEscrow.sol` (HTLC), `AeroFytaTipSplitter.sol`, `CreditProofVerifier.sol` (Circom ZK) |
