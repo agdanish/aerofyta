@@ -10,11 +10,13 @@ describe('WebhookSimulatorService', () => {
   let service: WebhookSimulatorService;
 
   before(() => {
+    process.env.DEMO_MODE = 'true';
     service = new WebhookSimulatorService(19999);
   });
 
   after(() => {
     service.stop();
+    delete process.env.DEMO_MODE;
   });
 
   it('constructor initializes with correct port', () => {
