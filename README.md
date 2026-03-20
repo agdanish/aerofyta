@@ -39,10 +39,10 @@ npm install @xzashr/aerofyta && npx @xzashr/aerofyta demo
 
 <br/>
 
-> **AeroFyta** is an autonomous payment agent where four AI agents discover creators, debate tip-worthiness through cryptographic consensus, and execute payments across 9 chains via an 8-stage transaction pipeline. The wallet's financial state drives every decision — no human clicks required.
+> **AeroFyta** is an autonomous payment agent where four AI agents discover creators, debate tip-worthiness through cryptographic consensus, and execute payments across 9 chains via an 8-stage transaction pipeline. The wallet's financial state drives every decision. No human clicks required.
 
 ```bash
-# Clone and run — that's it
+# Clone and run. That's it.
 git clone https://github.com/agdanish/aerofyta.git && cd aerofyta && npm install && npm run dev
 ```
 
@@ -55,7 +55,7 @@ git clone https://github.com/agdanish/aerofyta.git && cd aerofyta && npm install
 <details>
 <summary><h2>Architecture</h2></summary>
 
-> **v1.2.0** — Full architecture documentation with detailed component diagrams: [docs/architecture.md](./docs/architecture.md)
+> **v1.2.0**: Full architecture documentation with detailed component diagrams: [docs/architecture.md](./docs/architecture.md)
 
 ```
 User Layer:   Dashboard (React 58pg)  |  Telegram Bot  |  Chrome Extension  |  CLI (60+ cmds)
@@ -249,7 +249,7 @@ Verifies every transaction by comparing on-chain balance deltas:
 
 ## Economic Engine
 
-Real financial tracking — not mock data. The economic engine maintains an append-only ledger of all financial operations with full P&L visibility.
+Real financial tracking, not mock data. The economic engine maintains an append-only ledger of all financial operations with full P&L visibility.
 
 ### P&L Tracking
 
@@ -332,7 +332,7 @@ Proposal submitted → Agents analyze independently → Votes signed with SHA-25
 
 ## Event Sourcing
 
-Every system action is recorded as an immutable event in a tamper-proof hash chain. Events are never modified or deleted — only appended.
+Every system action is recorded as an immutable event in a tamper-proof hash chain. Events are never modified or deleted, only appended.
 
 ### 28 Event Types
 
@@ -366,7 +366,7 @@ interface SourcedEvent {
 
 **Chain Integrity Verification**: At startup and periodically, the system walks the entire event chain and verifies every hash link. Any tampered event breaks the chain and triggers an alert.
 
-**Persistence**: Events are written to JSONL files — one line per event, append-only. Supports replay for state reconstruction.
+**Persistence**: Events are written to JSONL files, one line per event, append-only. Supports replay for state reconstruction.
 
 ---
 
@@ -406,7 +406,7 @@ Rules are evaluated in descending priority order. The first DENY stops evaluatio
 
 ## Chain Abstraction
 
-A unified interface across all 9 blockchains. Application code never deals with chain-specific details — the abstraction layer handles addressing, signing, fee estimation, and transaction formats.
+A unified interface across all 9 blockchains. Application code never deals with chain-specific details. The abstraction layer handles addressing, signing, fee estimation, and transaction formats.
 
 ### Unified 9-Chain Interface
 
@@ -442,7 +442,7 @@ Every chain connection is monitored in real-time:
 
 ## Observability
 
-32 Prometheus-compatible metrics instrumented from live operations. Real counters, gauges, and histograms — not synthetic data.
+32 Prometheus-compatible metrics instrumented from live operations. Real counters, gauges, and histograms. Not synthetic data.
 
 ### Metric Categories
 
@@ -478,7 +478,7 @@ All metrics follow the Prometheus exposition format and can be scraped by standa
 # Start the agent
 npm install && npm run dev
 
-# ONE COMMAND — proves WDK wallet is real and operational
+# ONE COMMAND: proves WDK wallet is real and operational
 curl -X POST http://localhost:3001/api/self-test
 ```
 
@@ -496,7 +496,7 @@ Response format:
   "walletAddress": "0x...",
   "txHash": "0x...",
   "etherscanLink": "https://sepolia.etherscan.io/tx/0x...",
-  "proof": "WDK wallet operational — 0-value self-transfer confirmed on Sepolia",
+  "proof": "WDK wallet operational, 0-value self-transfer confirmed on Sepolia",
   "method": "self-transfer",
   "network": "ethereum-sepolia"
 }
@@ -509,7 +509,7 @@ Response format:
 # 1. Start the agent
 npm install && npm run dev
 
-# 2. Self-test — 0-value on-chain tx proving WDK wallet works
+# 2. Self-test: 0-value on-chain tx proving WDK wallet works
 curl -X POST http://localhost:3001/api/self-test
 
 # 3. Mint test USDT on Sepolia
@@ -581,13 +581,13 @@ graph LR
 | **Strategic** | Wallet health 40-70 | Optimal amounts, fee-minimized, data-driven selection, 1.0x multiplier |
 | **Cautious** | Wallet health < 40 | Minimal tips, lowest-fee chains only, preservation mode, 0.5x multiplier |
 
-The wallet becomes the decision engine. As the agent spends, saves, and earns yield — its behavior adapts in real-time. This is not programmed if/else logic. The financial state _is_ the intelligence.
+The wallet becomes the decision engine. As the agent spends, saves, and earns yield, its behavior adapts in real-time. This is not programmed if/else logic. The financial state _is_ the intelligence.
 
 ---
 
-## WDK Integration — 12 Packages
+## WDK Integration: 12 Packages
 
-AeroFyta uses **12 Tether WDK packages** with **454 file references** — the deepest WDK integration in the hackathon.
+AeroFyta uses **12 Tether WDK packages** with **454 file references**, the deepest WDK integration in the hackathon.
 
 | # | Package | Purpose |
 |:-:|---------|---------|
@@ -604,7 +604,7 @@ AeroFyta uses **12 Tether WDK packages** with **454 file references** — the de
 | 11 | `@tetherto/wdk-velora-swap` | Velora Swap — DEX aggregation and token swaps |
 | 12 | `@tetherto/wdk-utils` | Shared utilities — formatting, validation, constants |
 
-### Multi-Asset Support — USD₮, XAU₮, USA₮
+### Multi-Asset Support: USD₮, XAU₮, USA₮
 
 AeroFyta supports **three Tether assets** across all chains, addressing the judging criteria for sensible use of multiple assets:
 
@@ -614,9 +614,9 @@ AeroFyta supports **three Tether assets** across all chains, addressing the judg
 | **XAU₮** | Tether Gold | `0x68749665FF8D2d112Fa859AA293F07A622782F38` | 6 | Gold-backed tips (1 token = 1 troy oz) |
 | **USA₮** | Alloy Dollar | `0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0` | 6 | US dollar-pegged alternative tips |
 
-All three tokens use the same WDK `transfer()` flow — the contract address is the only difference. The dashboard, CLI, Telegram bot, and Chrome extension all support selecting which token to tip with.
+All three tokens use the same WDK `transfer()` flow. The contract address is the only difference. The dashboard, CLI, Telegram bot, and Chrome extension all support selecting which token to tip with.
 
-### WDK Integration Depth — Per-Package Method Usage
+### WDK Integration Depth: Per-Package Method Usage
 
 Every package is exercised with **real method calls**, not just imports. Run `GET /api/wdk/integration-check` to generate a live report, or run the 27 integration tests in `agent/src/__tests__/integration/wdk-packages.test.ts`.
 
@@ -678,9 +678,9 @@ Uses `@tetherto/wdk-wallet-ton-gasless` for zero-fee tipping on the TON network.
 
 Gas fees destroy the economics of small tips. A $0.50 tip on Ethereum mainnet can cost $2+ in gas. With gasless transactions:
 
-- **Micro-tips become viable** — send $0.10 without losing it to gas
-- **New users onboard without ETH** — no need to buy gas tokens first
-- **Cross-chain fee optimization** — the agent picks the cheapest gasless route automatically
+- **Micro-tips become viable**: send $0.10 without losing it to gas
+- **New users onboard without ETH**: no need to buy gas tokens first
+- **Cross-chain fee optimization**: the agent picks the cheapest gasless route automatically
 
 ---
 
@@ -703,7 +703,7 @@ Dollar-cost averaging on configurable schedules. The agent buys fixed amounts at
 <td width="33%">
 
 ### Subscriptions
-Recurring creator payments with retry logic. Set frequency, amount, and recipient — the agent handles execution and failure recovery.
+Recurring creator payments with retry logic. Set frequency, amount, and recipient. The agent handles execution and failure recovery.
 
 </td>
 </tr>
@@ -733,7 +733,7 @@ HTTP 402-based machine-to-machine payment protocol. Agents pay other agents for 
 
 ## Event-Triggered Tipping
 
-AeroFyta fires tips autonomously based on 6 real-time event triggers — no human click required:
+AeroFyta fires tips autonomously based on 6 real-time event triggers. No human click required:
 
 | Trigger | How It Works |
 |:--------|:-------------|
@@ -758,7 +758,7 @@ Message Velocity (msgs/sec) x Keyword Match (hype terms) x Emoji Density x Caps 
 Crowdfunded pools where multiple fans collectively fund tips for their favorite creators:
 
 - **Create** a pool with a target amount and deadline
-- **Contribute** any amount — tracked per-contributor
+- **Contribute** any amount, tracked per-contributor
 - **Auto-disburse** when the pool reaches its target
 - **Refund** if the deadline passes without reaching the goal
 - Managed via API endpoints and dashboard UI
@@ -787,11 +787,11 @@ The Chrome extension supports configurable per-creator limits:
 ### OpenClaw-Native Agent Runtime
 [SOUL.md](./agent/SOUL.md)-driven identity with 7 registered [skills](./agent/skills/). 5-iteration reasoning loop on every decision:
 
-1. **Thought** — What should I do and why?
-2. **Action** — Query wallet state, check fees, scan creators
-3. **Observe** — What did I learn?
-4. **Reflect** — Does this match my financial goals?
-5. **Decide** — Execute, defer, or escalate
+1. **Thought**: What should I do and why?
+2. **Action**: Query wallet state, check fees, scan creators
+3. **Observe**: What did I learn?
+4. **Reflect**: Does this match my financial goals?
+5. **Decide**: Execute, defer, or escalate
 
 </td>
 <td width="50%">
@@ -816,18 +816,18 @@ The Chrome extension supports configurable per-creator limits:
 
 SHA-256 hashing of decision context (amount, recipient, chain, wallet state) skips redundant LLM calls. Identical contexts return cached verdicts instantly, reducing latency and API usage by up to 80%.
 
-### LLM Cascade — Never Fails
+### LLM Cascade (Never Fails)
 
 ```
 Groq (llama-3.3-70b) -> Gemini (2.0 Flash) -> Rule-Based Fallback
          Fast + Free         Backup             Always Available
 ```
 
-If all LLMs are down, the agent falls back to rule-based reasoning — it **never stops working**.
+If all LLMs are down, the agent falls back to rule-based reasoning. It **never stops working**.
 
 ### Epsilon-Greedy Exploration
 
-10% of decisions are exploratory — the agent tries new chains, new tip amounts, new creators — enabling continuous learning and adaptation.
+10% of decisions are exploratory. The agent tries new chains, new tip amounts, and new creators, enabling continuous learning and adaptation.
 
 ---
 
@@ -857,15 +857,15 @@ AeroFyta blocks **12 attack vectors** through a layered defense system:
 
 **Kill Switch**: One API call (`POST /api/agent/kill`) freezes all autonomous operations instantly. All pending transactions are cancelled. The agent enters read-only mode until manually restarted.
 
-**Risk Engine**: 8-dimension scoring evaluates every transaction — amount, frequency, recipient trust, chain risk, gas ratio, wallet impact, historical pattern, and consensus confidence.
+**Risk Engine**: 8-dimension scoring evaluates every transaction: amount, frequency, recipient trust, chain risk, gas ratio, wallet impact, historical pattern, and consensus confidence.
 
 **Policy Engine**: 10 composable rules with priority-ordered evaluation (see [Policy Engine](#-policy-engine) section).
 
-**Rate Limiting**: Tiered per-IP rate limiting — 100 requests/min for reads, 10 requests/min for writes. Configurable per-endpoint with burst allowance.
+**Rate Limiting**: Tiered per-IP rate limiting. 100 requests/min for reads, 10 requests/min for writes. Configurable per-endpoint with burst allowance.
 
 **Circuit Breaker**: CLOSED/OPEN/HALF_OPEN state machine for external service calls. Automatically opens after consecutive failures, prevents cascading outages, and self-heals via half-open probing.
 
-**Credit Scoring**: 300-850 credit scores computed from 5 factors — payment history, utilization ratio, account age, transaction diversity, and repayment consistency. Used for lending eligibility and risk-adjusted limits.
+**Credit Scoring**: 300-850 credit scores computed from 5 factors: payment history, utilization ratio, account age, transaction diversity, and repayment consistency. Used for lending eligibility and risk-adjusted limits.
 
 ---
 
@@ -877,7 +877,7 @@ AeroFyta blocks **12 attack vectors** through a layered defense system:
 | Blockchains | **9** |
 | Specialized agents | **4** |
 | Architectural systems | **8** |
-| Tests passing | **1,183** (`npm test` — verify yourself) |
+| Tests passing | **1,183** (`npm test` to verify) |
 | Contract tests | **62** (3 Hardhat test files) |
 | API endpoints | **763** route definitions |
 | MCP tools | **68** tool registrations |
@@ -907,7 +907,7 @@ npm install && npm run dev
 > Dashboard opens at `http://localhost:5173`. Agent API at `http://localhost:3001`.
 
 <details>
-<summary><strong>Environment Setup (optional — enhances AI reasoning)</strong></summary>
+<summary><strong>Environment Setup (optional, enhances AI reasoning)</strong></summary>
 
 ```bash
 cp agent/.env.example agent/.env
@@ -985,7 +985,7 @@ Every command talks to the same agent backend. The CLI is a first-class interfac
 
 ## Talk to the Agent
 
-Chat with AeroFyta directly on Telegram — no setup required.
+Chat with AeroFyta directly on Telegram. No setup required.
 
 [![Telegram Bot](https://img.shields.io/badge/Telegram-@AeroFytaBot-26A5E4?style=for-the-badge&logo=telegram)](https://t.me/AeroFytaBot)
 
@@ -1007,7 +1007,7 @@ Natural language also works: *"tip sarah 2 usdt on polygon"*, *"check my balance
 
 ### Run the Bot Standalone
 
-The Telegram bot works independently — no Express server or WDK backend needed:
+The Telegram bot works independently. No Express server or WDK backend needed:
 
 ```bash
 # Get a token from @BotFather: https://t.me/BotFather
@@ -1032,9 +1032,9 @@ TELEGRAM_BOT_TOKEN=your_token npx tsx agent/telegram-standalone.ts
 
 ## Chrome Extension
 
-Browser extension for tipping creators directly on Rumble and YouTube. Detects creator engagement metrics in real-time, shows the agent's reasoning, and executes tips through WDK — all without leaving the video page.
+Browser extension for tipping creators directly on Rumble and YouTube. Detects creator engagement metrics in real-time, shows the agent's reasoning, and executes tips through WDK, all without leaving the video page.
 
-**HTMX Wallet Extraction**: The extension silently detects and extracts creator wallet addresses from Rumble channel pages using DOM parsing — no manual entry required. Combined with per-creator tipping rules, the extension enables fully autonomous creator discovery and tipping.
+**HTMX Wallet Extraction**: The extension silently detects and extracts creator wallet addresses from Rumble channel pages using DOM parsing. No manual entry required. Combined with per-creator tipping rules, the extension enables fully autonomous creator discovery and tipping.
 
 ---
 
@@ -1047,7 +1047,7 @@ Browser extension for tipping creators directly on Rumble and YouTube. Detects c
 <td width="33%">
 
 ### x402 Payment Protocol
-HTTP 402 paywalls for agent-to-agent API access. Agents pay micro-fees to access other agents' data and services — enabling a machine-to-machine payment economy.
+HTTP 402 paywalls for agent-to-agent API access. Agents pay micro-fees to access other agents' data and services, enabling a machine-to-machine payment economy.
 
 </td>
 <td width="33%">
@@ -1079,7 +1079,7 @@ Real-time gas cost comparison across all 9 supported chains. The agent queries c
 <td>
 
 ### WebSocket Real-Time
-Live dashboard updates via Socket.IO. Decision streams, wallet state changes, tip confirmations, and agent dialogue are pushed to the frontend in real-time — no polling.
+Live dashboard updates via Socket.IO. Decision streams, wallet state changes, tip confirmations, and agent dialogue are pushed to the frontend in real-time. No polling.
 
 </td>
 </tr>
@@ -1240,10 +1240,10 @@ This project was built entirely during the Tether Hackathon Galactica: WDK Editi
 
 <div align="center">
 
-**v1.2.0 — Built with 12 Tether WDK packages, 4 agents, 8 architectural systems for Hackathon Galactica: WDK Edition 1**
+**v1.2.0. Built with 12 Tether WDK packages, 4 agents, 8 architectural systems for Hackathon Galactica: WDK Edition 1**
 
 [![npm](https://img.shields.io/badge/npm-@xzashr/aerofyta-CB3837?style=flat-square&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta) [![Live](https://img.shields.io/badge/live-aerofyta.xzashr.com-FF4E00?style=flat-square)](https://aerofyta.xzashr.com) [![Tether WDK](https://img.shields.io/badge/Tether-WDK-50AF95?style=flat-square&logo=tether&logoColor=white)](https://wdk.tether.io)
 
-*AeroFyta — where wallets think, agents debate, consensus is cryptographic, and payments execute autonomously.*
+*AeroFyta: where wallets think, agents debate, consensus is cryptographic, and payments execute autonomously.*
 
 </div>
