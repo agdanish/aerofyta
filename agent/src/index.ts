@@ -143,6 +143,18 @@ async function main(): Promise<void> {
     logger.info(`AeroFyta early server on http://localhost:${PORT} (WDK initializing...)`);
   });
 
+  // Start Telegram bot EARLY in standalone/demo mode (before WDK init)
+  const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+  let grammyBot: TelegramGrammyBot | null = null;
+  if (telegramToken) {
+    grammyBot = new TelegramGrammyBot({ token: telegramToken });
+    grammyBot.start().then(() => {
+      logger.info('Telegram bot started (demo mode, WDK loading...)');
+    }).catch((err) => {
+      logger.warn('Telegram bot early start failed', { error: String(err) });
+    });
+  }
+
   await sr.initialize(seed);
 
   // Close early server — main server takes over
@@ -304,26 +316,10 @@ async function main(): Promise<void> {
     personality: sr.personality,
   });
 
-  // Start Telegram bot (optional — only if TELEGRAM_BOT_TOKEN is set)
-  // Grammy-based bot takes priority; falls back to native fetch polling bot
-  const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
-  if (telegramToken) {
-    const grammyBot = new TelegramGrammyBot({
-      token: telegramToken,
-      agent,
-      wallet: walletService,
-      feeArbitrage: sr.feeArbitrage,
-      autonomousLoop: sr.autonomousLoop,
-    });
-    grammyBot.start().catch((err) => {
-      logger.warn('Grammy Telegram bot startup failed — falling back to native bot', { error: String(err) });
-      // Fallback to native fetch-based bot
-      agent.startTelegramBot().catch((fallbackErr) => {
-        logger.warn('Native Telegram bot also failed (non-fatal)', { error: String(fallbackErr) });
-      });
-    });
-  } else {
-    logger.info('TELEGRAM_BOT_TOKEN not set — Telegram bot disabled');
+  // Update Telegram bot with full services (now that WDK is ready)
+  if (grammyBot && sr.feeArbitrage && sr.autonomousLoop) {
+    grammyBot.updateServices(sr.feeArbitrage, sr.autonomousLoop);
+    logger.info('Telegram bot updated with full WDK services');
   }
 
   // Demo mode — seed sample data for judges

@@ -42,6 +42,19 @@ import {
   demoHistory,
   demoGas,
   demoReasoning,
+  demoMood,
+  demoPulse,
+  demoEscrow,
+  demoCreators,
+  demoDca,
+  demoSubscribe,
+  demoKill,
+  demoYield,
+  demoBridge,
+  demoSwap,
+  demoPolicy,
+  demoAudit,
+  demoMetrics,
 } from './demo-responses.js';
 import { parseNaturalLanguage } from './nlp.js';
 
@@ -93,7 +106,7 @@ export class TelegramGrammyBot {
         feeArbitrage: options.feeArbitrage,
         autonomousLoop: options.autonomousLoop,
       };
-      this.demoMode = false;
+      this.demoMode = !options.agent;
     } else {
       this.deps = null;
       this.demoMode = true;
@@ -102,6 +115,16 @@ export class TelegramGrammyBot {
     this.registerCommands();
     this.registerNaturalLanguage();
     this.registerErrorHandler();
+  }
+
+  /** Update services after WDK initialization completes */
+  updateServices(feeArbitrage: FeeArbitrageService, autonomousLoop: AutonomousLoopService | null): void {
+    if (this.deps) {
+      this.deps.feeArbitrage = feeArbitrage;
+      this.deps.autonomousLoop = autonomousLoop;
+      this.demoMode = false;
+      logger.info('Telegram bot services updated with full WDK backend');
+    }
   }
 
   /** Start the bot with long polling */
@@ -187,6 +210,19 @@ export class TelegramGrammyBot {
     this.bot.command('history', wrap(handleHistory, demoHistory));
     this.bot.command('gas', wrap(handleGas, demoGas));
     this.bot.command('reasoning', wrap(handleReasoning, demoReasoning));
+    this.bot.command('mood', wrap(null, demoMood));
+    this.bot.command('pulse', wrap(null, demoPulse));
+    this.bot.command('escrow', wrap(null, demoEscrow));
+    this.bot.command('creators', wrap(null, demoCreators));
+    this.bot.command('dca', wrap(null, demoDca));
+    this.bot.command('subscribe', wrap(null, demoSubscribe));
+    this.bot.command('kill', wrap(null, demoKill));
+    this.bot.command('yield', wrap(null, demoYield));
+    this.bot.command('bridge', wrap(null, demoBridge));
+    this.bot.command('swap', wrap(null, demoSwap));
+    this.bot.command('policy', wrap(null, demoPolicy));
+    this.bot.command('audit', wrap(null, demoAudit));
+    this.bot.command('metrics', wrap(null, demoMetrics));
   }
 
   // ── Natural language handler ───────────────────────────────

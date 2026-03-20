@@ -87,27 +87,38 @@ export async function demoHelp(ctx: Context): Promise<void> {
   const msg = [
     '*AeroFyta Commands*',
     '',
-    '/start  Welcome message',
-    '/tip `@user amount [chain]`  Send a tip',
-    '  Example: `/tip @sarah_creates 2.5 polygon`',
-    '/balance  Wallet balances across all 9 chains',
-    '/status  Agent status (cycle, decisions, health)',
-    '/wallets  Show all 9 wallet addresses',
-    '/history  Recent tip history with TX hashes',
-    '/gas  Gas prices across chains with recommendation',
-    '/reasoning  Last agent reasoning chain (ReAct)',
-    '/help  Show this help message',
+    '*Tipping*',
+    '/tip `@user amount [chain]` - Send a tip',
+    '/escrow - HTLC escrow (create, claim, list)',
+    '/dca - Dollar cost averaging plans',
+    '/subscribe - Recurring tip subscriptions',
+    '/creators - Tracked creators and engagement',
+    '/history - Recent tips with TX hashes',
+    '',
+    '*Wallet*',
+    '/balance - Balances across all 9 chains',
+    '/wallets - All 9 wallet addresses',
+    '/gas - Gas prices with recommendation',
+    '/mood - Wallet mood (generous/strategic/cautious)',
+    '/pulse - Financial health score (0-100)',
+    '',
+    '*DeFi*',
+    '/yield - Aave V3 supply and earnings',
+    '/bridge - USDT0 cross-chain bridge',
+    '/swap - Velora DEX token swaps',
+    '',
+    '*Agent*',
+    '/status - Agent status and uptime',
+    '/reasoning - Last AI reasoning chain (ReAct)',
+    '/policy - View 10 composable policy rules',
+    '/audit - Recent audit log entries',
+    '/metrics - Prometheus metrics summary',
+    '/kill - Emergency kill switch',
     '',
     '*Natural language also works:*',
     '  "tip sarah 2 usdt on polygon"',
     '  "check my balance"',
     '  "who should I tip?"',
-    '  "show gas prices"',
-    '',
-    '*Architecture:*',
-    '  LLM Cascade: Groq -> Gemini -> Rules',
-    '  3-Agent Consensus: TipExecutor + Guardian + Treasury',
-    '  Wallet-as-Brain: mood adapts to financial state',
   ].join('\n');
   await ctx.reply(msg, { parse_mode: 'Markdown' });
 }
@@ -299,6 +310,261 @@ export async function demoReasoning(ctx: Context): Promise<void> {
   await ctx.reply(msg, { parse_mode: 'Markdown' });
 }
 
+// ── New commands ─────────────────────────────────────────────
+
+export async function demoMood(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Wallet Mood*',
+    '',
+    'Current: *Generous* (1.5x multiplier)',
+    'Health: 87/100',
+    'Liquidity: 92/100',
+    'Diversification: 78/100',
+    'Velocity: 45/100',
+    '',
+    'The wallet is healthy and well-funded.',
+    'Tips are amplified by 1.5x in generous mode.',
+    '',
+    '_Mood shifts automatically based on financial state._',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoPulse(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Financial Pulse*',
+    '',
+    'Health Score: *87/100*',
+    '',
+    'Liquidity: 92 (high)',
+    'Diversification: 78 (7/9 chains funded)',
+    'Velocity: 45 (moderate spend rate)',
+    'Risk Appetite: 72/100',
+    '',
+    'Available USDT: 2,480.00',
+    'Max single tip: 50.00 USDT',
+    'Daily budget remaining: 175.00 USDT',
+    '',
+    'Runway: ~14 days at current burn rate',
+    '_Updated every autonomous cycle._',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoEscrow(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*HTLC Escrow*',
+    '',
+    'Active escrows: 3',
+    '',
+    '1. *50 USDT* to @dev\\_fund',
+    '   Status: Locked (expires in 2h)',
+    '   Hash: `sha256:a1b2c3...`',
+    '',
+    '2. *25 USDT* to @creator\\_pool',
+    '   Status: Locked (expires in 6h)',
+    '   Hash: `sha256:d4e5f6...`',
+    '',
+    '3. *10 USDT* to @bounty\\_hunter',
+    '   Status: Claimed',
+    '   Hash: `sha256:g7h8i9...`',
+    '',
+    'Commands:',
+    '  `/escrow create 50 @user 2h`',
+    '  `/escrow claim <id> <preimage>`',
+    '  `/escrow list`',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoCreators(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Tracked Creators*',
+    '',
+    '1. *Marques Brownlee* (YouTube)',
+    '   Engagement: 0.55 | Tips sent: 8',
+    '   Tier: Gold',
+    '',
+    '2. *The Dan Bongino Show* (Rumble)',
+    '   Engagement: 0.36 | Tips sent: 3',
+    '   Tier: Silver',
+    '',
+    '3. *Russell Brand* (Rumble)',
+    '   Engagement: 0.35 | Tips sent: 2',
+    '   Tier: Silver',
+    '',
+    '4. *Tim Pool Show* (Rumble)',
+    '   Engagement: 0.26 | Tips sent: 1',
+    '   Tier: Bronze',
+    '',
+    'Sources: YouTube RSS, Rumble scraper',
+    '_Creator discovery runs every autonomous cycle._',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoDca(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*DCA (Dollar Cost Averaging)*',
+    '',
+    'Active plans: 1',
+    '',
+    '1. *100 USDT weekly* into MKBHD tips',
+    '   Chain: Polygon (cheapest fees)',
+    '   Next execution: 2026-03-28',
+    '   Total distributed: 400 USDT (4 weeks)',
+    '',
+    'Commands:',
+    '  `/dca create 100 weekly @creator polygon`',
+    '  `/dca list`',
+    '  `/dca stop <id>`',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoSubscribe(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Subscriptions*',
+    '',
+    'Active: 2',
+    '',
+    '1. *@sarah\\_creates* - 10 USDT/week on Polygon',
+    '   Next: 2026-03-28 | Total paid: 40 USDT',
+    '',
+    '2. *@ai\\_builder* - 5 USDT/month on Arbitrum',
+    '   Next: 2026-04-15 | Total paid: 5 USDT',
+    '',
+    'Commands:',
+    '  `/subscribe @user 10 weekly polygon`',
+    '  `/subscribe list`',
+    '  `/subscribe cancel <id>`',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoKill(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*KILL SWITCH*',
+    '',
+    'This will immediately:',
+    '  Stop the autonomous loop',
+    '  Cancel all pending transactions',
+    '  Freeze all wallet operations',
+    '  Enter read-only mode',
+    '',
+    'To confirm, type: `/kill confirm`',
+    '',
+    '_Use only in emergencies. Restart with `/start` after review._',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoYield(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Yield (Aave V3)*',
+    '',
+    'Supplied: 500 USDT on Ethereum Sepolia',
+    'APY: 3.2%',
+    'Earned: 1.33 USDT (since 2026-03-16)',
+    '',
+    'Available to supply: 1,980 USDT',
+    '',
+    'Commands:',
+    '  `/yield supply 100 USDT`',
+    '  `/yield withdraw 50 USDT`',
+    '  `/yield status`',
+    '',
+    '_Yield offsets gas costs. Coverage: ~40% of daily fees._',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoBridge(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*USDT0 Bridge (LayerZero)*',
+    '',
+    'Bridge USDT across chains via LayerZero OFT.',
+    '',
+    'Supported routes:',
+    '  Ethereum <-> Polygon',
+    '  Ethereum <-> Arbitrum',
+    '  Ethereum <-> Avalanche',
+    '  Polygon <-> Arbitrum',
+    '',
+    'Commands:',
+    '  `/bridge 100 USDT ethereum polygon`',
+    '  `/bridge routes`',
+    '  `/bridge status <txHash>`',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoSwap(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Velora Swap*',
+    '',
+    'DEX aggregation for token swaps.',
+    '',
+    'Example quotes:',
+    '  100 USDT -> 0.038 ETH (Ethereum)',
+    '  100 USDT -> 100.02 USDC (Polygon)',
+    '  100 USDT -> 342.5 TON (TON)',
+    '',
+    'Commands:',
+    '  `/swap 100 USDT ETH ethereum`',
+    '  `/swap quote 50 USDT MATIC polygon`',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoPolicy(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Policy Engine (10 Rules)*',
+    '',
+    '1. MaxSingleTip: 50 USDT (DENY)',
+    '2. DailySpendLimit: 200 USDT (DENY)',
+    '3. HourlyRateLimit: 20 tx/hr (DENY)',
+    '4. MinWalletBalance: 100 USDT reserve (DENY)',
+    '5. BlockedRecipient: 3 addresses (DENY)',
+    '6. WhitelistOnly: OFF (DENY)',
+    '7. ChainPreference: Polygon (MODIFY)',
+    '8. FeeCapPolicy: max 5% fee (MODIFY)',
+    '9. BatchOptimizer: group <1 USDT tips (MODIFY)',
+    '10. CooldownPeriod: 1hr same recipient (DENY)',
+    '',
+    '_Policies evaluated on every transaction._',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoAudit(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Audit Log (Last 5)*',
+    '',
+    '[12:01] TIP 5.00 USDT to @sarah\\_creates on Polygon - OK',
+    '[11:45] CONSENSUS 3/3 approved tip to @rumble\\_dev',
+    '[11:30] POLICY ChainPreference redirected Ethereum -> Polygon',
+    '[11:15] CYCLE #847 completed. 2 tips, 1 skipped.',
+    '[11:00] MOOD shifted: Strategic -> Generous (health 87)',
+    '',
+    '_Full audit trail at GET /api/audit_',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
+export async function demoMetrics(ctx: Context): Promise<void> {
+  await ctx.reply([
+    '*Metrics (Prometheus)*',
+    '',
+    'Transactions:',
+    '  tips\\_sent\\_total: 23',
+    '  tips\\_failed\\_total: 2',
+    '  avg\\_tip\\_amount\\_usd: 4.35',
+    '',
+    'Consensus:',
+    '  votes\\_cast\\_total: 141',
+    '  veto\\_count: 3',
+    '',
+    'Performance:',
+    '  api\\_requests\\_total: 1,247',
+    '  avg\\_response\\_ms: 42',
+    '',
+    'Economics:',
+    '  fees\\_paid\\_total: 0.0087 USDT',
+    '  yield\\_earned\\_total: 1.33 USDT',
+    '',
+    '_Prometheus endpoint: GET /api/metrics_',
+  ].join('\n'), { parse_mode: 'Markdown' });
+}
+
 /** Map of command name to demo handler */
 export const DEMO_HANDLERS: Record<string, (ctx: Context) => Promise<void>> = {
   start: demoStart,
@@ -310,4 +576,17 @@ export const DEMO_HANDLERS: Record<string, (ctx: Context) => Promise<void>> = {
   history: demoHistory,
   gas: demoGas,
   reasoning: demoReasoning,
+  mood: demoMood,
+  pulse: demoPulse,
+  escrow: demoEscrow,
+  creators: demoCreators,
+  dca: demoDca,
+  subscribe: demoSubscribe,
+  kill: demoKill,
+  yield: demoYield,
+  bridge: demoBridge,
+  swap: demoSwap,
+  policy: demoPolicy,
+  audit: demoAudit,
+  metrics: demoMetrics,
 };
