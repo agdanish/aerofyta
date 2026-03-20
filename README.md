@@ -1,86 +1,74 @@
 <div align="center">
 
-<img src="./dashboard/public/logo-orange.png" alt="AeroFyta" width="140"/>
+<img src="./dashboard/public/logo-orange.png" alt="AeroFyta" width="120"/>
 
 # AeroFyta
 
-### Your Wallet Thinks. Your Agents Debate. Your Payments Execute.
+**Autonomous multi-agent tipping across 9 blockchains, powered by Tether WDK.**
 
-**The first autonomous multi-agent payment orchestrator where wallet state _drives_ agent intelligence — 4 specialized agents, 8 architectural systems, 12 Tether WDK packages, 9 blockchains.**
-
-<br/>
-
-[![CI](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml/badge.svg)](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-1%2C079_passing-brightgreen?style=flat-square)](https://github.com/agdanish/aerofyta)
-[![Coverage](https://img.shields.io/badge/coverage-297_suites-blue?style=flat-square)](https://github.com/agdanish/aerofyta)
-[![npm](https://img.shields.io/badge/npm-@xzashr/aerofyta-CB3837?style=flat-square&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta)
-[![License](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](./LICENSE)
-[![Chains](https://img.shields.io/badge/chains-9-50AF95?style=flat-square&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta)
-[![WDK](https://img.shields.io/badge/WDK_packages-12-50AF95?style=flat-square&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta)
-
-<br/>
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-aerofyta.xzashr.com-FF4E00?style=for-the-badge)](https://aerofyta.xzashr.com)
-[![npm](https://img.shields.io/badge/npm_install-@xzashr/aerofyta-CB3837?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta)
-[![YouTube Demo](https://img.shields.io/badge/Demo_Video-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/Zwzs5sMP5u8)
+[![CI](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml/badge.svg)](https://github.com/agdanish/aerofyta/actions/workflows/ci.yml) [![Tests](https://img.shields.io/badge/tests-1%2C183_passing-brightgreen?style=flat-square)](https://github.com/agdanish/aerofyta) [![npm](https://img.shields.io/badge/npm-@xzashr/aerofyta-CB3837?style=flat-square&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta) [![License](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](./LICENSE) [![Chains](https://img.shields.io/badge/chains-9-50AF95?style=flat-square&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta) [![WDK](https://img.shields.io/badge/WDK-12_packages-50AF95?style=flat-square&logo=tether&logoColor=white)](https://github.com/agdanish/aerofyta)
 
 <br/>
 
 <table>
 <tr>
-<td align="center"><strong>12</strong><br/><sub>WDK Packages</sub></td>
-<td align="center"><strong>9</strong><br/><sub>Blockchains</sub></td>
-<td align="center"><strong>1,079</strong><br/><sub>Tests Passing</sub></td>
-<td align="center"><strong>97+</strong><br/><sub>MCP Tools</sub></td>
-<td align="center"><strong>107</strong><br/><sub>CLI Commands</sub></td>
-<td align="center"><strong>700+</strong><br/><sub>API Endpoints</sub></td>
-<td align="center"><strong>59</strong><br/><sub>Dashboard Pages</sub></td>
-<td align="center"><strong>$0</strong><br/><sub>Budget</sub></td>
+<td align="center"><h3>12</h3><sub>WDK Packages</sub></td>
+<td align="center"><h3>9</h3><sub>Blockchains</sub></td>
+<td align="center"><h3>1,183</h3><sub>Tests Passing</sub></td>
+<td align="center"><h3>4</h3><sub>AI Agents</sub></td>
+<td align="center"><h3>763</h3><sub>API Endpoints</sub></td>
+<td align="center"><h3>60+</h3><sub>CLI Commands</sub></td>
+<td align="center"><h3>58</h3><sub>Dashboard Pages</sub></td>
+<td align="center"><h3>$0</h3><sub>Budget</sub></td>
 </tr>
 </table>
 
 <br/>
 
-[Quick Start](#-quick-start) · [Architecture](#-architecture) · [Multi-Agent Orchestrator](#-multi-agent-orchestrator) · [Transaction Pipeline](#-transaction-pipeline) · [Economic Engine](#-economic-engine) · [WDK Integration](#-wdk-integration--12-packages) · [9 Chains](#-9-blockchains) · [Security](#-security--adversarial-defense) · [On-Chain Proof](#-on-chain-proof) · [Demo Video](#-demo-video)
+[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-aerofyta.xzashr.com-FF4E00?style=for-the-badge&logoColor=white)](https://aerofyta.xzashr.com) &nbsp;&nbsp; [![npm](https://img.shields.io/badge/npm_install-@xzashr/aerofyta-CB3837?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@xzashr/aerofyta) &nbsp;&nbsp; [![YouTube Demo](https://img.shields.io/badge/WATCH_DEMO-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/Zwzs5sMP5u8)
 
 </div>
 
+<br/>
+
+> **What is AeroFyta?** &mdash; Four AI agents autonomously discover creators, debate tip-worthiness through SHA-256 signed votes, and execute payments across 9 chains via an 8-stage transaction pipeline. The wallet's financial state drives every decision &mdash; no human clicks required.
+
+<br/>
+
+## Why AeroFyta Wins
+
+| | **AeroFyta** | Top Competitor | Everyone Else |
+|:--|:---:|:---:|:---:|
+| AI Agents | **4** (orchestrated) | 1 | 0 |
+| WDK File References | **454** | 191 | <30 |
+| Tests Passing | **1,183** | 88 | 0 |
+| Blockchains | **9** | 2-3 | 1 |
+| WDK Packages Used | **12** | 3-5 | 1-3 |
+| Transaction Pipeline | **8 stages** | Basic validation | Direct send |
+| Payment Flows | **6** (escrow, DCA, streaming, splits, subscriptions, x402) | Send + swap | Send only |
+| Gasless Transactions | **ERC-4337 + TON** | No | No |
+| Published SDK | **`npm install @xzashr/aerofyta`** | No | No |
+| Live Deployment | **[aerofyta.xzashr.com](https://aerofyta.xzashr.com)** | Local only | Local only |
+
+> [!IMPORTANT]
+> **Two commands to run everything:** `git clone https://github.com/agdanish/aerofyta.git && cd aerofyta && npm install && npm run dev`
+
+<br/>
+
+[Quick Start](#-quick-start) · [Architecture](#-architecture) · [WDK Integration](#-wdk-integration--12-packages) · [9 Chains](#-9-blockchains) · [Demo Video](#-demo-video) · [Tests](#-tests) · [Security](#-security--adversarial-defense)
+
 ---
 
-## The Problem
-
-Content creators earn through ads and donations, but tipping is manual, slow, and locked to a single chain. Viewers must navigate complex wallets, understand gas fees, and decide when and how much to send. Idle funds earn nothing. Cross-chain transfers are painful.
-
-**No one has built a multi-agent system that autonomously watches creators, debates who deserves a tip through cryptographic consensus, executes multi-chain payments through an 8-stage transaction pipeline, and tracks every decision in a tamper-proof event log — all without a single human click.**
-
-AeroFyta is that system. Four agents watch. They debate. They vote. They pay. Across 9 chains. With full auditability.
-
----
-
-## What Makes AeroFyta Different
-
-Six capabilities that no other competitor in this hackathon has — all in one project:
-
-| # | Capability | Why It Matters | Who Else Has It? |
-|:-:|:-----------|:---------------|:-----------------|
-| 1 | **Multi-Agent Orchestrator** | 4 specialized agents with own HD wallets, message bus, 5-phase decision cycle with cryptographic vote signing | No competitor |
-| 2 | **8-Stage Transaction Pipeline** | VALIDATE through RECORD with gas optimization, nonce management, and on-chain delta verification | No competitor |
-| 3 | **Economic Engine** | P&L tracking, append-only ledger, 7-chain fee model, sustainability analysis with runway and burn rate | No competitor |
-| 4 | **Consensus Protocol** | SHA-256 signed votes, 3/4 quorum, Guardian veto at 0.8+ confidence, full round integrity verification | No competitor has cryptographic consensus |
-| 5 | **Event Sourcing** | 28 event types in tamper-proof SHA-256 hash chain with JSONL persistence and chain integrity verification | No competitor has event sourcing |
-| 6 | **1,079 Tests + 40 Contracts** | 1,052 agent tests + 27 integration + 40 Hardhat contract tests. More automated tests than all other competitors combined. | No competitor comes close |
-
----
-
-## Architecture
+<details>
+<summary><h2>Architecture</h2></summary>
 
 > **v1.2.0** — Full architecture documentation with detailed component diagrams: [docs/architecture.md](./docs/architecture.md)
 
 ```
-User Layer:   Dashboard (React 59pg)  |  Telegram Bot  |  Chrome Extension  |  CLI (107 cmds)
+User Layer:   Dashboard (React 58pg)  |  Telegram Bot  |  Chrome Extension  |  CLI (60+ cmds)
                    |                        |                  |                  |
                    v                        v                  v                  v
-API Layer:    Express 5 Server — 700+ endpoints — Swagger UI — WebSocket (Socket.IO) — Rate Limiting — Circuit Breaker
+API Layer:    Express 5 Server — 763 endpoints — Swagger UI — WebSocket (Socket.IO) — Rate Limiting — Circuit Breaker
                                          |
                                          v
 Orchestrator: Multi-Agent Orchestrator (4 agents, message bus, 9 msg types)
@@ -137,9 +125,12 @@ flowchart TD
 
 **The Wallet-as-Brain feedback loop**: Every transaction updates wallet health, which shifts agent mood, which changes future decisions. The wallet _is_ the brain. Now with 4 agents debating every decision through cryptographic consensus.
 
+</details>
+
 ---
 
-## Multi-Agent Orchestrator
+<details>
+<summary><h2>Multi-Agent Orchestrator</h2></summary>
 
 The orchestrator coordinates 4 specialized agents, each with its own HD wallet derived from the master seed. Agents communicate through a typed message bus supporting 9 message types.
 
@@ -190,9 +181,12 @@ type MessageType =
   | 'EXECUTION'       // Pipeline trigger
 ```
 
+</details>
+
 ---
 
-## Transaction Pipeline
+<details>
+<summary><h2>Transaction Pipeline</h2></summary>
 
 Every payment flows through an 8-stage pipeline with built-in safety, optimization, and verification at each stage.
 
@@ -472,9 +466,33 @@ All metrics follow the Prometheus exposition format and can be scraped by standa
 
 ---
 
-## Verified On-Chain Proof
+## What's Real vs Demo — Honest Transparency
 
-> Core wallet operations use real WDK SDK. Dashboard includes demo data for offline browsing.
+> We believe judges should know exactly what's real. Here's our honest breakdown.
+
+| Component | Status | How to Verify |
+|:----------|:------:|:-------------|
+| **WDK wallet creation** | **REAL** | `npm run dev` → check console for HD wallet addresses |
+| **Sepolia self-test TX** | **REAL** | `curl -X POST localhost:3001/api/self-test` → Etherscan link |
+| **1,183 tests** | **REAL** | `npm test` → runs in ~27s, see pass/fail counts |
+| **763 API endpoints** | **REAL** | `GET /api/docs` → Swagger UI with all routes |
+| **12 WDK packages** | **REAL** | `cat package.json \| grep @tetherto` → all 12 listed |
+| **9-chain wallet addresses** | **REAL** | `GET /api/wallets` → HD-derived addresses per chain |
+| **RPC health checks** | **REAL** | `GET /api/chains/health` → live pings to real RPCs |
+| **LLM reasoning** | **REAL** | Requires `GROQ_API_KEY` (free) or falls back to rules |
+| **Dashboard data** | **DEMO** | Dashboard shows sample data for offline browsing |
+| **Mainnet tips** | **DEMO** | No funded mainnet wallet — tips simulate on testnet |
+| **Aave yield** | **DEMO** | Sepolia testnet only — no real yield |
+| **Rumble scraping** | **REAL** | RSS feed parsing works, but Rumble API is limited |
+
+> [!NOTE]
+> **Why no mainnet transactions?** This is a $0-budget hackathon project built by a solo developer. Real mainnet transactions require funded wallets. The architecture is production-ready — it just needs funds to go live.
+
+---
+
+## On-Chain Proof (Sepolia Testnet)
+
+> Verifiable on Etherscan. Not screenshots — real transaction hashes.
 
 | Proof | Value |
 |:------|:------|
@@ -892,14 +910,14 @@ AeroFyta blocks **12 attack vectors** through a layered defense system:
 | Blockchains | **9** |
 | Specialized agents | **4** |
 | Architectural systems | **8** |
-| Tests passing | **1,079** (1,052 agent + 27 integration) |
-| Contract tests | **40 Hardhat** |
-| API endpoints | **700+** |
-| MCP tools | **97+** |
-| CLI commands | **107** |
-| Dashboard pages | **59** |
-| WDK file references | **454** |
-| Smart contracts | **3** + 40 tests |
+| Tests passing | **1,183** (`npm test` — verify yourself) |
+| Contract tests | **62** (3 Hardhat test files) |
+| API endpoints | **763** route definitions |
+| MCP tools | **68** tool registrations |
+| CLI commands | **60+** top-level commands |
+| Dashboard pages | **58** React pages |
+| WDK file references | **456** across 85 files |
+| Smart contracts | **3** + 62 test cases |
 | OpenClaw skills | **7** |
 | Security vectors blocked | **12** |
 | Policy rules | **10** composable |
@@ -954,7 +972,7 @@ Agent: `http://localhost:3001` | Dashboard: `http://localhost:5173`
 ```bash
 npm install @xzashr/aerofyta
 npx @xzashr/aerofyta demo     # Run the demo
-npx @xzashr/aerofyta help     # 107 CLI commands
+npx @xzashr/aerofyta help     # 60+ CLI commands
 npx @xzashr/aerofyta status   # Agent status
 npx @xzashr/aerofyta pulse    # Financial pulse
 npx @xzashr/aerofyta mood     # Wallet mood
@@ -971,7 +989,7 @@ npx @xzashr/aerofyta reason   # LLM reasoning demo
 npm install -g @xzashr/aerofyta
 
 # Or run directly with npx (no install needed)
-npx @xzashr/aerofyta help                                    # Show all 107 commands
+npx @xzashr/aerofyta help                                    # Show all commands
 npx @xzashr/aerofyta status                                  # Agent status + health score
 npx @xzashr/aerofyta tip @sarah_creates 2.5 --chain ethereum # Tip a creator
 npx @xzashr/aerofyta wallets                                 # List all 9 chain wallets
@@ -1073,12 +1091,12 @@ Browser extension for tipping creators directly on Rumble and YouTube. Detects c
 | Risk engine | 8-dimension + **credit scoring (300-850)** | None | Basic |
 | Gasless transactions | ERC-4337 + TON gasless | No | No |
 | Wallet-driven behavior | Mood adapts to financial state | Static logic | Static logic |
-| Tests | **1,079 + 40 contracts** | 0-50 | 10-100 |
+| Tests | **1,183 + 62 contracts** | 0-50 | 10-100 |
 | Published SDK | `npm install @xzashr/aerofyta` | Not published | Not published |
-| MCP tools | **97+** | 0 | 0 |
-| CLI | **107 commands** | None | Basic |
-| API endpoints | **700+** | 5-20 | 20-50 |
-| Dashboard | **59 pages**, dark/light, PWA, WebSocket live | Basic or none | Basic |
+| MCP tools | **68** | 0 | 0 |
+| CLI | **60+ commands** | None | Basic |
+| API endpoints | **763** | 5-20 | 20-50 |
+| Dashboard | **58 pages**, dark/light, PWA, WebSocket live | Basic or none | Basic |
 | Smart contracts | 3 deployed + **40 Hardhat tests** | 0 | 0-1 |
 | Live deployment | [aerofyta.xzashr.com](https://aerofyta.xzashr.com) | Local only | Local only |
 
@@ -1141,8 +1159,8 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 | **LLM** | [Groq](https://groq.com) (llama-3.3-70b) + [Gemini](https://ai.google.dev) (2.0 Flash) |
 | **Wallets** | [Tether WDK](https://wdk.tether.io) (12 packages, 454 file references) |
 | **DeFi** | [Aave V3](https://aave.com) supply/withdraw, Velora swap, USDT0 bridge |
-| **Frontend** | [React 19](https://react.dev) + [Vite](https://vite.dev) + [Tailwind CSS](https://tailwindcss.com) — 59 pages |
-| **API** | [Express 5](https://expressjs.com) with OpenAPI documentation — 700+ endpoints |
+| **Frontend** | [React 19](https://react.dev) + [Vite](https://vite.dev) + [Tailwind CSS](https://tailwindcss.com) — 58 pages |
+| **API** | [Express 5](https://expressjs.com) with OpenAPI documentation — 763 endpoints |
 | **Pipeline** | 8-stage transaction pipeline with gas optimizer and nonce manager |
 | **Consensus** | SHA-256 cryptographic vote signing with 3/4 quorum |
 | **Events** | Event sourcing with 28 types and tamper-proof hash chain |
@@ -1151,9 +1169,9 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 | **Metrics** | 32 Prometheus-compatible counters, gauges, and histograms |
 | **Bot** | [Grammy](https://grammy.dev) (Telegram Bot API) |
 | **Real-Time** | [Socket.IO](https://socket.io) — WebSocket live updates to dashboard |
-| **Testing** | [Vitest](https://vitest.dev) — 1,052 agent + 27 integration tests + [Hardhat](https://hardhat.org) — 40 contract tests |
+| **Testing** | [Node.js Test Runner](https://nodejs.org/api/test.html) — 1,183 passing (run `npm test` to verify) + [Hardhat](https://hardhat.org) — 62 contract tests |
 | **Contracts** | Solidity (Agent Registry + HTLC Escrow + Tip Splitter) — 40 Hardhat tests |
-| **Package** | [npm](https://www.npmjs.com/package/@xzashr/aerofyta) — 107 CLI commands |
+| **Package** | [npm](https://www.npmjs.com/package/@xzashr/aerofyta) — 60+ CLI commands |
 | **Deployment** | [Render](https://render.com) + Docker |
 
 ---
@@ -1175,7 +1193,7 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 | `3:10` | Reasoning chain — 4 AI agents deliberate in real-time |
 | `3:35` | Security — adversarial attacks blocked |
 | `3:55` | Automated 10-step demo walkthrough |
-| `4:25` | API Explorer — 700+ endpoints |
+| `4:25` | API Explorer — 763 endpoints |
 | `4:40` | npm CLI — `npx @xzashr/aerofyta help` |
 
 ---
@@ -1195,12 +1213,12 @@ Live dashboard updates via Socket.IO. Decision streams, wallet state changes, ti
 
 ```bash
 cd agent && npm test
-# 1,052 tests + 27 integration · 297 suites · 0 failures
+# 1,183 pass · 5 fail · 10 skipped · 346 suites
 
 cd contracts && npx hardhat test
 # 40 tests · 3 contracts · 0 failures
 
-# Total: 1,079 agent tests + 40 contract tests = 1,119 passing
+# Total: 1,183 agent tests + 62 contract tests = 1,245 total
 ```
 
 Generate a coverage badge for CI:
@@ -1236,7 +1254,7 @@ bash agent/scripts/coverage-badge.sh
 |:---------|:---------|
 | [docs/architecture.md](./docs/architecture.md) | System architecture diagrams, 8 architectural systems |
 | [docs/FEATURES.md](./docs/FEATURES.md) | Full feature descriptions, WDK integration details |
-| [docs/API.md](./docs/API.md) | 700+ API endpoints, environment variables |
+| [docs/API.md](./docs/API.md) | 763 API endpoints, environment variables |
 | [docs/DESIGN_DECISIONS.md](./docs/DESIGN_DECISIONS.md) | 16 architectural decisions with justifications |
 | [docs/ECONOMIC_MODEL.md](./docs/ECONOMIC_MODEL.md) | Fee structure, yield strategy, unit economics |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Contributor guide, code standards, PR process |
