@@ -63,6 +63,8 @@ export interface ChainConfig {
   };
 }
 
+export type BalanceSource = 'wdk' | 'rpc' | 'cached' | 'unavailable';
+
 export interface ChainBalances {
   chain: string;
   native: string;
@@ -70,6 +72,7 @@ export interface ChainBalances {
   nativeUsd: number;
   usdtUsd: number;
   lastUpdated: string;
+  source: BalanceSource;
 }
 
 // ── Default Chain Configurations ───────────────────────────────
@@ -205,6 +208,7 @@ export class ChainAbstraction {
         nativeUsd: 0,
         usdtUsd: 0,
         lastUpdated: new Date().toISOString(),
+        source: 'cached',
       });
     }
     logger.info('ChainAbstraction initialized', { chains: chainsToLoad.map(c => c.id) });
@@ -232,9 +236,9 @@ export class ChainAbstraction {
   }
 
   /** Set balance (called by WDK sync or manually). */
-  setBalance(chain: string, native: string, usdt: string, nativeUsd: number, usdtUsd: number): void {
+  setBalance(chain: string, native: string, usdt: string, nativeUsd: number, usdtUsd: number, source: BalanceSource = 'cached'): void {
     this.assertChainExists(chain);
-    this.balances.set(chain, { chain, native, usdt, nativeUsd, usdtUsd, lastUpdated: new Date().toISOString() });
+    this.balances.set(chain, { chain, native, usdt, nativeUsd, usdtUsd, lastUpdated: new Date().toISOString(), source });
   }
 
   // ── Transfer ───────────────────────────────────────────────
@@ -297,19 +301,56 @@ export class ChainAbstraction {
 
   // ── Gas Estimation ─────────────────────────────────────────
 
-  /** Estimate gas cost for a transfer on a specific chain. */
-  async estimateGas(chain: string, _to: string, _amount: string): Promise<GasEstimate> {
+  /** Estimate gas cost for a transfer on a specific chain.
+   *  For EVM chains, attempts a real eth_gasPrice RPC call first. */
+  async estimateGas(chain: string, _to: string, _amount: string): Promise<GasEstimate & { source: BalanceSource }> {
     this.assertChainExists(chain);
     const config = this.chains.get(chain)!;
 
-    // Realistic gas estimates per chain type
+    // Try real RPC gas price for EVM chains
+    if (config.type === 'evm') {
+      try {
+        const rpcUrl = config.rpcEndpoints[config.activeRpcIndex];
+        const resp = await fetch(rpcUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ jsonrpc: '2.0', method: 'eth_gasPrice', params: [], id: 1 }),
+          signal: AbortSignal.timeout(3000),
+        });
+        const json = await resp.json() as { result?: string };
+        if (json.result) {
+          const gasPriceWei = parseInt(json.result, 16);
+          const gasPriceGwei = gasPriceWei / 1e9;
+          const gasLimit = 65000;
+          const costNative = (gasPriceWei * gasLimit) / 1e18;
+          // Rough USD estimate: ETH ~$2500, MATIC ~$0.5, AVAX ~$20
+          const nativeUsd: Record<string, number> = { ethereum: 2500, polygon: 0.5, arbitrum: 2500, optimism: 2500, avalanche: 20 };
+          const priceUsd = nativeUsd[chain] ?? 1;
+          const costUsd = costNative * priceUsd;
+
+          return {
+            chain,
+            gasLimit: String(gasLimit),
+            gasPriceGwei: gasPriceGwei.toFixed(2),
+            estimatedCostNative: costNative.toFixed(8),
+            estimatedCostUsd: Math.round(costUsd * 10000) / 10000,
+            estimatedTimeSeconds: config.blockTimeMs / 1000 * 2,
+            source: 'rpc',
+          };
+        }
+      } catch {
+        // Fall through to static estimates
+      }
+    }
+
+    // Fallback static gas estimates per chain type
     const estimates: Record<string, { gasLimit: string; gasPriceGwei: string; costUsd: number; timeS: number }> = {
       ethereum: { gasLimit: '65000', gasPriceGwei: '25', costUsd: 2.50, timeS: 15 },
       polygon: { gasLimit: '65000', gasPriceGwei: '50', costUsd: 0.01, timeS: 3 },
       arbitrum: { gasLimit: '65000', gasPriceGwei: '0.1', costUsd: 0.10, timeS: 1 },
       optimism: { gasLimit: '65000', gasPriceGwei: '0.01', costUsd: 0.05, timeS: 3 },
       avalanche: { gasLimit: '65000', gasPriceGwei: '25', costUsd: 0.08, timeS: 3 },
-      tron: { gasLimit: '0', gasPriceGwei: '0', costUsd: 0.50, timeS: 4 }, // Energy-based
+      tron: { gasLimit: '0', gasPriceGwei: '0', costUsd: 0.50, timeS: 4 },
       ton: { gasLimit: '0', gasPriceGwei: '0', costUsd: 0.02, timeS: 6 },
       solana: { gasLimit: '0', gasPriceGwei: '0', costUsd: 0.001, timeS: 1 },
       bitcoin: { gasLimit: '0', gasPriceGwei: '0', costUsd: 1.50, timeS: 600 },
@@ -323,7 +364,8 @@ export class ChainAbstraction {
       gasPriceGwei: est.gasPriceGwei,
       estimatedCostNative: `${est.costUsd}`,
       estimatedCostUsd: est.costUsd,
-      estimatedTimeSeconds: config.blockTimeMs / 1000 * 2, // ~2 blocks for confirmation
+      estimatedTimeSeconds: config.blockTimeMs / 1000 * 2,
+      source: 'cached',
     };
   }
 
@@ -416,33 +458,99 @@ export class ChainAbstraction {
   }
 
   private async checkAllChains(): Promise<void> {
-    for (const [chainId, config] of this.chains) {
-      const h = this.health.get(chainId)!;
-      const startTime = Date.now();
+    const checks = [...this.chains.entries()].map(([chainId, config]) =>
+      this.checkSingleChain(chainId, config),
+    );
+    await Promise.allSettled(checks);
+  }
 
-      try {
-        // In production, ping the RPC endpoint
-        // Simulate health check latency based on chain type
-        const latency = config.type === 'bitcoin' ? 200 : config.type === 'ton' ? 150 : 50;
+  /** Check a single chain by hitting its real RPC endpoint. */
+  private async checkSingleChain(chainId: string, config: ChainConfig): Promise<void> {
+    const h = this.health.get(chainId)!;
+    const startTime = Date.now();
 
-        h.latencyMs = latency + Math.floor(Math.random() * 50);
-        h.lastBlockHeight += Math.floor(config.blockTimeMs > 0 ? 60000 / config.blockTimeMs : 1);
-        h.lastCheckedAt = new Date().toISOString();
-        h.consecutiveFailures = 0;
-        h.healthy = true;
-      } catch {
-        h.consecutiveFailures++;
-        h.latencyMs = Date.now() - startTime;
-        h.lastCheckedAt = new Date().toISOString();
+    try {
+      const rpcUrl = config.rpcEndpoints[config.activeRpcIndex];
 
-        // Mark unhealthy after 3 consecutive failures
-        if (h.consecutiveFailures >= 3) {
-          h.healthy = false;
-          logger.warn(`Chain ${chainId} marked unhealthy after ${h.consecutiveFailures} failures`);
-
-          // Attempt RPC failover
-          this.failoverRpc(chainId);
+      if (config.type === 'evm') {
+        // Real JSON-RPC call for EVM chains
+        const resp = await fetch(rpcUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ jsonrpc: '2.0', method: 'eth_blockNumber', params: [], id: 1 }),
+          signal: AbortSignal.timeout(5000),
+        });
+        const json = await resp.json() as { result?: string };
+        if (json.result) {
+          h.lastBlockHeight = parseInt(json.result, 16);
         }
+      } else if (config.type === 'tron') {
+        // Tron: use /wallet/getnowblock
+        const resp = await fetch(`${rpcUrl}/wallet/getnowblock`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: '{}',
+          signal: AbortSignal.timeout(5000),
+        });
+        const json = await resp.json() as { block_header?: { raw_data?: { number?: number } } };
+        if (json.block_header?.raw_data?.number) {
+          h.lastBlockHeight = json.block_header.raw_data.number;
+        }
+      } else if (config.type === 'ton') {
+        // TON: use getMasterchainInfo
+        const resp = await fetch(rpcUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: '1', jsonrpc: '2.0', method: 'getMasterchainInfo', params: {} }),
+          signal: AbortSignal.timeout(5000),
+        });
+        const json = await resp.json() as { result?: { last?: { seqno?: number } } };
+        if (json.result?.last?.seqno) {
+          h.lastBlockHeight = json.result.last.seqno;
+        }
+      } else if (config.type === 'solana') {
+        // Solana: getSlot
+        const resp = await fetch(rpcUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'getSlot' }),
+          signal: AbortSignal.timeout(5000),
+        });
+        const json = await resp.json() as { result?: number };
+        if (json.result) {
+          h.lastBlockHeight = json.result;
+        }
+      } else if (config.type === 'bitcoin') {
+        // Bitcoin: blockstream REST API
+        const resp = await fetch(`${rpcUrl}/blocks/tip/height`, {
+          signal: AbortSignal.timeout(5000),
+        });
+        const text = await resp.text();
+        const height = parseInt(text, 10);
+        if (!isNaN(height)) {
+          h.lastBlockHeight = height;
+        }
+      }
+
+      h.latencyMs = Date.now() - startTime;
+      h.lastCheckedAt = new Date().toISOString();
+      h.consecutiveFailures = 0;
+      h.healthy = true;
+      h.rpcEndpoint = config.rpcEndpoints[config.activeRpcIndex];
+
+      logger.debug(`Chain ${chainId} health OK`, { latencyMs: h.latencyMs, blockHeight: h.lastBlockHeight, source: 'rpc' });
+    } catch {
+      h.consecutiveFailures++;
+      h.latencyMs = Date.now() - startTime;
+      h.lastCheckedAt = new Date().toISOString();
+
+      // Mark unhealthy after 3 consecutive failures
+      if (h.consecutiveFailures >= 3) {
+        h.healthy = false;
+        logger.warn(`Chain ${chainId} marked unhealthy after ${h.consecutiveFailures} failures`);
+
+        // Attempt RPC failover
+        this.failoverRpc(chainId);
       }
     }
   }
@@ -545,7 +653,7 @@ export class ChainAbstraction {
 
     for (const [chain, bal] of Object.entries(demoBalances)) {
       if (this.chains.has(chain)) {
-        this.setBalance(chain, bal.native, bal.usdt, bal.nativeUsd, parseFloat(bal.usdt));
+        this.setBalance(chain, bal.native, bal.usdt, bal.nativeUsd, parseFloat(bal.usdt), 'cached');
       }
     }
     logger.info('ChainAbstraction seeded with demo balances');

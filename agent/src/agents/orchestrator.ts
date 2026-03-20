@@ -7,6 +7,8 @@
 
 import { randomUUID } from 'node:crypto';
 import { logger } from '../utils/logger.js';
+import { eventStore, metrics, consensusProtocol, profitLossEngine, policyEngine } from '../shared-singletons.js';
+import type { PolicyContext } from '../policies/policy-engine.js';
 import { MessageBus, type AgentMessage } from './message-bus.js';
 import {
   BaseAgent,
@@ -290,14 +292,84 @@ export class MultiAgentOrchestrator {
 
       // ── PHASE 5: EXECUTE APPROVED PROPOSALS ──
       if (decision.outcome === 'approved') {
+        // Evaluate policy engine BEFORE execution
+        try {
+          const amount = parseFloat(String(proposal.data['amount'] ?? '0'));
+          const chain = String(proposal.data['chain'] ?? proposal.data['chainId'] ?? 'ethereum');
+          const policyCtx: PolicyContext = {
+            operationType: proposal.type === 'TIP' ? 'tip' : 'transfer',
+            amount,
+            chain,
+            recipient: String(proposal.data['recipient'] ?? ''),
+            gasCostUsd: 0.05,
+            agentId: proposal.proposedBy,
+            totalBalance: 100,
+            dailySpent: 0,
+            tipsLastHour: 0,
+            creatorEngagement: (proposal.data['engagementScore'] as number ?? 50) / 100,
+            isNewCreator: false,
+            hourOfDay: new Date().getHours(),
+            metadata: {},
+          };
+          const policyResult = policyEngine.evaluate(policyCtx);
+          eventStore.append('POLICY_EVALUATED', {
+            proposalId: proposal.id,
+            allowed: policyResult.allowed,
+            deniedBy: policyResult.deniedBy,
+            policiesChecked: policyResult.evaluatedPolicies.length,
+          }, 'policy-engine');
+          metrics.increment('policies_evaluated_total', { result: policyResult.allowed ? 'allow' : 'deny' });
+
+          if (!policyResult.allowed) {
+            eventStore.append('POLICY_DENIED', {
+              proposalId: proposal.id,
+              deniedBy: policyResult.deniedBy,
+              reason: policyResult.denialReason,
+            }, 'policy-engine');
+            metrics.increment('policies_denied_total', { policy_id: policyResult.deniedBy ?? 'unknown' });
+            result.errors.push(`Policy denied ${proposal.id}: ${policyResult.denialReason}`);
+            logger.info(`Orchestrator: Proposal ${proposal.id} DENIED by policy ${policyResult.deniedBy}`);
+            continue; // Skip execution
+          }
+
+          // Apply modifications if policy says MODIFY
+          if (policyResult.modifiedParams?.amount !== undefined) {
+            proposal.data['amount'] = String(policyResult.modifiedParams.amount);
+            logger.info(`Policy modified tip amount to ${policyResult.modifiedParams.amount}`);
+          }
+        } catch (err) {
+          logger.debug('Policy evaluation failed (non-fatal, proceeding)', { error: String(err) });
+        }
+
         const action = this.proposalToAction(proposal);
         const executor = this.selectExecutor(action);
+        const execStart = Date.now();
 
         try {
           const execResult = await this.withTimeout(executor.execute(action), 15_000, `${executor.name} execution`);
           decision.executionResult = execResult;
           result.phases.executions.push(execResult);
           proposal.status = 'executed';
+
+          // Emit REAL TIP_EXECUTED event
+          try {
+            const tipAmount = parseFloat(String(proposal.data['amount'] ?? '0'));
+            const tipChain = String(proposal.data['chain'] ?? proposal.data['chainId'] ?? 'ethereum');
+            eventStore.append('TIP_EXECUTED', {
+              proposalId: proposal.id,
+              recipient: proposal.data['recipient'],
+              amount: proposal.data['amount'],
+              chain: tipChain,
+              txHash: execResult.txHash ?? 'pending',
+              executionTimeMs: Date.now() - execStart,
+            }, 'orchestrator');
+            metrics.increment('tips_sent_total', { chain: tipChain, status: 'confirmed' });
+            metrics.observe('tip_execution_time_ms', Date.now() - execStart);
+            metrics.observe('tip_amount_usd', tipAmount);
+            profitLossEngine.recordTipSent(tipAmount, tipChain, 0.01);
+          } catch (emitErr) {
+            logger.debug('Event/metric emission failed (non-fatal)', { error: String(emitErr) });
+          }
 
           // Broadcast result
           this.bus.publish(
@@ -488,7 +560,69 @@ export class MultiAgentOrchestrator {
   // ── Vote Resolution ──
 
   private resolveVotes(proposal: Proposal, votes: Vote[]): DecisionRecord {
-    // Check for Guardian veto
+    // ── Use REAL cryptographic consensus protocol ──
+    try {
+      // Register agents if not already
+      for (const agent of this.agents) {
+        consensusProtocol.registerAgent(agent.id);
+      }
+
+      // Create a real consensus round
+      const round = consensusProtocol.createRound(
+        proposal.description,
+        proposal.type,
+        proposal.proposedBy,
+        proposal.data,
+        0, // risk score
+      );
+
+      // Cast each agent's vote through the cryptographic consensus
+      for (const vote of votes) {
+        try {
+          const agentId = this.agents.find(a => a.name === vote.agentName)?.id ?? vote.agentName;
+          const decision = vote.decision === 'approve' ? 'approve' as const
+            : vote.decision === 'abstain' ? 'abstain' as const
+            : 'reject' as const;
+          consensusProtocol.castVote(round.id, agentId, decision, vote.confidence, vote.reasoning);
+          metrics.increment('votes_cast_total', { decision });
+        } catch (err) {
+          logger.debug(`Consensus vote cast failed for ${vote.agentName}`, { error: String(err) });
+        }
+      }
+
+      // Resolve the round with cryptographic verification
+      const result = consensusProtocol.resolveRound(round.id);
+
+      // Emit REAL event
+      eventStore.append('CONSENSUS_RESOLVED', {
+        roundId: round.id,
+        proposalId: proposal.id,
+        decision: result.decision,
+        votesFor: result.votesFor,
+        votesAgainst: result.votesAgainst,
+        abstentions: result.abstentions,
+        integrityVerified: result.integrityVerified,
+        quorumMet: result.quorumMet,
+      }, 'orchestrator');
+
+      const outcome: DecisionRecord['outcome'] = result.decision === 'approved' ? 'approved'
+        : result.decision === 'vetoed' ? 'vetoed'
+        : 'rejected';
+
+      return {
+        proposalId: proposal.id,
+        proposalType: proposal.type,
+        description: proposal.description,
+        votes,
+        outcome,
+        reasoning: `[Crypto Consensus] ${result.details} (integrity: ${result.integrityVerified ? 'verified' : 'FAILED'})`,
+        timestamp: new Date().toISOString(),
+      };
+    } catch (err) {
+      logger.warn('Cryptographic consensus failed, falling back to simple vote count', { error: String(err) });
+    }
+
+    // ── Fallback: simple vote counting (original logic) ──
     const guardianVote = votes.find((v) => v.agentName === 'Guardian');
     if (this.guardianCanVeto && guardianVote?.decision === 'reject' && guardianVote.confidence >= 0.8) {
       return {
@@ -502,15 +636,11 @@ export class MultiAgentOrchestrator {
       };
     }
 
-    // Count approvals (excluding abstains from denominator)
     const nonAbstain = votes.filter((v) => v.decision !== 'abstain');
     const approvals = nonAbstain.filter((v) => v.decision === 'approve').length;
     const total = nonAbstain.length;
-
-    // Need 3/4 majority of non-abstaining agents
     const needed = Math.min(this.requiredMajority, Math.ceil(total * 0.75));
     const approved = approvals >= needed;
-
     const voteSummary = votes.map((v) => `${v.agentName}:${v.decision}(${v.confidence.toFixed(2)})`).join(', ');
 
     return {

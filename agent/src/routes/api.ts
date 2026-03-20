@@ -78,15 +78,12 @@ import { GaslessDemoService as GaslessDemoServiceImpl } from '../services/gasles
 
 // ── Deep Architectural Systems ────────────────────────────────
 import { registerConsensusRoutes } from './consensus.routes.js';
-import { ConsensusProtocol } from '../consensus/consensus-protocol.js';
 import { registerEventStoreRoutes } from './event-store.routes.js';
-import { EventStore } from '../events/event-store.js';
 import { registerPolicyEngineRoutes } from './policy-engine.routes.js';
-import { PolicyEngine } from '../policies/policy-engine.js';
 import { registerChainAbstractionRoutes } from './chain-abstraction.routes.js';
 import { ChainAbstraction } from '../chains/chain-abstraction.js';
 import { registerMetricsRoutes } from './metrics.routes.js';
-import { MetricsCollector } from '../observability/metrics-collector.js';
+import { eventStore, metrics, policyEngine, consensusProtocol } from '../shared-singletons.js';
 
 // ── Service aliases — all instances live in ServiceRegistry ─────
 // These re-exports preserve backward compatibility for modules that
@@ -697,31 +694,24 @@ export function createApiRouter(
   // ── Deep Architectural Systems ─────────────────────────────
   // ══════════════════════════════════════════════════════════════
 
-  // ── 1. Consensus Protocol (cryptographic voting + quorum + guardian veto) ──
-  const consensusProtocol = new ConsensusProtocol();
-  consensusProtocol.seedDemoRound();
+  // ── 1. Consensus Protocol (shared singleton — cryptographic voting) ──
   registerConsensusRoutes(router, consensusProtocol);
 
-  // ── 2. Event Sourcing (append-only hash-chain audit log) ────
-  const eventStore = new EventStore();
-  eventStore.seedDemoEvents();
+  // ── 2. Event Sourcing (shared singleton — append-only hash-chain audit) ──
   registerEventStoreRoutes(router, eventStore);
 
-  // ── 3. Policy Engine (composable rules governing all behavior) ──
-  const policyEngine = new PolicyEngine();
+  // ── 3. Policy Engine (shared singleton — composable rules) ──
   registerPolicyEngineRoutes(router, policyEngine);
 
-  // ── 4. Chain Abstraction Layer (unified 9-chain interface) ──
+  // ── 4. Chain Abstraction Layer (unified 9-chain interface + real RPC) ──
   const chainAbstraction = new ChainAbstraction();
-  chainAbstraction.seedDemoBalances();
+  chainAbstraction.startHealthMonitoring(120000); // Real RPC health checks every 2 min
   registerChainAbstractionRoutes(router, chainAbstraction);
 
-  // ── 5. Observability & Metrics (Prometheus-style collection) ──
-  const metricsCollector = new MetricsCollector();
-  metricsCollector.seedDemoMetrics();
-  registerMetricsRoutes(router, metricsCollector);
+  // ── 5. Observability & Metrics (shared singleton — real instrumentation) ──
+  registerMetricsRoutes(router, metrics);
 
-  logger.info('All 5 deep architectural systems registered');
+  logger.info('All 5 deep architectural systems registered (REAL shared singletons, no demo seeds)');
 
   return router;
 }

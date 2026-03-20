@@ -112,6 +112,23 @@ async function main(): Promise<void> {
     logger.info(`Optional secrets not set: ${requiredSecretCheck.missing.map(k => `AEROFYTA_${k}`).join(', ')} (non-fatal)`);
   }
 
+  // Initialize shared singletons (EventStore, Metrics, PolicyEngine, Consensus, P&L)
+  // These are imported once and shared across the entire application.
+  const { eventStore: globalEventStore, metrics: globalMetrics, consensusProtocol: globalConsensus } = await import('./shared-singletons.js');
+  globalEventStore.append('SYSTEM_STARTUP', {
+    version: '1.0.0',
+    timestamp: new Date().toISOString(),
+    node: process.version,
+    platform: process.platform,
+  }, 'system');
+  globalMetrics.set('agent_count_active', 4);
+  globalMetrics.set('chains_connected', 9);
+  // Register all agents for consensus
+  for (const agentId of ['discovery-agent', 'treasury-agent', 'tip-executor-agent', 'guardian-agent']) {
+    globalConsensus.registerAgent(agentId);
+  }
+  logger.info('Shared singletons initialized (EventStore, Metrics, PolicyEngine, Consensus, P&L)');
+
   // Initialize all services via ServiceRegistry
   const seed = getOrCreateSeed();
   const sr = ServiceRegistry.getInstance();

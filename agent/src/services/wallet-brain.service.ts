@@ -7,6 +7,7 @@
 
 import { logger } from '../utils/logger.js';
 import { ServiceRegistry } from './service-registry.js';
+import { eventStore, metrics } from '../shared-singletons.js';
 
 // ── Types ─────────────────────────────────────────────────────
 
@@ -287,6 +288,23 @@ export class WalletBrainService {
         health,
         reason: transition.reason,
       });
+
+      // Emit REAL event on mood transition
+      try {
+        eventStore.append('MOOD_CHANGED', {
+          from: prevMood,
+          to: newMood,
+          health,
+          liquidity,
+          diversification,
+          velocity,
+          maxTipUsdt: moodCfg.maxTip,
+          riskAppetite: Math.min(100, riskAppetite),
+        }, 'wallet-brain');
+        metrics.set('portfolio_health', health / 100);
+      } catch (err) {
+        logger.debug('Event/metric emission failed (non-fatal)', { error: String(err) });
+      }
     }
 
     // ── Store snapshot ──

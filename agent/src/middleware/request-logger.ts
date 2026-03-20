@@ -3,6 +3,7 @@
 
 import type { Request, Response, NextFunction, RequestHandler } from 'express';
 import { logger } from '../utils/logger.js';
+import { metrics } from '../shared-singletons.js';
 
 /** Paths to skip logging (too noisy) */
 const SKIP_PATHS = new Set(['/api/health', '/health', '/api/health/deep']);
@@ -35,6 +36,17 @@ export function requestLoggerMiddleware(): RequestHandler {
         userAgent: req.get('user-agent') ?? '-',
         contentLength: res.get('content-length') ?? '-',
       };
+
+      // Instrument REAL API metrics
+      try {
+        const pathGroup = req.route?.path ?? req.path.split('/').slice(0, 4).join('/');
+        metrics.increment('api_requests_total', {
+          method: req.method,
+          path: pathGroup,
+          status: String(res.statusCode),
+        });
+        metrics.observe('api_response_time_ms', duration, { path: pathGroup });
+      } catch { /* non-fatal */ }
 
       if (res.statusCode >= 500) {
         logger.error('HTTP request', entry);

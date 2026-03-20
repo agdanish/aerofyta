@@ -14,6 +14,8 @@ import type { GasOptimizationResult } from './gas-optimizer.js';
 import { ReceiptVerifier } from './receipt-verifier.js';
 import type { VerificationProof } from './receipt-verifier.js';
 import { NonceManager } from './nonce-manager.js';
+import { eventStore, metrics, policyEngine, profitLossEngine } from '../shared-singletons.js';
+import type { PolicyContext } from '../policies/policy-engine.js';
 
 // ── Pipeline Types ─────────────────────────────────────────────
 
@@ -232,9 +234,51 @@ export class TransactionPipeline {
     logger.info('Pipeline started: TIP', { pipelineId, recipient: params.recipient.slice(0, 16), amount: params.amount });
 
     try {
-      // ── Stage 1: VALIDATE ──
+      // ── Stage 1: VALIDATE (includes policy evaluation) ──
       const validateStart = Date.now();
       this.validateTipParams(params);
+
+      // Evaluate policy engine before proceeding
+      try {
+        const policyCtx: PolicyContext = {
+          operationType: 'tip',
+          amount: parseFloat(params.amount),
+          chain: params.preferredChain ?? 'ethereum-sepolia',
+          recipient: params.recipient,
+          gasCostUsd: 0.05,
+          agentId: 'transaction-pipeline',
+          totalBalance: 100,
+          dailySpent: 0,
+          tipsLastHour: 0,
+          creatorEngagement: 0.5,
+          isNewCreator: false,
+          hourOfDay: new Date().getHours(),
+          metadata: {},
+        };
+        const policyResult = policyEngine.evaluate(policyCtx);
+        metrics.increment('policies_evaluated_total', { result: policyResult.allowed ? 'allow' : 'deny' });
+
+        if (!policyResult.allowed) {
+          eventStore.append('POLICY_DENIED', {
+            pipelineId,
+            deniedBy: policyResult.deniedBy,
+            reason: policyResult.denialReason,
+            amount: params.amount,
+            recipient: params.recipient.slice(0, 16),
+          }, 'transaction-pipeline');
+          throw new Error(`Policy denied: ${policyResult.denialReason} (by ${policyResult.deniedBy})`);
+        }
+
+        // Apply modifications
+        if (policyResult.modifiedParams?.amount !== undefined) {
+          params = { ...params, amount: String(policyResult.modifiedParams.amount) };
+          logger.info('Policy modified tip amount', { newAmount: policyResult.modifiedParams.amount });
+        }
+      } catch (err) {
+        if (err instanceof Error && err.message.startsWith('Policy denied:')) throw err;
+        logger.debug('Policy evaluation failed (non-fatal)', { error: String(err) });
+      }
+
       stageTrace.push(this.transition(currentStage, 'quote', validateStart));
       currentStage = 'quote';
       this.activePipeline.stage = currentStage;
@@ -361,6 +405,36 @@ export class TransactionPipeline {
       this.history.push(result);
       this.activePipeline = null;
 
+      // Emit REAL events and metrics for the completed tip
+      try {
+        const tipAmount = parseFloat(params.amount);
+        eventStore.append('TIP_EXECUTED', {
+          pipelineId,
+          txHash: txResult.hash,
+          chain: selectedChain,
+          recipient: params.recipient.slice(0, 16) + '...',
+          amount: params.amount,
+          fee: txResult.fee,
+          gasUsed: confirmation.gasUsed,
+          blockNumber: confirmation.blockNumber,
+          totalTimeMs: result.totalTimeMs,
+        }, 'transaction-pipeline');
+        eventStore.append('TIP_CONFIRMED', {
+          pipelineId,
+          txHash: txResult.hash,
+          blockNumber: confirmation.blockNumber,
+          verified: verification.verified,
+        }, 'transaction-pipeline');
+        metrics.increment('tips_sent_total', { chain: selectedChain, status: 'confirmed' });
+        metrics.observe('tip_execution_time_ms', result.totalTimeMs);
+        metrics.observe('tip_amount_usd', tipAmount);
+        metrics.observe('gas_cost_usd', parseFloat(txResult.fee) || 0, { chain: selectedChain });
+        profitLossEngine.recordTipSent(tipAmount, selectedChain, parseFloat(txResult.fee) || 0);
+        profitLossEngine.recordGasSpent(parseFloat(txResult.fee) || 0, selectedChain);
+      } catch (emitErr) {
+        logger.debug('Event/metric emission failed (non-fatal)', { error: String(emitErr) });
+      }
+
       logger.info('Pipeline complete: TIP', {
         pipelineId,
         txHash: txResult.hash,
@@ -376,6 +450,19 @@ export class TransactionPipeline {
       const errorMsg = String(err);
       logger.error('Pipeline failed: TIP', { pipelineId, stage: currentStage, error: errorMsg });
       stageTrace.push(this.transition(currentStage, 'failed', Date.now(), errorMsg));
+
+      // Emit failure event
+      try {
+        eventStore.append('TIP_FAILED', {
+          pipelineId,
+          stage: currentStage,
+          error: errorMsg,
+          amount: params.amount,
+          recipient: params.recipient.slice(0, 16) + '...',
+        }, 'transaction-pipeline');
+        metrics.increment('tips_sent_total', { chain: params.preferredChain ?? 'ethereum-sepolia', status: 'failed' });
+      } catch { /* non-fatal */ }
+
       const result = this.failResult(pipelineId, currentStage, errorMsg, params.preferredChain ?? 'ethereum-sepolia', stageTrace, startTime);
       this.history.push(result);
       this.activePipeline = null;

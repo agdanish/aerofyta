@@ -14,6 +14,7 @@ import WalletManagerBtc from '@tetherto/wdk-wallet-btc';
 import WalletManagerSolana from '@tetherto/wdk-wallet-solana';
 import { logger } from '../utils/logger.js';
 import { validationFailed, insufficientBalance } from '../utils/service-error.js';
+import { eventStore, metrics, profitLossEngine } from '../shared-singletons.js';
 
 // WDK type references for escrow vault operations
 // @tetherto/wdk provides: WDK core, seed phrase generation
@@ -393,6 +394,22 @@ export class EscrowService {
       lockStatus: escrow.lockStatus,
     });
 
+    // Emit REAL event to event store
+    try {
+      eventStore.append('ESCROW_CREATED', {
+        escrowId: escrow.id,
+        sender: escrow.sender,
+        recipient: escrow.recipient,
+        amount: escrow.amount,
+        chain: escrow.chainId,
+        lockStatus: escrow.lockStatus,
+        timelockExpires: new Date(timelock).toISOString(),
+      }, 'escrow-service');
+      metrics.increment('escrows_created_total', { chain: escrow.chainId });
+    } catch (err) {
+      logger.debug('Event/metric emission failed (non-fatal)', { error: String(err) });
+    }
+
     // Return the escrow AND the secret — caller must share secret with depositor only
     return { escrow, secret };
   }
@@ -468,6 +485,23 @@ export class EscrowService {
     if (txHash) escrow.txHash = txHash;
     this.save();
     logger.info('HTLC escrow claimed', { id: escrowId, txHash, lockStatus: escrow.lockStatus });
+
+    // Emit REAL event to event store
+    try {
+      eventStore.append('ESCROW_CLAIMED', {
+        escrowId: escrow.id,
+        recipient: escrow.recipient,
+        amount: escrow.amount,
+        chain: escrow.chainId,
+        txHash: txHash ?? 'no-tx',
+        lockStatus: escrow.lockStatus,
+      }, 'escrow-service');
+      metrics.increment('escrows_claimed_total');
+      profitLossEngine.recordTipSent(parseFloat(escrow.amount), escrow.chainId, 0);
+    } catch (err) {
+      logger.debug('Event/metric emission failed (non-fatal)', { error: String(err) });
+    }
+
     return escrow;
   }
 

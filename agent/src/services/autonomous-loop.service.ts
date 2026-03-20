@@ -3,6 +3,7 @@
 // Autonomous Loop Service — ReAct pipeline running WITHOUT human input
 
 import { logger } from '../utils/logger.js';
+import { eventStore, metrics } from '../shared-singletons.js';
 import type { AIService } from './ai.service.js';
 import type { EventSimulatorService, SimulatedEvent } from './event-simulator.service.js';
 import type { DecisionLogService } from './decision-log.service.js';
@@ -412,6 +413,32 @@ export class AutonomousLoopService {
     }
 
     logger.info(`--- Cycle ${cycleNumber} END (${cycleDuration}ms) --- outcome=${actResult.outcome}`);
+
+    // Emit REAL events and metrics for this cycle
+    try {
+      eventStore.append('CYCLE_COMPLETED', {
+        cycleNumber,
+        outcome: actResult.outcome,
+        tipsExecuted: actResult.tipsExecutedDelta,
+        eventsProcessed: newEvents.length,
+        durationMs: cycleDuration,
+        dataSource: this.lastDataSource,
+        mood: moodState?.mood ?? 'unknown',
+      }, 'autonomous-loop');
+      metrics.increment('cycles_completed_total');
+      metrics.observe('tip_execution_time_ms', cycleDuration);
+      if (actResult.tipsExecutedDelta > 0) {
+        metrics.increment('tips_sent_total', { chain: 'multi', status: 'confirmed' }, actResult.tipsExecutedDelta);
+      }
+      // Update portfolio health gauge from financial pulse
+      if (pulse) {
+        metrics.set('portfolio_health', pulse.healthScore / 100);
+        metrics.set('portfolio_total_usd', pulse.totalAvailableUsdt);
+      }
+    } catch (err) {
+      logger.debug('Event/metric emission failed (non-fatal)', { error: String(err) });
+    }
+
     const cycleResult: LoopCycleResult = {
       cycleNumber, phase: 'reflect', events: newEvents, llmDecision,
       actionTaken: actResult.actionTaken, outcome: actResult.outcome, durationMs: cycleDuration,
