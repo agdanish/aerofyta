@@ -28,17 +28,19 @@ npm install @xzashr/aerofyta && npx @xzashr/aerofyta demo
 
 ## The Problem
 
-Content creators earn across 9 blockchains. Their tips shouldn't be trapped on one.
+Rumble creators receive tips in USD₮, XAU₮, and BTC. But tipping today is manual, one-click-at-a-time, with no intelligence behind it. A fan watches a 2-hour livestream and forgets to tip. A creator hits 100K followers and nobody notices. A hype moment in chat passes in seconds -- no human is fast enough to react.
 
-A fan on TON wants to tip a creator on Ethereum. Today, that means bridges, swaps, gas estimation, and hoping you don't paste the wrong address. A $0.50 tip costs $2 in gas. Micro-appreciation becomes economically impossible. Every tip is a research project -- pick the chain, pick the token, check the fee, pray it works.
+Meanwhile, gas fees destroy micro-tips. A $0.50 appreciation costs $2+ in fees on some chains. And when bots handle money? One bug, one exploit, and the wallet is drained.
 
-And when bots handle the tipping? There's no safety net. One bug, one exploit, and the wallet is drained.
+Tipping should be as automatic as watching. It should feel native to video consumption, not like a blockchain transaction.
 
 ## The Solution
 
-You say **"tip @creator $5."** That's it.
+AeroFyta extends Rumble's tipping wallet with autonomous AI agents that tip creators based on what actually happens -- watch time, chat hype, viewer spikes, follower milestones, and subscriber events.
 
-Four AI agents debate the best chain. They vote with cryptographic signatures. An 8-stage pipeline validates, quotes, signs, broadcasts, confirms, and records the payment. The wallet's own financial health -- its mood -- governs every decision. A struggling wallet refuses to tip. A thriving wallet tips generously. No manual chain selection. No wasted gas. No human clicks.
+You say **"tip @creator $5"** or let the agent decide on its own. Four AI agents debate the best chain, vote with cryptographic signatures, and execute through an 8-stage pipeline. The wallet's financial health -- its mood -- governs every decision. A struggling wallet holds back. A thriving wallet tips generously. No manual chain selection. No wasted gas. No human clicks.
+
+Built on top of Rumble's USD₮, XAU₮, USA₮, and BTC tipping flows, powered by 12 Tether WDK packages across 9 blockchains.
 
 ---
 
@@ -348,12 +350,13 @@ docker build -t aerofyta . && docker run -p 3001:3001 --env-file .env aerofyta
 
 | Criterion | How AeroFyta Delivers | Evidence |
 |-----------|----------------------|----------|
-| **Correctness** | 8-stage pipeline with validation at every step; 1,183 tests; on-chain self-test endpoint | `POST /api/self-test` returns real tx hash |
-| **Autonomy** | 4-agent consensus loop runs every 60s without human input; Wallet-as-Brain mood governs decisions; event-triggered tipping (watch_time, chat_hype, viewer_spike, follower_milestone) | `autonomous-loop.service.ts` |
-| **Real-World Viability** | Published on npm; live Telegram bot; funded testnet wallet; 60 CLI + 60 Telegram commands; Docker deployment; SDK for third-party integration | `npx @xzashr/aerofyta demo` |
-| **WDK Integration** | 12 packages imported and used; 9 chains registered; multi-asset (USDT/XAUt/USAT); gasless via ERC-4337 + TON Gasless; bridging, lending, swaps | `package.json` dependencies |
-| **Safety** | 6-layer defense; Guardian solo veto; danger can only escalate; hard-coded spending caps; adversarial test suite | `safety.service.ts`, `adversarial-demo.service.ts` |
-| **Originality** | Wallet-as-Brain paradigm (wallet mood drives agent behavior); cross-chain reputation passports; Circom ZK credit proofs; cryptographic multi-agent consensus | `financial-pulse.ts` |
+| **Agent Intelligence** | 4-agent consensus with SHA-256 signed votes; ReAct 5-step reasoning loop; LLM cascade (Groq, Gemini, rule-based fallback); Wallet-as-Brain mood drives autonomous decisions | `orchestrator.ts`, `financial-pulse.ts` |
+| **WDK Wallet Integration** | 12 WDK packages; 9 chains; self-custodial HD wallets; gasless via ERC-4337 + TON Gasless; multi-asset (USD₮, XAU₮, USA₮); bridging, lending, swaps | `wallet.service.ts`, `package.json` |
+| **Technical Execution** | 1,183 tests passing; 8-stage transaction pipeline; TypeScript strict mode; zero `as any`; event sourcing with SHA-256 hash chain; 32 Prometheus metrics | `npm test`, CI green |
+| **Agentic Payment Design** | 6 payment flows (escrow, DCA, subscriptions, streaming, splits, x402); 10 composable policy rules; event-triggered tipping (watch_time, chat_hype, viewer_spike, milestones); community tip pools | `escrow.service.ts`, `pipeline/` |
+| **Originality** | Wallet-as-Brain paradigm (financial state drives agent mood and behavior); cross-chain reputation passports; cryptographic multi-agent consensus; 6-layer safety where danger only escalates | `financial-pulse.ts`, `consensus-protocol.ts` |
+| **Polish & Ship-ability** | Published on npm; live deployment; 60 Telegram commands with inline mode and button menus; 60 CLI commands; Docker; SDK for third-party integration; Chrome extension | `npx @xzashr/aerofyta demo` |
+| **Presentation & Demo** | Live Telegram bot (@AeroFytaBot); interactive dashboard (58 pages); on-chain self-test endpoint; funded testnet wallet with Etherscan proof | `aerofyta.xzashr.com` |
 
 ---
 
