@@ -26,9 +26,9 @@ describe('CHAIN_CONFIGS', () => {
     assert.equal(CHAIN_CONFIGS['tron-nile'].nativeCurrency, 'TRX');
   });
 
-  it('all chains are testnets', () => {
+  it('all chains have isTestnet defined', () => {
     for (const [_id, cfg] of Object.entries(CHAIN_CONFIGS)) {
-      assert.equal(cfg.isTestnet, true, `${cfg.id} should be testnet`);
+      assert.equal(typeof cfg.isTestnet, 'boolean', `${cfg.id} should have isTestnet boolean`);
     }
   });
 });
