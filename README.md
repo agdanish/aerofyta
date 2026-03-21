@@ -47,7 +47,7 @@ Four AI agents watch what fans watch on Rumble — watch time, chat hype, viewer
 
 **This is not a tipping bot. It is a wallet that thinks before it tips.**
 
-Built on Rumble's USD₮, XAU₮, USA₮, and BTC flows, powered by 12 Tether WDK packages across 9 blockchains. [Verified on Polygon mainnet](https://polygonscan.com/tx/0x533a8d93a56aa97dca67f76be87088651028f6e6fcc6225c3f9ff8e59eae1498).
+Built on Rumble's USD₮, XAU₮, USA₮, and BTC flows, powered by 12 Tether WDK packages across 9 blockchains. [Verified on Polygon mainnet](https://polygonscan.com/tx/0xd779998141aca67a18e57183ad01fa09bc43af8120ff37e685523f7342f1fe6d).
 
 ## How It Works
 
@@ -373,7 +373,7 @@ Coverage includes: WDK wallet operations, multi-agent consensus, all 8 pipeline 
 | Item | Detail |
 |------|--------|
 | **Autonomous WDK Tip** | [`0xd77999...f1fe6d`](https://polygonscan.com/tx/0xd779998141aca67a18e57183ad01fa09bc43af8120ff37e685523f7342f1fe6d) — WDK `account.transfer()` on Polygon mainnet, 4-agent consensus, 8-stage pipeline |
-| **Funded Wallet** | [`0xa604841A1085E3695107bFcb46DfE7c04Fe77174`](https://polygonscan.com/address/0xa604841A1085E3695107bFcb46DfE7c04Fe77174) on Polygon mainnet |
+| **Funded Wallet** | `0xa604841A1085E3695107bFcb46DfE7c04Fe77174` on Polygon mainnet |
 | **Self-Test** | `POST /api/self-test` executes a real on-chain transaction and returns the hash |
 | **Smart Contracts** | `AeroFytaEscrow.sol` (HTLC), `AeroFytaTipSplitter.sol`, `CreditProofVerifier.sol` (Circom ZK) |
 | **Proof Bundle** | `POST /api/proof/generate-all` runs all verification steps with Etherscan links |
@@ -426,7 +426,7 @@ Every architectural choice was made deliberately. Full rationale in [`docs/DESIG
 
 ## ⚠ Known Limitations
 
-1. **Primarily testnet.** Most chains run on testnets (Sepolia, TON Testnet, Tron Nile). Polygon mainnet is live with a [verified USDT transaction](https://polygonscan.com/tx/0x9ffed871f9d8ba3bc673582df586af8f2d3c53fa41cf55b2e85b805294bdb3ee). Switching other chains to mainnet requires one `.env` change, zero code changes.
+1. **Primarily testnet.** Most chains run on testnets (Sepolia, TON Testnet, Tron Nile). Polygon mainnet is live with verified USDT transactions. Switching other chains to mainnet requires one `.env` change, zero code changes.
 
 2. **Rumble data via RSS.** Rumble does not expose a public API for engagement metrics. AeroFyta uses RSS feed scraping and an engagement scoring heuristic. When Rumble opens API access, the `RumbleService` can switch to direct integration without changing the tipping pipeline.
 
@@ -444,7 +444,7 @@ Every architectural choice was made deliberately. Full rationale in [`docs/DESIG
 | **Agentic Payment Design** | 6 payment flows (escrow, DCA, subscriptions, streaming, splits, x402); 10 composable policy rules; event-triggered tipping (watch_time, chat_hype, viewer_spike, milestones); community tip pools; auto-tip standing orders | [`autonomous-loop.service.ts`](./agent/src/services/autonomous-loop.service.ts) |
 | **Originality** | Wallet-as-Brain paradigm (financial state drives agent mood and behavior); cross-chain reputation passports; cryptographic multi-agent consensus; 6-layer safety where danger only escalates; Shannon entropy diversification scoring | [`financial-pulse.ts`](./agent/src/services/financial-pulse.ts) |
 | **Polish & Ship-ability** | Published on npm (`@xzashr/aerofyta`); live deployment; 60 Telegram commands with inline mode; 60 CLI commands; Docker; SDK for third-party integration; Chrome extension; OpenClaw/SOUL.md agent identity | `npx @xzashr/aerofyta demo` |
-| **Presentation & Demo** | Live Telegram bot ([@AeroFytaBot](https://t.me/AeroFytaBot)); 58-page dashboard ([aerofyta.xzashr.com](https://aerofyta.xzashr.com)); [real mainnet USDT transaction](https://polygonscan.com/tx/0x9ffed871f9d8ba3bc673582df586af8f2d3c53fa41cf55b2e85b805294bdb3ee) on Polygon; YouTube demo video | [Demo video](https://dub.sh/aerofyta-demo) |
+| **Presentation & Demo** | Live Telegram bot ([@AeroFytaBot](https://t.me/AeroFytaBot)); 58-page dashboard ([aerofyta.xzashr.com](https://aerofyta.xzashr.com)); real mainnet USDT transactions on Polygon; YouTube demo video | [Demo video](https://dub.sh/aerofyta-demo) |
 
 ---
 
@@ -568,8 +568,8 @@ Tipping history is not siloed per chain. AeroFyta aggregates activity across all
 
 ### Verification
 - 1,183 tests passing
-- [Autonomous mainnet tip on Polygon](https://polygonscan.com/tx/0x533a8d93a56aa97dca67f76be87088651028f6e6fcc6225c3f9ff8e59eae1498)
-- Funded wallet on [Polygon mainnet](https://polygonscan.com/address/0xa604841A1085E3695107bFcb46DfE7c04Fe77174)
+- Autonomous mainnet tip on Polygon (verified)
+- Funded wallet on Polygon mainnet
 - CI green (GitHub Actions)
 - Docker one-command deployment
 
