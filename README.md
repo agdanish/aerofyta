@@ -25,7 +25,7 @@ npm install @xzashr/aerofyta && npx @xzashr/aerofyta demo
 
 <br/>
 
-[Live Demo](https://aerofyta.xzashr.com) &nbsp;|&nbsp; [Watch Demo (YouTube)](https://youtu.be/Zwzs5sMP5u8) &nbsp;|&nbsp; [Telegram Bot](https://t.me/AeroFytaBot) &nbsp;|&nbsp; [npm](https://www.npmjs.com/package/@xzashr/aerofyta)
+[Live Demo](https://aerofyta.xzashr.com) &nbsp;|&nbsp; [Watch Demo (YouTube)](https://dub.sh/aerofyta-demo) &nbsp;|&nbsp; [Telegram Bot](https://t.me/AeroFytaBot) &nbsp;|&nbsp; [npm](https://www.npmjs.com/package/@xzashr/aerofyta)
 
 </div>
 
@@ -444,7 +444,7 @@ Every architectural choice was made deliberately. Full rationale in [`docs/DESIG
 | **Agentic Payment Design** | 6 payment flows (escrow, DCA, subscriptions, streaming, splits, x402); 10 composable policy rules; event-triggered tipping (watch_time, chat_hype, viewer_spike, milestones); community tip pools; auto-tip standing orders | [`autonomous-loop.service.ts`](./agent/src/services/autonomous-loop.service.ts) |
 | **Originality** | Wallet-as-Brain paradigm (financial state drives agent mood and behavior); cross-chain reputation passports; cryptographic multi-agent consensus; 6-layer safety where danger only escalates; Shannon entropy diversification scoring | [`financial-pulse.ts`](./agent/src/services/financial-pulse.ts) |
 | **Polish & Ship-ability** | Published on npm (`@xzashr/aerofyta`); live deployment; 60 Telegram commands with inline mode; 60 CLI commands; Docker; SDK for third-party integration; Chrome extension; OpenClaw/SOUL.md agent identity | `npx @xzashr/aerofyta demo` |
-| **Presentation & Demo** | Live Telegram bot ([@AeroFytaBot](https://t.me/AeroFytaBot)); 58-page dashboard ([aerofyta.xzashr.com](https://aerofyta.xzashr.com)); [real mainnet USDT transaction](https://polygonscan.com/tx/0x9ffed871f9d8ba3bc673582df586af8f2d3c53fa41cf55b2e85b805294bdb3ee) on Polygon; YouTube demo video | [Demo video](https://youtu.be/Zwzs5sMP5u8) |
+| **Presentation & Demo** | Live Telegram bot ([@AeroFytaBot](https://t.me/AeroFytaBot)); 58-page dashboard ([aerofyta.xzashr.com](https://aerofyta.xzashr.com)); [real mainnet USDT transaction](https://polygonscan.com/tx/0x9ffed871f9d8ba3bc673582df586af8f2d3c53fa41cf55b2e85b805294bdb3ee) on Polygon; YouTube demo video | [Demo video](https://dub.sh/aerofyta-demo) |
 
 ---
 
